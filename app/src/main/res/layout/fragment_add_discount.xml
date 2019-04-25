@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_discount"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddDiscount_Fragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_marginTop="70dp"
+            android:inputType="text"
+            android:id="@+id/business_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="@string/business_name" />
+
+        <EditText
+            android:id="@+id/address"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="@string/address" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+        <EditText
+            android:id="@+id/city"
+            android:inputType="text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="@string/city"
+            android:layout_weight="1"/>
+            <Spinner
+                android:id="@+id/states"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:background="@android:drawable/edit_text" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/phone"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="@string/phone" />
+
+        <EditText
+            android:id="@+id/website"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="@string/website" />
+
+        <EditText
+            android:id="@+id/discount_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="@string/discount_details"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:singleLine="false"/>
+
+        <Spinner
+            android:id="@+id/category"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@android:drawable/edit_text" />
+
+        <TextView
+            android:id="@+id/lblcomment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/leave_the_first_comment_optional"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/first_comment"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:singleLine="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="@string/comment"
+             />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/listDiscounts"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ListDiscount_Fragment">
+
+    <TextView
+        android:id="@+id/device_location"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/toolbar_dimens"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/noDiscounts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/display_no_discount"
+        android:textAlignment="center"
+        android:layout_centerInParent="true"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/recycler_view_discounts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_below="@+id/device_location"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/md_keylines"
+        android:scrollbars="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@color/offWhitePalette"
+        app:itemTextColor="@color/offWhitePalette"
+        app:menu="@menu/bottom_nav_menu" />
+</RelativeLayout>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/txtCheckIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dialogCheckin"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/txtCheckInHotel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_below="@+id/txtCheckIn"
+        />
+
+    <TextView
+        android:id="@+id/txtCheckOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dialogSetCheckout"
+        android:gravity="center"
+        android:layout_below="@+id/txtCheckInHotel"
+        />
+
+    <Spinner
+        android:id="@+id/sprCheckout"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:entries="@array/checkoutDays"
+        android:layout_below="@id/txtCheckOut"
+        style="">
+    </Spinner>
+
+    <TimePicker
+        android:id="@+id/tprCheckOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:timePickerMode="spinner"
+        android:calendarViewShown="false"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        android:layout_toEndOf="@id/sprCheckout"
+        android:layout_below="@id/txtCheckOut"
+        android:layout_marginTop="-30dp"
+        android:layout_marginBottom="-30dp"
+        android:layout_marginLeft="-60dp"
+        />
+
+    <Button
+        android:id="@+id/btnCheckInConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dialogCheckInConfirm"
+        android:layout_below="@id/tprCheckOut"
+        />
+</RelativeLayout>

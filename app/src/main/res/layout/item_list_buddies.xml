@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?android:attr/selectableItemBackground">
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"
+        android:padding="@dimen/md_keylines"
+        android:background="?android:attr/selectableItemBackground"
+        >
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/thumbnail"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"/>
+        <TextView
+            android:id="@+id/list_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="@dimen/article_subheading"
+            tools:text="Firstname" />
+        <TextView
+            android:id="@+id/list_last"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="16sp"
+            tools:text="Lastname" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buddiesCarrot"
+            android:textAlignment="textEnd"
+            android:textSize="20sp"
+            android:text="@string/password_carrot"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="50dp"
+        android:orientation="horizontal"
+        android:background="?android:attr/selectableItemBackground"
+        android:weightSum="100">
+        <TextView
+            android:id="@+id/list_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_weight="33"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@color/medium_grey"
+            android:textSize="12sp"
+            tools:text="position" />
+    </LinearLayout>
+
+    <!-- This invisible textview is used to send text to messaging activity -->
+    <TextView
+        android:id="@+id/recipient_uid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:visibility="invisible"
+        />
+</RelativeLayout>
