@@ -8,10 +8,13 @@ buildscript {
     }
     dependencies {
         //dont update gradle breaks codecov- it should be classpath 'com.android.tools.build:gradle:3.1.2'
-        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.android.tools.build:gradle:3.4.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
         classpath 'com.google.gms:google-services:4.0.2'
+        //added this line 20190426 when transfer of Firebase ownershihp was
+        //transfered by Francesco Ward to Danielle Coulter
+        classpath 'com.google.gms:google-services:4.0.1'
         classpath 'org.jacoco:org.jacoco.core:0.7.9'
     }
 }
