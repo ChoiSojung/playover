@@ -60,7 +60,8 @@
         android:id="@+id/btnCheckInConfirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/dialogCheckInConfirm"
         android:layout_below="@id/tprCheckOut"
-        />
+        android:backgroundTint="#4CAF50"
+        android:text="@string/dialogCheckInConfirm"
+        android:textColor="#FFFFFF" />
 </RelativeLayout>

@@ -2,27 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="176dp"
-    android:background="@color/colorAccent"
+    android:background="#99E3FF"
     android:gravity="bottom"
+    android:orientation="vertical"
     android:padding="16dp"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:orientation="vertical">
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round"/>
+        android:src="@mipmap/logo" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
+        android:fontFamily="@font/montserrat"
         android:text="Playover"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        android:textAlignment="viewStart"
+        android:textColor="@color/button_grey"
+        android:textSize="24sp" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Menu"/>
+        android:fontFamily="@font/montserrat"
+        android:text="Menu"
+        android:textColor="@color/button_grey"
+        android:textSize="18sp" />
 
 </LinearLayout>

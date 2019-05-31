@@ -171,7 +171,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:layout_marginTop="10dp"
-        android:background="@color/colorPrimary"
+        android:background="#4CAF50"
         android:drawableEnd="@drawable/ic_chat_bubble"
         android:drawablePadding="-90dp"
         android:paddingEnd="100dp"

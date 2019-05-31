@@ -24,12 +24,11 @@
                 android:id="@+id/toolbar_discounts"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/dark_grey"
+                android:background="#99E3FF"
                 android:elevation="4dp"
                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
                 app:title="@string/discounts"
-                app:titleTextColor="@color/white" >
-            </android.support.v7.widget.Toolbar>
+                app:titleTextColor="@color/white"></android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.AppBarLayout>
 

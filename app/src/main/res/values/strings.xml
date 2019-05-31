@@ -1,9 +1,9 @@
 <resources>
-    <string name="lblcheckin_main">Check-in and see other crew members at your layover airports and hotels \n\n\n Search and message any crew member \n\n\n Find airline employee discounts</string>
+    <string name="lblcheckin_main">Connect with your crew \n\n\n Message your crew \n\n\n Find airline employee discounts</string>
     <string name="lblfeature_main">Features</string>
     <string name="lbllogin_main">Already a member?\tSign In</string>
     <string name="btnsignup_main">Get Started</string>
-    <string name="lblsocialize_main">Socialize with your fellow airline crew members.</string>
+    <string name="lblsocialize_main">Join Playover Now!</string>
     <string name="editImage">Update Profile Picture</string>
     <string name="editFirstName">First Name</string>
     <string name="editLastName">Last Name</string>

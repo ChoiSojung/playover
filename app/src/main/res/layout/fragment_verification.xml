@@ -47,17 +47,18 @@
              android:layout_marginStart="30dp"
              android:background="@android:drawable/edit_text"
              />
+
          <Button
              android:id="@+id/verify"
-             android:layout_height="match_parent"
-             android:layout_weight="1"
              android:layout_width="0dp"
+             android:layout_height="match_parent"
              android:layout_marginStart="10dp"
              android:layout_marginEnd="30dp"
-             android:background="@color/colorPrimary"
-             android:textColor="@color/offWhitePalette"
+             android:layout_weight="1"
+             android:background="#4CAF50"
              android:text="@string/btnverify_main"
-             android:textAlignment="center"/>
+             android:textAlignment="center"
+             android:textColor="@color/offWhitePalette" />
      </LinearLayout>
      <LinearLayout
          android:layout_width="match_parent"

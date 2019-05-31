@@ -22,11 +22,11 @@
                 android:id="@+id/toolbar_messaging"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/dark_grey"
+                android:background="#99E3FF"
                 android:elevation="4dp"
                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
                 app:title="MESSAGES"
-                app:titleTextColor="@color/white" />
+                app:titleTextColor="#757575" />
 
         </android.support.design.widget.AppBarLayout>
 

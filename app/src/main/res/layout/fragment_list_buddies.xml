@@ -71,7 +71,7 @@
             android:layout_column="0"
             android:layout_columnWeight="1"
             android:layout_gravity="center"
-            android:background="@color/colorPrimary"
+            android:background="#4CAF50"
             android:text="@string/send_message"
             android:textColor="@color/offWhitePalette"
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,15 +11,22 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_logo" />
+
             <TextView
                 android:id="@+id/lblsignup"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="25dp"
+                android:fontFamily="@font/montserrat"
                 android:text="@string/sign_up"
                 android:textAlignment="center"
-                android:textSize="30sp"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="#757575"
+                android:textSize="30sp" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -104,17 +112,18 @@
                     android:layout_marginTop="15dp"
                     android:textSize="12sp"
                     android:text="@string/terms_signup"/>
+
                 <Button
+                    android:id="@+id/buttonSignUp"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:id="@+id/buttonSignUp"
-                    android:text="@string/sign_up_signup"
-                    android:textSize="18sp"
-                    android:textColor="@color/offWhitePalette"
-                    android:background="@color/colorPrimary"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginTop="30dp" />
+                    android:background="#4CAF50"
+                    android:text="@string/sign_up_signup"
+                    android:textColor="@color/offWhitePalette"
+                    android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
 </FrameLayout>

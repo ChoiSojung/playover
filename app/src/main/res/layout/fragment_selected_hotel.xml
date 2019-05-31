@@ -13,14 +13,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <ExpandableListView
             android:id="@+id/lstAlsoCheckedIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/button_grey"
             android:layout_marginTop="50dp"
-            >
-        </ExpandableListView>
+            android:background="#99E3FF"></ExpandableListView>
     </LinearLayout>
     <GridLayout
         android:layout_width="match_parent"
@@ -51,16 +50,15 @@
             android:id="@+id/txtCheckoutSet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:textColor="@color/offWhitePalette"
             android:layout_row="0"
             android:layout_column="1"
             android:layout_gravity="end"
-            android:padding="15dp"
+            android:background="#4CAF50"
             android:clickable="true"
             android:focusable="true"
+            android:padding="15dp"
             android:text="@string/check_out_hotel"
-            />
+            android:textColor="@color/offWhitePalette" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -103,12 +101,11 @@
             android:layout_width="125dp"
             android:layout_height="35dp"
             android:layout_column="0"
-            android:text="@string/send_message"
-            android:layout_gravity="center"
             android:layout_columnWeight="1"
-            android:background="@color/colorPrimary"
-            android:textColor="@android:color/white"
-            />
+            android:layout_gravity="center"
+            android:background="#606D72"
+            android:text="@string/send_message"
+            android:textColor="@android:color/white" />
 
         <!--<Button-->
             <!--android:id="@+id/messageAllBtn"-->

@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="@dimen/toolbar_dimens"
-        android:background="@color/colorPrimaryDark"
+        android:background="#FFFFFF"
         android:gravity="center_vertical"
         android:paddingStart="20dp"
         android:textColor="@color/white"
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
+        android:background="#757575"
         app:itemIconTint="@color/offWhitePalette"
         app:itemTextColor="@color/offWhitePalette"
         app:menu="@menu/bottom_nav_menu" />
