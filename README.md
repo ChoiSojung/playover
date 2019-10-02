@@ -13,7 +13,7 @@ Typos can ruin everything
 ### Solutions
 Using location services share contact info with members in your organization near you. How: Create a profile with the information you want to share, open the app, (when you either get onboard or check in at the hotel) and find those in your crew.
 
-[![CircleCI](https://circleci.com/gh/FrancescoWard/Playover/tree/master.svg?style=svg&circle-token=3bd258157a719f0ec81450278f49b39f0168a1e4)](https://circleci.com/gh/FrancescoWard/Playover/tree/master)
-[![codecov](https://codecov.io/gh/FrancescoWard/Playover/branch/master/graph/badge.svg?token=rzxCiUSRNh)](https://codecov.io/gh/FrancescoWard/Playover)
+[![CircleCI](https://circleci.com/gh/ChoiSojung/playover.svg?style=svg)](https://circleci.com/gh/ChoiSojung/playover)
+[![codecov](https://codecov.io/gh/ChoiSojung/playover/branch/master/graph/badge.svg)](https://codecov.io/gh/ChoiSojung/playover)
 
 Original Repo: https://github.com/FrancescoWard/Playover/issues
