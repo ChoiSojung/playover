@@ -39,8 +39,8 @@ public class SelectedHotelTest {
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
             Thread.sleep(2000);
-            onView(withId(R.id.email_login)).perform(replaceText("clint@clintshawvideo.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.email_login)).perform(replaceText("hotelTest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(replaceText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(5000);
             onView(withId(R.id.recycler_view_hotels))
@@ -54,8 +54,8 @@ public class SelectedHotelTest {
             onView(withId(R.id.txtCheckoutSet)).perform(click());
         } catch (Exception ex) {
             onView(withId(R.id.lblogin_main)).perform(MainActivityTest.clickClickableSpan("Sign In"));
-            onView(withId(R.id.email_login)).perform(replaceText("clint@clintshawvideo.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.email_login)).perform(replaceText("hotelTest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(replaceText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(5000);
             onView(withId(R.id.recycler_view_hotels))
