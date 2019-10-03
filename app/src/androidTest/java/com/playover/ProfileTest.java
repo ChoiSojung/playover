@@ -54,8 +54,8 @@ public class ProfileTest {
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
             Thread.sleep(5000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
-            onView(withId(R.id.email_login)).perform(typeText("mviencek@hotmail.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(typeText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(8000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
@@ -66,9 +66,9 @@ public class ProfileTest {
                     .perform(click());
             Thread.sleep(10000);
             onView(withId(R.id.editFirstName))
-                    .perform(replaceText("Mikal"));
+                    .perform(replaceText("Randall"));
             onView(withId(R.id.editLastName))
-                    .perform(replaceText("Viencek"));
+                    .perform(replaceText("Hacker"));
             onView(withId(R.id.editPosition))
                     .perform(replaceText(""));
             closeSoftKeyboard();
@@ -80,8 +80,8 @@ public class ProfileTest {
         } catch (Exception ex) {
             Thread.sleep(5000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
-            onView(withId(R.id.email_login)).perform(typeText("mviencek@hotmail.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(typeText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(8000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
@@ -89,8 +89,8 @@ public class ProfileTest {
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
             Thread.sleep(5000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
-            onView(withId(R.id.email_login)).perform(typeText("mviencek@hotmail.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(typeText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(8000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
@@ -102,9 +102,9 @@ public class ProfileTest {
             Thread.sleep(10000);
 
             onView(withId(R.id.editFirstName))
-                    .perform(replaceText("Mikal"));
+                    .perform(replaceText("Randall"));
             onView(withId(R.id.editLastName))
-                    .perform(replaceText("Viencek"));
+                    .perform(replaceText("Hacker"));
             onView(withId(R.id.editPosition))
                     .perform(replaceText(""));
             closeSoftKeyboard();
@@ -124,8 +124,8 @@ public class ProfileTest {
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
             Thread.sleep(5000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
-            onView(withId(R.id.email_login)).perform(typeText("mviencek@hotmail.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(typeText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(8000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
@@ -137,11 +137,11 @@ public class ProfileTest {
             Thread.sleep(10000);
 
             onView(withId(R.id.editFirstName))
-                    .perform(replaceText("Mikal"));
+                    .perform(replaceText("Randall"));
             onView(withId(R.id.editLastName))
                     .perform(replaceText(""));
             onView(withId(R.id.editPosition))
-                    .perform(replaceText("Technical Support Specialist"));
+                    .perform(replaceText("Flight Attendant"));
             closeSoftKeyboard();
             onView(withText("Save Changes"))
                     .perform(scrollTo(), click());
@@ -151,8 +151,8 @@ public class ProfileTest {
         } catch (Exception ex) {
             Thread.sleep(5000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
-            onView(withId(R.id.email_login)).perform(typeText("mviencek@hotmail.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(typeText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(8000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
@@ -160,8 +160,8 @@ public class ProfileTest {
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
             Thread.sleep(5000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
-            onView(withId(R.id.email_login)).perform(typeText("mviencek@hotmail.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(typeText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(8000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
@@ -173,11 +173,11 @@ public class ProfileTest {
             Thread.sleep(10000);
 
             onView(withId(R.id.editFirstName))
-                    .perform(replaceText("Mikal"));
+                    .perform(replaceText("Randall"));
             onView(withId(R.id.editLastName))
                     .perform(replaceText(""));
             onView(withId(R.id.editPosition))
-                    .perform(replaceText("Technical Support Specialist"));
+                    .perform(replaceText("Flight Attendant"));
             closeSoftKeyboard();
             onView(withText("Save Changes"))
                     .perform(scrollTo(), click());
@@ -195,8 +195,8 @@ public class ProfileTest {
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
             Thread.sleep(5000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
-            onView(withId(R.id.email_login)).perform(typeText("mviencek@hotmail.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(typeText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(8000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
@@ -210,9 +210,9 @@ public class ProfileTest {
             onView(withId(R.id.editFirstName))
                     .perform(replaceText(""));
             onView(withId(R.id.editLastName))
-                    .perform(replaceText("Viencek"));
+                    .perform(replaceText("Hacker"));
             onView(withId(R.id.editPosition))
-                    .perform(replaceText("Technical Support Specialist"));
+                    .perform(replaceText("Flight Attendant"));
             closeSoftKeyboard();
             onView(withText("Save Changes"))
                     .perform(scrollTo(), click());
@@ -222,8 +222,8 @@ public class ProfileTest {
         } catch (Exception ex) {
             Thread.sleep(5000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
-            onView(withId(R.id.email_login)).perform(typeText("mviencek@hotmail.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(typeText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(8000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
@@ -231,8 +231,8 @@ public class ProfileTest {
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
             Thread.sleep(5000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
-            onView(withId(R.id.email_login)).perform(typeText("mviencek@hotmail.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(typeText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(8000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
@@ -246,9 +246,9 @@ public class ProfileTest {
             onView(withId(R.id.editFirstName))
                     .perform(replaceText(""));
             onView(withId(R.id.editLastName))
-                    .perform(replaceText("Viencek"));
+                    .perform(replaceText("Hacker"));
             onView(withId(R.id.editPosition))
-                    .perform(replaceText("Technical Support Specialist"));
+                    .perform(replaceText("Flight Attendant"));
             closeSoftKeyboard();
             onView(withText("Save Changes"))
                     .perform(scrollTo(), click());
@@ -267,8 +267,8 @@ public class ProfileTest {
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
             Thread.sleep(5000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
-            onView(withId(R.id.email_login)).perform(typeText("mviencek@hotmail.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(typeText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(8000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
@@ -279,9 +279,9 @@ public class ProfileTest {
                     .perform(click());
             Thread.sleep(10000);
             onView(withId(R.id.editFirstName))
-                    .perform(replaceText("Mikal"));
+                    .perform(replaceText("Randall"));
             onView(withId(R.id.editLastName))
-                    .perform(replaceText("Viencek"));
+                    .perform(replaceText("Hacker"));
             closeSoftKeyboard();
             onView(withId(R.id.year)).perform(click());
             onData(allOf(is(instanceOf(Integer.class)))).atPosition(1).perform(click());
@@ -292,10 +292,10 @@ public class ProfileTest {
             onView(withId(R.id.relationship)).perform(click());
             onData(allOf(is(instanceOf(String.class)))).atPosition(2).perform(click());
             onView(withId(R.id.editPosition))
-                    .perform(replaceText("Technical Support Specialist"));
+                    .perform(replaceText("Flight Attendant"));
             closeSoftKeyboard();
             onView(withId(R.id.editGroup))
-                    .perform(replaceText("North Seattle"));
+                    .perform(replaceText("Alaska Airlines"));
             closeSoftKeyboard();
             onView(withId(R.id.editInterests))
                     .perform(replaceText("Video Games"));
@@ -304,13 +304,13 @@ public class ProfileTest {
                     .perform(scrollTo(), click());
             Thread.sleep(10000);
             onView(withId(R.id.profileName))
-                    .check(matches(withText("Mikal Viencek")));
+                    .check(matches(withText("Randall Hacker")));
             onView(withId(R.id.profileGroup))
-                    .check(matches(withText("North Seattle")));
+                    .check(matches(withText("Alaska Airlines")));
             onView(withId(R.id.profileInterest))
                     .check(matches(withText("Video Games")));
             onView(withId(R.id.profilePosition))
-                    .check(matches(withText("Technical Support Specialist")));
+                    .check(matches(withText("Flight Attendant")));
             onView(withId(R.id.profileRelationshipText))
                     .check(matches(withText("Married")));
 
@@ -319,8 +319,8 @@ public class ProfileTest {
         catch (Exception ex) {
             Thread.sleep(5000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
-            onView(withId(R.id.email_login)).perform(typeText("mviencek@hotmail.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(typeText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(8000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
@@ -331,9 +331,9 @@ public class ProfileTest {
                     .perform(click());
             Thread.sleep(10000);
             onView(withId(R.id.editFirstName))
-                    .perform(replaceText("Mikal"));
+                    .perform(replaceText("Randall"));
             onView(withId(R.id.editLastName))
-                    .perform(replaceText("Viencek"));
+                    .perform(replaceText("Hacker"));
             closeSoftKeyboard();
             onView(withId(R.id.year)).perform(click());
             onData(allOf(is(instanceOf(Integer.class)))).atPosition(1).perform(click());
@@ -344,10 +344,10 @@ public class ProfileTest {
             onView(withId(R.id.relationship)).perform(click());
             onData(allOf(is(instanceOf(String.class)))).atPosition(2).perform(click());
             onView(withId(R.id.editPosition))
-                    .perform(replaceText("Technical Support Specialist"));
+                    .perform(replaceText("Flight Attendant"));
             closeSoftKeyboard();
             onView(withId(R.id.editGroup))
-                    .perform(replaceText("North Seattle"));
+                    .perform(replaceText("Alaska Airlines"));
             closeSoftKeyboard();
             onView(withId(R.id.editInterests))
                     .perform(replaceText("Video Games"));
@@ -356,13 +356,13 @@ public class ProfileTest {
                     .perform(scrollTo(), click());
             Thread.sleep(10000);
             onView(withId(R.id.profileName))
-                    .check(matches(withText("Mikal Viencek")));
+                    .check(matches(withText("Randall Hacker")));
             onView(withId(R.id.profileGroup))
-                    .check(matches(withText("North Seattle")));
+                    .check(matches(withText("Alaska Airlines")));
             onView(withId(R.id.profileInterest))
                     .check(matches(withText("Video Games")));
             onView(withId(R.id.profilePosition))
-                    .check(matches(withText("Technical Support Specialist")));
+                    .check(matches(withText("Flight Attendant")));
             onView(withId(R.id.profileRelationshipText))
                     .check(matches(withText("Married")));
         }
@@ -375,8 +375,8 @@ public class ProfileTest {
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
         Thread.sleep(5000);
         onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
-        onView(withId(R.id.email_login)).perform(typeText("clint@clintshawvideo.com")).perform(ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.password_login)).perform(typeText("test123")).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
         onView(withId(R.id.btn_login)).perform(click());
         Thread.sleep(8000);
         onView(withId(R.id.main_content)).check(matches(isDisplayed()));
