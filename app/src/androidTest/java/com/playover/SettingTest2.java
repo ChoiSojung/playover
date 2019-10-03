@@ -55,11 +55,11 @@ public class SettingTest2 {
                     .perform(click());
             Thread.sleep(5000);
             onView(withId(R.id.currentPassword))
-                    .perform(replaceText("test123"));
+                    .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.newPassword1))
-                    .perform(replaceText("test123"));
+                    .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.newPassword2))
-                    .perform(replaceText("test123"));
+                    .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.passwordChangeBtn))
                     .perform(click());
 
@@ -87,11 +87,11 @@ public class SettingTest2 {
                     .perform(click());
             Thread.sleep(5000);
             onView(withId(R.id.currentPassword))
-                    .perform(replaceText("test123"));
+                    .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.newPassword1))
-                    .perform(replaceText("test123"));
+                    .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.newPassword2))
-                    .perform(replaceText("test123"));
+                    .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.passwordChangeBtn))
                     .perform(click());
         }
