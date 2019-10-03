@@ -43,8 +43,8 @@ public class SettingTest2 {
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
             Thread.sleep(5000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
-            onView(withId(R.id.email_login)).perform(typeText("clint@clintshawvideo.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(typeText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(8000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
@@ -55,19 +55,19 @@ public class SettingTest2 {
                     .perform(click());
             Thread.sleep(5000);
             onView(withId(R.id.currentPassword))
-                    .perform(replaceText("test123"));
+                    .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.newPassword1))
-                    .perform(replaceText("test123"));
+                    .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.newPassword2))
-                    .perform(replaceText("test123"));
+                    .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.passwordChangeBtn))
                     .perform(click());
 
         } catch (Exception ex) {
             Thread.sleep(5000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
-            onView(withId(R.id.email_login)).perform(typeText("clint@clintshawvideo.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(typeText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(8000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
@@ -75,8 +75,8 @@ public class SettingTest2 {
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
             Thread.sleep(5000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
-            onView(withId(R.id.email_login)).perform(typeText("clint@clintshawvideo.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(typeText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(8000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
@@ -87,11 +87,11 @@ public class SettingTest2 {
                     .perform(click());
             Thread.sleep(5000);
             onView(withId(R.id.currentPassword))
-                    .perform(replaceText("test123"));
+                    .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.newPassword1))
-                    .perform(replaceText("test123"));
+                    .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.newPassword2))
-                    .perform(replaceText("test123"));
+                    .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.passwordChangeBtn))
                     .perform(click());
         }
