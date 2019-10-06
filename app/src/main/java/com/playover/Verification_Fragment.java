@@ -105,7 +105,7 @@ public class Verification_Fragment extends Fragment {
                                     if (task.isSuccessful()) {
                                         UserViewModel userVm = new UserViewModel();
                                         Person newUser = new Person(firstName, lastName, null, position, null,
-                                                null, authVm.getUser().getEmail(), authVm.getUser().getUid(), null, null, false, null, null);
+                                                null, authVm.getUser().getEmail(), authVm.getUser().getUid(), null, null, false, null, null, null);
                                         Log.i("new user: ", newUser.toString());
                                         userVm.createUser(authVm.getUser().getUid(), newUser, new OnCompleteListener<Void>() {
                                             @Override

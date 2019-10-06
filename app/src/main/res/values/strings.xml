@@ -40,6 +40,7 @@
     <string name="no_buddies">Looks like you have no buddies... \n Look for someone in your hotel and click the star to make them a buddy!</string>
     <string name="find_buddies">Search above for crew members to add</string>
     <string name="add_them">Add them as you use the app on your layovers</string>
+    <string name="block_user">Block User</string>
     <string name="message">Message</string>
     <string name="add_buddy">Add Buddy</string>
     <string name="rm_buddy">Remove as Fight Buddy</string>

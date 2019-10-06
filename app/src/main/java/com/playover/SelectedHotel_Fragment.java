@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
+import com.playover.models.Buddy;
 import com.playover.models.Person;
 import com.playover.viewmodels.AuthUserViewModel;
 import com.playover.viewmodels.BuddiesViewModel;
@@ -372,14 +373,28 @@ public class SelectedHotel_Fragment extends Fragment {
                 guests.clear();
                 count = 0;
                 for (DataSnapshot x : dS.getChildren()) {
+                    //Log.i("buddy", x.toString());
                     hotelVm.getUser(x.getKey(), (Person p) ->
                     {
+                        //Log.i("buddy", p.toString());
                         count++;
                         try
                         {
+                            Log.i("buddy", p.getBuddies().toString());
+                            // get buddies, if the authVm.getUser().getUid() matches and blocked is true, don't add
+                            HashMap<String, Buddy> buddies = p.getBuddies();
+
+                            boolean isBuddy = buddies.containsKey(authVm.getUser().getUid());
+                           // Log.i("buddy", String.valueOf(isBuddy));
+                            boolean isBlocked = false;
+                            if (isBuddy) {
+                                isBlocked = buddies.get(authVm.getUser().getUid()).getBlocked();
+                            }
+                            Log.i("buddy", String.valueOf(isBlocked));
+
                             if ( ! p.getuId().equals("null")) {
                                 //don't add own user to list
-                                if ( ! authVm.getUser().getUid().equals(p.getuId())) {
+                                if ( ! authVm.getUser().getUid().equals(p.getuId()) && !isBlocked) {
                                     guests.add(p);
 
                                 }

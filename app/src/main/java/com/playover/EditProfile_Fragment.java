@@ -239,7 +239,7 @@ public class EditProfile_Fragment extends Fragment {
             if (authVm != null && userVm != null && flag) {
                 Person updatedUser = new Person(editFirstName.getText().toString().trim(), editLastName.getText().toString().trim()
                         , editGroup.getText().toString().trim(), editPosition.getText().toString().trim(), dob, mRelationship.getSelectedItem().toString()
-                        , authVm.getUser().getEmail(), authVm.getUser().getUid(), editInterest.getText().toString().trim(), profileImage, dnd, messageThreads, hotelCheckedInto);
+                        , authVm.getUser().getEmail(), authVm.getUser().getUid(), editInterest.getText().toString().trim(), profileImage, dnd, messageThreads, hotelCheckedInto, null);
                 userVm.updateUser(authVm.getUser().getUid(), updatedUser, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

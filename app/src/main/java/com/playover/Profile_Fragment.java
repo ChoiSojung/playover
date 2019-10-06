@@ -17,7 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.content.Context;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.playover.models.Discount;
@@ -30,9 +30,11 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Objects;
 
+
+
 public class Profile_Fragment extends Fragment {
 
-    private Button editProfileBtn, sendMessageBtn, buddyMessageBtn;
+    private Button editProfileBtn, sendMessageBtn, buddyMessageBtn, blockUserBtn;
     private ImageView dndImage;
     private ImageView profileImage, tempImage;
     private ImageButton starBtn;
@@ -56,6 +58,7 @@ public class Profile_Fragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
         editProfileBtn = rootView.findViewById(R.id.editBtn);
         sendMessageBtn = rootView.findViewById(R.id.ProfileMessageBtn);
+        blockUserBtn = rootView.findViewById(R.id.blockUserButton);
         fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
         profileImage = rootView.findViewById(R.id.profileImage);
         profileName = rootView.findViewById(R.id.profileName);
@@ -152,6 +155,7 @@ public class Profile_Fragment extends Fragment {
 
         if (this.getContext() instanceof CheckIn && getArguments() != null || this.getContext() instanceof Buddies_Activity && getArguments() != null) {
             sendMessageBtn.setVisibility(View.VISIBLE);
+            blockUserBtn.setVisibility(View.VISIBLE);
             starBtn.setVisibility(View.VISIBLE);
 
             sendMessageBtn.setOnClickListener(new View.OnClickListener() {
@@ -177,6 +181,30 @@ public class Profile_Fragment extends Fragment {
                             }
                         }
                     });
+
+            blockUserBtn.setOnClickListener(v -> {
+                Context context = this.getContext();
+                CharSequence text = "User Blocked";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+
+                toast.setGravity(50, 300, 900);
+                toast.show();
+                buddyVm.putBuddy(authVm.getUser().getUid(), getArguments().getString(Constants.KEY_BUDUID), true,
+                        new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Log.i("block buddy: ", "worked!");
+                                    //display message to user
+                                } else {
+                                    Log.i("blcok buddy", "didn't work!");
+                                    //display message to user
+                                }
+                            }
+                        });
+            });
 
             starBtn.setOnClickListener(v -> {
                 if (!buddy) {

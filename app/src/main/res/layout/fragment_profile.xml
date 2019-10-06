@@ -161,6 +161,21 @@
             android:visibility="invisible" />
 
         <Button
+            android:id="@+id/blockUserButton"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/ProfileMessageBtn"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorPrimary"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/block_user"
+            android:textColor="@color/offWhitePalette"
+            android:visibility="invisible" />
+
+        <Button
             android:id="@+id/buddyMessageBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
