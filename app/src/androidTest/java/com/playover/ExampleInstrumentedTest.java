@@ -149,7 +149,7 @@ public class ExampleInstrumentedTest {
     public void createUserInDB(){
         UserViewModel userVm = new UserViewModel();
         Person testPerson = new Person("Test First Name", "Test Last Name", "Test Group",
-                "Test Position", "12-31-2000", "Single", "Testing Email Address","TestUID","Testing Code =)","",false, null, "");
+                "Test Position", "12-31-2000", "Single", "Testing Email Address","TestUID","Testing Code =)","",false, null, "", null);
         userVm.createUser("TestUID", testPerson, new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

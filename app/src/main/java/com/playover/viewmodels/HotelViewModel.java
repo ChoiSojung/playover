@@ -1,10 +1,14 @@
 package com.playover.viewmodels;
 
+import android.util.Log;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.playover.datamodels.HotelDataModel;
 import com.playover.models.Hotel;
 import com.playover.models.Person;
@@ -69,7 +73,15 @@ public class HotelViewModel {
                 (DataSnapshot dataSnapshot) -> {
                     Person user = new Person();
                     for (DataSnapshot matchesSnapshot : dataSnapshot.getChildren()) {
+
+                        // Check if user has buddies that have blocked them.
+                        String userString = matchesSnapshot.getValue().toString();
+                        //Log.i("buddy", String.valueOf(userString.contains("blocked=true")));
+                        //Log.i("buddy", userString);
+                        //Log.i("buddy", matchesSnapshot.getValue().toString());
+                        //String userString = matchesSnapshot.toString();
                         user = matchesSnapshot.getValue(Person.class);
+                        //Log.i("buddy", user.toString());
                     }
                     responseCallback.accept(user);
                 },

@@ -2,10 +2,13 @@ package com.playover.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Person implements Parcelable {
     private String firstName;
@@ -20,6 +23,7 @@ public class Person implements Parcelable {
     private String imageUri;
     private boolean dnd;
     private List<String> messageThreads;
+    private HashMap<String, Buddy> buddies;
 
     //Added by fw
     private String hotelCheckedInto;
@@ -30,7 +34,7 @@ public class Person implements Parcelable {
 
     public Person(String firstName, String lastName, String group, String position,
                   String dob, String relationshipStatus, String emailAddress, String uId, String interests,
-                  String imageUri, boolean dnd, List<String> messageThreads, String hotelCheckedInto) {
+                  String imageUri, boolean dnd, List<String> messageThreads, String hotelCheckedInto, HashMap<String, Buddy> buddies) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.group = group;
@@ -49,6 +53,13 @@ public class Person implements Parcelable {
         }
         if (hotelCheckedInto != null) {
             this.hotelCheckedInto = hotelCheckedInto;
+        }
+        if (buddies != null) {
+            Log.i("buddy", "not null");
+            this.buddies = buddies;
+        } else {
+            Log.i("buddy", "null");
+            this.buddies = null;
         }
     }
 
@@ -171,6 +182,7 @@ public class Person implements Parcelable {
                 ", interests=' " + interests + '\'' +
                 ", imageUri=' " + imageUri + '\'' +
                 ", dnd=' " + dnd + '\'' +
+                ", buddies=' " + buddies + '\'' +
                 '}';
     }
 
@@ -215,5 +227,13 @@ public class Person implements Parcelable {
 
     public void setHotelCheckedInto(String hotelCheckedInto) {
         this.hotelCheckedInto = hotelCheckedInto;
+    }
+
+    public void setBuddies(HashMap<String, Buddy> buddies) {
+        this.buddies = buddies;
+    }
+
+    public HashMap<String, Buddy> getBuddies() {
+        return this.buddies;
     }
 }
