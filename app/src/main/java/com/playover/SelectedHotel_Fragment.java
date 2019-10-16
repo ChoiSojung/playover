@@ -206,6 +206,7 @@ public class SelectedHotel_Fragment extends Fragment {
             budVm.getBuddies(authVm.getUser().getUid(),
                     (ArrayList<Person> persons) -> {
                         for(Person person : persons) {
+                            //Log.i("buddy", String.valueOf("in for"));
                             if (person.getuId().equals(recipientUid.getText().toString())) {
                                 buddyStar.setImageResource(R.drawable.ic_star_black_24dp);
                                 buddy = true;
@@ -367,7 +368,9 @@ public class SelectedHotel_Fragment extends Fragment {
 
     private void doRead(short positionInHotelsList) {
         List<Person> guests = new ArrayList<>();
+
         try
+
         {
             hotelVm.getGuests(ListHotels_Fragment.mPlacesList.get((int) positionInHotelsList), (DataSnapshot dS) -> {
                 guests.clear();
@@ -376,30 +379,45 @@ public class SelectedHotel_Fragment extends Fragment {
                     //Log.i("buddy", x.toString());
                     hotelVm.getUser(x.getKey(), (Person p) ->
                     {
+                        //Log.i("buddy", String.valueOf("in for"));
                         //Log.i("buddy", p.toString());
                         count++;
                         try
                         {
-                            Log.i("buddy", p.getBuddies().toString());
+                            //Log.i("buddy", p.getBuddies().toString());
                             // get buddies, if the authVm.getUser().getUid() matches and blocked is true, don't add
-                            HashMap<String, Buddy> buddies = p.getBuddies();
+                            Log.i("buddy", p.toString());
+                            if (p.getBuddies() == null) {
+                                //Log.i("buddy", p.toString());
+                                if ( ! authVm.getUser().getUid().equals(p.getuId())) {
 
-                            boolean isBuddy = buddies.containsKey(authVm.getUser().getUid());
-                           // Log.i("buddy", String.valueOf(isBuddy));
-                            boolean isBlocked = false;
-                            if (isBuddy) {
-                                isBlocked = buddies.get(authVm.getUser().getUid()).getBlocked();
-                            }
-                            Log.i("buddy", String.valueOf(isBlocked));
-
-                            if ( ! p.getuId().equals("null")) {
-                                //don't add own user to list
-                                if ( ! authVm.getUser().getUid().equals(p.getuId()) && !isBlocked) {
                                     guests.add(p);
-
                                 }
-                                if (dS.getChildrenCount() == count) {
-                                    updateRecyclerView(guests);
+                            } else {
+                                HashMap<String, Buddy> buddies = p.getBuddies();
+
+                                boolean isBuddy = buddies.containsKey(authVm.getUser().getUid());
+                                //Log.i("buddy", String.valueOf(isBuddy));
+                                //Log.i("buddy", String.valueOf(p));
+                                boolean isBlocked = false;
+                                //Log.i("buddy", "huh");
+                                if (isBuddy) {
+                                    Log.i("buddy", "huh");
+                                    isBlocked = buddies.get(authVm.getUser().getUid()).getBlocked();
+                                }
+                                //Log.i("buddy", String.valueOf(isBlocked));
+                                //Log.i("buddy", String.valueOf("crap"));
+                                //Log.i("buddy", ));
+
+                                if (!p.getuId().equals("null")) {
+                                    //don't add own user to list
+                                    if (!authVm.getUser().getUid().equals(p.getuId()) && !isBlocked) {
+
+                                        guests.add(p);
+                                    }
+                                    if (dS.getChildrenCount() == count) {
+                                        updateRecyclerView(guests);
+                                    }
                                 }
                             }
                         }

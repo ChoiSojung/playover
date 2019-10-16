@@ -82,6 +82,7 @@ public class HotelViewModel {
                         //String userString = matchesSnapshot.toString();
                         user = matchesSnapshot.getValue(Person.class);
                         //Log.i("buddy", user.toString());
+                        //Log.i("buddy", user.toString());
                     }
                     responseCallback.accept(user);
                 },
