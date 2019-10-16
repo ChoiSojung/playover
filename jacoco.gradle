@@ -21,7 +21,7 @@ task jacocoTestReport(type : JacocoReport, dependsOn : 'testDebugUnitTest') {
     }
 
     classDirectories = fileTree(
-            dir      : 'build/intermediates/app_classes/debug',
+            dir      : 'build/intermediates/javac/debug/classes/com/playover',
             excludes : [
                     '**/R.class',
                     '**/R$*.class',
@@ -48,7 +48,7 @@ task jacocoTestReport(type : JacocoReport, dependsOn : 'testDebugUnitTest') {
     )
 
     doFirst {
-        files('build/intermediates/app_classes/debug').getFiles().each { file ->
+        files('build/intermediates/javac/debug/classes/com/playover').getFiles().each { file ->
             if (file.name.contains('$$')) {
                 file.renameTo(file.path.replace('$$', '$'))
             }
@@ -66,7 +66,7 @@ task jacocoTestReportLocal(type : JacocoReport, dependsOn : ['testDebugUnitTest'
     }
 
     classDirectories = fileTree(
-            dir      : 'build/intermediates/app_classes/debug',
+            dir      : 'build/intermediates/javac/debug/classes/com/playover',
             excludes : [
                     '**/R.class',
                     '**/R$*.class',
@@ -94,7 +94,7 @@ task jacocoTestReportLocal(type : JacocoReport, dependsOn : ['testDebugUnitTest'
     )
 
     doFirst {
-        files('build/intermediates/app_classes/debug').getFiles().each { file ->
+        files('build/intermediates/javac/debug/classes/com/playover').getFiles().each { file ->
             if (file.name.contains('$$')) {
                 file.renameTo(file.path.replace('$$', '$'))
             }
