@@ -22,10 +22,11 @@
 
         <EditText
             android:layout_marginTop="70dp"
-            android:inputType="text"
             android:id="@+id/misuse_report"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
+            android:inputType="textCapSentences|textMultiLine"
+            android:lines="10"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:background="@android:drawable/edit_text"
