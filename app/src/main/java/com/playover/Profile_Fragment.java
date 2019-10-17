@@ -210,7 +210,13 @@ public class Profile_Fragment extends Fragment {
 
             // Build out onClickListener for report Misuse button
             reportMisuseBtn.setOnClickListener(v-> {
-                
+                transaction = fragmentManager.beginTransaction();
+                ReportMisuse_Fragment newMisuseReport = new ReportMisuse_Fragment();
+                newMisuseReport.setArguments(b);
+                // we are not replacing the profile here!
+                transaction.replace(R.id.containerCheckIn, newMisuseReport, "ReportMisuse");
+                transaction.addToBackStack("ReportMisuse");
+                transaction.commit();
             });
 
             starBtn.setOnClickListener(v -> {

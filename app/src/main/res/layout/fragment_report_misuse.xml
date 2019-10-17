@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/report_misuse"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReportMisuse_Fragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_marginTop="70dp"
+            android:inputType="text"
+            android:id="@+id/misuse_report"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="@string/misuse_report" />
+
+    </LinearLayout>
+</ScrollView>
