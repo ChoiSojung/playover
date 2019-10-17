@@ -210,6 +210,8 @@ public class Profile_Fragment extends Fragment {
 
             // Build out onClickListener for report Misuse button
             reportMisuseBtn.setOnClickListener(v-> {
+                String selectedUserUid = getArguments().getString(Constants.KEY_BUDUID);
+                Log.i("misuse", selectedUserUid);
                 transaction = fragmentManager.beginTransaction();
                 ReportMisuse_Fragment newMisuseReport = new ReportMisuse_Fragment();
                 newMisuseReport.setArguments(b);
