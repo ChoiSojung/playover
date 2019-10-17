@@ -137,4 +137,5 @@
     <string name="price_tag_icon">Price Tag Icon</string>
     <string name="check_out_hotel">Check Out</string>
     <string name="misuse_report">Misuse Report</string>
+    <string name="submitReport">Submit Report</string>
 </resources>

@@ -22,5 +22,19 @@
             android:background="@android:drawable/edit_text"
             android:hint="@string/misuse_report" />
 
+        <Button
+            android:id="@+id/submitReportBtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="#4CAF50"
+            android:text="@string/submitReport"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:visibility="visible"/>
+
     </LinearLayout>
 </ScrollView>
