@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class ReportMisuse_Fragment extends Fragment {
 
@@ -23,9 +24,11 @@ public class ReportMisuse_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         String selectedUserUid = getArguments().getString(Constants.KEY_BUDUID);
-        Log.i("misuse", selectedUserUid);
-        Log.i("misuse", getArguments().getString(Constants.KEY_BUDNAME));
+        String selectedUserName = getArguments().getString(Constants.KEY_BUDNAME);
+
         View rootView = inflater.inflate(R.layout.fragment_report_misuse, container, false);
+        TextView reportUsernameTV = (TextView)rootView.findViewById(R.id.misuse_username);
+        reportUsernameTV.setText("Please fill out your misuse report for " + selectedUserName);
 
         return rootView;
     }
