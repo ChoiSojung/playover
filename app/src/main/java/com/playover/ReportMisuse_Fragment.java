@@ -22,7 +22,9 @@ public class ReportMisuse_Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.i("misuse", "infragment");
+        String selectedUserUid = getArguments().getString(Constants.KEY_BUDUID);
+        Log.i("misuse", selectedUserUid);
+        Log.i("misuse", getArguments().getString(Constants.KEY_BUDNAME));
         View rootView = inflater.inflate(R.layout.fragment_report_misuse, container, false);
 
         return rootView;

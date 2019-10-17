@@ -211,10 +211,14 @@ public class Profile_Fragment extends Fragment {
             // Build out onClickListener for report Misuse button
             reportMisuseBtn.setOnClickListener(v-> {
                 String selectedUserUid = getArguments().getString(Constants.KEY_BUDUID);
-                Log.i("misuse", selectedUserUid);
+                String selectedUserName = getArguments().getString(Constants.KEY_BUDNAME);
+
                 transaction = fragmentManager.beginTransaction();
                 ReportMisuse_Fragment newMisuseReport = new ReportMisuse_Fragment();
-                newMisuseReport.setArguments(b);
+                Bundle args = new Bundle();
+                args.putString(Constants.KEY_BUDUID, selectedUserUid);
+                args.putString(Constants.KEY_BUDNAME, selectedUserName);
+                newMisuseReport.setArguments(args);
                 // we are not replacing the profile here!
                 transaction.replace(R.id.containerCheckIn, newMisuseReport, "ReportMisuse");
                 transaction.addToBackStack("ReportMisuse");
