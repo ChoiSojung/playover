@@ -208,6 +208,11 @@ public class Profile_Fragment extends Fragment {
                         });
             });
 
+            // Build out onClickListener for report Misuse button
+            reportMisuseBtn.setOnClickListener(v-> {
+                
+            });
+
             starBtn.setOnClickListener(v -> {
                 if (!buddy) {
                     buddy = true;
