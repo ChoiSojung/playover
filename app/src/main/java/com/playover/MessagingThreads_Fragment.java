@@ -57,6 +57,7 @@ public class MessagingThreads_Fragment extends Fragment {
         userViewModel = new UserViewModel();
         authVm = new AuthUserViewModel();
         getMessageThreads();
+        //Log.i("messages", "double fuck this");
         return v;
     }
 

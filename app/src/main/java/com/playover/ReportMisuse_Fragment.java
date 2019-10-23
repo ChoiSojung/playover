@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.playover.datamodels.MisuseReportDataModel;
+import com.playover.models.MisuseReport;
 
 public class ReportMisuse_Fragment extends Fragment {
 
@@ -40,9 +41,10 @@ public class ReportMisuse_Fragment extends Fragment {
         submitReportBtn = rootView.findViewById(R.id.submitReportBtn);
         submitReportBtn.setOnClickListener(v -> {
             String misuseReport = reportEditText.getText().toString();
-            Log.i("misuse", misuseReport);
+            MisuseReport newReport = new MisuseReport(misuseReport);
+            Log.i("misuse", newReport.getReport());
             MisuseReportDataModel reportVm = new MisuseReportDataModel();
-            //reportVm.putMessageThread(misuseReport);
+            reportVm.putMessageThread(newReport);
             //reportVm.setValue("yooo");
         });
 
