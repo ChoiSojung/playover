@@ -32,6 +32,7 @@ public class ReportMisuse_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         String selectedUserUid = getArguments().getString(Constants.KEY_BUDUID);
         String selectedUserName = getArguments().getString(Constants.KEY_BUDNAME);
+        String reportersUserName = getArguments().getString(Constants.KEY_UID);
 
         View rootView = inflater.inflate(R.layout.fragment_report_misuse, container, false);
         TextView reportUsernameTV = (TextView)rootView.findViewById(R.id.misuse_username);
@@ -41,11 +42,10 @@ public class ReportMisuse_Fragment extends Fragment {
         submitReportBtn = rootView.findViewById(R.id.submitReportBtn);
         submitReportBtn.setOnClickListener(v -> {
             String misuseReport = reportEditText.getText().toString();
-            MisuseReport newReport = new MisuseReport(misuseReport);
+            MisuseReport newReport = new MisuseReport(misuseReport, selectedUserUid, reportersUserName);
             Log.i("misuse", newReport.getReport());
             MisuseReportDataModel reportVm = new MisuseReportDataModel();
             reportVm.putMessageThread(newReport);
-            //reportVm.setValue("yooo");
         });
 
         return rootView;

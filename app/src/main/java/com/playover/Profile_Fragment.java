@@ -212,12 +212,13 @@ public class Profile_Fragment extends Fragment {
             reportMisuseBtn.setOnClickListener(v-> {
                 String selectedUserUid = getArguments().getString(Constants.KEY_BUDUID);
                 String selectedUserName = getArguments().getString(Constants.KEY_BUDNAME);
-
+                String reportersUserName = authVm.getUser().getUid();
                 transaction = fragmentManager.beginTransaction();
                 ReportMisuse_Fragment newMisuseReport = new ReportMisuse_Fragment();
                 Bundle args = new Bundle();
                 args.putString(Constants.KEY_BUDUID, selectedUserUid);
                 args.putString(Constants.KEY_BUDNAME, selectedUserName);
+                args.putString(Constants.KEY_UID, reportersUserName);
                 newMisuseReport.setArguments(args);
                 // we are not replacing the profile here!
                 transaction.replace(R.id.containerCheckIn, newMisuseReport, "ReportMisuse");

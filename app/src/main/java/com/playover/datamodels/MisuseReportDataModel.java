@@ -48,16 +48,10 @@ public class MisuseReportDataModel {
         try {
             DatabaseReference threadsRef = mDatabase.child("misuseReports");
             String key = mDatabase.child("misuseReports").push().getKey();
-            //MisuseReport newReport = new MisuseReport(misuseReport);
-            //Log.i("misuse", newReport.toString());
-            //Map<String, Object> reportValues = newReport.toMap();
-
             Map<String, Object> childUpdates = new HashMap<>();
             childUpdates.put(key, misuseReport);
-            //threadsRef.updateChildren(newReport);
             threadsRef.updateChildren(childUpdates);
             threadsRef.push();
-
         }
         catch (Exception ex)
         {
