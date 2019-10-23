@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.playover.datamodels.MisuseReportDataModel;
+
 public class ReportMisuse_Fragment extends Fragment {
 
     public ReportMisuse_Fragment() {
@@ -39,6 +41,9 @@ public class ReportMisuse_Fragment extends Fragment {
         submitReportBtn.setOnClickListener(v -> {
             String misuseReport = reportEditText.getText().toString();
             Log.i("misuse", misuseReport);
+            MisuseReportDataModel reportVm = new MisuseReportDataModel();
+            //reportVm.putMessageThread(misuseReport);
+            //reportVm.setValue("yooo");
         });
 
         return rootView;

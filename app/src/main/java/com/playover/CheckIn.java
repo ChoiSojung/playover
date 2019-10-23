@@ -104,6 +104,7 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
              userId = authVm.getUser().getUid();
              hotelVm.findHotelCheckedInto(userId, (DataSnapshot result) -> {
 
+                 //Log.i("misuse", String.valueOf(result.getChildrenCount()));
                  hotelCheckedIncount = result.getChildrenCount();
                  Log.i("findhotelcheckedinto: ", userId + " checked in count: " + hotelCheckedIncount);
                 if (hotelCheckedIncount > 0) {

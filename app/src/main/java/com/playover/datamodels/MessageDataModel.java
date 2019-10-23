@@ -50,9 +50,11 @@ public class MessageDataModel {
         String uid = thread.getMessageThreadUID();
         try {
             DatabaseReference threadsRef = mDatabase.child("messageThreads");
-            Map<String, Object> threadMap = new HashMap<>();
-            threadMap.put(uid, thread);
-            threadsRef.updateChildren(threadMap);
+            //Map<String, Object> threadMap = new HashMap<>();
+            //threadMap.put(uid, thread);
+
+            //threadsRef.updateChildren(threadMap);
+            //threadsRef.push();
         }
         catch (Exception ex)
         {

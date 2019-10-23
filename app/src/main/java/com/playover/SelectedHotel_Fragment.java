@@ -205,6 +205,7 @@ public class SelectedHotel_Fragment extends Fragment {
 
             budVm.getBuddies(authVm.getUser().getUid(),
                     (ArrayList<Person> persons) -> {
+                        //Log.i("misuse", persons.toString());
                         for(Person person : persons) {
                             //Log.i("buddy", String.valueOf("in for"));
                             if (person.getuId().equals(recipientUid.getText().toString())) {
@@ -286,6 +287,7 @@ public class SelectedHotel_Fragment extends Fragment {
         @Override
         public void onBindViewHolder(SelectedHotel_Fragment.ViewHolder holder, final int position) {
             try {
+                //Log.i("misuse", mPeopleAlsoCheckedIn.toString());
                 String name = mPeopleAlsoCheckedIn.get(position).getFirstName() +
                         " " + mPeopleAlsoCheckedIn.get(position).getLastName();
                 String occupation = mPeopleAlsoCheckedIn.get(position).getPosition();
@@ -376,22 +378,25 @@ public class SelectedHotel_Fragment extends Fragment {
                 guests.clear();
                 count = 0;
                 for (DataSnapshot x : dS.getChildren()) {
-                    //Log.i("buddy", x.toString());
+                    //Log.i("misuse", x.toString());
                     hotelVm.getUser(x.getKey(), (Person p) ->
                     {
-                        //Log.i("buddy", String.valueOf("in for"));
-                        //Log.i("buddy", p.toString());
+                        //Log.i("misuse", String.valueOf("in for"));
+                        //Log.i("misuse", p.toString());
                         count++;
                         try
                         {
                             //Log.i("buddy", p.getBuddies().toString());
                             // get buddies, if the authVm.getUser().getUid() matches and blocked is true, don't add
-                            Log.i("buddy", p.toString());
+                            //Log.i("misuse", p.toString());
                             if (p.getBuddies() == null) {
                                 //Log.i("buddy", p.toString());
                                 if ( ! authVm.getUser().getUid().equals(p.getuId())) {
-
+                                    Log.i("misuse", p.toString());
                                     guests.add(p);
+                                    if (dS.getChildrenCount() == count) {
+                                        updateRecyclerView(guests);
+                                    }
                                 }
                             } else {
                                 HashMap<String, Buddy> buddies = p.getBuddies();
