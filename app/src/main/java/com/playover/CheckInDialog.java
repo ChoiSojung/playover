@@ -1,7 +1,11 @@
 package com.playover;
 
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
@@ -17,6 +21,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
+import com.playover.broadcast_receivers.AlarmReceiver;
 import com.playover.models.Hotel;
 import com.playover.viewmodels.AuthUserViewModel;
 import com.playover.viewmodels.HotelViewModel;
@@ -26,6 +31,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import static android.content.Context.ALARM_SERVICE;
+import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 public class CheckInDialog extends Dialog implements View.OnClickListener
 {
@@ -61,6 +69,7 @@ public class CheckInDialog extends Dialog implements View.OnClickListener
         positionInArrayList = pos;
         latitude = hotel.getLat();
         longitude = hotel.getLon();
+
     }
 
     @Override
@@ -148,6 +157,10 @@ public class CheckInDialog extends Dialog implements View.OnClickListener
             {
                 System.out.println(ex.getMessage());
             }
+                //get checkout time
+                Calendar checkOut = getCal(dateSelection, hourSelection, minuteSelection);
+                //set alarm
+                setAlarm(checkOut);
 
                 doTransition();
             }
@@ -213,5 +226,52 @@ public class CheckInDialog extends Dialog implements View.OnClickListener
         calendar.set(Calendar.MINUTE, minutes);// for 0 min
 
         return calendar.getTime().toString();
+    }
+
+    public static Calendar getCal(String day, int hours, int minutes)
+    {
+        int days = 0;
+        switch (day)
+        {
+            case "Today": days = 0;
+                break;
+            case "Tomorrow": days =  1;
+                break;
+            case "3 Days": days = 2;
+                break;
+            case "4 Days": days = 3;
+                break;
+            case "5 Days": days = 4;
+                break;
+            case "6 Days": days = 5;
+                break;
+            case "7 Days": days = 6;
+                break;
+            default:
+                break;
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH) + days);
+        calendar.set(Calendar.HOUR_OF_DAY, hours);// for 6 hour
+        calendar.set(Calendar.MINUTE, minutes);// for 0 min
+
+        return calendar;
+    }
+
+
+    //helper method to set alarm for auto checkout task
+    public void setAlarm(Calendar c){
+        Intent checkOutIntent = new Intent(getContext(), AlarmReceiver.class);
+        checkOutIntent.setAction(AlarmReceiver.ACTION_ALARM);
+
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(getContext().getApplicationContext(),
+                0, checkOutIntent, 0);
+        AlarmManager alarmManager = (AlarmManager)getContext().getApplicationContext().
+                getSystemService(ALARM_SERVICE);
+
+        alarmManager.set(AlarmManager.RTC, c.getTimeInMillis(), alarmIntent);
+
     }
 }
