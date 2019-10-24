@@ -34,7 +34,7 @@ import java.util.Objects;
 
 public class Profile_Fragment extends Fragment {
 
-    private Button editProfileBtn, sendMessageBtn, buddyMessageBtn, blockUserBtn;
+    private Button editProfileBtn, sendMessageBtn, buddyMessageBtn, blockUserBtn, reportMisuseBtn;
     private ImageView dndImage;
     private ImageView profileImage, tempImage;
     private ImageButton starBtn;
@@ -59,6 +59,7 @@ public class Profile_Fragment extends Fragment {
         editProfileBtn = rootView.findViewById(R.id.editBtn);
         sendMessageBtn = rootView.findViewById(R.id.ProfileMessageBtn);
         blockUserBtn = rootView.findViewById(R.id.blockUserButton);
+        reportMisuseBtn = rootView.findViewById(R.id.reportMisuseButton);
         fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
         profileImage = rootView.findViewById(R.id.profileImage);
         profileName = rootView.findViewById(R.id.profileName);
@@ -69,7 +70,7 @@ public class Profile_Fragment extends Fragment {
         tempImage = rootView.findViewById(R.id.tempImage);
         dndImage = rootView.findViewById(R.id.dndImage);
         starBtn = rootView.findViewById(R.id.profileBuddyStar);
-        buddyMessageBtn = rootView.findViewById(R.id.buddyMessageBtn);
+        //buddyMessageBtn = rootView.findViewById(R.id.buddyMessageBtn);
 
         userVm = new UserViewModel();
         authVm = new AuthUserViewModel();
@@ -156,6 +157,7 @@ public class Profile_Fragment extends Fragment {
         if (this.getContext() instanceof CheckIn && getArguments() != null || this.getContext() instanceof Buddies_Activity && getArguments() != null) {
             sendMessageBtn.setVisibility(View.VISIBLE);
             blockUserBtn.setVisibility(View.VISIBLE);
+            reportMisuseBtn.setVisibility(View.VISIBLE);
             starBtn.setVisibility(View.VISIBLE);
 
             sendMessageBtn.setOnClickListener(new View.OnClickListener() {
@@ -204,6 +206,24 @@ public class Profile_Fragment extends Fragment {
                                 }
                             }
                         });
+            });
+
+            // Build out onClickListener for report Misuse button
+            reportMisuseBtn.setOnClickListener(v-> {
+                String selectedUserUid = getArguments().getString(Constants.KEY_BUDUID);
+                String selectedUserName = getArguments().getString(Constants.KEY_BUDNAME);
+                String reportersUserName = authVm.getUser().getUid();
+                transaction = fragmentManager.beginTransaction();
+                ReportMisuse_Fragment newMisuseReport = new ReportMisuse_Fragment();
+                Bundle args = new Bundle();
+                args.putString(Constants.KEY_BUDUID, selectedUserUid);
+                args.putString(Constants.KEY_BUDNAME, selectedUserName);
+                args.putString(Constants.KEY_UID, reportersUserName);
+                newMisuseReport.setArguments(args);
+                // we are not replacing the profile here!
+                transaction.replace(R.id.containerCheckIn, newMisuseReport, "ReportMisuse");
+                transaction.addToBackStack("ReportMisuse");
+                transaction.commit();
             });
 
             starBtn.setOnClickListener(v -> {

@@ -41,6 +41,7 @@
     <string name="find_buddies">Search above for crew members to add</string>
     <string name="add_them">Add them as you use the app on your layovers</string>
     <string name="block_user">Block User</string>
+    <string name="report_misuse">Report Misuse</string>
     <string name="message">Message</string>
     <string name="add_buddy">Add Buddy</string>
     <string name="rm_buddy">Remove as Fight Buddy</string>
@@ -135,4 +136,6 @@
     <string name="utilities">Utilities</string>
     <string name="price_tag_icon">Price Tag Icon</string>
     <string name="check_out_hotel">Check Out</string>
+    <string name="misuse_report">Misuse Report</string>
+    <string name="submitReport">Submit Report</string>
 </resources>
