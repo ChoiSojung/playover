@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/messaging_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        >
+
+        <FrameLayout
+            android:id="@+id/containerGroupMessaging"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <android.support.design.widget.AppBarLayout
+                    android:id="@+id/appBarLayoutMessaging"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.Toolbar
+                        android:id="@+id/toolbar_messaging"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="#99E3FF"
+                        android:elevation="4dp"
+                        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                        app:title="GROUP MESSAGES"
+                        app:titleTextColor="#757575" />
+
+                </android.support.design.widget.AppBarLayout>
+
+                <Button
+                    android:id="@+id/create_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text = "Create New Group"
+                    />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/nav_view_group_messaging"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/nav_header"
+            app:menu="@menu/drawer_menu" />
+
+    </android.support.v4.widget.DrawerLayout>
+</LinearLayout>

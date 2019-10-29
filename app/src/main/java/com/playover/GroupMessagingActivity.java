@@ -1,5 +1,6 @@
 package com.playover;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,17 +11,23 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.playover.broadcast_receivers.InternetBroadcastReceiver;
 import com.playover.viewmodels.AuthUserViewModel;
 import com.playover.viewmodels.UserViewModel;
 
-public class MessagingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class GroupMessagingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     static FragmentManager messagingFragmentManager;
     private FragmentManager fragmentManager;
@@ -30,12 +37,13 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
     private String recipientUID;
     private String myUID;
     private UserViewModel userViewModel;
+    private Button CreateGroupButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i("messages", "fuck this");
-        setContentView(R.layout.activity_messaging);
+        setContentView(R.layout.activity_group_messaging);
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         if (b != null){
@@ -57,7 +65,7 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
         }
 
         drawer = findViewById(R.id.messaging_content);
-        NavigationView navigationView = findViewById(R.id.nav_view_messaging);
+        NavigationView navigationView = findViewById(R.id.nav_view_group_messaging);
         navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
@@ -68,8 +76,8 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
         transaction = fragmentManager.beginTransaction();
         if (recipientUID == null) {
             //Log.i("messages", "null");
-            MessagingThreads_Fragment newMessageThreadsFragment = new MessagingThreads_Fragment();
-            transaction.replace(R.id.containerMessaging, newMessageThreadsFragment, "Message Threads");
+            GroupMessagingThreads_Fragment newGroupMessageThreadsFragment = new GroupMessagingThreads_Fragment();
+            transaction.replace(R.id.containerGroupMessaging, newGroupMessageThreadsFragment, "Message Threads");
             transaction.commit();
         } else {
             Log.i("messages", "else it is");
@@ -77,9 +85,20 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
             bundle.putString("recipientUid", recipientUID);
             MessagingBubbles_Fragment newMessagingBubblesFragment = new MessagingBubbles_Fragment();
             newMessagingBubblesFragment.setArguments(bundle);
-            transaction.replace(R.id.containerMessaging, newMessagingBubblesFragment, "Messaging Bubbles");
+            transaction.replace(R.id.containerGroupMessaging, newMessagingBubblesFragment, "Messaging Bubbles");
             transaction.commit();
         }
+
+
+        CreateGroupButton = (Button) findViewById(R.id.create_group);
+
+        CreateGroupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //CreateGroup();
+                Log.i(":==>", "Create New Group");
+            }
+        });
     }
 
     public String getRecipientUID() {
@@ -155,7 +174,7 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
     public void isNetworkAvailable() {
         boolean networks = InternetBroadcastReceiver.isNetworkAvailable(getApplicationContext());
         if (!networks) {
-            Intent displayNoService = new Intent(MessagingActivity.this, NoInternet.class);
+            Intent displayNoService = new Intent(GroupMessagingActivity.this, NoInternet.class);
             startActivity(displayNoService);
         }
     }
@@ -169,5 +188,41 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
         }
     }
 
+    private void CreateGroup() {
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(GroupMessagingActivity.this, R.style.AlertDialog);
+        builder.setTitle("Enter Group Name :");
 
+        final EditText groupNameField = new EditText(GroupMessagingActivity.this);
+        //groupNameField.setHint("playover everything");
+        builder.setView(groupNameField);
+
+        builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String groupName = groupNameField.getText().toString();
+
+                if (TextUtils.isEmpty(groupName)){
+                    Toast.makeText(GroupMessagingActivity.this, "Group must have a name"
+                            , Toast.LENGTH_SHORT);
+                } else {
+                    CreateNewGroup(groupName);
+                }
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
+    private void CreateNewGroup(String groupName){
+        Toast.makeText(GroupMessagingActivity.this, "Group " + groupName + " will be created below"
+                , Toast.LENGTH_SHORT);
+    }
 }
