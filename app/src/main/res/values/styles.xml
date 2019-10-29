@@ -19,7 +19,4 @@
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
-
-    <style name="AlertDialog" parent="Base.Theme.AppCompat.Light.Dialog"></style>
-
 </resources>

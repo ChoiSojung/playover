@@ -97,10 +97,6 @@ public class Buddies_Activity extends AppCompatActivity implements NavigationVie
                 Intent messaging = new Intent(getApplicationContext(), MessagingActivity.class);
                 startActivity(messaging);
                 break;
-            case R.id.nav_group_messaging:
-                Intent groupMessaging = new Intent(getApplicationContext(), GroupMessagingActivity.class);
-                startActivity(groupMessaging);
-                break;
         }
         return true;
     }

@@ -66,7 +66,6 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
     private Hotel obj = null;
     String userId = null;
 
-
     private boolean firstTime;
     private long hotelCheckedIncount;
 
@@ -462,10 +461,6 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
             case R.id.nav_messaging:
                 Intent messaging = new Intent(getApplicationContext(), MessagingActivity.class);
                 startActivity(messaging);
-                break;
-            case R.id.nav_group_messaging:
-                Intent groupMessaging = new Intent(getApplicationContext(), GroupMessagingActivity.class);
-                startActivity(groupMessaging);
                 break;
         }
         return true;
