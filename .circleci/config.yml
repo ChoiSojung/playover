@@ -177,11 +177,11 @@ jobs:
       - *decode_gcloud_key
       - run:
           name: Set Google Cloud target project
-          command: gcloud config set project playover-85cce
+          command: gcloud config set project playover-a1a90
           no_output_timeout: 30m
       - run:
           name: Authenticate with Google Cloud
-          command: gcloud auth activate-service-account firebase-adminsdk-fuv7a@playover-85cce.iam.gserviceaccount.com --key-file ${HOME}/client-secret.json
+          command: gcloud auth activate-service-account firebase-adminsdk-hbrku@playover-a1a90.iam.gserviceaccount.com --key-file ${HOME}/client-secret.json
       - run:
           name: Echo sha1 variable for debugging
           command: echo ${CIRCLE_SHA1}
