@@ -15,6 +15,11 @@
             android:title="Messages" />
 
         <item
+            android:id="@+id/nav_group_messaging"
+            android:icon="@drawable/ic_message"
+            android:title="Group Messages" />
+
+        <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_profile"
             android:title="@string/my_profile" />
