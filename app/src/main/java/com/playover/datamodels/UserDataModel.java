@@ -99,6 +99,14 @@ public class UserDataModel {
         usersRef.updateChildren(user).addOnCompleteListener(viewModelCallBack);
     }
 
+    //updates the firebase instance ID used for messaging & notifications
+    public void updateFBinstanceID(String uId, String FCMinstanceID, OnCompleteListener<Void> viewModelCallBack) {
+        DatabaseReference usersRef = mDatabase.child("users");
+        Map<String, Object> user = new HashMap<>();
+        user.put(uId + "/FCMinstanceID/", FCMinstanceID);
+        usersRef.updateChildren(user).addOnCompleteListener(viewModelCallBack);
+    }
+
     //clears the listeners.
     public void clear() {
         listeners.forEach(Query::removeEventListener);

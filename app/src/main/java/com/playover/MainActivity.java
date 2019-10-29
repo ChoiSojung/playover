@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.playover.broadcast_receivers.InternetBroadcastReceiver;
 import com.playover.viewmodels.AuthUserViewModel;
+import com.playover.viewmodels.NotificationsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }
+
+
     }
 
 

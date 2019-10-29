@@ -135,4 +135,57 @@
     <string name="utilities">Utilities</string>
     <string name="price_tag_icon">Price Tag Icon</string>
     <string name="check_out_hotel">Check Out</string>
+
+    <!-- notification resources -->
+    <string name="buddy_default_id">buddy_default</string>
+    <string name="buddy_default_name">Buddies normal priority</string>
+    <string name="buddy_default_desc">Your friends and contacts, normal messages</string>
+    <string name="buddy_priority_id">buddy_priority</string>
+    <string name="buddy_priority_name">Buddies, priority messages</string>
+    <string name="buddy_priority_desc">Your friends and contacts, work related messages</string>
+    <string name="buddy_emergency_id">buddy_emergency</string>
+    <string name="buddy_emergency_name">Buddies, most important</string>
+    <string name="buddy_emergency_desc">Your friends and contacts, very important and emergency</string>
+
+    <string name="channel_default_id">channel_default</string>
+    <string name="channel_default_name">Chat groups normal priority</string>
+    <string name="channel_default_desc">Chat groups you belong to, normal messages</string>
+    <string name="channel_priority_id">channel_priority</string>
+    <string name="channel_priority_name">Chat groups, priority messages</string>
+    <string name="channel_priority_desc">Chat groups you belong to, work related messages</string>
+    <string name="channel_emergency_id">channel_emergency</string>
+    <string name="channel_emergency_name">Chat groups, most important messages</string>
+    <string name="channel_emergency_desc">Chat groups you belong to, very important and emergency</string>
+
+    <string name="crew_default_id">crew_default</string>
+    <string name="crew_default_name">Work crews normal priority</string>
+    <string name="crew_default_desc">Work crews you belong to, normal messages</string>
+    <string name="crew_priority_id">crew_priority</string>
+    <string name="crew_priority_name">Work crews, priority messages</string>
+    <string name="crew_priority_desc">Work crews you belong to, work related messages</string>
+    <string name="crew_emergency_id">crew_emergency</string>
+    <string name="crew_emergency_name">Work crews, most important messages</string>
+    <string name="crew_emergency_desc">Work crews you belong to, very important and emergency</string>
+
+    <string name="organization_default_id">organization_default</string>
+    <string name="organization_default_name">Company wide normal messages</string>
+    <string name="organization_default_desc">Company wide announcements, normal priority</string>
+    <string name="organization_priority_id">organization_priority</string>
+    <string name="organization_priority_name">Company wide, priority messages</string>
+    <string name="organization_priority_desc">Company wide announcements, work related messages</string>
+    <string name="organization_emergency_id">organization_emergency</string>
+    <string name="organization_emergency_name">Company wide, most important messages</string>
+    <string name="organization_emergency_desc">Company wide announcements, very important and emergency</string>
+
+    <string name="global_default_id">global_default</string>
+    <string name="global_default_name">Playover application announcements</string>
+    <string name="global_default_desc">Playover application announcements, normal priority</string>
+    <!-- Reserved, most likely unwise to implement
+    <string name="global_priority_id">global_priority</string>
+    <string name="global_priority_name">Playover application priority announcements</string>
+    <string name="global_priority_desc">Playover application, important announcements</string>
+    <string name="global_emergency_id">global_emergency</string>
+    <string name="global_emergency_name">Playover application emergency announcements</string>
+    <string name="global_emergency_desc">Playover application, emergency announcements</string>
+    -->
 </resources>

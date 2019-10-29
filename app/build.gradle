@@ -58,6 +58,8 @@ android {
         //added this line 20190426 when transfer of Firebase ownershihp was
         //transfered by Francesco Ward to Danielle Coulter
         implementation 'com.google.firebase:firebase-core:16.0.1'
+        implementation 'com.google.firebase:firebase-messaging:17.4.0'
+        implementation 'com.google.firebase:firebase-functions:16.1.3'
         implementation 'com.squareup.picasso:picasso:2.71828'
         implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
         implementation 'com.google.android.gms:play-services-auth:16.0.1'
