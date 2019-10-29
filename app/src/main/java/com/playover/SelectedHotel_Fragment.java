@@ -14,14 +14,20 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.support.v7.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +47,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class SelectedHotel_Fragment extends Fragment {
+public class SelectedHotel_Fragment extends Fragment{
 
     TextView mTxtHotelName;
     TextView mTxtHotelAddress;
@@ -49,7 +55,7 @@ public class SelectedHotel_Fragment extends Fragment {
     ExpandableListView mList;
     private String personToMessageUid;
     private RecyclerView recyclerView;
-    private SelectedHotel_Fragment.ContentAdapter adapter;
+    private static SelectedHotel_Fragment.ContentAdapter adapter;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
 
@@ -64,6 +70,9 @@ public class SelectedHotel_Fragment extends Fragment {
     private long count;
     public static boolean isCheckedIn = false;
     private String hotelCheckedInto = null;
+    private SearchView searchView;
+    private static List<Person> filteredGuests;
+
 
     @Nullable
     @Override
@@ -71,6 +80,9 @@ public class SelectedHotel_Fragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         isCheckedIn = true;
+
+        //enable search in the tool bar
+        setHasOptionsMenu(true);
 
         View v = inflater.inflate(R.layout.fragment_selected_hotel, container, false);
         recyclerView = v.findViewById(R.id.recycler_view_also_checked_in);
@@ -178,12 +190,46 @@ public class SelectedHotel_Fragment extends Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+        //inflate menu; adds items to the action bar if present
+        inflater.inflate(R.menu.search_menu, menu);
+        //associate searchable config with search view
+        final MenuItem searchItem = menu.findItem(R.id.action_search);
+        searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+            @Override
+            public boolean onQueryTextSubmit(String query){
+                adapter.getFilter().filter(query);
+                updateRecyclerView(filteredGuests);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query){
+                return false;
+            }
+
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id=item.getItemId();
+        if(id==R.id.action_search){
+            return true;
+        }
+        return getActivity().onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //read guests from db
         doRead(getArguments().getShort("pos"));
 
     }
+
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public CheckBox checkbox;
@@ -266,15 +312,19 @@ public class SelectedHotel_Fragment extends Fragment {
     /**
      * Adapter to display recycler view.
      */
-    public static class ContentAdapter extends RecyclerView.Adapter<SelectedHotel_Fragment.ViewHolder> {
+    public static class ContentAdapter extends RecyclerView.Adapter<SelectedHotel_Fragment.ViewHolder>
+                implements Filterable {
         // Set numbers of List in RecyclerView.
         private static int LENGTH;
         private final Context c;
         private List<String> messagingList = new ArrayList<>();
         public static int checkboxPosition = -1;
+        private List<Person> guests;
 
         public ContentAdapter(Context context) {
             c = context;
+            this.guests = SelectedHotel_Fragment.mPeopleAlsoCheckedIn;
+            filteredGuests = new ArrayList<>();
         }
 
         @Override
@@ -336,6 +386,44 @@ public class SelectedHotel_Fragment extends Fragment {
 
             }
         }
+
+        @Override
+        public Filter getFilter(){
+            return new Filter(){
+                @Override
+                protected FilterResults performFiltering(CharSequence charSequence){
+                    String charString = charSequence.toString();
+                    if(charString.isEmpty()){
+                        filteredGuests = guests;
+                    } else {
+                        String filterPattern = charSequence.toString().toLowerCase().trim();
+                        List<Person> filteredList = new ArrayList<>();
+                        for (Person p: guests){
+                            String email = p.getEmailAddress();
+                            email=email.substring(email.indexOf("@"+1, email.indexOf(".")));
+                            if(email.toLowerCase().contains(filterPattern)){
+                                filteredList.add(p);
+                            }
+                        }
+                        filteredGuests = filteredList;
+                    }
+                    FilterResults filterResults = new FilterResults();
+                    filterResults.values=filteredGuests;
+                    return filterResults;
+                }
+                @Override
+                protected void publishResults(CharSequence charSequence, FilterResults filterResults){
+                    filteredGuests = (ArrayList<Person>) filterResults.values;
+                    notifyDataSetChanged();
+                }
+            };
+
+        }
+
+        public interface ContentAdapterListener{
+            void onPersonSelected(Person p);
+
+    }
 
         public List<String> getMessagingList() {
             return messagingList;
