@@ -61,7 +61,8 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/fui_transparent"
         android:src="@drawable/ic_block_24px"
-        android:layout_toLeftOf="@+id/buddyStar"/>
+        android:layout_toLeftOf="@+id/buddyStar"
+        android:visibility="invisible"/>
 
     <ImageButton
         android:id="@+id/buddyStar"
