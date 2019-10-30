@@ -2,6 +2,7 @@ package com.playover;
 
 import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.playover.broadcast_receivers.AlarmReceiver;
+import com.playover.broadcast_receivers.MyNotificationPublisher;
 import com.playover.models.Hotel;
 import com.playover.viewmodels.AuthUserViewModel;
 import com.playover.viewmodels.HotelViewModel;
@@ -60,6 +63,9 @@ public class CheckInDialog extends Dialog implements View.OnClickListener
     private List<Hotel> hotelList = new ArrayList<>();
     private Hotel result;
 
+    public static final String NOTIFICATION_CHANNEL_ID = "1001";
+    private final static String default_notification_channel_id="default";
+
 
     public CheckInDialog(int pos, @NonNull Context context, Hotel hotel) {
         super(context);
@@ -69,6 +75,7 @@ public class CheckInDialog extends Dialog implements View.OnClickListener
         positionInArrayList = pos;
         latitude = hotel.getLat();
         longitude = hotel.getLon();
+
 
     }
 
@@ -161,6 +168,12 @@ public class CheckInDialog extends Dialog implements View.OnClickListener
                 Calendar checkOut = getCal(dateSelection, hourSelection, minuteSelection);
                 //set alarm
                 setAlarm(checkOut);
+
+                Calendar checkOutAlert = getCal(dateSelection, hourSelection, minuteSelection);
+                checkOutAlert.add(Calendar.HOUR, -1);
+
+                //schedule notification for checkout
+                scheduleNotification(getNotification("Your checkout time is " + getTime(dateSelection, hourSelection, minuteSelection)), checkOutAlert);
 
                 doTransition();
             }
@@ -273,5 +286,30 @@ public class CheckInDialog extends Dialog implements View.OnClickListener
 
         alarmManager.set(AlarmManager.RTC, c.getTimeInMillis(), alarmIntent);
 
+    }
+
+    //helper method to schedule notification for checkout time
+    public void scheduleNotification(Notification notification, Calendar c){
+        Intent notifyCheckoutIntent = new Intent(getContext(), MyNotificationPublisher.class);
+        notifyCheckoutIntent.putExtra(MyNotificationPublisher.NOTIFICATION_ID, 1);
+        notifyCheckoutIntent.putExtra(MyNotificationPublisher.NOTIFICATION, notification);
+
+        PendingIntent notifyIntent = PendingIntent.getBroadcast(getContext().getApplicationContext(),
+                0, notifyCheckoutIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager)getContext().getApplicationContext().
+                getSystemService(ALARM_SERVICE);
+
+        alarmManager.set(AlarmManager.RTC, c.getTimeInMillis(), notifyIntent);
+    }
+
+    private Notification getNotification(String content){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), default_notification_channel_id);
+        builder.setContentTitle("Scheduled Checkout");
+        builder.setContentText(content);
+        builder.setSmallIcon(R.drawable.ic_launcher_foreground);
+        builder.setAutoCancel(true);
+        builder.setChannelId(NOTIFICATION_CHANNEL_ID);
+        return builder.build();
     }
 }
