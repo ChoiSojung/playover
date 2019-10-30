@@ -199,8 +199,10 @@ public class SelectedHotel_Fragment extends Fragment{
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             @Override
             public boolean onQueryTextSubmit(String query){
-                adapter.getFilter().filter(query);
-                updateRecyclerView(filteredGuests);
+                //Log.i("filter", mPeopleAlsoCheckedIn.toString());
+                List<Person> filteredPersons = getFilteredGuests(query);
+                //Log.i("filter", filteredGuests.toString());
+                updateRecyclerView(filteredPersons);
                 return false;
             }
 
@@ -210,6 +212,31 @@ public class SelectedHotel_Fragment extends Fragment{
             }
 
         });
+    }
+
+    public List<Person> getFilteredGuests(String searchKeyword) {
+        if(searchKeyword.isEmpty()){
+            filteredGuests = mPeopleAlsoCheckedIn;
+        } else {
+            //Log.i("filter", charSequence.toString());
+            String filterPattern = searchKeyword.toLowerCase().trim();
+            List<Person> filteredList = new ArrayList<>();
+            //Log.i("filter", mPeopleAlsoCheckedIn.toString());
+            for (Person p : mPeopleAlsoCheckedIn) {
+                //Log.i("filter", p.toString());
+                String email = p.getEmailAddress();
+                //Log.i("filter", email);
+                //email=email.substring(email.indexOf("@"+1, email.indexOf(".")));
+                if(email.toLowerCase().contains(filterPattern)){
+                    //Log.i("filter", p.toString());
+                    filteredList.add(p);
+                }
+            }
+            //Log.i("filter", filteredList.toString());
+            filteredGuests = filteredList;
+
+        }
+        return filteredGuests;
     }
 
     @Override
@@ -312,8 +339,7 @@ public class SelectedHotel_Fragment extends Fragment{
     /**
      * Adapter to display recycler view.
      */
-    public static class ContentAdapter extends RecyclerView.Adapter<SelectedHotel_Fragment.ViewHolder>
-                implements Filterable {
+    public static class ContentAdapter extends RecyclerView.Adapter<SelectedHotel_Fragment.ViewHolder> {
         // Set numbers of List in RecyclerView.
         private static int LENGTH;
         private final Context c;
@@ -387,39 +413,6 @@ public class SelectedHotel_Fragment extends Fragment{
             }
         }
 
-        @Override
-        public Filter getFilter(){
-            return new Filter(){
-                @Override
-                protected FilterResults performFiltering(CharSequence charSequence){
-                    String charString = charSequence.toString();
-                    if(charString.isEmpty()){
-                        filteredGuests = guests;
-                    } else {
-                        String filterPattern = charSequence.toString().toLowerCase().trim();
-                        List<Person> filteredList = new ArrayList<>();
-                        for (Person p: guests){
-                            String email = p.getEmailAddress();
-                            email=email.substring(email.indexOf("@"+1, email.indexOf(".")));
-                            if(email.toLowerCase().contains(filterPattern)){
-                                filteredList.add(p);
-                            }
-                        }
-                        filteredGuests = filteredList;
-                    }
-                    FilterResults filterResults = new FilterResults();
-                    filterResults.values=filteredGuests;
-                    return filterResults;
-                }
-                @Override
-                protected void publishResults(CharSequence charSequence, FilterResults filterResults){
-                    filteredGuests = (ArrayList<Person>) filterResults.values;
-                    notifyDataSetChanged();
-                }
-            };
-
-        }
-
         public interface ContentAdapterListener{
             void onPersonSelected(Person p);
 
@@ -483,6 +476,7 @@ public class SelectedHotel_Fragment extends Fragment{
                                     Log.i("misuse", p.toString());
                                     guests.add(p);
                                     if (dS.getChildrenCount() == count) {
+
                                         updateRecyclerView(guests);
                                     }
                                 }
@@ -509,6 +503,7 @@ public class SelectedHotel_Fragment extends Fragment{
                                         guests.add(p);
                                     }
                                     if (dS.getChildrenCount() == count) {
+
                                         updateRecyclerView(guests);
                                     }
                                 }
@@ -535,6 +530,7 @@ public class SelectedHotel_Fragment extends Fragment{
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
         adapter.setLENGTH(mPeopleAlsoCheckedIn.size());
+//        Log.i("filter", mPeopleAlsoCheckedIn.toString());
     }
 
     @Override
