@@ -196,7 +196,7 @@ jobs:
           no_output_timeout: 30m
       - run:
           name: Download instrumented test results from Firebase Test Lab
-          command: gsutil -m cp -r -U gs://test-lab-t5iyh5fzdt4c6-ny6t164dynf5m/${CIRCLE_SHA1} /root/workspace/firebase/
+          command: gsutil -m cp -r -U gs://test-lab-q8hnmisiit6qx-yndqswtsnadiq/${CIRCLE_SHA1} /root/workspace/firebase/
           no_output_timeout: 30m
       - *persist_firebase_workspace
       - store_artifacts:
