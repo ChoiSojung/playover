@@ -46,6 +46,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 
 public class SelectedHotel_Fragment extends Fragment{
 
@@ -196,6 +198,9 @@ public class SelectedHotel_Fragment extends Fragment{
         //associate searchable config with search view
         final MenuItem searchItem = menu.findItem(R.id.action_search);
         searchView = (SearchView) searchItem.getActionView();
+        //get reference to the clear button to clear filter and bring back original display
+        ImageView closeButton = (ImageView)searchView.findViewById(R.id.search_close_btn);
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             @Override
             public boolean onQueryTextSubmit(String query){
@@ -208,10 +213,23 @@ public class SelectedHotel_Fragment extends Fragment{
 
             @Override
             public boolean onQueryTextChange(String query){
+
                 return false;
             }
 
         });
+
+        closeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Log.i("CloseButton sez: ", "Clicked!");
+                searchView.setQuery("",false);
+                searchView.clearFocus();
+
+            }
+        });
+
+
     }
 
     public List<Person> getFilteredGuests(String searchKeyword) {
@@ -345,12 +363,9 @@ public class SelectedHotel_Fragment extends Fragment{
         private final Context c;
         private List<String> messagingList = new ArrayList<>();
         public static int checkboxPosition = -1;
-        private List<Person> guests;
 
         public ContentAdapter(Context context) {
             c = context;
-            this.guests = SelectedHotel_Fragment.mPeopleAlsoCheckedIn;
-            filteredGuests = new ArrayList<>();
         }
 
         @Override
