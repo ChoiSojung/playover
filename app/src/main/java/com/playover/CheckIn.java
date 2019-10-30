@@ -26,6 +26,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -212,6 +213,12 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
         {
             System.out.println(e.getMessage());
         }
+    }
+
+    //Enables search filter menu option in the tool bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        return true;
     }
 
     private static boolean isTestMode() {
