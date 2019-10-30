@@ -46,7 +46,7 @@ public class Verification_Fragment extends Fragment {
     private FragmentManager fragmentManager;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private int verifyCount = 0;
-
+    private Button login;
 
     public Verification_Fragment() {
         // Required empty public constructor
@@ -64,6 +64,9 @@ public class Verification_Fragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_verification, container, false);
         verification_message = rootView.findViewById(R.id.verification_message);
+        // return to the login page
+        //View SingnView = inflater.inflate(R.layout.fragment_log_in, container, false);
+        //
         family = rootView.findViewById(R.id.family);
         verificationEdit = rootView.findViewById(R.id.verificationEdit);
         didntReceive = rootView.findViewById(R.id.didntReceive);
@@ -105,7 +108,7 @@ public class Verification_Fragment extends Fragment {
                                     if (task.isSuccessful()) {
                                         UserViewModel userVm = new UserViewModel();
                                         Person newUser = new Person(firstName, lastName, null, position, null,
-                                                null, authVm.getUser().getEmail(), authVm.getUser().getUid(), null, null, false, null, null, null);
+                                                null, authVm.getUser().getEmail(), true, authVm.getUser().getUid(), null, null, false, null, null, null);
                                         Log.i("new user: ", newUser.toString());
                                         userVm.createUser(authVm.getUser().getUid(), newUser, new OnCompleteListener<Void>() {
                                             @Override
@@ -198,6 +201,9 @@ public class Verification_Fragment extends Fragment {
         }
 
         return rootView;
+        // startActivity(new Intent(Verification_Fragment.this, LogIn_Fragment.class));
+        //Intent i = new Intent(Verification_Fragment.this, LogIn_Fragment.class);
+        //startActivity(i);
     }
 
     //send email method.  spins up a new thread

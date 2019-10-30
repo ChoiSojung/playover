@@ -32,4 +32,5 @@ public class Constants {
     public static final String KEY_BUDNAME = "bud_name";
     public static final String KEY_DISPLAY_NAME = "display_name";
     public static final String KEY_LAST_UPDATE = "last_updated";
+    public static final String KEY_Employee_EMAIL = "Yes";
 }

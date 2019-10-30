@@ -17,6 +17,7 @@ public class Person implements Parcelable {
     private String relationshipStatus;
     private String dob;
     private String position;
+    private boolean isAlaskaEmployee;
     private String emailAddress;
     private String uId;
     private String interests;
@@ -33,7 +34,7 @@ public class Person implements Parcelable {
     }
 
     public Person(String firstName, String lastName, String group, String position,
-                  String dob, String relationshipStatus, String emailAddress, String uId, String interests,
+                  String dob, String relationshipStatus, String emailAddress, boolean isAlaskaEmployee, String uId, String interests,
                   String imageUri, boolean dnd, List<String> messageThreads, String hotelCheckedInto, HashMap<String, Buddy> buddies) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,6 +43,7 @@ public class Person implements Parcelable {
         this.dob = dob;
         this.relationshipStatus = relationshipStatus;
         this.emailAddress = emailAddress;
+        this.isAlaskaEmployee = isValid (emailAddress );
         this.uId = uId;
         this.interests = interests;
         this.imageUri = imageUri;
@@ -82,6 +84,10 @@ public class Person implements Parcelable {
 
     public String getEmailAddress() {
         return emailAddress;
+    }
+
+    public boolean isAlaskaEmployee() {
+        return isAlaskaEmployee;
     }
 
     public String getFirstName() {
@@ -148,6 +154,11 @@ public class Person implements Parcelable {
         this.emailAddress = emailAddress;
     }
 
+    public boolean setisAlaskaEmployee(boolean  isAlaskaEmployee) {
+        this. isAlaskaEmployee =  isAlaskaEmployee;
+        return isValid (emailAddress);
+    }
+
     public void setuId(String uId) {
         this.uId = uId;
     }
@@ -168,6 +179,12 @@ public class Person implements Parcelable {
         this.messageThreads = messageThreads;
     }
 
+    // Check user's email if it's from alaskaair.com
+    static boolean isValid(String email) {
+        String regex = "^\\S+@alaskaair\\.com$";
+        return email.matches(regex);
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -179,6 +196,7 @@ public class Person implements Parcelable {
                 ", dob= " + dob +
                 ", position=' " + position + '\'' +
                 ", emailAddress=' " + emailAddress + '\'' +
+                ", Alaskaair Employee=' " + isAlaskaEmployee + '\'' +
                 ", interests=' " + interests + '\'' +
                 ", imageUri=' " + imageUri + '\'' +
                 ", dnd=' " + dnd + '\'' +
@@ -212,6 +230,7 @@ public class Person implements Parcelable {
         dest.writeSerializable(dob);
         dest.writeString(relationshipStatus);
         dest.writeString(emailAddress);
+        dest.writeString( String.valueOf ( isAlaskaEmployee ) );
         dest.writeString(uId);
         dest.writeString(interests);
         dest.writeString(imageUri);

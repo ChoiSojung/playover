@@ -41,6 +41,7 @@ public class SignUp_Fragment extends Fragment {
     private FragmentManager fragmentManager;
     private FragmentTransaction transaction;
     private EditText verification_Password;
+    private String tag = "vcode";
 
 
     public SignUp_Fragment() {
@@ -167,9 +168,10 @@ public class SignUp_Fragment extends Fragment {
                             transaction = fragmentManager.beginTransaction();
                             Verification_Fragment Verification = new Verification_Fragment();
                             Bundle b = new Bundle();
-                            //Log.i("misuse", String.valueOf(validationCode));
+                            Log.i(tag,String.valueOf(validationCode));
                             b.putInt(Constants.KEY_CODE, validationCode);
                             b.putString(Constants.KEY_EMAIL, emailSignUp.getText().toString().toLowerCase().trim());
+                            b.putString(Constants.KEY_Employee_EMAIL, emailSignUp.getText().toString().toLowerCase().trim());
                             b.putString(Constants.KEY_FNAME, firstNameSignUp.getText().toString().trim());
                             b.putString(Constants.KEY_LNAME, lastNameSignUp.getText().toString().trim());
                             b.putString(Constants.KEY_POSITION, positionSignUp.getText().toString().trim());
@@ -194,6 +196,8 @@ public class SignUp_Fragment extends Fragment {
         return matcher.matches();
     }
 
+
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -212,6 +216,28 @@ public class SignUp_Fragment extends Fragment {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+
+                   /* FirebaseAuth auth = FirebaseAuth.getInstance();
+                    firebaseAuth.createUserWithEmailAndPassword (emailSignUp.getText ().toString (),
+                            passwordSignUp.getText ().toString ())
+                            .addOnCompleteListener (new OnCompleteListener <AuthResult> () {
+                                @Override
+                                public void onComplete(@NonNull Task <AuthResult> task) {
+                                    if(task.isSuccessful (){ firebaseAuth.getCurrentUser ().sendEmailVerification ().addOnCompleteListener ( new OnCompleteListener <Void> () {
+                                        @Override
+                                        public void onComplete(@NonNull Task <Void> task) {
+                                            if(task.isSuccessful()){
+                                                emailSignUp.setText("");
+                                                passwordSignUp.setText ( "" );
+
+                                            }
+                                        }
+                                    });
+                                    }
+                                } else {
+                                    Toast.makeText (  )
+                                }
+                            }*/
                     try {
                         SendMail sender = new SendMail();
                         sender.MailingMessage("PlayOver Email Verification Code", "Here is the requested validation code:  " + validationCode,
