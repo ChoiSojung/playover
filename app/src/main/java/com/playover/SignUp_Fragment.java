@@ -167,7 +167,7 @@ public class SignUp_Fragment extends Fragment {
                             transaction = fragmentManager.beginTransaction();
                             Verification_Fragment Verification = new Verification_Fragment();
                             Bundle b = new Bundle();
-                            //Log.i("misuse", String.valueOf(validationCode));
+                            Log.i("misuse", String.valueOf(validationCode));
                             b.putInt(Constants.KEY_CODE, validationCode);
                             b.putString(Constants.KEY_EMAIL, emailSignUp.getText().toString().toLowerCase().trim());
                             b.putString(Constants.KEY_FNAME, firstNameSignUp.getText().toString().trim());
