@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/buddies_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Buddies_Activity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayoutBuddies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/fragment_toolbar_buddies"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/dark_grey"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:titleTextColor="@color/white" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!--  <android.support.v7.widget.SearchView
+          android:id="@+id/search_bar"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:gravity="start"
+          android:hint="SEARCH FOR BUDDIES"
+          android:textColor="@color/dark_grey"
+          android:textStyle="italic" />-->
+    <TextView
+        android:id="@+id/noBuddies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="45dp"
+        android:text="@string/no_buddies"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/buddies_recycleView"
+        android:layout_width="match_parent"
+        android:layout_height="405dp"
+        android:clipToPadding="false"
+        android:paddingTop="?attr/actionBarSize"
+        android:paddingBottom="@dimen/md_keylines"
+        android:scrollbars="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:columnCount="2"
+        android:orientation="vertical"
+        android:rowCount="1">
+
+        <Button
+            android:id="@+id/message_sel"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_gravity="center"
+            android:background="#4CAF50"
+            android:text="@string/send_message"
+            android:textColor="@color/offWhitePalette"
+
+            />
+        <!-- <Button
+             android:id="@+id/message_all"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginEnd="16sp"
+             android:layout_weight="75"
+             android:clickable="true"
+             android:text="Message all" /> -->
+
+    </GridLayout>
+</LinearLayout>
