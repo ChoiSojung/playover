@@ -64,6 +64,7 @@ public class SelectedHotel_Fragment extends Fragment{
     private Toolbar mTitle;
     static List<Person> mPeopleAlsoCheckedIn = new ArrayList<>();
     private HotelViewModel hotelVm = new HotelViewModel();
+    private static HotelViewModel hotVm = new HotelViewModel();
     private static UserViewModel userVm = new UserViewModel();
     private static AuthUserViewModel authVm = new AuthUserViewModel();
     public static BuddiesViewModel budVm = new BuddiesViewModel();
@@ -256,7 +257,13 @@ public class SelectedHotel_Fragment extends Fragment{
 
     }
 
+    public boolean userIsBlocked(String userUid) {
 
+        hotelVm.getUser(authVm.getUser().getUid(), (Person p) -> {
+
+        } );
+        return false;
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public CheckBox checkbox;
@@ -265,6 +272,7 @@ public class SelectedHotel_Fragment extends Fragment{
         public ImageButton buddyStar;
         public TextView recipientUid;
         private ImageView thumbnail;
+        public ImageView blockedIcon;
         public boolean buddy = false;
 
         public ViewHolder(LayoutInflater inflater, ViewGroup parent) {
@@ -273,20 +281,88 @@ public class SelectedHotel_Fragment extends Fragment{
             name = itemView.findViewById(R.id.list_name);
             position = itemView.findViewById(R.id.list_position);
             buddyStar = itemView.findViewById(R.id.buddyStar);
+            blockedIcon = itemView.findViewById(R.id.blockedPerson);
             recipientUid = itemView.findViewById(R.id.recipient_uid);
             thumbnail = itemView.findViewById(R.id.thumbnail);
+
+
 
             budVm.getBuddies(authVm.getUser().getUid(),
                     (ArrayList<Person> persons) -> {
                         //Log.i("misuse", persons.toString());
+
+
+
                         for(Person person : persons) {
                             //Log.i("buddy", String.valueOf("in for"));
                             if (person.getuId().equals(recipientUid.getText().toString())) {
                                 buddyStar.setImageResource(R.drawable.ic_star_black_24dp);
                                 buddy = true;
+                                hotVm.getUser(authVm.getUser().getUid(), (Person curUser) -> {
+                                    //Log.i("misuse", curUser.toString());
+                                    HashMap<String, Buddy> buddies = curUser.getBuddies();
+                                    if (buddies != null) {
+                                        boolean isBuddy = buddies.containsKey(person.getuId());
+                                        if (isBuddy) {
+                                            boolean isBlocked = buddies.get(person.getuId()).getBlocked();
+
+                                            Log.i("misuse", person.toString());
+                                            Log.i("misuse", String.valueOf(isBlocked));
+                                            if (isBlocked) {
+                                                // show blocked image
+                                                blockedIcon.setVisibility(View.VISIBLE);
+                                            }
+                                        }
+                                    }
+                                    //Log.i("misuse", buddies.toString());
+                                });
                             }
                         }
                     });
+
+
+            //// start
+
+//            if (p.getBuddies() == null) {
+//                //Log.i("buddy", p.toString());
+//                if ( ! authVm.getUser().getUid().equals(p.getuId())) {
+//                    //Log.i("misuse", p.toString());
+//                    guests.add(p);
+//                    if (dS.getChildrenCount() == count) {
+//
+//                        updateRecyclerView(guests);
+//                    }
+//                }
+//            } else {
+//                HashMap<String, Buddy> buddies = p.getBuddies();
+//
+//                boolean isBuddy = buddies.containsKey(authVm.getUser().getUid());
+//                //Log.i("buddy", String.valueOf(isBuddy));
+//                //Log.i("buddy", String.valueOf(p));
+//                boolean isBlocked = false;
+//                //Log.i("buddy", "huh");
+//                if (isBuddy) {
+//                    Log.i("buddy", "huh");
+//                    isBlocked = buddies.get(authVm.getUser().getUid()).getBlocked();
+//                }
+//                //Log.i("buddy", String.valueOf(isBlocked));
+//                //Log.i("buddy", String.valueOf("crap"));
+//                //Log.i("buddy", ));
+//
+//                if (!p.getuId().equals("null")) {
+//                    //don't add own user to list
+//                    if (!authVm.getUser().getUid().equals(p.getuId()) && !isBlocked) {
+//
+//                        guests.add(p);
+//                    }
+//                    if (dS.getChildrenCount() == count) {
+//
+//                        updateRecyclerView(guests);
+//                    }
+//                }
+//            }
+
+            //// stop
 
             buddyStar.setOnClickListener(v -> {
 
@@ -473,7 +549,7 @@ public class SelectedHotel_Fragment extends Fragment{
                             if (p.getBuddies() == null) {
                                 //Log.i("buddy", p.toString());
                                 if ( ! authVm.getUser().getUid().equals(p.getuId())) {
-                                    Log.i("misuse", p.toString());
+                                    //Log.i("misuse", p.toString());
                                     guests.add(p);
                                     if (dS.getChildrenCount() == count) {
 
