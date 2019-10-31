@@ -34,6 +34,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
+import com.jakewharton.rxbinding.support.v7.widget.RxSearchView;
 import com.playover.models.Buddy;
 import com.playover.models.Person;
 import com.playover.viewmodels.AuthUserViewModel;
@@ -48,6 +49,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
+
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import rx.android.schedulers.AndroidSchedulers;
 
 public class SelectedHotel_Fragment extends Fragment{
 
@@ -75,6 +80,7 @@ public class SelectedHotel_Fragment extends Fragment{
     private SearchView searchView;
     private static List<Person> filteredGuests;
 
+    CharSequence query;
 
     @Nullable
     @Override
@@ -192,44 +198,71 @@ public class SelectedHotel_Fragment extends Fragment{
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //read guests from db
+        doRead(getArguments().getShort("pos"));
+
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
         //inflate menu; adds items to the action bar if present
         inflater.inflate(R.menu.search_menu, menu);
         //associate searchable config with search view
         final MenuItem searchItem = menu.findItem(R.id.action_search);
-        searchView = (SearchView) searchItem.getActionView();
-        //get reference to the clear button to clear filter and bring back original display
-        ImageView closeButton = (ImageView)searchView.findViewById(R.id.search_close_btn);
+        setUpSearchView(searchItem);
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
-            @Override
-            public boolean onQueryTextSubmit(String query){
-                //Log.i("filter", mPeopleAlsoCheckedIn.toString());
-                List<Person> filteredPersons = getFilteredGuests(query);
-                //Log.i("filter", filteredGuests.toString());
-                updateRecyclerView(filteredPersons);
-                return false;
-            }
+        //old code
+        //searchView = (SearchView) searchItem.getActionView();
 
-            @Override
-            public boolean onQueryTextChange(String query){
+        //searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+//            @Override
+//            public boolean onQueryTextSubmit(String query){
+//                //Log.i("filter", mPeopleAlsoCheckedIn.toString());
+//                List<Person> filteredPersons = getFilteredGuests(query);
+//                //Log.i("filter", filteredGuests.toString());
+//                updateRecyclerView(filteredPersons);
+//                return true;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String query){
+//                List<Person> filteredPersons = getFilteredGuests(query);
+//                updateRecyclerView(filteredPersons);
+//                return true;
+//            }
+//
+//        });
+//
 
-                return false;
-            }
+    }
 
-        });
+    private void setUpSearchView(MenuItem searchView){
+
+        SearchView searchMenuItem = (SearchView)searchView.getActionView();
+        ImageView closeButton = (ImageView)searchMenuItem.findViewById(R.id.search_close_btn);
 
         closeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Log.i("CloseButton sez: ", "Clicked!");
-                searchView.setQuery("",false);
-                searchView.clearFocus();
+                searchMenuItem.setQuery("",true);
+                searchMenuItem.clearFocus();
 
             }
         });
+        RxSearchView.queryTextChanges(searchMenuItem)
+                .doOnEach(notification->{
+                    query = (CharSequence)notification.getValue();
+                })
+                .debounce(300,TimeUnit.MILLISECONDS)
+                .skip(1)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(results->{
+                    updateRecyclerView(getFilteredGuests(query.toString()));
 
-
+                });
     }
 
     public List<Person> getFilteredGuests(String searchKeyword) {
@@ -265,16 +298,6 @@ public class SelectedHotel_Fragment extends Fragment{
         }
         return getActivity().onOptionsItemSelected(item);
     }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        //read guests from db
-        doRead(getArguments().getShort("pos"));
-
-    }
-
-
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public CheckBox checkbox;
