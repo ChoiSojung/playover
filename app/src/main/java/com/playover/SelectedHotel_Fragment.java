@@ -54,6 +54,8 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import rx.android.schedulers.AndroidSchedulers;
 
+import static java.lang.Thread.sleep;
+
 public class SelectedHotel_Fragment extends Fragment{
 
     TextView mTxtHotelName;
@@ -243,15 +245,23 @@ public class SelectedHotel_Fragment extends Fragment{
         SearchView searchMenuItem = (SearchView)searchView.getActionView();
         ImageView closeButton = (ImageView)searchMenuItem.findViewById(R.id.search_close_btn);
 
-        closeButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Log.i("CloseButton sez: ", "Clicked!");
-                searchMenuItem.setQuery("",true);
-                searchMenuItem.clearFocus();
+        closeButton.setOnClickListener(new View.OnClickListener() {
+                                           @Override
+                                           public void onClick(View v) {
+                                               Log.i("CloseButton sez: ", "Clicked!");
+                                               searchMenuItem.setQuery("", false);
 
-            }
-        });
+                                               //getFilteredGuests("");
+
+                                               //searchMenuItem.setQuery("",false);
+                                               //doRead(getArguments().getShort("pos"));
+                                               searchMenuItem.clearFocus();
+                                           }
+                                       });
+
+
+
+
         RxSearchView.queryTextChanges(searchMenuItem)
                 .doOnEach(notification->{
                     query = (CharSequence)notification.getValue();
@@ -266,8 +276,9 @@ public class SelectedHotel_Fragment extends Fragment{
     }
 
     public List<Person> getFilteredGuests(String searchKeyword) {
+        //filteredGuests.clear();
         if(searchKeyword.isEmpty()){
-            filteredGuests = mPeopleAlsoCheckedIn;
+            doRead(getArguments().getShort("pos"));
         } else {
             //Log.i("filter", charSequence.toString());
             String filterPattern = searchKeyword.toLowerCase().trim();
@@ -288,6 +299,11 @@ public class SelectedHotel_Fragment extends Fragment{
 
         }
         return filteredGuests;
+    }
+
+    public void refreshSearch(String s){
+        updateRecyclerView(getFilteredGuests(s));
+        Log.i("refresh", getFilteredGuests(s).toString());
     }
 
     @Override
