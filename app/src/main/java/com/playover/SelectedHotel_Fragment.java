@@ -60,6 +60,8 @@ public class SelectedHotel_Fragment extends Fragment {
     public static boolean isCheckedIn = false;
     private String hotelCheckedInto = null;
 
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -59,10 +58,15 @@ public class ReportMisuse_Fragment extends Fragment {
             // Redirect back to SelectedHotel_Fragment
             SelectedHotel_Fragment SelectedHotel_Fragment = new SelectedHotel_Fragment ();
             FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.selectedHotel,SelectedHotel_Fragment, SelectedHotel_Fragment.getTag ());
+            fragmentManager .popBackStack();
+
+
+
+
+            /*FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.containerCheckIn,SelectedHotel_Fragment, SelectedHotel_Fragment.getTag ());
             fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
+            fragmentTransaction.commit();*/
 
             /*SelectedHotel_Fragment SelectedHotel_Fragment = new SelectedHotel_Fragment ();
             FragmentManager manager = getFragmentManager ();
