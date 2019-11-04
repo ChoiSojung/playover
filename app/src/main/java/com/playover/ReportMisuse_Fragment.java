@@ -1,9 +1,10 @@
 package com.playover;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -56,14 +57,22 @@ public class ReportMisuse_Fragment extends Fragment {
             toast.setGravity( Gravity.CENTER, 0, 0);
 
             // Redirect back to SelectedHotel_Fragment
+            SelectedHotel_Fragment SelectedHotel_Fragment = new SelectedHotel_Fragment ();
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.selectedHotel,SelectedHotel_Fragment, SelectedHotel_Fragment.getTag ());
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+
             /*SelectedHotel_Fragment SelectedHotel_Fragment = new SelectedHotel_Fragment ();
             FragmentManager manager = getFragmentManager ();
             manager.beginTransaction ()
-                    .replace ( R.id.item_list_checked_in,SelectedHotel_Fragment, SelectedHotel_Fragment.getTag () )
-                    .commit ();
-*/
+                    .replace ( R.id.selectedHotel,SelectedHotel_Fragment, SelectedHotel_Fragment.getTag () )
+                    .addToBackStack(SelectedHotel_Fragment.getTag())
+                    .commit ();*/
 
-            openAnotherActivity();
+
+            //openAnotherActivity();
             //getActivity().onBackPressed();
 
             /*new View.OnClickListener (){
@@ -94,13 +103,11 @@ public class ReportMisuse_Fragment extends Fragment {
         } );
 */
 
-
-
         return rootView;
     }
 
-    private void openAnotherActivity() {
+    /*private void openAnotherActivity() {
         Intent myIntent = new Intent(ReportMisuse_Fragment.this.getActivity(), SelectedHotel_Fragment.class);
         startActivity ( myIntent );
-    }
+    }*/
 }
