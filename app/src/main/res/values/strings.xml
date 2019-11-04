@@ -41,6 +41,7 @@
     <string name="find_buddies">Search above for crew members to add</string>
     <string name="add_them">Add them as you use the app on your layovers</string>
     <string name="block_user">Block User</string>
+    <string name="report_misuse">Report Misuse</string>
     <string name="message">Message</string>
     <string name="add_buddy">Add Buddy</string>
     <string name="rm_buddy">Remove as Fight Buddy</string>
@@ -135,6 +136,10 @@
     <string name="utilities">Utilities</string>
     <string name="price_tag_icon">Price Tag Icon</string>
     <string name="check_out_hotel">Check Out</string>
+	
+	<!-- Added by Matt P. for misuse / abuse reporting -->
+	<string name="misuse_report">Misuse Report</string>
+    <string name="submitReport">Submit Report</string>
 
     <!-- notification resources -->
     <string name="buddy_default_id">buddy_default</string>
@@ -188,4 +193,5 @@
     <string name="global_emergency_name">Playover application emergency announcements</string>
     <string name="global_emergency_desc">Playover application, emergency announcements</string>
     -->
+
 </resources>

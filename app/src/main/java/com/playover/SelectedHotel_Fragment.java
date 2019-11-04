@@ -14,14 +14,20 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.support.v7.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,8 +46,10 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 
-public class SelectedHotel_Fragment extends Fragment {
+public class SelectedHotel_Fragment extends Fragment{
 
     TextView mTxtHotelName;
     TextView mTxtHotelAddress;
@@ -49,7 +57,7 @@ public class SelectedHotel_Fragment extends Fragment {
     ExpandableListView mList;
     private String personToMessageUid;
     private RecyclerView recyclerView;
-    private SelectedHotel_Fragment.ContentAdapter adapter;
+    private static SelectedHotel_Fragment.ContentAdapter adapter;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
 
@@ -64,6 +72,9 @@ public class SelectedHotel_Fragment extends Fragment {
     private long count;
     public static boolean isCheckedIn = false;
     private String hotelCheckedInto = null;
+    private SearchView searchView;
+    private static List<Person> filteredGuests;
+
 
     @Nullable
     @Override
@@ -71,6 +82,9 @@ public class SelectedHotel_Fragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         isCheckedIn = true;
+
+        //enable search in the tool bar
+        setHasOptionsMenu(true);
 
         View v = inflater.inflate(R.layout.fragment_selected_hotel, container, false);
         recyclerView = v.findViewById(R.id.recycler_view_also_checked_in);
@@ -178,12 +192,89 @@ public class SelectedHotel_Fragment extends Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+        //inflate menu; adds items to the action bar if present
+        inflater.inflate(R.menu.search_menu, menu);
+        //associate searchable config with search view
+        final MenuItem searchItem = menu.findItem(R.id.action_search);
+        searchView = (SearchView) searchItem.getActionView();
+        //get reference to the clear button to clear filter and bring back original display
+        ImageView closeButton = (ImageView)searchView.findViewById(R.id.search_close_btn);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+            @Override
+            public boolean onQueryTextSubmit(String query){
+                //Log.i("filter", mPeopleAlsoCheckedIn.toString());
+                List<Person> filteredPersons = getFilteredGuests(query);
+                //Log.i("filter", filteredGuests.toString());
+                updateRecyclerView(filteredPersons);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query){
+
+                return false;
+            }
+
+        });
+
+        closeButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Log.i("CloseButton sez: ", "Clicked!");
+                searchView.setQuery("",false);
+                searchView.clearFocus();
+
+            }
+        });
+
+
+    }
+
+    public List<Person> getFilteredGuests(String searchKeyword) {
+        if(searchKeyword.isEmpty()){
+            filteredGuests = mPeopleAlsoCheckedIn;
+        } else {
+            //Log.i("filter", charSequence.toString());
+            String filterPattern = searchKeyword.toLowerCase().trim();
+            List<Person> filteredList = new ArrayList<>();
+            //Log.i("filter", mPeopleAlsoCheckedIn.toString());
+            for (Person p : mPeopleAlsoCheckedIn) {
+                //Log.i("filter", p.toString());
+                String email = p.getEmailAddress();
+                //Log.i("filter", email);
+                //email=email.substring(email.indexOf("@"+1, email.indexOf(".")));
+                if(email.toLowerCase().contains(filterPattern)){
+                    //Log.i("filter", p.toString());
+                    filteredList.add(p);
+                }
+            }
+            //Log.i("filter", filteredList.toString());
+            filteredGuests = filteredList;
+
+        }
+        return filteredGuests;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id=item.getItemId();
+        if(id==R.id.action_search){
+            return true;
+        }
+        return getActivity().onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //read guests from db
         doRead(getArguments().getShort("pos"));
 
     }
+
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public CheckBox checkbox;
@@ -205,6 +296,7 @@ public class SelectedHotel_Fragment extends Fragment {
 
             budVm.getBuddies(authVm.getUser().getUid(),
                     (ArrayList<Person> persons) -> {
+                        //Log.i("misuse", persons.toString());
                         for(Person person : persons) {
                             //Log.i("buddy", String.valueOf("in for"));
                             if (person.getuId().equals(recipientUid.getText().toString())) {
@@ -286,6 +378,7 @@ public class SelectedHotel_Fragment extends Fragment {
         @Override
         public void onBindViewHolder(SelectedHotel_Fragment.ViewHolder holder, final int position) {
             try {
+                //Log.i("misuse", mPeopleAlsoCheckedIn.toString());
                 String name = mPeopleAlsoCheckedIn.get(position).getFirstName() +
                         " " + mPeopleAlsoCheckedIn.get(position).getLastName();
                 String occupation = mPeopleAlsoCheckedIn.get(position).getPosition();
@@ -335,6 +428,11 @@ public class SelectedHotel_Fragment extends Fragment {
             }
         }
 
+        public interface ContentAdapterListener{
+            void onPersonSelected(Person p);
+
+    }
+
         public List<String> getMessagingList() {
             return messagingList;
         }
@@ -376,22 +474,26 @@ public class SelectedHotel_Fragment extends Fragment {
                 guests.clear();
                 count = 0;
                 for (DataSnapshot x : dS.getChildren()) {
-                    //Log.i("buddy", x.toString());
+                    //Log.i("misuse", x.toString());
                     hotelVm.getUser(x.getKey(), (Person p) ->
                     {
-                        //Log.i("buddy", String.valueOf("in for"));
-                        //Log.i("buddy", p.toString());
+                        //Log.i("misuse", String.valueOf("in for"));
+                        //Log.i("misuse", p.toString());
                         count++;
                         try
                         {
                             //Log.i("buddy", p.getBuddies().toString());
                             // get buddies, if the authVm.getUser().getUid() matches and blocked is true, don't add
-                            Log.i("buddy", p.toString());
+                            //Log.i("misuse", p.toString());
                             if (p.getBuddies() == null) {
                                 //Log.i("buddy", p.toString());
                                 if ( ! authVm.getUser().getUid().equals(p.getuId())) {
-
+                                    Log.i("misuse", p.toString());
                                     guests.add(p);
+                                    if (dS.getChildrenCount() == count) {
+
+                                        updateRecyclerView(guests);
+                                    }
                                 }
                             } else {
                                 HashMap<String, Buddy> buddies = p.getBuddies();
@@ -416,6 +518,7 @@ public class SelectedHotel_Fragment extends Fragment {
                                         guests.add(p);
                                     }
                                     if (dS.getChildrenCount() == count) {
+
                                         updateRecyclerView(guests);
                                     }
                                 }
@@ -442,6 +545,7 @@ public class SelectedHotel_Fragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
         adapter.setLENGTH(mPeopleAlsoCheckedIn.size());
+//        Log.i("filter", mPeopleAlsoCheckedIn.toString());
     }
 
     @Override

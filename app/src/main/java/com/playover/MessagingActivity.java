@@ -34,6 +34,7 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("messages", "fuck this");
         setContentView(R.layout.activity_messaging);
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
@@ -66,10 +67,12 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
 
         transaction = fragmentManager.beginTransaction();
         if (recipientUID == null) {
+            //Log.i("messages", "null");
             MessagingThreads_Fragment newMessageThreadsFragment = new MessagingThreads_Fragment();
             transaction.replace(R.id.containerMessaging, newMessageThreadsFragment, "Message Threads");
             transaction.commit();
         } else {
+            Log.i("messages", "else it is");
             Bundle bundle = new Bundle();
             bundle.putString("recipientUid", recipientUID);
             MessagingBubbles_Fragment newMessagingBubblesFragment = new MessagingBubbles_Fragment();
