@@ -70,6 +70,7 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
     private boolean firstTime;
     private long hotelCheckedIncount;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
