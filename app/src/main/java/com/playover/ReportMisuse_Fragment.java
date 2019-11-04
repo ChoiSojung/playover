@@ -1,15 +1,18 @@
 package com.playover;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.playover.datamodels.MisuseReportDataModel;
 import com.playover.models.MisuseReport;
@@ -46,8 +49,58 @@ public class ReportMisuse_Fragment extends Fragment {
             Log.i("misuse", newReport.getReport());
             MisuseReportDataModel reportVm = new MisuseReportDataModel();
             reportVm.putMessageThread(newReport);
+
+            //Show the toast msg "Misuse report is stored in database"
+            Toast toast = Toast.makeText(getActivity(),"Thank you for reporting this issue.", Toast.LENGTH_LONG);
+            toast.show();
+            toast.setGravity( Gravity.CENTER, 0, 0);
+
+            // Redirect back to SelectedHotel_Fragment
+            /*SelectedHotel_Fragment SelectedHotel_Fragment = new SelectedHotel_Fragment ();
+            FragmentManager manager = getFragmentManager ();
+            manager.beginTransaction ()
+                    .replace ( R.id.item_list_checked_in,SelectedHotel_Fragment, SelectedHotel_Fragment.getTag () )
+                    .commit ();
+*/
+
+            openAnotherActivity();
+            //getActivity().onBackPressed();
+
+            /*new View.OnClickListener (){
+                @Override
+                public void onClick(View v) {
+                    SelectedHotel_Fragment SelectedHotel_Fragment = new SelectedHotel_Fragment ();
+                    FragmentManager manager = getFragmentManager ();
+                    manager.beginTransaction ()
+                            .replace ( R.id.containerCheckIn,SelectedHotel_Fragment, SelectedHotel_Fragment.getTag () )
+                            .commit ();
+
+                    //openAnotherActivity;
+                }};*/
+
         });
+/*
+        submitReportBtn.setOnClickListener ( new View.OnClickListener (){
+            @Override
+            public void onClick(View v) {
+                openAnotherActivity();
+            }
+
+            private void openAnotherActivity() {
+                Intent myIntent = new Intent(ReportMisuse_Fragment.this.getActivity(), SelectedHotel_Fragment.class);
+                startActivity ( myIntent );
+
+            }
+        } );
+*/
+
+
 
         return rootView;
+    }
+
+    private void openAnotherActivity() {
+        Intent myIntent = new Intent(ReportMisuse_Fragment.this.getActivity(), SelectedHotel_Fragment.class);
+        startActivity ( myIntent );
     }
 }

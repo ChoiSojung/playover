@@ -7,8 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -18,12 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,7 +31,6 @@ import com.playover.viewmodels.BuddiesViewModel;
 import com.playover.viewmodels.HotelViewModel;
 import com.playover.viewmodels.UserViewModel;
 import com.squareup.picasso.Picasso;
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -410,7 +405,7 @@ public class SelectedHotel_Fragment extends Fragment {
                                     Log.i("buddy", "huh");
                                     isBlocked = buddies.get(authVm.getUser().getUid()).getBlocked();
                                 }
-                                //Log.i("buddy", String.valueOf(isBlocked));
+                                //Log.i("buddy", String.valueOf(isBlocked))
                                 //Log.i("buddy", String.valueOf("crap"));
                                 //Log.i("buddy", ));
 

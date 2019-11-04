@@ -47,6 +47,7 @@ public class Verification_Fragment extends Fragment {
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private int verifyCount = 0;
     private Button login;
+    private String tag = "vcode";
 
     public Verification_Fragment() {
         // Required empty public constructor
