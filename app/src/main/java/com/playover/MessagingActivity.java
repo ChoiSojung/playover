@@ -20,6 +20,9 @@ import com.playover.broadcast_receivers.InternetBroadcastReceiver;
 import com.playover.viewmodels.AuthUserViewModel;
 import com.playover.viewmodels.UserViewModel;
 
+
+import java.util.ArrayList;
+
 public class MessagingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     static FragmentManager messagingFragmentManager;
@@ -27,8 +30,8 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
     private FragmentTransaction transaction;
     private DrawerLayout drawer;
     private AuthUserViewModel authVm;
-    private String recipientUID;
-    private String myUID;
+    private String recipientUIDs;
+    private String messagerUIDs;
     private UserViewModel userViewModel;
 
     @Override
@@ -39,8 +42,10 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         if (b != null){
-            if (b.containsKey("recipientUid")) {
-                recipientUID = b.getString("recipientUid");
+            if (b.containsKey("recipientUids")) {
+                ArrayList<String> rUIDList = new ArrayList<>();
+                rUIDList = b.getStringArrayList("recipientUids");
+                recipientUIDs = String.join(",", rUIDList);
             }
         }
         fragmentManager = getSupportFragmentManager();
@@ -66,15 +71,16 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
         toggle.syncState();
 
         transaction = fragmentManager.beginTransaction();
-        if (recipientUID == null) {
+        if (recipientUIDs == null) {
             //Log.i("messages", "null");
             MessagingThreads_Fragment newMessageThreadsFragment = new MessagingThreads_Fragment();
             transaction.replace(R.id.containerMessaging, newMessageThreadsFragment, "Message Threads");
             transaction.commit();
         } else {
             Log.i("messages", "else it is");
+
             Bundle bundle = new Bundle();
-            bundle.putString("recipientUid", recipientUID);
+            bundle.putString("recipientUid", recipientUIDs);
             MessagingBubbles_Fragment newMessagingBubblesFragment = new MessagingBubbles_Fragment();
             newMessagingBubblesFragment.setArguments(bundle);
             transaction.replace(R.id.containerMessaging, newMessagingBubblesFragment, "Messaging Bubbles");
@@ -83,7 +89,7 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
     }
 
     public String getRecipientUID() {
-        return recipientUID;
+        return recipientUIDs;
     }
 
     @Override
