@@ -1,6 +1,8 @@
 package com.playover;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +14,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -66,6 +70,7 @@ public class SelectedHotel_Fragment extends Fragment{
     TextView mTxtCheckoutSet;
     ExpandableListView mList;
     private ArrayList<String> personToMessageUids = new ArrayList<>();
+    Bundle messageThreadBundle = new Bundle();
     private RecyclerView recyclerView;
     private static SelectedHotel_Fragment.ContentAdapter adapter;
     List<String> listDataHeader;
@@ -124,13 +129,20 @@ public class SelectedHotel_Fragment extends Fragment{
                         String mListTemp = messagingList.next();
                         personToMessageUids.addAll(Arrays.asList(mListTemp));
                     }
-                    // assuming there is one initially
-
-                    if (personToMessageUids != null) {
-                        messagingIntent.putStringArrayListExtra("recipientUids", personToMessageUids);
+                    // if Group Message
+                    if (personToMessageUids.size() > 1){
+                        Log.i("newGroupSize", Integer.toString(personToMessageUids.size()));
+                        RequestNewGroupName(messageThreadBundle);
                     }
+
+                    // assuming there is one initially
+                    if (personToMessageUids != null) {
+                        messageThreadBundle.putStringArrayList("recipientUids", personToMessageUids);
+                    }
+                    messagingIntent.putExtras(messageThreadBundle);
                     ContentAdapter.checkboxPosition = -1;
-                    startActivity(messagingIntent);
+                    Log.i("messageThreadBundle: ", "new group");
+                    //startActivity(messagingIntent);
                 }
                 catch (Exception e) {
                     Log.v("Exception",e.getMessage());
@@ -201,6 +213,8 @@ public class SelectedHotel_Fragment extends Fragment{
                     },null);
             }
         });
+
+
 
         userVm.clear();
         hotelVm.clear();
@@ -680,6 +694,43 @@ public class SelectedHotel_Fragment extends Fragment{
         adapter.setLENGTH(mPeopleAlsoCheckedIn.size());
 //        Log.i("filter", mPeopleAlsoCheckedIn.toString());
     }
+
+    private Bundle RequestNewGroupName(Bundle messageThreadBundle){
+        Context context = getActivity();
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(context, R.style.AlertDialog);
+        builder.setTitle("Enter Group Name: ");
+
+        final EditText groupNameField = new EditText(context);
+        //groupNameField.setHint("playover everything");
+        builder.setView(groupNameField);
+        builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String groupName = groupNameField.getText().toString();
+                if (TextUtils.isEmpty(groupName)){
+                    Toast.makeText(context, "Group must have a name"
+                            , Toast.LENGTH_SHORT);
+                } else {
+                    messageThreadBundle.putString("groupName", groupName);
+                    Log.i("groupName", groupName);
+                }
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        builder.show();
+
+        return messageThreadBundle;
+    }
+
+    private String NewGroupName(String groupName){ return(groupName);}
 
     @Override
     public void onAttach(Context context) {
