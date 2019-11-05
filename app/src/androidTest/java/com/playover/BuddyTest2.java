@@ -38,71 +38,71 @@ public class BuddyTest2 {
     public GrantPermissionRule locationFineRule = GrantPermissionRule.grant(android.Manifest.permission.ACCESS_FINE_LOCATION);
     @Rule
     public GrantPermissionRule locationCourseRule = GrantPermissionRule.grant(Manifest.permission.ACCESS_COARSE_LOCATION);
-
-    @Test
-    public void buddyRecycleViewer() throws InterruptedException {
-        Thread.sleep(5000);
-        try {
-            onView(withId(R.id.main_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(2000);
-            onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
-            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(5000);
-            onView(withId(R.id.main_content)).check(matches(isDisplayed()));
-            onView(withId(R.id.main_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_buddies));
-            Thread.sleep(5000);
-            onView(withRecyclerView(R.id.buddies_recycleView).atPosition(0)).perform(click());
-            Thread.sleep(3000);
-            onView(withId(R.id.profileBuddyStar)).perform(click());
-            Thread.sleep(2000);
-            onView(withId(R.id.profileBuddyStar)).perform(click());
-            Thread.sleep(2000);
-            Espresso.pressBack();
-            Thread.sleep(2000);
-            onView(withRecyclerView(R.id.buddies_recycleView).atPositionOnView(0, R.id.checkbox))
-                    .perform(click());
-            Thread.sleep(2000);
-            onView(withId(R.id.message_sel)).perform(click());
-            Thread.sleep(2000);
-            Espresso.pressBack();
-
-        } catch (Exception ex) {
-            onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
-            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(5000);
-            onView(withId(R.id.main_content)).check(matches(isDisplayed()));
-            onView(withId(R.id.main_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_buddies));
-            Thread.sleep(5000);
-            onView(withRecyclerView(R.id.buddies_recycleView).atPosition(0)).perform(click());
-            Thread.sleep(3000);
-            onView(withId(R.id.profileBuddyStar)).perform(click());
-            Thread.sleep(2000);
-            onView(withId(R.id.profileBuddyStar)).perform(click());
-            Thread.sleep(2000);
-            Espresso.pressBack();
-            Thread.sleep(2000);
-            onView(withRecyclerView(R.id.buddies_recycleView).atPositionOnView(0, R.id.checkbox))
-                    .perform(click());
-            Thread.sleep(2000);
-            onView(withRecyclerView(R.id.buddies_recycleView).atPositionOnView(0, R.id.checkbox))
-                    .perform(click());
-            Thread.sleep(2000);
-            onView(withRecyclerView(R.id.buddies_recycleView).atPositionOnView(1, R.id.checkbox))
-                    .perform(click());
-            Thread.sleep(2000);
-            onView(withId(R.id.message_sel)).perform(click());
-            Thread.sleep(2000);
-            Espresso.pressBack();
-        }
-
-    }
+//
+//    @Test
+//    public void buddyRecycleViewer() throws InterruptedException {
+//        Thread.sleep(5000);
+//        try {
+//            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+//            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+//            Thread.sleep(2000);
+//            onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
+//            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+//            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
+//            onView(withId(R.id.btn_login)).perform(click());
+//            Thread.sleep(5000);
+//            onView(withId(R.id.main_content)).check(matches(isDisplayed()));
+//            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+//            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_buddies));
+//            Thread.sleep(5000);
+//            onView(withRecyclerView(R.id.buddies_recycleView).atPosition(0)).perform(click());
+//            Thread.sleep(3000);
+//            onView(withId(R.id.profileBuddyStar)).perform(click());
+//            Thread.sleep(2000);
+//            onView(withId(R.id.profileBuddyStar)).perform(click());
+//            Thread.sleep(2000);
+//            Espresso.pressBack();
+//            Thread.sleep(2000);
+//            onView(withRecyclerView(R.id.buddies_recycleView).atPositionOnView(0, R.id.checkbox))
+//                    .perform(click());
+//            Thread.sleep(2000);
+//            onView(withId(R.id.message_sel)).perform(click());
+//            Thread.sleep(2000);
+//            Espresso.pressBack();
+//
+//        } catch (Exception ex) {
+//            onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
+//            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+//            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
+//            onView(withId(R.id.btn_login)).perform(click());
+//            Thread.sleep(5000);
+//            onView(withId(R.id.main_content)).check(matches(isDisplayed()));
+//            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+//            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_buddies));
+//            Thread.sleep(5000);
+//            onView(withRecyclerView(R.id.buddies_recycleView).atPosition(0)).perform(click());
+//            Thread.sleep(3000);
+//            onView(withId(R.id.profileBuddyStar)).perform(click());
+//            Thread.sleep(2000);
+//            onView(withId(R.id.profileBuddyStar)).perform(click());
+//            Thread.sleep(2000);
+//            Espresso.pressBack();
+//            Thread.sleep(2000);
+//            onView(withRecyclerView(R.id.buddies_recycleView).atPositionOnView(0, R.id.checkbox))
+//                    .perform(click());
+//            Thread.sleep(2000);
+//            onView(withRecyclerView(R.id.buddies_recycleView).atPositionOnView(0, R.id.checkbox))
+//                    .perform(click());
+//            Thread.sleep(2000);
+//            onView(withRecyclerView(R.id.buddies_recycleView).atPositionOnView(1, R.id.checkbox))
+//                    .perform(click());
+//            Thread.sleep(2000);
+//            onView(withId(R.id.message_sel)).perform(click());
+//            Thread.sleep(2000);
+//            Espresso.pressBack();
+//        }
+//
+//    }
 
     @Test
     public void testDrawerBuddies() throws InterruptedException {
