@@ -54,9 +54,6 @@
             android:name=".MessagingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".GroupMessagingActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".Discounts"
             android:screenOrientation="portrait" />
 

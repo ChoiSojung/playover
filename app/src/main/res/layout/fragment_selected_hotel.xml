@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
+            android:clickable="true"
             android:background="#99E3FF"></ExpandableListView>
     </LinearLayout>
     <GridLayout
@@ -73,6 +74,7 @@
     </GridLayout>
     <LinearLayout android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:clickable="true"
         android:orientation="vertical">
         <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -83,6 +85,7 @@
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
             android:scrollbars="vertical"
+            android:clickable="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:forceHasOverlappingRendering="false"
             />

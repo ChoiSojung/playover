@@ -271,10 +271,6 @@ public class Discounts extends AppCompatActivity implements NavigationView.OnNav
                 Intent messaging = new Intent(getApplicationContext(), MessagingActivity.class);
                 startActivity(messaging);
                 break;
-            case R.id.nav_group_messaging:
-                Intent groupMessaging = new Intent(getApplicationContext(), GroupMessagingActivity.class);
-                startActivity(groupMessaging);
-                break;
         }
         return true;
     }
