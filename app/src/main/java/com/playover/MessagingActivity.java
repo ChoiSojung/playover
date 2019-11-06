@@ -45,7 +45,11 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
             if (b.containsKey("recipientUids")) {
                 ArrayList<String> rUIDList = new ArrayList<>();
                 rUIDList = b.getStringArrayList("recipientUids");
-                recipientUIDs = String.join(",", rUIDList);
+                for (int i = 0; i <rUIDList.size(); i++){
+                    recipientUIDs += rUIDList.get(i) + ",";
+                }
+                Log.i("rUIDs:", recipientUIDs);
+                //Log.i("gName:", b.getString("groupName"));
             }
         }
         fragmentManager = getSupportFragmentManager();

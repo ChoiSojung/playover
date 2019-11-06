@@ -122,27 +122,29 @@ public class SelectedHotel_Fragment extends Fragment{
             @Override
             public void onClick(View v) {
                 try {
-                    Intent messagingIntent = new Intent(getActivity(), MessagingActivity.class);
                     ContentAdapter adapter = (ContentAdapter) recyclerView.getAdapter();
                     Iterator<String> messagingList = adapter.getMessagingList().iterator();
                     while(messagingList.hasNext()){
                         String mListTemp = messagingList.next();
                         personToMessageUids.addAll(Arrays.asList(mListTemp));
                     }
-                    // if Group Message
-                    if (personToMessageUids.size() > 1){
-                        Log.i("newGroupSize", Integer.toString(personToMessageUids.size()));
-                        RequestNewGroupName(messageThreadBundle);
-                    }
 
                     // assuming there is one initially
                     if (personToMessageUids != null) {
+                        // is Group Message
+                        if (personToMessageUids.size() > 1){
+                            messageThreadBundle = RequestNewGroupName(messageThreadBundle);
+                            Log.i("newGroupSize", Integer.toString(personToMessageUids.size()));
+                        }
                         messageThreadBundle.putStringArrayList("recipientUids", personToMessageUids);
+                        Log.i("Added Uids", "here");
                     }
+
+                    Intent messagingIntent = new Intent(getActivity(), MessagingActivity.class);
                     messagingIntent.putExtras(messageThreadBundle);
                     ContentAdapter.checkboxPosition = -1;
-                    Log.i("messageThreadBundle: ", "new group");
-                    //startActivity(messagingIntent);
+                    Log.i("messageThreadBundle: ", "create new group");
+                    startActivity(messagingIntent);
                 }
                 catch (Exception e) {
                     Log.v("Exception",e.getMessage());
