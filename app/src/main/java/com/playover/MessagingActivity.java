@@ -20,7 +20,7 @@ import com.playover.broadcast_receivers.InternetBroadcastReceiver;
 import com.playover.viewmodels.AuthUserViewModel;
 import com.playover.viewmodels.UserViewModel;
 
-
+import java.security.MessageDigest;
 import java.util.ArrayList;
 
 public class MessagingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {

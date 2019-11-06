@@ -25,6 +25,9 @@ import com.playover.viewmodels.AuthUserViewModel;
 import com.playover.viewmodels.MessageViewModel;
 import com.playover.viewmodels.UserViewModel;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -166,14 +169,26 @@ public class MessagingBubbles_Fragment extends Fragment {
         );
     }
 
-
+    // hash uids to get Message Thread UID using MD5 algorithm and standard algo.
     private String generateMessageThreadUID(String uid1, String uid2) {
-        int compare = uid1.compareTo(uid2);
-        if(compare < 0){
-            return uid1+uid2;
-        }
-        else{
-            return uid2+uid1;
+        String hashedMTUID = getMD5(uid1+uid2);
+        Log.i("Message Thread ID:", hashedMTUID);
+        return hashedMTUID;
+    }
+
+    private static String getMD5(String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(input.getBytes());
+            BigInteger no = new BigInteger(1, messageDigest);
+
+            String hashtext = no.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
     }
 
