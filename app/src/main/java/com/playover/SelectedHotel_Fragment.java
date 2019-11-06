@@ -69,7 +69,7 @@ public class SelectedHotel_Fragment extends Fragment{
     TextView mTxtHotelAddress;
     TextView mTxtCheckoutSet;
     ExpandableListView mList;
-    private ArrayList<String> personToMessageUids = new ArrayList<>();
+    private ArrayList<String> personToMessageUids = new ArrayList();
     Bundle messageThreadBundle = new Bundle();
     private RecyclerView recyclerView;
     private static SelectedHotel_Fragment.ContentAdapter adapter;
@@ -124,11 +124,12 @@ public class SelectedHotel_Fragment extends Fragment{
                 try {
                     ContentAdapter adapter = (ContentAdapter) recyclerView.getAdapter();
                     Iterator<String> messagingList = adapter.getMessagingList().iterator();
+
                     while(messagingList.hasNext()){
                         String mListTemp = messagingList.next();
-                        personToMessageUids.addAll(Arrays.asList(mListTemp));
+                        personToMessageUids.add(mListTemp);
                     }
-
+                    Log.i("iPTMU",personToMessageUids.get(0));
                     // assuming there is one initially
                     if (personToMessageUids != null) {
                         // is Group Message

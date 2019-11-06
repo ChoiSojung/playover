@@ -180,9 +180,9 @@ public class MessagingBubbles_Fragment extends Fragment {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] messageDigest = md.digest(input.getBytes());
-            BigInteger no = new BigInteger(1, messageDigest);
+            BigInteger num = new BigInteger(1, messageDigest);
 
-            String hashtext = no.toString(16);
+            String hashtext = num.toString(16);
             while (hashtext.length() < 32) {
                 hashtext = "0" + hashtext;
             }

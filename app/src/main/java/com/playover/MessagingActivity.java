@@ -30,14 +30,14 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
     private FragmentTransaction transaction;
     private DrawerLayout drawer;
     private AuthUserViewModel authVm;
-    private String recipientUIDs;
+    private String recipientUIDs = new String();
     private String messagerUIDs;
     private UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("messages", "fuck this");
+        //Log.i("messages", "fuck this");
         setContentView(R.layout.activity_messaging);
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
@@ -45,10 +45,14 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
             if (b.containsKey("recipientUids")) {
                 ArrayList<String> rUIDList = new ArrayList<>();
                 rUIDList = b.getStringArrayList("recipientUids");
-                for (int i = 0; i <rUIDList.size(); i++){
-                    recipientUIDs += rUIDList.get(i) + ",";
+                Log.i("rUIDList", rUIDList.get(0));
+                for (int i = 0; i < rUIDList.size(); i++){
+                    recipientUIDs += rUIDList.get(i);
+                    if (i < rUIDList.size() - 1){
+                        recipientUIDs += ",";
+                    }
                 }
-                Log.i("rUIDs:", recipientUIDs);
+                Log.i("rUIDs", recipientUIDs);
                 //Log.i("gName:", b.getString("groupName"));
             }
         }
