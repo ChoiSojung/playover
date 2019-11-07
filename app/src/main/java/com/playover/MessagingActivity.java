@@ -79,13 +79,13 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
         toggle.syncState();
 
         transaction = fragmentManager.beginTransaction();
-        if (recipientUIDs == null) {
+        if (recipientUIDs.length() == 0) {
             //Log.i("messages", "null");
             MessagingThreads_Fragment newMessageThreadsFragment = new MessagingThreads_Fragment();
             transaction.replace(R.id.containerMessaging, newMessageThreadsFragment, "Message Threads");
             transaction.commit();
         } else {
-            Log.i("messages", "else it is" + recipientUIDs);
+            Log.i("messages", "else it is");
 
             Bundle bundle = new Bundle();
             bundle.putString("recipientUid", recipientUIDs);
