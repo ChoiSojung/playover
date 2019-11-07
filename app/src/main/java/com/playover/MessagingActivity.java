@@ -30,6 +30,7 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
     private FragmentTransaction transaction;
     private DrawerLayout drawer;
     private AuthUserViewModel authVm;
+    private String groupName;
     private String recipientUIDs = new String();
     private String messagerUIDs;
     private UserViewModel userViewModel;
@@ -42,6 +43,9 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         if (b != null){
+            if (b.containsKey("groupName")){
+                groupName = b.getString("groupName");
+            }
             if (b.containsKey("recipientUids")) {
                 ArrayList<String> rUIDList = new ArrayList<>();
                 rUIDList = b.getStringArrayList("recipientUids");
@@ -88,6 +92,7 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
             Log.i("messages", "else it is");
 
             Bundle bundle = new Bundle();
+            bundle.putString("groupName", groupName);
             bundle.putString("recipientUid", recipientUIDs);
             MessagingBubbles_Fragment newMessagingBubblesFragment = new MessagingBubbles_Fragment();
             newMessagingBubblesFragment.setArguments(bundle);

@@ -135,6 +135,8 @@ public class SelectedHotel_Fragment extends Fragment{
                         // is Group Message
                         if (personToMessageUids.size() > 1){
                             messageThreadBundle = RequestNewGroupName(messageThreadBundle);
+                            // temp group placeholder
+                            messageThreadBundle.putString("groupName", "Group Name");
                             Log.i("newGroupSize", Integer.toString(personToMessageUids.size()));
                         }
                         messageThreadBundle.putStringArrayList("recipientUids", personToMessageUids);

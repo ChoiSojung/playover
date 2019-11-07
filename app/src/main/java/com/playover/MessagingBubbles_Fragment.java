@@ -48,6 +48,7 @@ public class MessagingBubbles_Fragment extends Fragment {
     private TextView textViewUser1;
     private TextView textViewUser2;
     private UserViewModel userViewModel;
+    private String groupName;
     private String threadUid;
     private String groupUids;
     private String[] reciptUids;
@@ -83,6 +84,11 @@ public class MessagingBubbles_Fragment extends Fragment {
         threadUid = generateMessageThreadUID(senderUID, recipientUID);
         groupUids = generateGroupUIDs(senderUID, recipientUID);
         reciptUids = recipientUID.split(",");
+        if (reciptUids.length > 1){
+            groupName = getArguments().getString("groupName");
+        } else {
+            groupName = "1-1 Group";
+        }
         Log.i("group ids", groupUids);
         senderName.put(myUID, "myn ame");
         userViewModel.getUser(myUID,
@@ -146,7 +152,7 @@ public class MessagingBubbles_Fragment extends Fragment {
                     message.setTimestamp(message.generateTimestamp());
                     editText.setText("");
                     if (userMessageThread == null) {
-                        userMessageThread = new UserMessageThread(threadUid, groupUids, message);
+                        userMessageThread = new UserMessageThread(groupName, threadUid, groupUids, message);
                     } else {
                         userMessageThread.addMessage(message);
                     }
