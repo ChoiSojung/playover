@@ -29,6 +29,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MessagingBubbles_Fragment extends Fragment {
@@ -49,11 +50,13 @@ public class MessagingBubbles_Fragment extends Fragment {
     private UserViewModel userViewModel;
     private String threadUid;
     private String groupUids;
+    private String[] reciptUids;
     private String senderUID;
     private String myUID;
     private UserMessageThread userMessageThread;
     private String username1;
     private String username2;
+    private HashMap<String, String> senderName = new HashMap<>();
 
     public MessagingBubbles_Fragment() {
 
@@ -79,6 +82,7 @@ public class MessagingBubbles_Fragment extends Fragment {
         myUID = senderUID;
         threadUid = generateMessageThreadUID(senderUID, recipientUID);
         groupUids = generateGroupUIDs(senderUID, recipientUID);
+        reciptUids = recipientUID.split(",");
         Log.i("group ids", groupUids);
         userViewModel.getUser(myUID,
                 (Person user) -> {
@@ -91,17 +95,23 @@ public class MessagingBubbles_Fragment extends Fragment {
                         Log.e("Exception occurred adding message thread to sender: ", e.getMessage());
                     }
                 });
-        userViewModel.getUser(recipientUID,
-                (Person user) -> {
-                    username2 = user.getFirstName() + " " + user.getLastName();
-                    textViewUser2.setText(username2);
-                    user.addThread(threadUid);
-                    try {
-                        userViewModel.addMessageThreadToUser(user);
-                    }catch(Exception e) {
-                        Log.e("Exception occurred adding message thread to recipient: ", e.getMessage());
-                    }
-                });
+        for(String uid : reciptUids) {
+            userViewModel.getUser(uid,
+                    (Person user) -> {
+                        username2 = user.getFirstName() + " " + user.getLastName();
+                        textViewUser2.setText(username2);
+                        senderName.put(uid, username2);
+                        user.addThread(threadUid);
+                        try {
+                            userViewModel.addMessageThreadToUser(user);
+                        } catch (Exception e) {
+                            Log.e("Exception occurred adding message thread to recipient: ", e.getMessage());
+                        }
+                    });
+        }
+        for (String i : senderName.keySet()){
+            Log.i ("key-value", "uid: " + i + "name: " + senderName.get(i));
+        }
 
 
         //set ListView adapter first

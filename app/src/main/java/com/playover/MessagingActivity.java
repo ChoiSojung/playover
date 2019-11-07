@@ -85,7 +85,7 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
             transaction.replace(R.id.containerMessaging, newMessageThreadsFragment, "Message Threads");
             transaction.commit();
         } else {
-            Log.i("messages", "else it is");
+            Log.i("messages", "else it is" + recipientUIDs);
 
             Bundle bundle = new Bundle();
             bundle.putString("recipientUid", recipientUIDs);
