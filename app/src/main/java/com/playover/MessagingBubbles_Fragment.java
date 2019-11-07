@@ -84,6 +84,7 @@ public class MessagingBubbles_Fragment extends Fragment {
         groupUids = generateGroupUIDs(senderUID, recipientUID);
         reciptUids = recipientUID.split(",");
         Log.i("group ids", groupUids);
+        senderName.put(myUID, "myn ame");
         userViewModel.getUser(myUID,
                 (Person user) -> {
                     username1 = user.getFirstName() + " " + user.getLastName();
@@ -106,6 +107,9 @@ public class MessagingBubbles_Fragment extends Fragment {
                             userViewModel.addMessageThreadToUser(user);
                         } catch (Exception e) {
                             Log.e("Exception occurred adding message thread to recipient: ", e.getMessage());
+                        }
+                        for (String i : senderName.keySet()){
+                            Log.i ("innerkv", "uid: " + i + "name: " + senderName.get(i));
                         }
                     });
         }
@@ -163,13 +167,18 @@ public class MessagingBubbles_Fragment extends Fragment {
                             adapter.notifyDataSetChanged();
                             List<Message> messages = thread.getMessages();
                             for (Message message : messages) {
+                                String UID = message.getMessageUID();
+                                String userName = "name ";
+                                //Object ts = message.getTimestamp();
+                                String timestamp = "time";
                                 String content = message.getContent();
                                 if (message.getSenderUID().equals(myUID)) {
                                     myMessage = true;
                                 } else {
                                     myMessage = false;
                                 }
-                                MessageBubble messageBubble = new MessageBubble(content, myMessage);
+                                MessageBubble messageBubble =
+                                        new MessageBubble(userName, timestamp, content, myMessage);
                                 messageBubbles.add(messageBubble);
                             }
                             userMessageThread = thread;
