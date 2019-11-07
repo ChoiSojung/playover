@@ -6,20 +6,23 @@ import java.util.List;
 public class UserMessageThread {
 
     private String messageThreadUID;
+    private String messageGroupUIDs;
     private List<Message> messages;
 
     public UserMessageThread() {
     }
 
-    public UserMessageThread(String messageThreadUID, Message message) {
+    public UserMessageThread(String messageThreadUID, String messageGroupUIDs, Message message) {
         this.messageThreadUID = messageThreadUID;
+        this.messageGroupUIDs = messageGroupUIDs;
         if (messages == null) {
             messages = new ArrayList<>();
         }
         messages.add(message);
     }
 
-    public UserMessageThread(String messageThreadUID, List<Message> messages) {
+    public UserMessageThread(String messageThreadUID, String messageGroupUIDs, List<Message> messages) {
+        this.messageGroupUIDs = messageGroupUIDs;
         this.messageThreadUID = messageThreadUID;
         this.messages = messages;
     }
@@ -30,6 +33,14 @@ public class UserMessageThread {
 
     public void setMessageThreadUID(String messageThreadUID) {
         this.messageThreadUID = messageThreadUID;
+    }
+
+    public String getMessageGroupUIDs() {
+        return messageGroupUIDs;
+    }
+
+    public void setMessageGroupUIDs(String messageGroupUIDs){
+        this.messageGroupUIDs = messageGroupUIDs;
     }
 
     public List<Message> getMessages() {
@@ -52,6 +63,8 @@ public class UserMessageThread {
         StringBuilder sb = new StringBuilder();
         sb.append("Thread: ");
         sb.append(messageThreadUID);
+        sb.append("\n");
+        sb.append(messageGroupUIDs);
         sb.append("\n");
         for (Message message : messages) {
             sb.append("Message: ");

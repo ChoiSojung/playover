@@ -48,6 +48,7 @@ public class MessagingBubbles_Fragment extends Fragment {
     private TextView textViewUser2;
     private UserViewModel userViewModel;
     private String threadUid;
+    private String groupUids;
     private String senderUID;
     private String myUID;
     private UserMessageThread userMessageThread;
@@ -77,6 +78,8 @@ public class MessagingBubbles_Fragment extends Fragment {
         senderUID = authVm.getUser().getUid();
         myUID = senderUID;
         threadUid = generateMessageThreadUID(senderUID, recipientUID);
+        groupUids = generateGroupUIDs(senderUID, recipientUID);
+        Log.i("group ids", groupUids);
         userViewModel.getUser(myUID,
                 (Person user) -> {
                     username1 = user.getFirstName() + " " + user.getLastName();
@@ -129,7 +132,7 @@ public class MessagingBubbles_Fragment extends Fragment {
                     message.setTimestamp(message.generateTimestamp());
                     editText.setText("");
                     if (userMessageThread == null) {
-                        userMessageThread = new UserMessageThread(threadUid, message);
+                        userMessageThread = new UserMessageThread(threadUid, groupUids, message);
                     } else {
                         userMessageThread.addMessage(message);
                     }
@@ -190,6 +193,10 @@ public class MessagingBubbles_Fragment extends Fragment {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private String generateGroupUIDs(String senderUID, String recipientUID) {
+        return senderUID + "," + recipientUID;
     }
 
     @Override
