@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.playover.models.Person;
 import com.playover.viewmodels.AuthUserViewModel;
 import com.playover.viewmodels.UserViewModel;
+import com.playover.models.UserMessageThread;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -70,6 +71,9 @@ public class MessagingThreads_Fragment extends Fragment {
                         } else {
                             Toast.makeText(getActivity(), "You have no messages.", Toast.LENGTH_LONG).show();
                         }
+                    }
+                    for (String i : messageThreads) {
+                        Log.i ("messageThreadHere", i);
                     }
                     adapter = new MessagingThreads_Fragment.ContentAdapter(recyclerView.getContext(), messageThreads);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -167,6 +171,7 @@ public class MessagingThreads_Fragment extends Fragment {
             String uid = authVm.getUser().getUid();
             String recipientUid = threadUid.replaceFirst(uid,"");
             Log.i("RecipientUID: " , recipientUid);
+            String rUIDs[] = recipientUid.split(",");
             try {
                 userViewModel.getUser(recipientUid,
                         (Person user) -> {

@@ -45,8 +45,8 @@ public class MessagingBubbles_Fragment extends Fragment {
     boolean myMessage;
     private List<MessageBubble> messageBubbles;
     private ArrayAdapter<MessageBubble> adapter;
-    private TextView textViewUser1;
-    private TextView textViewUser2;
+    private TextView textViewGroupName;
+    private TextView textViewUsers;
     private UserViewModel userViewModel;
     private String groupName;
     private String threadUid;
@@ -55,9 +55,7 @@ public class MessagingBubbles_Fragment extends Fragment {
     private String senderUID;
     private String myUID;
     private UserMessageThread userMessageThread;
-    private String username1;
-    private String username2;
-    private HashMap<String, String> senderName = new HashMap<>();
+    private String username;
 
     public MessagingBubbles_Fragment() {
 
@@ -77,8 +75,8 @@ public class MessagingBubbles_Fragment extends Fragment {
         listView = rootView.findViewById(R.id.list_msg);
         btnSend = rootView.findViewById(R.id.btn_chat_send);
         editText = rootView.findViewById(R.id.msg_type);
-        textViewUser1 = rootView.findViewById(R.id.user1);
-        textViewUser2 = rootView.findViewById(R.id.user2);
+        textViewGroupName = rootView.findViewById(R.id.group_name);
+        textViewUsers = rootView.findViewById(R.id.users);
         senderUID = authVm.getUser().getUid();
         myUID = senderUID;
         threadUid = generateMessageThreadUID(senderUID, recipientUID);
@@ -90,11 +88,11 @@ public class MessagingBubbles_Fragment extends Fragment {
             groupName = "1-1 Group";
         }
         Log.i("group ids", groupUids);
-        senderName.put(myUID, "myn ame");
         userViewModel.getUser(myUID,
                 (Person user) -> {
-                    username1 = user.getFirstName() + " " + user.getLastName();
-                    textViewUser1.setText(username1);
+                    textViewGroupName.setText(groupName);
+                    username = user.getFirstName() + " " + user.getLastName();
+                    textViewUsers.setText(textViewUsers.getText().toString() + myUID + ":" + username + ",");
                     user.addThread(threadUid);
                     try {
                         userViewModel.addMessageThreadToUser(user);
@@ -102,27 +100,20 @@ public class MessagingBubbles_Fragment extends Fragment {
                         Log.e("Exception occurred adding message thread to sender: ", e.getMessage());
                     }
                 });
+
         for(String uid : reciptUids) {
             userViewModel.getUser(uid,
                     (Person user) -> {
-                        username2 = user.getFirstName() + " " + user.getLastName();
-                        textViewUser2.setText(username2);
-                        senderName.put(uid, username2);
+                        username = user.getFirstName() + " " + user.getLastName();
+                        textViewUsers.setText(textViewUsers.getText().toString() + uid + ":" + username + ",");
                         user.addThread(threadUid);
                         try {
                             userViewModel.addMessageThreadToUser(user);
                         } catch (Exception e) {
                             Log.e("Exception occurred adding message thread to recipient: ", e.getMessage());
                         }
-                        for (String i : senderName.keySet()){
-                            Log.i ("innerkv", "uid: " + i + "name: " + senderName.get(i));
-                        }
                     });
         }
-        for (String i : senderName.keySet()){
-            Log.i ("key-value", "uid: " + i + "name: " + senderName.get(i));
-        }
-
 
         //set ListView adapter first
         adapter = new MessageAdapter(getActivity(), R.layout.left_message_bubble, messageBubbles);
@@ -172,11 +163,17 @@ public class MessagingBubbles_Fragment extends Fragment {
                             adapter.clear();
                             adapter.notifyDataSetChanged();
                             List<Message> messages = thread.getMessages();
+                            HashMap<String, String> uidNameMap = new HashMap<>();
+                            String[] uNPairs = textViewUsers.getText().toString().split(",");
+                            for (String pair : uNPairs){
+                                String[] uidName = pair.split(":");
+                                uidNameMap.put(uidName[0], uidName[1]);
+                            }
                             for (Message message : messages) {
                                 String UID = message.getMessageUID();
-                                String userName = "name ";
+                                String userName = uidNameMap.get(message.getSenderUID());
                                 //Object ts = message.getTimestamp();
-                                String timestamp = "time";
+                                String timestamp = " time";
                                 String content = message.getContent();
                                 if (message.getSenderUID().equals(myUID)) {
                                     myMessage = true;
