@@ -76,18 +76,21 @@ public class MessagingBubbles_Fragment extends Fragment {
         editText = rootView.findViewById(R.id.msg_type);
         textViewGroupName = rootView.findViewById(R.id.group_name);
         textViewUsers = rootView.findViewById(R.id.users);
+        recipientUID = getArguments().getString("recipientUid");
         senderUID = authVm.getUser().getUid();
         myUID = senderUID;
         if (getArguments().containsKey("threadUid")){
             threadUid = getArguments().getString("threadUid");
+            Log.i ("aLREADYthreadUid",threadUid);
         } else {
             threadUid = generateMessageThreadUID(senderUID, recipientUID);
         }
-        recipientUID = getArguments().getString("recipientUid");
+        Log.i ("MBthreadUid",threadUid);
         groupUids = generateGroupUIDs(senderUID, recipientUID);
         reciptUids = recipientUID.split(",");
         if (reciptUids.length > 1){
-            groupName = getArguments().getString("groupName");
+            //groupName = getArguments().getString("groupName");
+            groupName = "Group Name";
         } else {
             groupName = "1-1 Group";
         }
@@ -176,8 +179,9 @@ public class MessagingBubbles_Fragment extends Fragment {
                             for (Message message : messages) {
                                 String UID = message.getMessageUID();
                                 String userName = uidNameMap.get(message.getSenderUID());
-                                //Object ts = message.getTimestamp();
-                                String timestamp = " time";
+                                Object ts = message.getTimestamp();
+                                Long lts = (long)ts;
+                                String timestamp = lts.toString();
                                 String content = message.getContent();
                                 if (message.getSenderUID().equals(myUID)) {
                                     myMessage = true;

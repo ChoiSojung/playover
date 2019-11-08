@@ -32,6 +32,7 @@
                 android:textSize="@dimen/article_titles"/>
         </RelativeLayout>
 
+<!--hidden textviews to tranport data-->
         <TextView
             android:id="@+id/uid"
             android:layout_width="wrap_content"

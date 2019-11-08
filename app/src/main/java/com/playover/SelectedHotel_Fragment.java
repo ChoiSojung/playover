@@ -129,7 +129,9 @@ public class SelectedHotel_Fragment extends Fragment{
                         String mListTemp = messagingList.next();
                         personToMessageUids.add(mListTemp);
                     }
-                    Log.i("iPTMU",personToMessageUids.get(0));
+                    for (String i : personToMessageUids) {
+                        Log.i("iPTMU", i);
+                    }
                     // assuming there is one initially
                     if (personToMessageUids != null) {
                         // is Group Message
