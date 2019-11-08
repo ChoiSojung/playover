@@ -21,9 +21,10 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.playover.models.Person;
+import com.playover.models.UserMessageThread;
 import com.playover.viewmodels.AuthUserViewModel;
 import com.playover.viewmodels.UserViewModel;
-import com.playover.models.UserMessageThread;
+import com.playover.viewmodels.MessageViewModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -35,7 +36,9 @@ public class MessagingThreads_Fragment extends Fragment {
     private RecyclerView recyclerView;
     private MessagingThreads_Fragment.ContentAdapter adapter;
     private UserViewModel userViewModel;
+    private MessageViewModel messageViewModel;
     private AuthUserViewModel authVm;
+    private UserMessageThread userMessageThread;
     private DatabaseReference mDatabase;
     private Context context;
 
@@ -57,6 +60,7 @@ public class MessagingThreads_Fragment extends Fragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         userViewModel = new UserViewModel();
         authVm = new AuthUserViewModel();
+        messageViewModel = new MessageViewModel();
         getMessageThreads();
         //Log.i("messages", "double fuck this");
         return v;
@@ -71,9 +75,6 @@ public class MessagingThreads_Fragment extends Fragment {
                         } else {
                             Toast.makeText(getActivity(), "You have no messages.", Toast.LENGTH_LONG).show();
                         }
-                    }
-                    for (String i : messageThreads) {
-                        Log.i ("messageThreadHere", i);
                     }
                     adapter = new MessagingThreads_Fragment.ContentAdapter(recyclerView.getContext(), messageThreads);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -114,12 +115,14 @@ public class MessagingThreads_Fragment extends Fragment {
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public ImageView thumbnail;
         public TextView name;
+        public TextView gUids;
         public TextView uid;
 
         public ViewHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.thread_list, parent, false));
             thumbnail = itemView.findViewById(R.id.thumbnail);
             name = itemView.findViewById(R.id.list_name);
+            gUids = itemView.findViewById(R.id.group_uids);
             uid = itemView.findViewById(R.id.uid);
             itemView.setOnClickListener(this);
         }
@@ -130,7 +133,8 @@ public class MessagingThreads_Fragment extends Fragment {
                 MessagingActivity.messagingFragmentManager.popBackStack();
                 FragmentTransaction transaction = MessagingActivity.messagingFragmentManager.beginTransaction();
                 Bundle bundle = new Bundle();
-                bundle.putString("recipientUid", uid.getText().toString());
+                bundle.putString("threadUid", uid.getText().toString());
+                bundle.putString("recipientUid", gUids.getText().toString());
                 MessagingBubbles_Fragment newMessagingBubblesFragment = new MessagingBubbles_Fragment();
                 newMessagingBubblesFragment.setArguments(bundle);
                 transaction.replace(R.id.containerMessaging, newMessagingBubblesFragment).addToBackStack(null);
@@ -168,11 +172,11 @@ public class MessagingThreads_Fragment extends Fragment {
             Log.i("ThreadUid: ", threadUid);
             UserViewModel userViewModel = new UserViewModel();
             AuthUserViewModel authVm = new AuthUserViewModel();
+            MessageViewModel messageViewModel = new MessageViewModel();
             String uid = authVm.getUser().getUid();
-            String recipientUid = threadUid.replaceFirst(uid,"");
-            Log.i("RecipientUID: " , recipientUid);
-            String rUIDs[] = recipientUid.split(",");
-            try {
+            /*String recipientUid = threadUid.replaceFirst(uid,"");
+            Log.i("RecipientUID: " , recipientUid);*/
+/*            try {
                 userViewModel.getUser(recipientUid,
                         (Person user) -> {
                             if (user.getImageUri() != null) {
@@ -192,7 +196,18 @@ public class MessagingThreads_Fragment extends Fragment {
 
             } catch (NullPointerException npe) {
                 Log.e("Message Thead Fragment Exception: ", npe.getMessage());
-            }
+            }*/
+            messageViewModel.getMessages(threadUid,
+                    (UserMessageThread thread) -> {
+                        String groupName = thread.getMessageGroupName();
+                        String groupIds = thread.getMessageGroupUIDs();
+                        holder.name.setText(groupName);
+                        holder.gUids.setText(groupIds);
+                        String gIds = holder.gUids.getText().toString();
+                        String recipientUid = threadUid.replaceFirst(gIds,"");
+                        holder.gUids.setText(recipientUid);
+                        holder.uid.setText(threadUid);
+                    });
         }
 
         @Override

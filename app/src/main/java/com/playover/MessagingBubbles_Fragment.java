@@ -68,7 +68,6 @@ public class MessagingBubbles_Fragment extends Fragment {
             fragmentManager = getActivity().getSupportFragmentManager();
         }
         assert getArguments() != null;
-        recipientUID = getArguments().getString("recipientUid");
         messageBubbles = new ArrayList<>();
         authVm = new AuthUserViewModel();
         userViewModel = new UserViewModel();
@@ -79,7 +78,12 @@ public class MessagingBubbles_Fragment extends Fragment {
         textViewUsers = rootView.findViewById(R.id.users);
         senderUID = authVm.getUser().getUid();
         myUID = senderUID;
-        threadUid = generateMessageThreadUID(senderUID, recipientUID);
+        if (getArguments().containsKey("threadUid")){
+            threadUid = getArguments().getString("threadUid");
+        } else {
+            threadUid = generateMessageThreadUID(senderUID, recipientUID);
+        }
+        recipientUID = getArguments().getString("recipientUid");
         groupUids = generateGroupUIDs(senderUID, recipientUID);
         reciptUids = recipientUID.split(",");
         if (reciptUids.length > 1){
@@ -139,7 +143,7 @@ public class MessagingBubbles_Fragment extends Fragment {
                     Message message = new Message();
                     message.setContent(content);
                     message.setSenderUID(senderUID);
-                    message.setRecipientUID(recipientUID);
+                    //message.setRecipientUID(recipientUID);
                     message.setTimestamp(message.generateTimestamp());
                     editText.setText("");
                     if (userMessageThread == null) {

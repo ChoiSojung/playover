@@ -39,5 +39,12 @@
             android:layout_gravity="end"
             android:visibility="invisible"/>
 
+        <TextView
+            android:id="@+id/group_uids"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_gravity="end"
+            android:visibility="invisible"/>
+
     </LinearLayout>
 </LinearLayout>

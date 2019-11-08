@@ -53,6 +53,7 @@
             android:layout_gravity="left|center_vertical"
             android:textSize="20sp" />
 
+<!--        hide for transport user id-name pair data-->
         <TextView
             android:id="@+id/users"
             android:layout_width="wrap_content"
