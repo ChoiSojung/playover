@@ -51,6 +51,8 @@ public class MisuseTest {
             onView(withId(R.id.recycler_view_also_checked_in))
                     .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
             Thread.sleep(5000);
+            onView(withId(R.id.reportMisuseButton)).perform(click());
+            Thread.sleep(5000);
 
 
         } catch (Exception ex) {
@@ -71,6 +73,8 @@ public class MisuseTest {
             Thread.sleep(8000);
             onView(withId(R.id.recycler_view_also_checked_in))
                     .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+            Thread.sleep(5000);
+            onView(withId(R.id.reportMisuseButton)).perform(click());
             Thread.sleep(5000);
 
         }
