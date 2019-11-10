@@ -22,6 +22,7 @@ import org.junit.Test;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -37,7 +38,7 @@ public class MisuseTest {
     public GrantPermissionRule locationCourseRule = GrantPermissionRule.grant(Manifest.permission.ACCESS_COARSE_LOCATION);
 
     @Test
-    public void getToMisuseFragmentTest() throws Exception {
+    public void fileMisuseReportTest() throws Exception {
         try {
             Thread.sleep(5000);
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
@@ -50,10 +51,13 @@ public class MisuseTest {
             Thread.sleep(8000);
             onView(withId(R.id.recycler_view_also_checked_in))
                     .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.reportMisuseButton)).perform(click());
-            Thread.sleep(5000);
-
+            Thread.sleep(3000);
+            onView(withId(R.id.misuse_report)).perform(replaceText("They are a bad actor!"));
+            Thread.sleep(3000);
+            onView(withId(R.id.submitReportBtn)).perform(click());
+            Thread.sleep(3000);
 
         } catch (Exception ex) {
             Thread.sleep(5000);
@@ -73,10 +77,13 @@ public class MisuseTest {
             Thread.sleep(8000);
             onView(withId(R.id.recycler_view_also_checked_in))
                     .perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.reportMisuseButton)).perform(click());
-            Thread.sleep(5000);
-
+            Thread.sleep(3000);
+            onView(withId(R.id.misuse_report)).perform(replaceText("They are a bad actor!"));
+            Thread.sleep(3000);
+            onView(withId(R.id.submitReportBtn)).perform(click());
+            Thread.sleep(3000);
         }
     }
 
