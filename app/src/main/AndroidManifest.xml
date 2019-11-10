@@ -63,9 +63,13 @@
         <activity
             android:name=".Buddies_Activity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".MessagingActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".MessagingActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.playover_SHOW_MESSAGES"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Discounts"
             android:screenOrientation="portrait" />
