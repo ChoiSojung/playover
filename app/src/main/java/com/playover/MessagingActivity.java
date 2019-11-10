@@ -20,8 +20,11 @@ import com.playover.broadcast_receivers.InternetBroadcastReceiver;
 import com.playover.viewmodels.AuthUserViewModel;
 import com.playover.viewmodels.UserViewModel;
 
+import java.util.Set;
+
 public class MessagingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private final String TAG = "MessagingActivity";
     static FragmentManager messagingFragmentManager;
     private FragmentManager fragmentManager;
     private FragmentTransaction transaction;
@@ -38,6 +41,14 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
         setContentView(R.layout.activity_messaging);
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
+        // Code to discover Bundle keys. Keys found: "from" "msgSequence" "msgThreadId"
+//        if(b != null) {
+//            Set<String> bundleKeys = b.keySet();
+//            for (String key : bundleKeys) {
+//                Log.i(TAG, key);
+//            }
+//        }
+
         if (b != null){
             if (b.containsKey("recipientUid")) {
                 recipientUID = b.getString("recipientUid");

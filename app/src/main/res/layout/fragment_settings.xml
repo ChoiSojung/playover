@@ -61,4 +61,43 @@
         android:text="@string/do_not_disturb"
         android:textSize="20sp" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="5dp"
+        android:text="Testing: FCM instance ID from FirebaseInstanceID:" />
+
+    <TextView
+        android:id="@+id/settings_fragment_fcmviafbinstance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="20sp"
+        android:text="Value not known yet" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="5dp"
+        android:text="Testing: FCM instance ID from RT Database:" />
+
+    <TextView
+        android:id="@+id/settings_fragment_fcmviafbrtdb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="20sp"
+        android:text="Value not known yet" />
+
 </LinearLayout>

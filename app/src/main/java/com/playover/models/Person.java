@@ -28,13 +28,17 @@ public class Person implements Parcelable {
     //Added by fw
     private String hotelCheckedInto;
 
+    //added by QRP for FCM
+    private String FBinstanceID;
+
     public Person() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
     public Person(String firstName, String lastName, String group, String position,
                   String dob, String relationshipStatus, String emailAddress, String uId, String interests,
-                  String imageUri, boolean dnd, List<String> messageThreads, String hotelCheckedInto, HashMap<String, Buddy> buddies) {
+                  String imageUri, boolean dnd, List<String> messageThreads, String hotelCheckedInto,
+                  HashMap<String, Buddy> buddies) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.group = group;
@@ -236,4 +240,8 @@ public class Person implements Parcelable {
     public HashMap<String, Buddy> getBuddies() {
         return this.buddies;
     }
+
+    //added by QRP
+    public String getFBinstanceID() {return FBinstanceID;}
+    public void setFBinstanceID(String FBinstanceID) {this.FBinstanceID = FBinstanceID;}
 }

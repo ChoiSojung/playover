@@ -63,9 +63,13 @@
         <activity
             android:name=".Buddies_Activity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".MessagingActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".MessagingActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.playover_SHOW_MESSAGES"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Discounts"
             android:screenOrientation="portrait" />
@@ -76,9 +80,24 @@
             </intent-filter>
         </receiver>
 
+        <service
+            android:name=".Notifications"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_message" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/channel_default_id" />
+
     </application>
 
 </manifest>

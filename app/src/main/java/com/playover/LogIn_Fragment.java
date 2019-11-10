@@ -30,21 +30,26 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.playover.viewmodels.AuthUserViewModel;
+import com.playover.viewmodels.NotificationsViewModel;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LogIn_Fragment extends Fragment {
 
+    private String TAG = "LogIn_Fragment";
     private TextView sign_in;
     private TextView forget_main;
     private EditText email_login;
     private EditText password_login;
     private AuthUserViewModel authVm;
+    private NotificationsViewModel notifyVM;
     private FragmentTransaction transaction;
     private FragmentManager fragmentManager;
-
+    private String FCMinstanceID;
 
     public LogIn_Fragment() {
         // Required empty public constructor
@@ -61,6 +66,7 @@ public class LogIn_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_log_in, container, false);
         authVm = new AuthUserViewModel();
+        notifyVM = new NotificationsViewModel();
         if (getActivity() != null) {
             fragmentManager = getActivity().getSupportFragmentManager();
         }
@@ -113,6 +119,36 @@ public class LogIn_Fragment extends Fragment {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if (task.isSuccessful()) {
+                                            // added by QRP, on login set notification channels and store FB instance ID
+                                            String uId = new AuthUserViewModel().getUser().getUid();
+                                            //String FCMInstanceID;
+                                            FirebaseInstanceId.getInstance().getInstanceId()
+                                                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                                                            if (!task.isSuccessful()) {
+                                                                Log.w(TAG, "getInstanceId failed", task.getException());
+                                                                return;
+                                                            }
+
+                                                            // Get new Instance ID token
+                                                            FCMinstanceID = task.getResult().getToken();
+                                                            notifyVM.setFCMinstanceID(uId, FCMinstanceID, new OnCompleteListener<Void>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                    if (task.isSuccessful()) {
+                                                                        Log.i(TAG, "Successfully set FCMinstanceID " + FCMinstanceID);
+                                                                    } else {
+                                                                        if (task.getException() != null)
+                                                                            Log.d(TAG, "Failed to set FCMinstanceID: " + task.getException());
+                                                                    }
+                                                                }
+                                                            });
+
+                                                            Log.d(TAG, FCMinstanceID);
+                                                        }
+                                                    });
+                                            notifyVM.createMyNotificationChannels(getActivity());
                                             logInDialog.dismiss();
                                             Intent intent = new Intent(parentActivity, CheckIn.class);
                                             parentActivity.startActivity(intent);
