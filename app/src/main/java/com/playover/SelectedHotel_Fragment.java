@@ -54,8 +54,6 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import rx.android.schedulers.AndroidSchedulers;
 
-import static java.lang.Thread.sleep;
-
 public class SelectedHotel_Fragment extends Fragment{
 
     TextView mTxtHotelName;
