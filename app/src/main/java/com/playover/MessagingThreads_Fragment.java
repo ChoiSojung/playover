@@ -175,41 +175,46 @@ public class MessagingThreads_Fragment extends Fragment {
             MessageViewModel messageViewModel = new MessageViewModel();
             String uid = authVm.getUser().getUid();
             Log.i("MyUid", uid);
-            /*String recipientUid = threadUid.replaceFirst(uid,"");
-            Log.i("RecipientUID: " , recipientUid);*/
-/*            try {
-                userViewModel.getUser(recipientUid,
-                        (Person user) -> {
-                            if (user.getImageUri() != null) {
-                                String dbImage = user.getImageUri();
-                                Picasso mPicasso = Picasso.get();
-                                mPicasso.load(dbImage)
-                                        .resize(30, 30)
-                                        .centerCrop()
-                                        .into(holder.thumbnail);
-                            } else {
-                                holder.thumbnail.setImageResource(R.drawable.profile_avatar_placeholder);
-                            }
-                            String fullName = user.getFirstName() + " " + user.getLastName();
-                            holder.name.setText(fullName);
-                            holder.uid.setText(recipientUid);
-                        });
+            String recipientUid = threadUid.replaceFirst(uid,"");
+            Log.i("RecipientUID: " , recipientUid);
+            // check if thread is an one-on-one thread (mUid == uid) for backward compactibility
+            String mUid = threadUid.replaceFirst(recipientUid, "");
+            if (mUid == uid) {
+                try {
+                    userViewModel.getUser(recipientUid,
+                            (Person user) -> {
+                                if (user.getImageUri() != null) {
+                                    String dbImage = user.getImageUri();
+                                    Picasso mPicasso = Picasso.get();
+                                    mPicasso.load(dbImage)
+                                            .resize(30, 30)
+                                            .centerCrop()
+                                            .into(holder.thumbnail);
+                                } else {
+                                    holder.thumbnail.setImageResource(R.drawable.profile_avatar_placeholder);
+                                }
+                                String fullName = user.getFirstName() + " " + user.getLastName();
+                                holder.name.setText(fullName);
+                                holder.uid.setText(recipientUid);
+                            });
 
-            } catch (NullPointerException npe) {
-                Log.e("Message Thead Fragment Exception: ", npe.getMessage());
-            }*/
-            messageViewModel.getMessages(threadUid,
-                    (UserMessageThread thread) -> {
-                        String groupName = thread.getMessageGroupName();
-                        String groupIds = thread.getMessageGroupUIDs();
-                        holder.name.setText(groupName);
-                        /*holder.gUids.setText(groupIds);
-                        String gIds = holder.gUids.getText().toString();*/
-                        String recipientUid = threadUid.replaceFirst(groupIds,"");
-                        holder.gUids.setText(recipientUid);
-                        holder.uid.setText(threadUid);
-                    });
-        }
+                } catch (NullPointerException npe) {
+                    Log.e("Message Thead Fragment Exception: ", npe.getMessage());
+                }
+            } else {
+                messageViewModel.getMessages(threadUid,
+                        (UserMessageThread thread) -> {
+                            String groupName = thread.getMessageGroupName();
+                            String groupIds = thread.getMessageGroupUIDs();
+                            holder.name.setText(groupName);
+                            String reciptUid = threadUid.replaceFirst(groupIds,"");
+                            holder.gUids.setText(reciptUid);
+                            holder.uid.setText(threadUid);
+                        });
+            }
+            }
+
+
 
         @Override
         public int getItemCount() {
