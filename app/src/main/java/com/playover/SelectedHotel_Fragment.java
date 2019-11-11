@@ -69,7 +69,7 @@ public class SelectedHotel_Fragment extends Fragment{
     TextView mTxtHotelAddress;
     TextView mTxtCheckoutSet;
     ExpandableListView mList;
-    private ArrayList<String> personToMessageUids = new ArrayList();
+    private String personToMessageUids = new String();
     Bundle messageThreadBundle = new Bundle();
     private RecyclerView recyclerView;
     private static SelectedHotel_Fragment.ContentAdapter adapter;
@@ -127,21 +127,25 @@ public class SelectedHotel_Fragment extends Fragment{
 
                     while(messagingList.hasNext()){
                         String mListTemp = messagingList.next();
-                        personToMessageUids.add(mListTemp);
+                        personToMessageUids += mListTemp + ",";
                     }
-                    for (String i : personToMessageUids) {
-                        Log.i("iPTMU", i);
-                    }
+                    personToMessageUids.replace(
+                            personToMessageUids.substring(personToMessageUids.length() - 1)
+                            , ""
+                    );
+                    Log.i("iPTMU", personToMessageUids);
+
                     // assuming there is one initially
                     if (personToMessageUids != null) {
                         // is Group Message
-                        if (personToMessageUids.size() > 1){
+                        String[] toMessageUid = personToMessageUids.split(",");
+                        if (toMessageUid.length > 1){
                             messageThreadBundle = RequestNewGroupName(messageThreadBundle);
                             // temp group placeholder
-                            // messageThreadBundle.putString("groupName", "Group Name");
-                            Log.i("newGroupSize", Integer.toString(personToMessageUids.size()));
+                            messageThreadBundle.putString("groupName", "Group Name");
+                            Log.i("newGroupSize", Integer.toString(personToMessageUids.length()));
                         }
-                        messageThreadBundle.putStringArrayList("recipientUids", personToMessageUids);
+                        messageThreadBundle.putString("recipientUids", personToMessageUids);
                         Log.i("Added Uids", "here");
                     }
 
@@ -743,7 +747,7 @@ public class SelectedHotel_Fragment extends Fragment{
     public void onAttach(Context context) {
         super.onAttach(context);
         ContentAdapter.checkboxPosition = -1;
-        personToMessageUids.clear();
+        personToMessageUids = "";
     }
 
     @Override
@@ -751,6 +755,6 @@ public class SelectedHotel_Fragment extends Fragment{
         super.onDetach();
         ListHotels_Fragment.mPlacesList.clear();
         ContentAdapter.checkboxPosition = -1;
-        personToMessageUids.clear();
+        personToMessageUids = "";
     }
 }

@@ -47,21 +47,10 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
                 groupName = b.getString("groupName");
             }
             if (b.containsKey("recipientUids")) {
-                ArrayList<String> rUIDList = new ArrayList<>();
-                rUIDList = b.getStringArrayList("recipientUids");
-                for (String i: rUIDList) {
-                    Log.i("rUIDList", i);
-                }
-                for (int i = 0; i < rUIDList.size(); i++){
-                    recipientUIDs += rUIDList.get(i);
-                    if (i < rUIDList.size() - 1){
-                        recipientUIDs += ",";
-                    }
-                }
-                Log.i("rUIDs", recipientUIDs);
-                //Log.i("gName:", b.getString("groupName"));
+                recipientUIDs = b.getString("recipientUids");
             }
         }
+        Log.i("toLaunch", groupName + " with " + recipientUIDs);
         fragmentManager = getSupportFragmentManager();
         messagingFragmentManager = getSupportFragmentManager();
         authVm = new AuthUserViewModel();

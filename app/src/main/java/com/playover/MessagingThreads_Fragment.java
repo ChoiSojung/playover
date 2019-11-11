@@ -207,7 +207,7 @@ public class MessagingThreads_Fragment extends Fragment {
                             String groupName = thread.getMessageGroupName();
                             String groupIds = thread.getMessageGroupUIDs();
                             holder.name.setText(groupName);
-                            String reciptUid = threadUid.replaceFirst(groupIds,"");
+                            String reciptUid = groupIds.replaceFirst(uid,"");
                             holder.gUids.setText(reciptUid);
                             holder.uid.setText(threadUid);
                         });

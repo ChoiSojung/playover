@@ -165,7 +165,7 @@ public class Profile_Fragment extends Fragment {
                 public void onClick(View v) {
                     try {
                         Intent messagingIntent = new Intent(getActivity(), MessagingActivity.class);
-                        messagingIntent.putExtra("recipientUid", getArguments().getString(Constants.KEY_BUDUID));
+                        messagingIntent.putExtra("recipientUids", getArguments().getString(Constants.KEY_BUDUID));
                         startActivity(messagingIntent);
                     }
                     catch (Exception e) {
