@@ -56,11 +56,30 @@
         android:layout_marginLeft="-60dp"
         />
 
+    <TextView
+        android:id="@+id/txtSetReminder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dialogSetReminder"
+        android:gravity="center"
+        android:layout_below="@id/tprCheckOut"
+        />
+
+    <Spinner
+        android:id="@+id/sprReminder"
+        style=""
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_toEndOf="@id/sprCheckout"
+        android:layout_below="@+id/txtSetReminder"
+        android:entries="@array/checkoutReminders"
+        android:layout_marginBottom="5dp"></Spinner>
+
     <Button
         android:id="@+id/btnCheckInConfirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tprCheckOut"
+        android:layout_below="@id/sprReminder"
         android:backgroundTint="#4CAF50"
         android:text="@string/dialogCheckInConfirm"
         android:textColor="#FFFFFF" />

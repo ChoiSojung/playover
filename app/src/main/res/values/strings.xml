@@ -30,6 +30,7 @@
     <string name="nearbyHotels">Nearby Hotels</string>
     <string name="dialogCheckin">CHECK-IN TO:</string>
     <string name="dialogSetCheckout">SET CHECK-OUT DATE AND TIME:</string>
+    <string name="dialogSetReminder">SET REMINDER:</string>
     <string name="dialogCheckInConfirm">Confirm</string>
     <string name="alsoCheckedIn">ALSO CURRENTLY CHECKED-IN HERE</string>
     <string name="messageAll">Message all</string>

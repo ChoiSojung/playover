@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static android.content.Context.ALARM_SERVICE;
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
@@ -51,10 +52,12 @@ public class CheckInDialog extends Dialog implements View.OnClickListener
     private Spinner mDate;
     private TimePicker mTime;
     private Button mBtnConfirm;
+    private Spinner mReminder;
 
     private String dateSelection;
     private int hourSelection;
     private int minuteSelection;
+    private String remindSelection;
 
     //DB
     private AuthUserViewModel authVm = new AuthUserViewModel();
@@ -87,6 +90,7 @@ public class CheckInDialog extends Dialog implements View.OnClickListener
         mPlace = findViewById(R.id.txtCheckInHotel);
         mPlace.setText(mPlaceText);
         mDate = findViewById(R.id.sprCheckout);
+        mReminder = findViewById(R.id.sprReminder);
 
         mTime = findViewById(R.id.tprCheckOut);
 
@@ -112,6 +116,7 @@ public class CheckInDialog extends Dialog implements View.OnClickListener
             try
             {
                 dateSelection = mDate.getSelectedItem().toString();
+                remindSelection = mReminder.getSelectedItem().toString();
 
                 //@TODO make it UTC time
                 String checkOutTime = getTime(dateSelection, hourSelection, minuteSelection);
@@ -170,7 +175,9 @@ public class CheckInDialog extends Dialog implements View.OnClickListener
                 setAlarm(checkOut);
 
                 Calendar checkOutAlert = getCal(dateSelection, hourSelection, minuteSelection);
-                checkOutAlert.add(Calendar.HOUR, -1);
+                int reminderSelectionInMinutes = getReminder(remindSelection);
+
+                checkOutAlert.add(Calendar.MINUTE, -reminderSelectionInMinutes);
 
                 //schedule notification for checkout
                 scheduleNotification(getNotification("Your checkout time is " + getTime(dateSelection, hourSelection, minuteSelection)), checkOutAlert);
@@ -239,6 +246,33 @@ public class CheckInDialog extends Dialog implements View.OnClickListener
         calendar.set(Calendar.MINUTE, minutes);// for 0 min
 
         return calendar.getTime().toString();
+    }
+
+    //helper method to get value of spinner item selected for checkout reminder notifcation
+    public static int getReminder(String reminder)
+    {
+        int minutes=0;
+
+        switch (reminder)
+        {
+            case "At Time of Checkout": minutes = 0;
+                break;
+            case "5 Minutes Before": minutes = 5; ;
+                break;
+            case "10 Minutes Before": minutes = 10;
+                break;
+            case "15 Minutes Before": minutes = 15;
+                break;
+            case "1 Hour Before": minutes = 60;
+                break;
+            case "2 Hours Before": minutes = 120;
+                break;
+            case "1 Day Before": minutes = 1440;
+                break;
+            default:
+                break;
+        }
+        return minutes;
     }
 
     public static Calendar getCal(String day, int hours, int minutes)
