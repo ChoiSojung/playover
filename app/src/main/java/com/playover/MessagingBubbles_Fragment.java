@@ -86,7 +86,7 @@ public class MessagingBubbles_Fragment extends Fragment {
             threadUid = generateMessageThreadUID(senderUID, recipientUID);
         }
         Log.i ("MBthreadUid",threadUid);
-        groupUids = generateGroupUIDs(senderUID, recipientUID);
+        groupUids = senderUID + "," + recipientUID;
         reciptUids = recipientUID.split(",");
         if (reciptUids.length > 1){
             //groupName = getArguments().getString("groupName");
@@ -245,10 +245,6 @@ public class MessagingBubbles_Fragment extends Fragment {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private String generateGroupUIDs(String senderUID, String recipientUID) {
-        return senderUID + "," + recipientUID;
     }
 
     @Override
