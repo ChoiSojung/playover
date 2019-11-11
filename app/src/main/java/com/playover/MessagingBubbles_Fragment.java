@@ -92,7 +92,7 @@ public class MessagingBubbles_Fragment extends Fragment {
             //groupName = getArguments().getString("groupName");
             groupName = "Group Name";
         } else {
-            groupName = "1-1 Group";
+            groupName = "oneOnOneGroup";
         }
         Log.i("group ids", groupUids);
         userViewModel.getUser(myUID,
@@ -100,12 +100,6 @@ public class MessagingBubbles_Fragment extends Fragment {
                     textViewGroupName.setText(groupName);
                     username = user.getFirstName() + " " + user.getLastName();
                     textViewUsers.setText(textViewUsers.getText().toString() + myUID + ":" + username + ",");
-                    user.addThread(threadUid);
-                    try {
-                        userViewModel.addMessageThreadToUser(user);
-                    }catch(Exception e) {
-                        Log.e("Exception occurred adding message thread to sender: ", e.getMessage());
-                    }
                 });
 
         for(String uid : reciptUids) {
@@ -113,12 +107,6 @@ public class MessagingBubbles_Fragment extends Fragment {
                     (Person user) -> {
                         username = user.getFirstName() + " " + user.getLastName();
                         textViewUsers.setText(textViewUsers.getText().toString() + uid + ":" + username + ",");
-                        user.addThread(threadUid);
-                        try {
-                            userViewModel.addMessageThreadToUser(user);
-                        } catch (Exception e) {
-                            Log.e("Exception occurred adding message thread to recipient: ", e.getMessage());
-                        }
                     });
         }
 
@@ -151,6 +139,27 @@ public class MessagingBubbles_Fragment extends Fragment {
                     editText.setText("");
                     if (userMessageThread == null) {
                         userMessageThread = new UserMessageThread(groupName, threadUid, groupUids, message);
+                        userViewModel.getUser(myUID,
+                                (Person user) -> {
+                                    user.addThread(threadUid);
+                                    try {
+                                        userViewModel.addMessageThreadToUser(user);
+                                    }catch(Exception e) {
+                                        Log.e("Exception occurred adding message thread to sender: ", e.getMessage());
+                                    }
+                                });
+
+                        for(String uid : reciptUids) {
+                            userViewModel.getUser(uid,
+                                    (Person user) -> {
+                                        user.addThread(threadUid);
+                                        try {
+                                            userViewModel.addMessageThreadToUser(user);
+                                        } catch (Exception e) {
+                                            Log.e("Exception occurred adding message thread to recipient: ", e.getMessage());
+                                        }
+                                    });
+                        }
                     } else {
                         userMessageThread.addMessage(message);
                     }
@@ -202,13 +211,26 @@ public class MessagingBubbles_Fragment extends Fragment {
         );
     }
 
-    // hash uids to get Message Thread UID using MD5 algorithm and standard algo.
-    private String generateMessageThreadUID(String uid1, String uid2) {
-        String hashedMTUID = getMD5(uid1+uid2);
-        Log.i("Message Thread ID:", hashedMTUID);
-        return hashedMTUID;
+    private String generateMessageThreadUID(String senderUID, String recipientUID) {
+        String MTUID;
+        reciptUids = recipientUID.split(",");
+        if (reciptUids.length > 1){
+            MTUID = getMD5(senderUID + recipientUID);
+        } else {
+            // backward compatible threadId for one-on-one messaging.
+            int compare = senderUID.compareTo(recipientUID);
+            if(compare < 0){
+                MTUID = senderUID + recipientUID;
+            } else {
+                MTUID = recipientUID + senderUID;
+            }
+        }
+
+        Log.i("Message Thread ID:", MTUID);
+        return MTUID;
     }
 
+    // hash uids to get Message Thread UID using MD5 algorithm and standard algo.
     private static String getMD5(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
