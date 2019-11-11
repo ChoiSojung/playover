@@ -138,7 +138,7 @@ public class SelectedHotel_Fragment extends Fragment{
                         if (personToMessageUids.size() > 1){
                             messageThreadBundle = RequestNewGroupName(messageThreadBundle);
                             // temp group placeholder
-                            messageThreadBundle.putString("groupName", "Group Name");
+                            // messageThreadBundle.putString("groupName", "Group Name");
                             Log.i("newGroupSize", Integer.toString(personToMessageUids.size()));
                         }
                         messageThreadBundle.putStringArrayList("recipientUids", personToMessageUids);
@@ -743,6 +743,7 @@ public class SelectedHotel_Fragment extends Fragment{
     public void onAttach(Context context) {
         super.onAttach(context);
         ContentAdapter.checkboxPosition = -1;
+        personToMessageUids.clear();
     }
 
     @Override
@@ -750,5 +751,6 @@ public class SelectedHotel_Fragment extends Fragment{
         super.onDetach();
         ListHotels_Fragment.mPlacesList.clear();
         ContentAdapter.checkboxPosition = -1;
+        personToMessageUids.clear();
     }
 }
