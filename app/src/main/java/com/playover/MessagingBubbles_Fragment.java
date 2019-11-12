@@ -28,10 +28,12 @@ import com.playover.viewmodels.AuthUserViewModel;
 import com.playover.viewmodels.MessageViewModel;
 import com.playover.viewmodels.UserViewModel;
 
+import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -235,10 +237,9 @@ public class MessagingBubbles_Fragment extends Fragment {
         String MTUID;
         reciptUids = recipientUID.split(",");
         if (reciptUids.length > 1){
-            MTUID = getMD5(senderUID + recipientUID);
+            MTUID = getMD5(senderUID + "," + recipientUID);
         } else {
             // backward compatible threadId for one-on-one messaging
-            Log.i("generateMessageT", senderUID + " " + recipientUID);
             int compare = senderUID.compareTo(recipientUID);
             if(compare < 0){
                 MTUID = senderUID + recipientUID;
@@ -253,6 +254,19 @@ public class MessagingBubbles_Fragment extends Fragment {
 
     // hash uids to get Message Thread UID using MD5 algorithm and standard algo.
     private static String getMD5(String input) {
+        //sort all uids so the same group people will stay in the same group chat
+        String[] arr = input.split(",");
+        input = "";
+        for (String id : arr){
+            Log.i ("MD5String", id);
+        }
+        Arrays.sort(arr);
+        for (String id : arr){
+            Log.i ("SortedMD5String", id);
+            input += input + id;
+        }
+        Log.i ("SortedMD5String", input);
+
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] messageDigest = md.digest(input.getBytes());
