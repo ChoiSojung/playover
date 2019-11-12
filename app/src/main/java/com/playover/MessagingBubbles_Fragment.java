@@ -105,7 +105,7 @@ public class MessagingBubbles_Fragment extends Fragment {
                                 textViewUsers.getText().toString() + uid + ":" + username + ",");
                     });
         }
-        
+
         //set ListView adapter first
         adapter = new MessageAdapter(getActivity(), R.layout.left_message_bubble, messageBubbles);
         listView.setAdapter(adapter);
@@ -187,6 +187,7 @@ public class MessagingBubbles_Fragment extends Fragment {
                             adapter.clear();
                             adapter.notifyDataSetChanged();
                             List<Message> messages = thread.getMessages();
+                            // put group name in message window
                             if(reciptUids.length == 1){
                                 textViewGroupName.setText(
                                         uidNameMap.get(myUID)
@@ -214,6 +215,7 @@ public class MessagingBubbles_Fragment extends Fragment {
                             userMessageThread = thread;
                         }
                     } else {
+                        // generate new group name if is a new thread
                         if(reciptUids.length == 1){
                             textViewGroupName.setText(
                                     uidNameMap.get(myUID)
@@ -235,7 +237,8 @@ public class MessagingBubbles_Fragment extends Fragment {
         if (reciptUids.length > 1){
             MTUID = getMD5(senderUID + recipientUID);
         } else {
-            // backward compatible threadId for one-on-one messaging.
+            // backward compatible threadId for one-on-one messaging
+            Log.i("generateMessageT", senderUID + " " + recipientUID);
             int compare = senderUID.compareTo(recipientUID);
             if(compare < 0){
                 MTUID = senderUID + recipientUID;
@@ -244,7 +247,7 @@ public class MessagingBubbles_Fragment extends Fragment {
             }
         }
 
-        Log.i("Message Thread ID:", MTUID);
+        Log.i("MessageThreadID:", MTUID);
         return MTUID;
     }
 
