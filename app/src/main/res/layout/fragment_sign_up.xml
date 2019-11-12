@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUp_Fragment">
+    tools:context=".SignUp_Fragment"
+    android:id="@+id/Sign_Up"
+    >
+
         <LinearLayout
             android:id="@+id/signup"
             android:layout_width="match_parent"
