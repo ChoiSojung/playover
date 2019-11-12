@@ -134,7 +134,9 @@ public class MessagingThreads_Fragment extends Fragment {
                 FragmentTransaction transaction = MessagingActivity.messagingFragmentManager.beginTransaction();
                 Bundle bundle = new Bundle();
                 bundle.putString("threadUid", uid.getText().toString());
+//                Log.i("onClickThreadUid", uid.getText().toString());
                 bundle.putString("recipientUid", gUids.getText().toString());
+//                Log.i("onClickRecipientUid", gUids.getText().toString());
                 MessagingBubbles_Fragment newMessagingBubblesFragment = new MessagingBubbles_Fragment();
                 newMessagingBubblesFragment.setArguments(bundle);
                 transaction.replace(R.id.containerMessaging, newMessagingBubblesFragment).addToBackStack(null);
@@ -169,17 +171,17 @@ public class MessagingThreads_Fragment extends Fragment {
         @Override
         public void onBindViewHolder(MessagingThreads_Fragment.ViewHolder holder, final int position) {
             String threadUid = messageThreads.get(position);
-            Log.i("ThreadUid: ", "this is " + threadUid);
+//            Log.i("ThreadUid: ", "this is " + threadUid);
             UserViewModel userViewModel = new UserViewModel();
             AuthUserViewModel authVm = new AuthUserViewModel();
             MessageViewModel messageViewModel = new MessageViewModel();
             String uid = authVm.getUser().getUid();
-            Log.i("MyUid", uid);
+//            Log.i("MyUid", uid);
             String recipientUid = threadUid.replaceFirst(uid,"");
 //            Log.i("RecipientUID: " , recipientUid);
             // check if thread is an one-on-one thread (mUid == uid) for backward compactibility
             String mUid = threadUid.replaceFirst(recipientUid, "");
-            Log.i("mUid", mUid);
+//            Log.i("mUid", mUid);
             if (mUid.equals(uid)) {
                 try {
                     userViewModel.getUser(recipientUid,
@@ -196,7 +198,10 @@ public class MessagingThreads_Fragment extends Fragment {
                                 }
                                 String fullName = user.getFirstName() + " " + user.getLastName();
                                 holder.name.setText(fullName);
-                                holder.uid.setText(recipientUid);
+                                holder.uid.setText(threadUid);
+                                holder.gUids.setText(recipientUid);
+                                /*Log.i("messageTtreadUid", "this is " + threadUid);
+                                Log.i("messageTrecipientuid", "this is " + recipientUid);*/
                             });
 
                 } catch (NullPointerException npe) {

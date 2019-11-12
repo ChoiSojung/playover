@@ -90,7 +90,7 @@ public class MessagingBubbles_Fragment extends Fragment {
             threadUid = generateMessageThreadUID(senderUID, recipientUID);
         }
         groupUids = senderUID + "," + recipientUID;
-        Log.i("group ids", groupUids);
+//        Log.i("group ids", groupUids);
         reciptUids = recipientUID.split(",");
         userViewModel.getUser(myUID,
                 (Person user) -> {
@@ -105,6 +105,7 @@ public class MessagingBubbles_Fragment extends Fragment {
                         username = user.getFirstName() + " " + user.getLastName();
                         textViewUsers.setText(
                                 textViewUsers.getText().toString() + uid + ":" + username + ",");
+//                        Log.i("reciptUidName",  uid + ":" + username + ",");
                     });
         }
 
@@ -137,7 +138,7 @@ public class MessagingBubbles_Fragment extends Fragment {
                     message.setTimestamp(message.generateTimestamp());
                     editText.setText("");
                     if (userMessageThread == null) {
-                        Log.i("onClickGroupName", "this is " + textViewGroupName.getText().toString());
+//                        Log.i("onClickGroupName", "this is " + textViewGroupName.getText().toString());
                         userMessageThread = new UserMessageThread(
                                 textViewGroupName.getText().toString()
                                 , threadUid
@@ -248,7 +249,7 @@ public class MessagingBubbles_Fragment extends Fragment {
             }
         }
 
-        Log.i("MessageThreadID:", MTUID);
+//        Log.i("MessageThreadID:", MTUID);
         return MTUID;
     }
 
@@ -257,15 +258,10 @@ public class MessagingBubbles_Fragment extends Fragment {
         //sort all uids so the same group people will stay in the same group chat
         String[] arr = input.split(",");
         input = "";
-        for (String id : arr){
-            Log.i ("MD5String", id);
-        }
         Arrays.sort(arr);
         for (String id : arr){
-            Log.i ("SortedMD5String", id);
             input += input + id;
         }
-        Log.i ("SortedMD5String", input);
 
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");

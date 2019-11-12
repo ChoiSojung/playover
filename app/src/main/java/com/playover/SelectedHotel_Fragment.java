@@ -121,8 +121,10 @@ public class SelectedHotel_Fragment extends Fragment{
                         personToMessageUids += mListTemp + ",";
                     }
                     // clean off the last comma from the message uids list
-                    Log.i("iPTMU", personToMessageUids.substring(personToMessageUids.length()-1));
-                    personToMessageUids = personToMessageUids.substring(0, personToMessageUids.length()-1);
+                    if(personToMessageUids.substring(personToMessageUids.length()-1).equals(",")) {
+                        personToMessageUids = personToMessageUids.substring
+                                (0, personToMessageUids.length() - 1);
+                    }
 
                     Log.i("iPTMU", personToMessageUids);
 
