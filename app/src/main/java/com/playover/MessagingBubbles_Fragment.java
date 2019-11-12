@@ -1,10 +1,13 @@
 package com.playover;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,7 +51,6 @@ public class MessagingBubbles_Fragment extends Fragment {
     private TextView textViewGroupName;
     private TextView textViewUsers;
     private UserViewModel userViewModel;
-    private String groupName;
     private String threadUid;
     private String groupUids;
     private String[] reciptUids;
@@ -87,27 +89,34 @@ public class MessagingBubbles_Fragment extends Fragment {
         }
         Log.i ("MBthreadUid",threadUid);
         groupUids = senderUID + "," + recipientUID;
-        reciptUids = recipientUID.split(",");
-        if (reciptUids.length > 1){
-            //groupName = getArguments().getString("groupName");
-            groupName = "Group Name";
-        } else {
-            groupName = "oneOnOneGroup";
-        }
         Log.i("group ids", groupUids);
+        reciptUids = recipientUID.split(",");
         userViewModel.getUser(myUID,
                 (Person user) -> {
-                    textViewGroupName.setText(groupName);
                     username = user.getFirstName() + " " + user.getLastName();
-                    textViewUsers.setText(textViewUsers.getText().toString() + myUID + ":" + username + ",");
+                    textViewUsers.setText(
+                            textViewUsers.getText().toString() + myUID + ":" + username + ",");
                 });
 
         for(String uid : reciptUids) {
             userViewModel.getUser(uid,
                     (Person user) -> {
                         username = user.getFirstName() + " " + user.getLastName();
-                        textViewUsers.setText(textViewUsers.getText().toString() + uid + ":" + username + ",");
+                        textViewUsers.setText(
+                                textViewUsers.getText().toString() + uid + ":" + username + ",");
                     });
+        }
+
+        //set GroupName if no GroupName request a New one, if 1-on-1 messaging, recipient name
+        if (reciptUids.length > 1){
+            RequestNewGroupName();
+        } else {
+            userViewModel.getUser(reciptUids[0],
+                    (Person user) -> {
+                        username = user.getFirstName() + " " + user.getLastName();
+                        textViewGroupName.setText(username);
+            });
+
         }
 
         //set ListView adapter first
@@ -118,6 +127,7 @@ public class MessagingBubbles_Fragment extends Fragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         getMessages();
+
 
         //event for button SEND
         btnSend.setOnClickListener(new View.OnClickListener() {
@@ -138,7 +148,12 @@ public class MessagingBubbles_Fragment extends Fragment {
                     message.setTimestamp(message.generateTimestamp());
                     editText.setText("");
                     if (userMessageThread == null) {
-                        userMessageThread = new UserMessageThread(groupName, threadUid, groupUids, message);
+                        Log.i("onClickGroupName", "this is " + textViewGroupName.getText().toString());
+                        userMessageThread = new UserMessageThread(
+                                textViewGroupName.getText().toString()
+                                , threadUid
+                                , groupUids
+                                , message);
                         userViewModel.getUser(myUID,
                                 (Person user) -> {
                                     user.addThread(threadUid);
@@ -245,6 +260,40 @@ public class MessagingBubbles_Fragment extends Fragment {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void RequestNewGroupName(){
+        Context context = getActivity();
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(context, R.style.AlertDialog);
+        builder.setTitle("Enter Group Name: ");
+
+        final EditText groupNameField = new EditText(context);
+        groupNameField.setHint("It is fun to PlayOver");
+        builder.setView(groupNameField);
+
+        builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String groupName = groupNameField.getText().toString();
+                if (TextUtils.isEmpty(groupName)) {
+                    Toast.makeText(context, "Group must have a name"
+                            , Toast.LENGTH_SHORT);
+                } else {
+                    textViewGroupName.setText(groupName);
+                    Log.i ("requestNewName", "this is " + textViewGroupName.getText().toString());
+                }
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        builder.show();
     }
 
     @Override

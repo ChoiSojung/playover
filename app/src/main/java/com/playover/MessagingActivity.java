@@ -20,9 +20,6 @@ import com.playover.broadcast_receivers.InternetBroadcastReceiver;
 import com.playover.viewmodels.AuthUserViewModel;
 import com.playover.viewmodels.UserViewModel;
 
-import java.security.MessageDigest;
-import java.util.ArrayList;
-
 public class MessagingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     static FragmentManager messagingFragmentManager;
@@ -30,7 +27,6 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
     private FragmentTransaction transaction;
     private DrawerLayout drawer;
     private AuthUserViewModel authVm;
-    private String groupName;
     private String recipientUIDs = new String();
     private String messagerUIDs;
     private UserViewModel userViewModel;
@@ -38,19 +34,14 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Log.i("messages", "fuck this");
         setContentView(R.layout.activity_messaging);
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         if (b != null){
-            if (b.containsKey("groupName")){
-                groupName = b.getString("groupName");
-            }
             if (b.containsKey("recipientUids")) {
                 recipientUIDs = b.getString("recipientUids");
             }
         }
-        Log.i("toLaunch", groupName + " with " + recipientUIDs);
         fragmentManager = getSupportFragmentManager();
         messagingFragmentManager = getSupportFragmentManager();
         authVm = new AuthUserViewModel();
@@ -83,7 +74,6 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
             Log.i("messages", "else it is");
 
             Bundle bundle = new Bundle();
-            bundle.putString("groupName", groupName);
             bundle.putString("recipientUid", recipientUIDs);
             MessagingBubbles_Fragment newMessagingBubblesFragment = new MessagingBubbles_Fragment();
             newMessagingBubblesFragment.setArguments(bundle);

@@ -47,21 +47,13 @@ import com.playover.viewmodels.HotelViewModel;
 import com.playover.viewmodels.UserViewModel;
 import com.squareup.picasso.Picasso;
 
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Predicate;
 
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 import rx.android.schedulers.AndroidSchedulers;
-
-import static java.lang.Thread.sleep;
 
 public class SelectedHotel_Fragment extends Fragment{
 
@@ -70,7 +62,6 @@ public class SelectedHotel_Fragment extends Fragment{
     TextView mTxtCheckoutSet;
     ExpandableListView mList;
     private String personToMessageUids = new String();
-    Bundle messageThreadBundle = new Bundle();
     private RecyclerView recyclerView;
     private static SelectedHotel_Fragment.ContentAdapter adapter;
     List<String> listDataHeader;
@@ -137,23 +128,12 @@ public class SelectedHotel_Fragment extends Fragment{
 
                     // assuming there is one initially
                     if (personToMessageUids != null) {
-                        // is Group Message
-                        String[] toMessageUid = personToMessageUids.split(",");
-                        if (toMessageUid.length > 1){
-                            messageThreadBundle = RequestNewGroupName(messageThreadBundle);
-                            // temp group placeholder
-                            messageThreadBundle.putString("groupName", "Group Name");
-                            Log.i("newGroupSize", Integer.toString(personToMessageUids.length()));
-                        }
-                        messageThreadBundle.putString("recipientUids", personToMessageUids);
-                        Log.i("Added Uids", "here");
+                        Intent messagingIntent = new Intent(getActivity(), MessagingActivity.class);
+                        messagingIntent.putExtra("recipientUids", personToMessageUids);
+                        ContentAdapter.checkboxPosition = -1;
+                        Log.i("messageThreadBundle: ", "create new group");
+                        startActivity(messagingIntent);
                     }
-
-                    Intent messagingIntent = new Intent(getActivity(), MessagingActivity.class);
-                    messagingIntent.putExtras(messageThreadBundle);
-                    ContentAdapter.checkboxPosition = -1;
-                    Log.i("messageThreadBundle: ", "create new group");
-                    startActivity(messagingIntent);
                 }
                 catch (Exception e) {
                     Log.v("Exception",e.getMessage());
@@ -704,41 +684,6 @@ public class SelectedHotel_Fragment extends Fragment{
         recyclerView.setAdapter(adapter);
         adapter.setLENGTH(mPeopleAlsoCheckedIn.size());
 //        Log.i("filter", mPeopleAlsoCheckedIn.toString());
-    }
-
-    private Bundle RequestNewGroupName(Bundle messageThreadBundle){
-        Context context = getActivity();
-        AlertDialog.Builder builder =
-                new AlertDialog.Builder(context, R.style.AlertDialog);
-        builder.setTitle("Enter Group Name: ");
-
-        final EditText groupNameField = new EditText(context);
-        //groupNameField.setHint("playover everything");
-        builder.setView(groupNameField);
-        builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                String groupName = groupNameField.getText().toString();
-                if (TextUtils.isEmpty(groupName)){
-                    Toast.makeText(context, "Group must have a name"
-                            , Toast.LENGTH_SHORT);
-                } else {
-                    messageThreadBundle.putString("groupName", groupName);
-                    Log.i("groupName", groupName);
-                }
-            }
-        });
-
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
-
-        builder.show();
-
-        return messageThreadBundle;
     }
 
     private String NewGroupName(String groupName){ return(groupName);}
