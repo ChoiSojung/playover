@@ -1,6 +1,8 @@
 package com.playover;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +14,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -43,15 +47,12 @@ import com.playover.viewmodels.HotelViewModel;
 import com.playover.viewmodels.UserViewModel;
 import com.squareup.picasso.Picasso;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Predicate;
 
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 import rx.android.schedulers.AndroidSchedulers;
 
 public class SelectedHotel_Fragment extends Fragment{
@@ -60,7 +61,7 @@ public class SelectedHotel_Fragment extends Fragment{
     TextView mTxtHotelAddress;
     TextView mTxtCheckoutSet;
     ExpandableListView mList;
-    private String personToMessageUid;
+    private String personToMessageUids = new String();
     private RecyclerView recyclerView;
     private static SelectedHotel_Fragment.ContentAdapter adapter;
     List<String> listDataHeader;
@@ -112,16 +113,29 @@ public class SelectedHotel_Fragment extends Fragment{
             @Override
             public void onClick(View v) {
                 try {
-                    Intent messagingIntent = new Intent(getActivity(), MessagingActivity.class);
                     ContentAdapter adapter = (ContentAdapter) recyclerView.getAdapter();
-                    List<String> messagingList = adapter.getMessagingList();
-                    // assuming there is one initially
-                    personToMessageUid = messagingList.get(0);
-                    if (personToMessageUid != null) {
-                        messagingIntent.putExtra("recipientUid", personToMessageUid);
+                    Iterator<String> messagingList = adapter.getMessagingList().iterator();
+
+                    while(messagingList.hasNext()){
+                        String mListTemp = messagingList.next();
+                        personToMessageUids += mListTemp + ",";
                     }
-                    ContentAdapter.checkboxPosition = -1;
-                    startActivity(messagingIntent);
+                    // clean off the last comma from the message uids list
+                    if(personToMessageUids.substring(personToMessageUids.length()-1).equals(",")) {
+                        personToMessageUids = personToMessageUids.substring
+                                (0, personToMessageUids.length() - 1);
+                    }
+
+                    Log.i("iPTMU", personToMessageUids);
+
+                    // assuming there is one initially
+                    if (personToMessageUids != null) {
+                        Intent messagingIntent = new Intent(getActivity(), MessagingActivity.class);
+                        messagingIntent.putExtra("recipientUids", personToMessageUids);
+                        ContentAdapter.checkboxPosition = -1;
+                        Log.i("messageThreadBundle: ", "create new group");
+                        startActivity(messagingIntent);
+                    }
                 }
                 catch (Exception e) {
                     Log.v("Exception",e.getMessage());
@@ -192,6 +206,8 @@ public class SelectedHotel_Fragment extends Fragment{
                     },null);
             }
         });
+
+
 
         userVm.clear();
         hotelVm.clear();
@@ -477,6 +493,7 @@ public class SelectedHotel_Fragment extends Fragment{
         // Set numbers of List in RecyclerView.
         private static int LENGTH;
         private final Context c;
+        private List<Buddy> mBuddyList;
         private List<String> messagingList = new ArrayList<>();
         public static int checkboxPosition = -1;
 
@@ -504,9 +521,16 @@ public class SelectedHotel_Fragment extends Fragment{
                     holder.name.setText(name);
                     holder.position.setText(occupation);
                     holder.recipientUid.setText(personCheckInUid);
-                    if(checkboxPosition == position){
+                    if(checkboxPosition == position && !messagingList.contains(personCheckInUid)){
                         holder.checkbox.setChecked(true);
                         messagingList.add(personCheckInUid);
+                    }
+                    else if(checkboxPosition == position && messagingList.contains(personCheckInUid)){
+                        holder.checkbox.setChecked(false);
+                        messagingList.remove(personCheckInUid);
+                    }
+                    else if (messagingList.contains(personCheckInUid)){
+                        holder.checkbox.setChecked(true);
                     }
                     else{
                         holder.checkbox.setChecked(false);
@@ -664,10 +688,13 @@ public class SelectedHotel_Fragment extends Fragment{
 //        Log.i("filter", mPeopleAlsoCheckedIn.toString());
     }
 
+    private String NewGroupName(String groupName){ return(groupName);}
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         ContentAdapter.checkboxPosition = -1;
+        personToMessageUids = "";
     }
 
     @Override
@@ -675,5 +702,6 @@ public class SelectedHotel_Fragment extends Fragment{
         super.onDetach();
         ListHotels_Fragment.mPlacesList.clear();
         ContentAdapter.checkboxPosition = -1;
+        personToMessageUids = "";
     }
 }

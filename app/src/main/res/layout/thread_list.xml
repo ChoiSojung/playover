@@ -32,8 +32,16 @@
                 android:textSize="@dimen/article_titles"/>
         </RelativeLayout>
 
+<!--hidden textviews to tranport data-->
         <TextView
             android:id="@+id/uid"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_gravity="end"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/group_uids"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:layout_gravity="end"

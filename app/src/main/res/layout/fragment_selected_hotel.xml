@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
+            android:clickable="true"
             android:background="#99E3FF"></ExpandableListView>
     </LinearLayout>
     <GridLayout

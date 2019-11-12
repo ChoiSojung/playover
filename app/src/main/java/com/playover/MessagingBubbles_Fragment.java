@@ -1,10 +1,13 @@
 package com.playover;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +28,13 @@ import com.playover.viewmodels.AuthUserViewModel;
 import com.playover.viewmodels.MessageViewModel;
 import com.playover.viewmodels.UserViewModel;
 
+import java.lang.reflect.Array;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class MessagingBubbles_Fragment extends Fragment {
@@ -41,15 +50,16 @@ public class MessagingBubbles_Fragment extends Fragment {
     boolean myMessage;
     private List<MessageBubble> messageBubbles;
     private ArrayAdapter<MessageBubble> adapter;
-    private TextView textViewUser1;
-    private TextView textViewUser2;
+    private TextView textViewGroupName;
+    private TextView textViewUsers;
     private UserViewModel userViewModel;
     private String threadUid;
+    private String groupUids;
+    private String[] reciptUids;
     private String senderUID;
     private String myUID;
     private UserMessageThread userMessageThread;
-    private String username1;
-    private String username2;
+    private String username;
 
     public MessagingBubbles_Fragment() {
 
@@ -62,41 +72,42 @@ public class MessagingBubbles_Fragment extends Fragment {
             fragmentManager = getActivity().getSupportFragmentManager();
         }
         assert getArguments() != null;
-        recipientUID = getArguments().getString("recipientUid");
         messageBubbles = new ArrayList<>();
         authVm = new AuthUserViewModel();
         userViewModel = new UserViewModel();
         listView = rootView.findViewById(R.id.list_msg);
         btnSend = rootView.findViewById(R.id.btn_chat_send);
         editText = rootView.findViewById(R.id.msg_type);
-        textViewUser1 = rootView.findViewById(R.id.user1);
-        textViewUser2 = rootView.findViewById(R.id.user2);
+        textViewGroupName = rootView.findViewById(R.id.group_name);
+        textViewUsers = rootView.findViewById(R.id.users);
+        recipientUID = getArguments().getString("recipientUid");
         senderUID = authVm.getUser().getUid();
         myUID = senderUID;
-        threadUid = generateMessageThreadUID(senderUID, recipientUID);
+        if (getArguments().containsKey("threadUid")){
+            threadUid = getArguments().getString("threadUid");
+//            Log.i ("aLREADYthreadUid",threadUid);
+        } else {
+            threadUid = generateMessageThreadUID(senderUID, recipientUID);
+        }
+        groupUids = senderUID + "," + recipientUID;
+//        Log.i("group ids", groupUids);
+        reciptUids = recipientUID.split(",");
         userViewModel.getUser(myUID,
                 (Person user) -> {
-                    username1 = user.getFirstName() + " " + user.getLastName();
-                    textViewUser1.setText(username1);
-                    user.addThread(threadUid);
-                    try {
-                        userViewModel.addMessageThreadToUser(user);
-                    }catch(Exception e) {
-                        Log.e("Exception occurred adding message thread to sender: ", e.getMessage());
-                    }
-                });
-        userViewModel.getUser(recipientUID,
-                (Person user) -> {
-                    username2 = user.getFirstName() + " " + user.getLastName();
-                    textViewUser2.setText(username2);
-                    user.addThread(threadUid);
-                    try {
-                        userViewModel.addMessageThreadToUser(user);
-                    }catch(Exception e) {
-                        Log.e("Exception occurred adding message thread to recipient: ", e.getMessage());
-                    }
+                    username = user.getFirstName() + " " + user.getLastName();
+                    textViewUsers.setText(
+                            textViewUsers.getText().toString() + myUID + ":" + username + ",");
                 });
 
+        for(String uid : reciptUids) {
+            userViewModel.getUser(uid,
+                    (Person user) -> {
+                        username = user.getFirstName() + " " + user.getLastName();
+                        textViewUsers.setText(
+                                textViewUsers.getText().toString() + uid + ":" + username + ",");
+//                        Log.i("reciptUidName",  uid + ":" + username + ",");
+                    });
+        }
 
         //set ListView adapter first
         adapter = new MessageAdapter(getActivity(), R.layout.left_message_bubble, messageBubbles);
@@ -106,6 +117,7 @@ public class MessagingBubbles_Fragment extends Fragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         getMessages();
+
 
         //event for button SEND
         btnSend.setOnClickListener(new View.OnClickListener() {
@@ -122,11 +134,37 @@ public class MessagingBubbles_Fragment extends Fragment {
                     Message message = new Message();
                     message.setContent(content);
                     message.setSenderUID(senderUID);
-                    message.setRecipientUID(recipientUID);
+                    //message.setRecipientUID(recipientUID);
                     message.setTimestamp(message.generateTimestamp());
                     editText.setText("");
                     if (userMessageThread == null) {
-                        userMessageThread = new UserMessageThread(threadUid, message);
+//                        Log.i("onClickGroupName", "this is " + textViewGroupName.getText().toString());
+                        userMessageThread = new UserMessageThread(
+                                textViewGroupName.getText().toString()
+                                , threadUid
+                                , groupUids
+                                , message);
+                        userViewModel.getUser(myUID,
+                                (Person user) -> {
+                                    user.addThread(threadUid);
+                                    try {
+                                        userViewModel.addMessageThreadToUser(user);
+                                    }catch(Exception e) {
+                                        Log.e("Exception occurred adding message thread to sender: ", e.getMessage());
+                                    }
+                                });
+
+                        for(String uid : reciptUids) {
+                            userViewModel.getUser(uid,
+                                    (Person user) -> {
+                                        user.addThread(threadUid);
+                                        try {
+                                            userViewModel.addMessageThreadToUser(user);
+                                        } catch (Exception e) {
+                                            Log.e("Exception occurred adding message thread to recipient: ", e.getMessage());
+                                        }
+                                    });
+                        }
                     } else {
                         userMessageThread.addMessage(message);
                     }
@@ -140,25 +178,55 @@ public class MessagingBubbles_Fragment extends Fragment {
     private void getMessages() {
         messageViewModel.getMessages(threadUid,
                 (UserMessageThread thread) -> {
+                    HashMap<String, String> uidNameMap = new HashMap<>();
+                    String[] uNPairs = textViewUsers.getText().toString().split(",");
+                    for (String pair : uNPairs){
+                        String[] uidName = pair.split(":");
+                        uidNameMap.put(uidName[0], uidName[1]);
+                    }
                     if (thread != null) {
                         if (thread.getMessages() != null) {
                             messageBubbles.clear();
                             adapter.clear();
                             adapter.notifyDataSetChanged();
                             List<Message> messages = thread.getMessages();
+                            // put group name in message window
+                            if(reciptUids.length == 1){
+                                textViewGroupName.setText(
+                                        uidNameMap.get(myUID)
+                                                + " and "
+                                                + uidNameMap.get(reciptUids[0]));
+                            } else {
+                                textViewGroupName.setText(thread.getMessageGroupName());
+                            }
                             for (Message message : messages) {
+                                String UID = message.getMessageUID();
+                                String userName = uidNameMap.get(message.getSenderUID());
+                                Object ts = message.getTimestamp();
+                                Long lts = (long)ts;
+                                String timestamp = lts.toString();
                                 String content = message.getContent();
                                 if (message.getSenderUID().equals(myUID)) {
                                     myMessage = true;
                                 } else {
                                     myMessage = false;
                                 }
-                                MessageBubble messageBubble = new MessageBubble(content, myMessage);
+                                MessageBubble messageBubble =
+                                        new MessageBubble(userName, timestamp, content, myMessage);
                                 messageBubbles.add(messageBubble);
                             }
                             userMessageThread = thread;
                         }
                     } else {
+                        // generate new group name if is a new thread
+                        if(reciptUids.length == 1){
+                            textViewGroupName.setText(
+                                    uidNameMap.get(myUID)
+                                            + " and "
+                                            + uidNameMap.get(reciptUids[0]));
+                        } else {
+                            RequestNewGroupName();
+                        }
                         Log.i("Messaging Bubble Activity: ", "No messages found in DB");
                     }
                     adapter.notifyDataSetChanged();
@@ -166,15 +234,82 @@ public class MessagingBubbles_Fragment extends Fragment {
         );
     }
 
+    private String generateMessageThreadUID(String senderUID, String recipientUID) {
+        String MTUID;
+        reciptUids = recipientUID.split(",");
+        if (reciptUids.length > 1){
+            MTUID = getMD5(senderUID + "," + recipientUID);
+        } else {
+            // backward compatible threadId for one-on-one messaging
+            int compare = senderUID.compareTo(recipientUID);
+            if(compare < 0){
+                MTUID = senderUID + recipientUID;
+            } else {
+                MTUID = recipientUID + senderUID;
+            }
+        }
 
-    private String generateMessageThreadUID(String uid1, String uid2) {
-        int compare = uid1.compareTo(uid2);
-        if(compare < 0){
-            return uid1+uid2;
+//        Log.i("MessageThreadID:", MTUID);
+        return MTUID;
+    }
+
+    // hash uids to get Message Thread UID using MD5 algorithm and standard algo.
+    private static String getMD5(String input) {
+        //sort all uids so the same group people will stay in the same group chat
+        String[] arr = input.split(",");
+        input = "";
+        Arrays.sort(arr);
+        for (String id : arr){
+            input += input + id;
         }
-        else{
-            return uid2+uid1;
+
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(input.getBytes());
+            BigInteger num = new BigInteger(1, messageDigest);
+
+            String hashtext = num.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
+    }
+
+    private void RequestNewGroupName(){
+        Context context = getActivity();
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(context, R.style.AlertDialog);
+        builder.setTitle("Enter Group Name: ");
+
+        final EditText groupNameField = new EditText(context);
+        groupNameField.setHint("It is fun to PlayOver");
+        builder.setView(groupNameField);
+
+        builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String groupName = groupNameField.getText().toString();
+                if (TextUtils.isEmpty(groupName)) {
+                    Toast.makeText(context, "Group must have a name"
+                            , Toast.LENGTH_SHORT);
+                } else {
+                    textViewGroupName.setText(groupName);
+                    Log.i ("requestNewName", "this is " + textViewGroupName.getText().toString());
+                }
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        builder.show();
     }
 
     @Override

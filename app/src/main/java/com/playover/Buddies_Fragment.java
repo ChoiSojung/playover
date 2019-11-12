@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.playover.models.Person;
 import com.playover.viewmodels.AuthUserViewModel;
 import com.playover.viewmodels.BuddiesViewModel;
@@ -27,6 +28,7 @@ import com.playover.viewmodels.UserViewModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Buddies_Fragment extends Fragment {
@@ -37,7 +39,6 @@ public class Buddies_Fragment extends Fragment {
     private Bundle bud;
     private Button allMessageButton;
     private Button messageButton;
-    private String personToMessageUid;
     private TextView noBuddies;
     private ArrayList<Person> mDataset = new ArrayList<>();
     private SearchView searchView;
@@ -93,12 +94,21 @@ public class Buddies_Fragment extends Fragment {
         messageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String buddyToMessageUids = new String();
                 Intent message = new Intent(getActivity(), MessagingActivity.class);
                 Buddies_Fragment.ContentAdapter adapter = (Buddies_Fragment.ContentAdapter) recyclerView.getAdapter();
-                List<String> messagingList = adapter.getMessagingList();
-                personToMessageUid = messagingList.get(0);
-                message.putExtra("recipientUid", personToMessageUid);
+                Iterator<String> messagingList = adapter.getMessagingList().iterator();
+
+                while(messagingList.hasNext()){
+                    String mListTemp = messagingList.next();
+                    buddyToMessageUids += mListTemp + ",";
+                }
+                // clean off the last comma from the message uids list
+                if(buddyToMessageUids.substring(buddyToMessageUids.length()-1).equals(",")) {
+                    buddyToMessageUids = buddyToMessageUids.substring
+                            (0, buddyToMessageUids.length() - 1);
+                }
+                message.putExtra("recipientUids", buddyToMessageUids);
                 startActivity(message);
 
             }
@@ -197,6 +207,7 @@ public class Buddies_Fragment extends Fragment {
         private int LENGTH;
         private ArrayList<Person> mDataset;
         private List<String> messagingList = new ArrayList<>();
+        public int checkboxPosition = -1;
 
         public ContentAdapter(ArrayList<Person> personArrayList) {
             this.mDataset = personArrayList;
@@ -219,6 +230,7 @@ public class Buddies_Fragment extends Fragment {
             try {
 
                 holder.mBud = mDataset.get(position);
+                String buddyUid = mDataset.get(position).getuId();
                 if (holder.mBud.getImageUri() != null) {
                     String dbImage = holder.mBud.getImageUri();
                     Picasso mPicasso = Picasso.get();
@@ -233,26 +245,40 @@ public class Buddies_Fragment extends Fragment {
                 holder.last.setText(String.format("%s", holder.mBud.getLastName()));
                 holder.position.setText(String.format("%s", holder.mBud.getPosition()));
                 holder.recipientUid.setText(String.format("%s", holder.mBud.getuId()));
+                if(checkboxPosition == position && !messagingList.contains(buddyUid)){
+                    holder.checkbox.setChecked(true);
+                    messagingList.add(buddyUid);
+                }
+                else if(checkboxPosition == position && messagingList.contains(buddyUid)){
+                    holder.checkbox.setChecked(false);
+                    messagingList.remove(buddyUid);
+                }
+                else if (messagingList.contains(buddyUid)){
+                    holder.checkbox.setChecked(true);
+                }
+                else{
+                    holder.checkbox.setChecked(false);
+                    messagingList.remove(buddyUid);
+                }
                 holder.checkbox.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (holder.checkbox.isChecked()) {
-                            //hacky but kinda down to the last minute here
-                            //uncheck all other checked checkboxes and clear the message list before adding uid
-                            for (int i = 0; i < recyclerView.getLayoutManager().getItemCount(); i++) {
-                                if (i != position) {
-                                    CheckBox c = recyclerView.getLayoutManager().getChildAt(i).findViewById(R.id.checkbox);
-                                    c.setChecked(false);
-                                }
+                            if (checkboxPosition != position) {
+                                checkboxPosition = position;
+                                notifyDataSetChanged();
+                            } else {
+                                checkboxPosition = -1;
+                                notifyDataSetChanged();
                             }
-                            messagingList.clear();
-                            messagingList.add(holder.mBud.getuId());
                         }
                     }
                 });
 
-            } catch (Exception ex) {
-                Log.e("onBindViewHolder Error: ", ex.getMessage());
+            } catch (NullPointerException npe) {
+                Log.e("onBindViewHolder Error: ", npe.getMessage());
+            } catch (IndexOutOfBoundsException iobe) {
+
             }
         }
 
