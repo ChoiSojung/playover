@@ -16,6 +16,16 @@
         <item>7 Days</item>
     </string-array>
 
+    <string-array name="checkoutReminders">
+        <item>At Time of Checkout</item>
+        <item>5 Minutes Before</item>
+        <item>10 Minutes Before</item>
+        <item>15 Minutes Before</item>
+        <item>1 Hour Before</item>
+        <item>2 Hours Before</item>
+        <item>1 Day Before</item>
+    </string-array>
+
     <string-array name="discountCategories">
         <item>- Select Discount Type -</item>
         <item>Food</item>
