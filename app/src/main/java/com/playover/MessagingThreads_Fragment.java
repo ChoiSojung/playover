@@ -174,12 +174,13 @@ public class MessagingThreads_Fragment extends Fragment {
             AuthUserViewModel authVm = new AuthUserViewModel();
             MessageViewModel messageViewModel = new MessageViewModel();
             String uid = authVm.getUser().getUid();
-//            Log.i("MyUid", uid);
+            Log.i("MyUid", uid);
             String recipientUid = threadUid.replaceFirst(uid,"");
 //            Log.i("RecipientUID: " , recipientUid);
             // check if thread is an one-on-one thread (mUid == uid) for backward compactibility
             String mUid = threadUid.replaceFirst(recipientUid, "");
-            if (mUid == uid) {
+            Log.i("mUid", mUid);
+            if (mUid.equals(uid)) {
                 try {
                     userViewModel.getUser(recipientUid,
                             (Person user) -> {
