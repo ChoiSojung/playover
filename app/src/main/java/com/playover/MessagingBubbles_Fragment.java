@@ -83,11 +83,10 @@ public class MessagingBubbles_Fragment extends Fragment {
         myUID = senderUID;
         if (getArguments().containsKey("threadUid")){
             threadUid = getArguments().getString("threadUid");
-            Log.i ("aLREADYthreadUid",threadUid);
+//            Log.i ("aLREADYthreadUid",threadUid);
         } else {
             threadUid = generateMessageThreadUID(senderUID, recipientUID);
         }
-        Log.i ("MBthreadUid",threadUid);
         groupUids = senderUID + "," + recipientUID;
         Log.i("group ids", groupUids);
         reciptUids = recipientUID.split(",");
@@ -106,19 +105,7 @@ public class MessagingBubbles_Fragment extends Fragment {
                                 textViewUsers.getText().toString() + uid + ":" + username + ",");
                     });
         }
-
-        //set GroupName if no GroupName request a New one, if 1-on-1 messaging, recipient name
-        if (reciptUids.length > 1){
-            RequestNewGroupName();
-        } else {
-            userViewModel.getUser(reciptUids[0],
-                    (Person user) -> {
-                        username = user.getFirstName() + " " + user.getLastName();
-                        textViewGroupName.setText(username);
-            });
-
-        }
-
+        
         //set ListView adapter first
         adapter = new MessageAdapter(getActivity(), R.layout.left_message_bubble, messageBubbles);
         listView.setAdapter(adapter);
@@ -188,17 +175,25 @@ public class MessagingBubbles_Fragment extends Fragment {
     private void getMessages() {
         messageViewModel.getMessages(threadUid,
                 (UserMessageThread thread) -> {
+                    HashMap<String, String> uidNameMap = new HashMap<>();
+                    String[] uNPairs = textViewUsers.getText().toString().split(",");
+                    for (String pair : uNPairs){
+                        String[] uidName = pair.split(":");
+                        uidNameMap.put(uidName[0], uidName[1]);
+                    }
                     if (thread != null) {
                         if (thread.getMessages() != null) {
                             messageBubbles.clear();
                             adapter.clear();
                             adapter.notifyDataSetChanged();
                             List<Message> messages = thread.getMessages();
-                            HashMap<String, String> uidNameMap = new HashMap<>();
-                            String[] uNPairs = textViewUsers.getText().toString().split(",");
-                            for (String pair : uNPairs){
-                                String[] uidName = pair.split(":");
-                                uidNameMap.put(uidName[0], uidName[1]);
+                            if(reciptUids.length == 1){
+                                textViewGroupName.setText(
+                                        uidNameMap.get(myUID)
+                                                + " and "
+                                                + uidNameMap.get(reciptUids[0]));
+                            } else {
+                                textViewGroupName.setText(thread.getMessageGroupName());
                             }
                             for (Message message : messages) {
                                 String UID = message.getMessageUID();
@@ -219,6 +214,14 @@ public class MessagingBubbles_Fragment extends Fragment {
                             userMessageThread = thread;
                         }
                     } else {
+                        if(reciptUids.length == 1){
+                            textViewGroupName.setText(
+                                    uidNameMap.get(myUID)
+                                            + " and "
+                                            + uidNameMap.get(reciptUids[0]));
+                        } else {
+                            RequestNewGroupName();
+                        }
                         Log.i("Messaging Bubble Activity: ", "No messages found in DB");
                     }
                     adapter.notifyDataSetChanged();
