@@ -263,7 +263,7 @@ public class MessagingBubbles_Fragment extends Fragment {
         Arrays.sort(arr);
         for (String id : arr){
             Log.i("sorted", id);
-            input += input + id;
+            input += id;
         }
         Log.i("sorted String", input);
         try {
