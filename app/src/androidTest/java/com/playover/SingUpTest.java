@@ -2,6 +2,8 @@ package com.playover;
 
 import android.Manifest;
 import android.support.test.espresso.action.ViewActions;
+import android.support.test.espresso.contrib.DrawerActions;
+import android.support.test.espresso.contrib.NavigationViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.rule.GrantPermissionRule;
 
@@ -30,6 +32,10 @@ public class SingUpTest {
     public void SignUpAUser() throws InterruptedException {
         Thread.sleep(5000);
         try {
+            Thread.sleep(5000);
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+            Thread.sleep(5000);
             onView(withId(R.id.signup_button_main)).perform(click());
             onView(isRoot()).perform(pressBack());
             onView(withId(R.id.lblfeature_main)).check(matches(isDisplayed()));
