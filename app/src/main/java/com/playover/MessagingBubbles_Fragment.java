@@ -238,7 +238,8 @@ public class MessagingBubbles_Fragment extends Fragment {
         String MTUID;
         reciptUids = recipientUID.split(",");
         if (reciptUids.length > 1){
-            MTUID = getMD5(senderUID + "," + recipientUID);
+            // all group chat begin with G-, and is saved under key groupMessageThread
+            MTUID = "G-" + getMD5(senderUID + "," + recipientUID);
         } else {
             // backward compatible threadId for one-on-one messaging
             int compare = senderUID.compareTo(recipientUID);
@@ -257,12 +258,14 @@ public class MessagingBubbles_Fragment extends Fragment {
     private static String getMD5(String input) {
         //sort all uids so the same group people will stay in the same group chat
         String[] arr = input.split(",");
+        Log.i("unsorted uids", "this " + input);
         input = "";
         Arrays.sort(arr);
         for (String id : arr){
+            Log.i("sorted", id);
             input += input + id;
         }
-
+        Log.i("sorted String", input);
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] messageDigest = md.digest(input.getBytes());
