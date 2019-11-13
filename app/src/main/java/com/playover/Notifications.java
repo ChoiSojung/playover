@@ -79,6 +79,10 @@ public class Notifications extends FirebaseMessagingService {
             Log.e(TAG, "Signed in user unavailable.");
             return;
         }
+        if(authVM.getUser() == null) {
+            Log.e(TAG, "User not found");
+            return;
+        }
         String uId = authVM.getUser().getUid();
         if(uId == null || uId.equals("")) {
             Log.e(TAG, "Failed to find uId.");
