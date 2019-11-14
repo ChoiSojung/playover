@@ -208,6 +208,7 @@ public class SignUp_Fragment extends Fragment {
     public void sendEmail() {
         Random rand = new Random();
         validationCode = rand.nextInt(999999);
+        Log.i("validationCode", String.valueOf(validationCode));
         if (validationCode != 0) {
             new Thread(new Runnable() {
                 @Override
