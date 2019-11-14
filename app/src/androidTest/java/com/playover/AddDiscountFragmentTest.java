@@ -59,9 +59,18 @@ public class AddDiscountFragmentTest {
             Thread.sleep(3000);
             onView(withId(R.id.business_name)).perform(replaceText("Amber India"));
             onView(withId(R.id.address)).perform(replaceText("4926 El Camino Real"));
-            onView(withId(R.id.city)).perform(replaceText("Los Altos"));
+            onView(withId(R.id.city)).perform(replaceText("(650) 968-7511"));
+            onView(withId(R.id.phone)).perform(replaceText("Amber India"));
+            onView(withId(R.id.website)).perform(replaceText("https://www.amber-india.com/"));
+            onView(withId(R.id.discount_details)).perform(replaceText("Buy one get one free"));
+            onView(withId(R.id.first_comment)).perform(replaceText("This is legit Amber Indiana!"));
             onView(withId(R.id.states)).perform(click());
             onData(anything()).atPosition(5).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.category)).perform(click());
+            onData(anything()).atPosition(1).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.saveDiscount)).perform(click());
             Thread.sleep(3000);
 
 
@@ -80,9 +89,18 @@ public class AddDiscountFragmentTest {
             Thread.sleep(3000);
             onView(withId(R.id.business_name)).perform(replaceText("Amber India"));
             onView(withId(R.id.address)).perform(replaceText("4926 El Camino Real"));
-            onView(withId(R.id.city)).perform(replaceText("Los Altos"));
+            onView(withId(R.id.city)).perform(replaceText("(650) 968-7511"));
+            onView(withId(R.id.phone)).perform(replaceText("Amber India"));
+            onView(withId(R.id.website)).perform(replaceText("https://www.amber-india.com/"));
+            onView(withId(R.id.discount_details)).perform(replaceText("Buy one get one free"));
+            onView(withId(R.id.first_comment)).perform(replaceText("This is legit Amber Indiana!"));
             onView(withId(R.id.states)).perform(click());
             onData(anything()).atPosition(5).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.category)).perform(click());
+            onData(anything()).atPosition(1).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.saveDiscount)).perform(click());
             Thread.sleep(3000);
         }
     }
