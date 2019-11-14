@@ -20,6 +20,7 @@ import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.replaceText;
@@ -27,6 +28,8 @@ import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.instanceOf;
 
 public class AddDiscountFragmentTest {
 
@@ -54,6 +57,13 @@ public class AddDiscountFragmentTest {
             Thread.sleep(3000);
             onView(withId(R.id.addDiscount)).perform(click());
             Thread.sleep(3000);
+            onView(withId(R.id.business_name)).perform(replaceText("Amber India"));
+            onView(withId(R.id.address)).perform(replaceText("4926 El Camino Real"));
+            onView(withId(R.id.city)).perform(replaceText("Los Altos"));
+            onView(withId(R.id.states)).perform(click());
+            onData(anything()).atPosition(5).perform(click());
+            Thread.sleep(3000);
+
 
 
         } catch (Exception ex) {
@@ -68,6 +78,12 @@ public class AddDiscountFragmentTest {
             Thread.sleep(3000);
             onView(withId(R.id.addDiscount)).perform(click());
             Thread.sleep(3000);
+            onView(withId(R.id.business_name)).perform(replaceText("Amber India"));
+            onView(withId(R.id.address)).perform(replaceText("4926 El Camino Real"));
+            onView(withId(R.id.city)).perform(replaceText("Los Altos"));
+            onView(withId(R.id.states)).perform(click());
+            onData(anything()).atPosition(5).perform(click());
+            Thread.sleep(3000);
         }
     }
 
@@ -76,7 +92,7 @@ public class AddDiscountFragmentTest {
         return new ViewAction() {
             @Override
             public Matcher<View> getConstraints() {
-                return Matchers.instanceOf(TextView.class);
+                return instanceOf(TextView.class);
             }
 
             @Override
