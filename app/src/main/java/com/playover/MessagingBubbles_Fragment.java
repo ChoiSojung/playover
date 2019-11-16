@@ -45,7 +45,7 @@ import java.util.TimeZone;
 public class MessagingBubbles_Fragment extends Fragment {
 
     private FragmentManager fragmentManager;
-    private DatabaseReference mDatabase;
+    //private DatabaseReference mDatabase;
     private MessageViewModel messageViewModel;
     private AuthUserViewModel authVm;
     private String recipientUID;
@@ -121,7 +121,7 @@ public class MessagingBubbles_Fragment extends Fragment {
         listView.setAdapter(adapter);
 
         messageViewModel = new MessageViewModel();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        //mDatabase = FirebaseDatabase.getInstance().getReference();
 
         getMessages();
 
