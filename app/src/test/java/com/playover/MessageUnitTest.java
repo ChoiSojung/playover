@@ -12,7 +12,7 @@ public class MessageUnitTest {
     private Message underTest;
     private String testContent = "test message";
     private String testSenderUid = "11223344";
-    private String testRecipientUid = "55667788";
+    private String testRecipientUid = "55667788"; //deprecated
     private Object testTimestamp = "1543803194831";
     private String testMessageUid = "99001122";
 

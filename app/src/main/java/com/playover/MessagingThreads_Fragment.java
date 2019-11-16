@@ -39,7 +39,6 @@ public class MessagingThreads_Fragment extends Fragment {
     private MessageViewModel messageViewModel;
     private AuthUserViewModel authVm;
     private UserMessageThread userMessageThread;
-   // private DatabaseReference mDatabase;
     private Context context;
 
     public MessagingThreads_Fragment() {
@@ -57,7 +56,6 @@ public class MessagingThreads_Fragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View v = inflater.inflate(R.layout.fragment_messagingthreads, container, false);
         recyclerView = v.findViewById(R.id.recycler_view);
-        //mDatabase = FirebaseDatabase.getInstance().getReference();
         userViewModel = new UserViewModel();
         authVm = new AuthUserViewModel();
         messageViewModel = new MessageViewModel();

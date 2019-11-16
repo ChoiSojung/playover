@@ -36,7 +36,7 @@ public class UserMessageThread {
 
     public String getMessageGroupName() { return messageGroupName; }
 
-    public void setMessageGroupName() {
+    public void setMessageGroupName(String messageGroupName) {
         this.messageGroupName = messageGroupName;
     }
 

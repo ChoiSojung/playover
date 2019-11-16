@@ -16,6 +16,8 @@ public class UserMessageThreadUnitTest {
     private UserMessageThread underTest;
     private List<Message> testMessageList = new ArrayList<>();
     private String testMessageThreadUID = "123456";
+    private String testMessageGroupName = "test Group Name";
+    private String testMessageGroupUIDS = "firstUid,secondUid,thridUid";
     private Message testMessage = new Message("test message content", "987654", "112233", "1543803194831");
 
     @After
@@ -27,7 +29,7 @@ public class UserMessageThreadUnitTest {
     @Test
     public void testSecondConstructor()  {
         testMessageList.add(testMessage);
-        underTest = new UserMessageThread(testMessageThreadUID, testMessage);
+        underTest = new UserMessageThread(testMessageGroupName, testMessageThreadUID, testMessageGroupUIDS, testMessage);
         assertEquals("123456", underTest.getMessageThreadUID());
         assertEquals(testMessageList, underTest.getMessages());
     }
@@ -35,7 +37,7 @@ public class UserMessageThreadUnitTest {
     @Test
     public void testThirdConstructor()  {
         testMessageList.add(testMessage);
-        underTest = new UserMessageThread(testMessageThreadUID, testMessageList);
+        underTest = new UserMessageThread(testMessageGroupName, testMessageThreadUID, testMessageGroupUIDS, testMessage);
         assertEquals("123456", underTest.getMessageThreadUID());
         assertEquals(testMessageList, underTest.getMessages());
     }
@@ -46,10 +48,16 @@ public class UserMessageThreadUnitTest {
         testMessageList.add(testMessage);
         underTest.setMessages(testMessageList);
         underTest.setMessageThreadUID(testMessageThreadUID);
+        underTest.setMessageGroupName(testMessageGroupName);
+        underTest.setMessageGroupUIDs(testMessageGroupUIDS);
         String actualMessageThreadUid = underTest.getMessageThreadUID();
+        String actualMessageGroupName = underTest.getMessageGroupName();
+        String actualMessageGroupUIDs = underTest.getMessageGroupUIDs();
         List<Message> actualMessageList = underTest.getMessages();
         assertEquals(testMessageList, actualMessageList);
         assertEquals(testMessageThreadUID, actualMessageThreadUid);
+        assertEquals(testMessageGroupName,actualMessageGroupName);
+        assertEquals(testMessageGroupUIDS,actualMessageGroupUIDs);
     }
 
     @Test
