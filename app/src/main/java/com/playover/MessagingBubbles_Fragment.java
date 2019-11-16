@@ -32,10 +32,15 @@ import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TimeZone;
 
 public class MessagingBubbles_Fragment extends Fragment {
 
@@ -60,6 +65,8 @@ public class MessagingBubbles_Fragment extends Fragment {
     private String myUID;
     private UserMessageThread userMessageThread;
     private String username;
+    private Calendar calendar = Calendar.getInstance();
+    private TimeZone timeZone = calendar.getTimeZone();
 
     public MessagingBubbles_Fragment() {
 
@@ -202,9 +209,15 @@ public class MessagingBubbles_Fragment extends Fragment {
                             for (Message message : messages) {
                                 String UID = message.getMessageUID();
                                 String userName = uidNameMap.get(message.getSenderUID());
+
+                                //parse Firebase Severvalue timeStamp use method found in https://exceptionshub.com/firebase-timestamp-to-date-and-time.html
                                 Object ts = message.getTimestamp();
-                                Long lts = (long)ts;
-                                String timestamp = lts.toString();
+                                Long epochValue = (long)ts;
+                                DateFormat format = new SimpleDateFormat("dd/MM HH:mm");
+                                format.setTimeZone(timeZone);
+                                Date epochDate = new Date(epochValue);
+                                String timestamp= format.format(epochDate);
+
                                 String content = message.getContent();
                                 if (message.getSenderUID().equals(myUID)) {
                                     myMessage = true;

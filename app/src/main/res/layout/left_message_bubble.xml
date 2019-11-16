@@ -3,11 +3,11 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -16,18 +16,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/user_name"
+                android:layout_alignParentLeft="true"
                 android:text="username"/>
 
             <TextView
+                android:id="@+id/time_stamp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/time_stamp"
-                android:text="timestamp"/>
+                android:layout_alignParentRight="true"
+                android:text="timestamp" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
-            android:layout_width="200dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:background="@drawable/bub_green"
