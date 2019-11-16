@@ -309,6 +309,7 @@ public class MessagingBubbles_Fragment extends Fragment {
             public void onClick(DialogInterface dialogInterface, int i) {
                 String groupName = groupNameField.getText().toString();
                 if (TextUtils.isEmpty(groupName)) {
+                    textViewGroupName.setText(getDefaultGroupName());
                     Toast.makeText(context, "Group must have a name"
                             , Toast.LENGTH_SHORT);
                 } else {
@@ -321,11 +322,19 @@ public class MessagingBubbles_Fragment extends Fragment {
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                textViewGroupName.setText(getDefaultGroupName());
                 dialogInterface.cancel();
             }
         });
 
         builder.show();
+    }
+
+    private String getDefaultGroupName(){
+        DateFormat format = new SimpleDateFormat("dd/MM/yy");
+        String currentDate = format.format(calendar.getTime());
+        String output = "Group created on " + currentDate;
+        return output;
     }
 
     @Override
