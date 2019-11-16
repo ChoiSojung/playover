@@ -216,6 +216,7 @@ public class MessagingThreads_Fragment extends Fragment {
                             String reciptUid = groupIds.replaceFirst(uid,"");
                             holder.gUids.setText(reciptUid);
                             holder.uid.setText(threadUid);
+                            holder.thumbnail.setImageResource(R.drawable.ic_group_messaging_48dp);
                         });
             }
             }
