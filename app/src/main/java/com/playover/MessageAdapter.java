@@ -41,6 +41,8 @@ public class MessageAdapter extends ArrayAdapter<MessageBubble> {
         holder = new ViewHolder(convertView);
         convertView.setTag(holder);
 
+        holder.userName.setText(messageBubble.getUserName());
+        holder.timeStamp.setText(messageBubble.getTimeStamp());
         holder.msg.setText(messageBubble.getContent());
 
         return convertView;
@@ -63,9 +65,13 @@ public class MessageAdapter extends ArrayAdapter<MessageBubble> {
     }
 
     private class ViewHolder {
+        private TextView userName;
+        private TextView timeStamp;
         private TextView msg;
 
         public ViewHolder(View v) {
+            userName = v.findViewById(R.id.user_name);
+            timeStamp = v.findViewById(R.id.time_stamp);
             msg = v.findViewById(R.id.txt_msg);
         }
     }

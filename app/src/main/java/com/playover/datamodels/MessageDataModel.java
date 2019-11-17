@@ -21,6 +21,7 @@ public class MessageDataModel {
 
     private DatabaseReference mDatabase;
     private HashMap<DatabaseReference, ValueEventListener> listeners;
+    private String DBkey = new String();
 
     public MessageDataModel() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -29,7 +30,8 @@ public class MessageDataModel {
 
     //gets message thread by uid from the database
     public void getMessageThread(String uID, Consumer<DataSnapshot> dataChangedCallback, Consumer<DatabaseError> dataErrorCallback) {
-        Query query = mDatabase.child("messageThreads").orderByKey().equalTo(uID);
+        DBkey = getDBkey(uID);
+        Query query = mDatabase.child(DBkey).orderByKey().equalTo(uID);
         ValueEventListener messageListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -48,9 +50,10 @@ public class MessageDataModel {
 
     public void putMessageThread(UserMessageThread thread) {
         String uid = thread.getMessageThreadUID();
+        DBkey = getDBkey(uid);
 
         try {
-            DatabaseReference threadsRef = mDatabase.child("messageThreads");
+            DatabaseReference threadsRef = mDatabase.child(DBkey);
             Map<String, Object> threadMap = new HashMap<>();
             threadMap.put(uid, thread);
             threadsRef.updateChildren(threadMap);
@@ -60,6 +63,16 @@ public class MessageDataModel {
         {
             Log.e("Error creating message thread: ", ex.getMessage());
         }
+    }
+
+    private String getDBkey(String uid){
+        String key = new String();
+        if(uid.substring(0,2).equals("G-")) {
+            key = "groupMessageThreads";
+        } else {
+            key = "messageThreads";
+        }
+        return key;
     }
 
     //clears the listeners

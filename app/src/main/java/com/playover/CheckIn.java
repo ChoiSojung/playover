@@ -67,6 +67,7 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
     private Hotel obj = null;
     String userId = null;
 
+
     private boolean firstTime;
     private long hotelCheckedIncount;
 
