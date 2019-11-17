@@ -32,6 +32,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.hasEntry;
+import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.is;
@@ -136,9 +138,9 @@ public class AddDiscountFragmentTest {
             Thread.sleep(1000);
             onView(withId(R.id.business_name)).check(matches(hasErrorText("Business Name Required!")));
             onView(withId(R.id.city)).check(matches(hasErrorText("City is required!")));
-            onView(withId(R.id.states)).check(matches(hasErrorText("Required!")));
+            //onView(withId(R.id.states)).check(matches(withId(R.string.required)));
             onView(withId(R.id.discount_details)).check(matches(hasErrorText("Please enter discount details!")));
-            onView(withId(R.id.category)).check(matches(hasErrorText("Required!")));
+            //onView(withId(R.id.category)).check(matches(withId(R.string.required)));
             onView(withId(R.id.address)).check(matches(hasErrorText("Address is a required field!")));
             Thread.sleep(1000);
 
@@ -161,13 +163,14 @@ public class AddDiscountFragmentTest {
             Thread.sleep(1000);
             onView(withId(R.id.business_name)).check(matches(hasErrorText("Business Name Required!")));
             onView(withId(R.id.city)).check(matches(hasErrorText("City is required!")));
-            onView(withId(R.id.states)).check(matches(hasErrorText("Required!")));
+            //onView(withId(R.id.states)).check(matches(withId(R.string.required)));
             onView(withId(R.id.discount_details)).check(matches(hasErrorText("Please enter discount details!")));
-            onView(withId(R.id.category)).check(matches(hasErrorText("Required!")));
+            //onView(withId(R.id.category)).check(matches(withId(R.string.required)));
             onView(withId(R.id.address)).check(matches(hasErrorText("Address is a required field!")));
             Thread.sleep(1000);
         }
     }
+
 
     //static method for clicking on clickable spans in textviews
     public static ViewAction clickClickableSpan(final CharSequence textToClick) {
