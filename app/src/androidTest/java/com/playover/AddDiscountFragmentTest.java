@@ -61,6 +61,10 @@ public class AddDiscountFragmentTest {
             Thread.sleep(3000);
             onView(withId(R.id.addDiscount)).perform(click());
             Thread.sleep(3000);
+            onView(withId(R.id.saveDiscount)).perform(click());
+            Thread.sleep(3000);
+            
+
 
         } catch (Exception ex) {
 
@@ -74,6 +78,8 @@ public class AddDiscountFragmentTest {
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_discounts));
             Thread.sleep(3000);
             onView(withId(R.id.addDiscount)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.saveDiscount)).perform(click());
             Thread.sleep(3000);
         }
     }
