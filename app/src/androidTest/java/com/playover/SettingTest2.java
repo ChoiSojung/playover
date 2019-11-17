@@ -57,6 +57,24 @@ public class SettingTest2 {
             onView(withId(R.id.currentPassword))
                     .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.newPassword1))
+                    .perform(replaceText("Pas"));
+            onView(withId(R.id.newPassword2))
+                    .perform(replaceText("Pas"));
+            onView(withId(R.id.currentPassword))
+                    .perform(replaceText("Passw0rd!"));
+            onView(withId(R.id.newPassword1))
+                    .perform(replaceText("Passw0rd!Passw0rd!Passw0rd!"));
+            onView(withId(R.id.newPassword2))
+                    .perform(replaceText("Passw0rd!Passw0rd!Passw0rd!"));
+            onView(withId(R.id.currentPassword))
+                    .perform(replaceText("Passw0rd!"));
+            onView(withId(R.id.newPassword1))
+                    .perform(replaceText(""));
+            onView(withId(R.id.newPassword2))
+                    .perform(replaceText(""));
+            onView(withId(R.id.currentPassword))
+                    .perform(replaceText("Passw0rd!"));
+            onView(withId(R.id.newPassword1))
                     .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.newPassword2))
                     .perform(replaceText("Passw0rd!"));
@@ -86,6 +104,24 @@ public class SettingTest2 {
             onView(withId(R.id.settingsChangePassword))
                     .perform(click());
             Thread.sleep(5000);
+            onView(withId(R.id.currentPassword))
+                    .perform(replaceText("Passw0rd!"));
+            onView(withId(R.id.newPassword1))
+                    .perform(replaceText("Pas"));
+            onView(withId(R.id.newPassword2))
+                    .perform(replaceText("Pas"));
+            onView(withId(R.id.currentPassword))
+                    .perform(replaceText("Passw0rd!"));
+            onView(withId(R.id.newPassword1))
+                    .perform(replaceText("Passw0rd!Passw0rd!Passw0rd!"));
+            onView(withId(R.id.newPassword2))
+                    .perform(replaceText("Passw0rd!Passw0rd!Passw0rd!"));
+            onView(withId(R.id.currentPassword))
+                    .perform(replaceText("Passw0rd!"));
+            onView(withId(R.id.newPassword1))
+                    .perform(replaceText(""));
+            onView(withId(R.id.newPassword2))
+                    .perform(replaceText(""));
             onView(withId(R.id.currentPassword))
                     .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.newPassword1))
