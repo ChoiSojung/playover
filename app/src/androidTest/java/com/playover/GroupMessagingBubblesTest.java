@@ -5,6 +5,7 @@ import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.DrawerActions;
 import android.support.test.espresso.contrib.NavigationViewActions;
+import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -14,33 +15,29 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.replaceText;
+import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withResourceName;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
-
-public class MessagingThreadsTest {
+public class GroupMessagingBubblesTest {
 
     private static AuthUserViewModel authUserViewModel = new AuthUserViewModel();
     private Intent testIntent;
-    private List<String> testMessagingList = new ArrayList<String>();
 
-    @Rule
-    public ActivityTestRule<MessagingActivity> activityTestRule =
+    @Rule public ActivityTestRule<MessagingActivity> activityTestRule =
             new ActivityTestRule<MessagingActivity>(MessagingActivity.class, true, false) {
                 @Override
                 protected Intent getActivityIntent() {
                     testIntent = new Intent();
+                    testIntent.putExtra("recipientUids", "c4C0VrwVkDWpJi8D9d3s2U7cxpr2");
                     return testIntent;
                 }
             };
@@ -50,16 +47,25 @@ public class MessagingThreadsTest {
     }
 
     @Test
-    public void testMessagingThreads() {
+    public void testMessaging() {
         if (checkForUser()) {
             activityTestRule.launchActivity(testIntent);
-            onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
-                    .check(matches(hasDescendant(withText("Fanny Fartsworth"))));
-            /*onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
-                    .check(matches(hasDescendant(withResourceName("profile_avatar_placeholder.png"))));*/
+            onView(withId(R.id.msg_type)).perform(typeText("Hello, There"));
+            Espresso.closeSoftKeyboard();
+            onView(withId(R.id.btn_chat_send)).perform(click());
+            if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
+                onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
+                        .check(matches(isDisplayed()));
+            }
+            onView(withId(R.id.msg_type)).perform(typeText("Howdy"));
+            Espresso.closeSoftKeyboard();
+            onView(withId(R.id.btn_chat_send)).perform(click());
+            if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(1).matches(isDisplayed())) {
+                onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(1))
+                        .check(matches(isDisplayed()));
+            }
         }
     }
-
 
     @Test
     public void testMessagingDrawerMessaging() throws InterruptedException {

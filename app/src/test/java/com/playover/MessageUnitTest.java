@@ -50,4 +50,9 @@ public class MessageUnitTest {
         assertEquals(testMessageUid, actualMessageUid);
     }
 
+    @Test
+    public void testSerializer(){
+        underTest = new Message(testContent, testSenderUid, testRecipientUid, testTimestamp);
+
+    }
 }

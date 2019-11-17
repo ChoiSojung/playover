@@ -6,10 +6,9 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         SignInTestSetup.class,
-        MessagingBubblesTest.class,
-        //MessagingThreadsTest.class
+        GroupMessagingBubblesTest.class
 })
-public class BasicMessagingTestSuite {
+public class GroupMessagingTestSuite {
 
 
 
