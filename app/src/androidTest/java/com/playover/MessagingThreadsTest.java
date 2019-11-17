@@ -52,8 +52,8 @@ public class MessagingThreadsTest {
     public void testMessagingThreads() {
         if (checkForUser()) {
             activityTestRule.launchActivity(testIntent);
-            onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(1))
-                    .check(matches(hasDescendant(withText("Mel Tassone"))));
+            onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
+                    .check(matches(hasDescendant(withText("Fanny Fartsworth"))));
         }
     }
 
@@ -138,8 +138,10 @@ public class MessagingThreadsTest {
             onView(withId(R.id.nav_view_messaging)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
             Thread.sleep(2000);
             onView(withId(R.id.lblogin_main)).perform(MainActivityTest.clickClickableSpan("Sign In"));
-            onView(withId(R.id.email_login)).perform(replaceText("melsmail@hotmail.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
+            // old account melsmail@hotmail.com
+            onView(withId(R.id.email_login)).perform(replaceText("jjtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            //test123
+            onView(withId(R.id.password_login)).perform(replaceText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(5000);
             if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
