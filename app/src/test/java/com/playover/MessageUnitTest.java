@@ -1,18 +1,25 @@
 package com.playover;
 
+import android.os.Bundle;
+import android.os.Parcel;
+
 import com.playover.models.Message;
 
 import org.junit.After;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
+@RunWith(JUnit4.class)
 public class MessageUnitTest {
 
     private Message underTest;
     private String testContent = "test message";
     private String testSenderUid = "11223344";
-    private String testRecipientUid = "55667788"; //deprecated
+    private String testRecipientUid = "55667788"; //deprecated, only use for reading old threads
     private Object testTimestamp = "1543803194831";
     private String testMessageUid = "99001122";
 
@@ -50,9 +57,20 @@ public class MessageUnitTest {
         assertEquals(testMessageUid, actualMessageUid);
     }
 
-    @Test
-    public void testSerializer(){
-        underTest = new Message(testContent, testSenderUid, testRecipientUid, testTimestamp);
 
-    }
+/*    @Test
+    public void testMessageIsParcelable(){
+        Message message = new Message(testContent, testSenderUid, testRecipientUid, testTimestamp);
+
+        Parcel parcel = Parcel.obtain();
+        message.writeToParcel(parcel, message.describeContents());
+        parcel.setDataPosition(0);
+
+        Message createdFromParcel = Message.CREATOR.createFromParcel(parcel);
+        assertEquals(createdFromParcel.getContent(), testContent);
+        assertEquals(createdFromParcel.getSenderUID(), testSenderUid);
+        assertEquals(createdFromParcel.getRecipientUID(), testRecipientUid);
+        assertEquals(createdFromParcel.getTimestamp(), testTimestamp);
+
+    }*/
 }
