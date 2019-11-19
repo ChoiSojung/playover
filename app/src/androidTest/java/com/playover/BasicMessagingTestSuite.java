@@ -7,7 +7,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         SignInTestSetup.class,
         MessagingBubblesTest.class,
-        //MessagingThreadsTest.class
+        MessagingThreadsTest.class
 })
 public class BasicMessagingTestSuite {
 
