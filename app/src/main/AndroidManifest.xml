@@ -82,7 +82,7 @@
 
         <provider
             android:name="RecentSuggestionProvider"
-            android:authorities="recent.suggestion.authority"/>
+            android:authorities="com.example.RecentSuggestionProvider"/>
 
 
         <service

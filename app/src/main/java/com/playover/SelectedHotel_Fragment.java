@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.SearchRecentSuggestions;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -293,6 +294,9 @@ public class SelectedHotel_Fragment extends Fragment{
                 .skip(1)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(results->{
+                    SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getContext(),
+                            RecentSuggestionProvider.AUTHORITY, RecentSuggestionProvider.MODE);
+                    suggestions.saveRecentQuery(query.toString(), null);
                     updateRecyclerView(getFilteredGuests(query.toString()));
 
                 });
