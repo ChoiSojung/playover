@@ -2,5 +2,6 @@
 <searchable xmlns:android="http://schemas.android.com/apk/res/android"
     android:hint="Type your team name..."
     android:label="@string/app_name"
-    android:searchSuggestAuthority="com.example.MyCustomSuggestionProvider">
+    android:searchSuggestAuthority="com.example.recent.suggestion.authority"
+    android:searchSuggestSelection=" ? " >
 </searchable>

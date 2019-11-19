@@ -80,6 +80,11 @@
             </intent-filter>
         </receiver>
 
+        <provider
+            android:name="RecentSuggestionProvider"
+            android:authorities="recent.suggestion.authority"/>
+
+
         <service
             android:name=".Notifications"
             android:exported="false">
