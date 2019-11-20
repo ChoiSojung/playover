@@ -134,7 +134,7 @@ public class MessagingThreads_Fragment extends Fragment {
                 bundle.putString("threadUid", uid.getText().toString());
 //                Log.i("onClickThreadUid", uid.getText().toString());
                 bundle.putString("recipientUid", gUids.getText().toString());
-//                Log.i("onClickRecipientUid", gUids.getText().toString());
+               /* Log.i("onClickRecipientUid", gUids.getText().toString());*/
                 MessagingBubbles_Fragment newMessagingBubblesFragment = new MessagingBubbles_Fragment();
                 newMessagingBubblesFragment.setArguments(bundle);
                 transaction.replace(R.id.containerMessaging, newMessagingBubblesFragment).addToBackStack(null);
@@ -210,8 +210,11 @@ public class MessagingThreads_Fragment extends Fragment {
                         (UserMessageThread thread) -> {
                             String groupName = thread.getMessageGroupName();
                             String groupIds = thread.getMessageGroupUIDs();
+                            Log.i("groupMessageGroup", "this is " + groupIds);
                             holder.name.setText(groupName);
                             String reciptUid = groupIds.replaceFirst(uid,"");
+                            reciptUid = reciptUid.replace(",,",",");
+                            /*Log.i("groupMessageRecipt", "this is " + reciptUid);*/
                             holder.gUids.setText(reciptUid);
                             holder.uid.setText(threadUid);
                             holder.thumbnail.setImageResource(R.drawable.ic_group_messaging_48dp);

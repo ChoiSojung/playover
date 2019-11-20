@@ -97,8 +97,11 @@ public class MessagingBubbles_Fragment extends Fragment {
             threadUid = generateMessageThreadUID(senderUID, recipientUID);
         }
         groupUids = senderUID + "," + recipientUID;
-//        Log.i("group ids", groupUids);
+        /*Log.i("group ids", groupUids);*/
         reciptUids = recipientUID.split(",");
+        for (String i : reciptUids){
+            Log.i("reciptUids", "is " + i);
+        }
         userViewModel.getUser(myUID,
                 (Person user) -> {
                     username = user.getFirstName() + " " + user.getLastName();
@@ -112,7 +115,7 @@ public class MessagingBubbles_Fragment extends Fragment {
                         username = user.getFirstName() + " " + user.getLastName();
                         textViewUsers.setText(
                                 textViewUsers.getText().toString() + uid + ":" + username + ",");
-//                        Log.i("reciptUidName",  uid + ":" + username + ",");
+                        Log.i("reciptUidName",  uid + ":" + username + ",");
                     });
         }
 
@@ -187,9 +190,16 @@ public class MessagingBubbles_Fragment extends Fragment {
                 (UserMessageThread thread) -> {
                     HashMap<String, String> uidNameMap = new HashMap<>();
                     String[] uNPairs = textViewUsers.getText().toString().split(",");
+                    Log.i("textViewUsers", "is " + textViewUsers.getText().toString());
                     for (String pair : uNPairs){
                         String[] uidName = pair.split(":");
+                        for(String i : uidName){
+                            Log.i("uidName", "is " + i);
+                        }
                         uidNameMap.put(uidName[0], uidName[1]);
+                    }
+                    for (String i : uidNameMap.keySet()){
+                        Log.i("uidNameMap", i + " : " + uidNameMap.get(i));
                     }
                     if (thread != null) {
                         if (thread.getMessages() != null) {
@@ -209,6 +219,7 @@ public class MessagingBubbles_Fragment extends Fragment {
                             for (Message message : messages) {
                                 String UID = message.getMessageUID();
                                 String userName = uidNameMap.get(message.getSenderUID());
+                                Log.i("bubbleUsername", "this is " + userName);
 
                                 //parse Firebase Severvalue timeStamp use method found in https://exceptionshub.com/firebase-timestamp-to-date-and-time.html
                                 Object ts = message.getTimestamp();

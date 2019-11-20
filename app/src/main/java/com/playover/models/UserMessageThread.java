@@ -25,14 +25,14 @@ public class UserMessageThread {
         messages.add(message);
     }
 
-    public UserMessageThread(
+/*    public UserMessageThread(
             String messageGroupName, String messageThreadUID
             , String messageGroupUIDs, List<Message> messages) {
         this.messageGroupName = messageGroupName;
         this.messageGroupUIDs = messageGroupUIDs;
         this.messageThreadUID = messageThreadUID;
         this.messages = messages;
-    }
+    }*/
 
     public String getMessageGroupName() { return messageGroupName; }
 

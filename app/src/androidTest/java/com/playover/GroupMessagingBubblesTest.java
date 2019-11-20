@@ -5,6 +5,7 @@ import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.DrawerActions;
 import android.support.test.espresso.contrib.NavigationViewActions;
+import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -14,33 +15,55 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.replaceText;
+import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withResourceName;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
-
-public class MessagingThreadsTest {
+public class GroupMessagingBubblesTest {
 
     private static AuthUserViewModel authUserViewModel = new AuthUserViewModel();
     private Intent testIntent;
-    private List<String> testMessagingList = new ArrayList<String>();
+    private Intent testIntent2;
+    private String testAccount1 = "jjtest@fake.com";
+    private String testAccount2 = "zztest@fake.com";
+    private String testAccount3 = "syatwork@gmail.com";
+    private String password = "Passw0rd!";
 
-    @Rule
-    public ActivityTestRule<MessagingActivity> activityTestRule =
+    @Rule public ActivityTestRule<MessagingActivity> activityTestRule =
             new ActivityTestRule<MessagingActivity>(MessagingActivity.class, true, false) {
                 @Override
                 protected Intent getActivityIntent() {
                     testIntent = new Intent();
+                    testIntent.putExtra("recipientUids",
+                            "c4C0VrwVkDWpJi8D9d3s2U7cxpr2,dHCtVaM2q9XA7pJ1PGZ3vdhTe1v2");
+                    return testIntent;
+                }
+            };
+    @Rule public ActivityTestRule<MessagingActivity> activityTestRule2 =
+            new ActivityTestRule<MessagingActivity>(MessagingActivity.class, true, false) {
+                @Override
+                protected Intent getActivityIntent() {
+                    testIntent2 = new Intent();
+                    testIntent2.putExtra("recipientUids",
+                            "c4C0VrwVkDWpJi8D9d3s2U7cxpr2,Vts6RaoOXmfzipdl3ZG1EzqOMiw2");
+                    return testIntent2;
+                }
+            };
+    @Rule public ActivityTestRule<MessagingActivity> activityTestRule3 =
+            new ActivityTestRule<MessagingActivity>(MessagingActivity.class, true, false) {
+                @Override
+                protected Intent getActivityIntent() {
+                    testIntent = new Intent();
+                    testIntent.putExtra("recipientUids",
+                            "Vts6RaoOXmfzipdl3ZG1EzqOMiw2,dHCtVaM2q9XA7pJ1PGZ3vdhTe1v2");
                     return testIntent;
                 }
             };
@@ -49,19 +72,94 @@ public class MessagingThreadsTest {
         return (authUserViewModel.getUser() != null);
     }
 
-    @Test
-    public void testMessagingThreads() {
+    private void signOutFromMessaging(){
+        onView(withId(R.id.messaging_content)).check(matches(isDisplayed()));
+        onView(withId(R.id.messaging_content)).perform(DrawerActions.open());
+        onView(withId(R.id.nav_view_messaging)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+    }
+
+    private void signInWithUser(String email, String password){
+        onView(withId(R.id.lblogin_main)).perform(MainActivityTest.clickClickableSpan("Sign In"));
+        onView(withId(R.id.email_login)).perform(replaceText(email)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.password_login)).perform(replaceText(password)).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.btn_login)).perform(click());
+    }
+
+    private  void testSendMessage(ActivityTestRule activityTestRule, Intent intent, String testMessage){
+
         if (checkForUser()) {
-            activityTestRule.launchActivity(testIntent);
-            onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
-                    .check(matches(hasDescendant(withText("Fanny Fartsworth"))));
-            /*onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
-                    .check(matches(hasDescendant(withResourceName("profile_avatar_placeholder.png"))));*/
+            activityTestRule.launchActivity(intent);
+            onView(withId(R.id.msg_type)).perform(typeText(testMessage));
+            Espresso.closeSoftKeyboard();
+            onView(withId(R.id.btn_chat_send)).perform(click());
+            if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
+                onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
+                        .check(matches(isDisplayed()));
+            }
         }
     }
 
+    private void testRecieveMessage(ActivityTestRule activityTestRule, Intent intent, String testMessage){
+
+        if (checkForUser()) {
+            activityTestRule.launchActivity(intent);
+            if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
+                onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
+                        .check(matches(hasDescendant(withText(testMessage))));
+            }
+        }
+    }
 
     @Test
+    public void testMessaging()  throws InterruptedException {
+
+        String testMessage = "Hello, everyone.";
+
+        testSendMessage(activityTestRule, testIntent, testMessage);
+
+/*
+        signOutFromMessaging();
+        Thread.sleep(20000);
+        signInWithUser(testAccount2, password);
+        Thread.sleep(5000);
+        */
+/*testSendMessage(activityTestRule2, testIntent2, "Hi, Jillian");*//*
+
+        testRecieveMessage(activityTestRule2, testIntent2, testMessage);
+*/
+
+
+/*        Thread.sleep(2000);
+        signOutFromMessaging();
+        Thread.sleep(2000);
+        signInWithUser(testAccount3, password);
+        Thread.sleep(5000);
+        if (checkForUser()) {
+            activityTestRule3.launchActivity(testIntent);
+            onView(withId(R.id.msg_type)).perform(typeText("What's up, guys?"));
+            Espresso.closeSoftKeyboard();
+            onView(withId(R.id.btn_chat_send)).perform(click());
+            if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
+                onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
+                        .check(matches(isDisplayed()));
+            }
+            onView(withId(R.id.msg_type)).perform(typeText("Play is Over, get back to work."));
+            Espresso.closeSoftKeyboard();
+            onView(withId(R.id.btn_chat_send)).perform(click());
+            if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(1).matches(isDisplayed())) {
+                onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(1))
+                        .check(matches(isDisplayed()));
+            }
+        }
+        Thread.sleep(2000);
+        signOutFromMessaging();
+        Thread.sleep(2000);
+        signInWithUser(testAccount1, password);*/
+    }
+
+
+
+ /*   @Test
     public void testMessagingDrawerMessaging() throws InterruptedException {
         if (checkForUser()) {
             activityTestRule.launchActivity(testIntent);
@@ -136,22 +234,15 @@ public class MessagingThreadsTest {
         if (checkForUser()) {
             activityTestRule.launchActivity(testIntent);
             Thread.sleep(2000);
-            onView(withId(R.id.messaging_content)).check(matches(isDisplayed()));
-            onView(withId(R.id.messaging_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view_messaging)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+            signOutFromMessaging();
             Thread.sleep(2000);
-            onView(withId(R.id.lblogin_main)).perform(MainActivityTest.clickClickableSpan("Sign In"));
-            // old account melsmail@hotmail.com
-            onView(withId(R.id.email_login)).perform(replaceText("jjtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
-            //test123
-            onView(withId(R.id.password_login)).perform(replaceText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.btn_login)).perform(click());
+            signInWithUser(testAccount1,password);
             Thread.sleep(5000);
             if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
                 onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
                         .check(matches(isDisplayed()));
             }
         }
-    }
+    }*/
 
 }

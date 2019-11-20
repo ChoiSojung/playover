@@ -81,4 +81,13 @@ public class UserMessageThreadUnitTest {
         assertEquals(testMessageList, underTest.getMessages());
     }
 
+    @Test
+    public void testSerializer(){
+        underTest = new UserMessageThread(testMessageGroupName, testMessageThreadUID, testMessageGroupUIDS, testMessage);
+        String expectResult =
+                "Thread: "+testMessageGroupName+"\n"+testMessageThreadUID+"\n"+testMessageGroupUIDS
+                        +"\n"+"Message: "+testMessage.getContent()+"\n";
+        assertEquals(expectResult, underTest.toString());
+    }
+
 }
