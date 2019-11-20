@@ -49,17 +49,17 @@ public class MessagingThreadsTest {
         return (authUserViewModel.getUser() != null);
     }
 
-    @Test
-    public void testMessagingThreads() {
-        if (checkForUser()) {
-            activityTestRule.launchActivity(testIntent);
-            onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
-                    .check(matches(hasDescendant(withText("Fanny Fartsworth"))));
-            /*onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
-                    .check(matches(hasDescendant(withResourceName("profile_avatar_placeholder.png"))));*/
-        }
-    }
-
+//    @Test
+//    public void testMessagingThreads() {
+//        if (checkForUser()) {
+//            activityTestRule.launchActivity(testIntent);
+//            onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
+//                    .check(matches(hasDescendant(withText("Fanny Fartsworth"))));
+//            /*onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
+//                    .check(matches(hasDescendant(withResourceName("profile_avatar_placeholder.png"))));*/
+//        }
+//    }
+//
 
     @Test
     public void testMessagingDrawerMessaging() throws InterruptedException {
