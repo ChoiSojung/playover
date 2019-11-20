@@ -31,6 +31,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static com.playover.MainActivityTest.withRecyclerView;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasProperty;
@@ -168,6 +169,70 @@ public class AddDiscountFragmentTest {
             //onView(withId(R.id.category)).check(matches(withId(R.string.required)));
             onView(withId(R.id.address)).check(matches(hasErrorText("Address is a required field!")));
             Thread.sleep(1000);
+        }
+    }
+
+    @Test
+    public void editExistingDiscountTest() throws Exception {
+        try {
+            Thread.sleep(5000);
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+            Thread.sleep(5000);
+            onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
+            onView(withId(R.id.email_login)).perform(typeText("nnTestDiscount@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.btn_login)).perform(click());
+            Thread.sleep(8000);
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_discounts));
+            Thread.sleep(3000);
+            onView(withRecyclerView(R.id.recycler_view_discounts).atPosition(0)).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.editDiscount)).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.business_name)).perform(replaceText(""));
+            onView(withId(R.id.address)).perform(replaceText(""));
+            onView(withId(R.id.city)).perform(replaceText(""));
+            onView(withId(R.id.phone)).perform(replaceText(""));
+            onView(withId(R.id.website)).perform(replaceText(""));
+            onView(withId(R.id.discount_details)).perform(replaceText(""));
+            onView(withId(R.id.states)).perform(click());
+            onData(anything()).atPosition(0).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.category)).perform(click());
+            onData(anything()).atPosition(0).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.saveDiscount)).perform(click());
+            Thread.sleep(3000);
+        } catch (Exception ex) {
+            Thread.sleep(5000);
+            onView(withId(R.id.lblogin_main)).perform(click());
+            onView(withId(R.id.email_login)).perform(typeText("nnTestDiscount@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.btn_login)).perform(click());
+            Thread.sleep(8000);
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_discounts));
+            Thread.sleep(3000);
+            onView(withRecyclerView(R.id.recycler_view_discounts).atPosition(0)).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.editDiscount)).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.business_name)).perform(replaceText(""));
+            onView(withId(R.id.address)).perform(replaceText(""));
+            onView(withId(R.id.city)).perform(replaceText(""));
+            onView(withId(R.id.phone)).perform(replaceText(""));
+            onView(withId(R.id.website)).perform(replaceText(""));
+            onView(withId(R.id.discount_details)).perform(replaceText(""));
+            onView(withId(R.id.states)).perform(click());
+            onData(anything()).atPosition(0).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.category)).perform(click());
+            onData(anything()).atPosition(0).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.saveDiscount)).perform(click());
+            Thread.sleep(3000);
         }
     }
 
