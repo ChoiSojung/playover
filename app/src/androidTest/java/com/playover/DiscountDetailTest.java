@@ -1,6 +1,7 @@
 package com.playover;
 
 import android.Manifest;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.UiController;
 import android.support.test.espresso.ViewAction;
@@ -9,6 +10,9 @@ import android.support.test.espresso.contrib.DrawerActions;
 import android.support.test.espresso.contrib.NavigationViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.rule.GrantPermissionRule;
+import android.support.test.uiautomator.UiDevice;
+import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.UiSelector;
 import android.text.SpannableString;
 import android.text.style.ClickableSpan;
 import android.view.View;
@@ -22,6 +26,7 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.RootMatchers.isDialog;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -60,7 +65,12 @@ public class DiscountDetailTest {
             Thread.sleep(2000);
             onView(withId(R.id.addComment)).perform(click());
             Thread.sleep(2000);
-
+            UiDevice mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+            UiObject uiObject = mDevice.findObject(new UiSelector().text("Comment..."));
+            if (uiObject.exists())
+            {
+                mDevice.pressBack();
+            }
 
         } catch (Exception ex) {
             Thread.sleep(5000);
@@ -76,7 +86,12 @@ public class DiscountDetailTest {
             Thread.sleep(2000);
             onView(withId(R.id.addComment)).perform(click());
             Thread.sleep(2000);
-           
+            UiDevice mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+            UiObject uiObject = mDevice.findObject(new UiSelector().text("Comment..."));
+            if (uiObject.exists())
+            {
+                mDevice.pressBack();
+            }
         }
     }
 
