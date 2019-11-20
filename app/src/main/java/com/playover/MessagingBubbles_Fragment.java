@@ -88,6 +88,13 @@ public class MessagingBubbles_Fragment extends Fragment {
         textViewGroupName = rootView.findViewById(R.id.group_name);
         textViewUsers = rootView.findViewById(R.id.users);
         recipientUID = getArguments().getString("recipientUid");
+        if (recipientUID.endsWith(",")){
+            recipientUID = recipientUID.substring(0, recipientUID.length()-1);
+        }
+        if (recipientUID.startsWith(",")){
+            recipientUID = recipientUID.substring(1, recipientUID.length());
+        }
+//        Log.i("recipientUID", "is " + recipientUID);
         senderUID = authVm.getUser().getUid();
         myUID = senderUID;
         if (getArguments().containsKey("threadUid")){
@@ -97,10 +104,10 @@ public class MessagingBubbles_Fragment extends Fragment {
             threadUid = generateMessageThreadUID(senderUID, recipientUID);
         }
         groupUids = senderUID + "," + recipientUID;
-        /*Log.i("group ids", groupUids);*/
+//        Log.i("group ids", groupUids);
         reciptUids = recipientUID.split(",");
         for (String i : reciptUids){
-            Log.i("reciptUids", "is " + i);
+//            Log.i("reciptUids", "is " + i);
         }
         userViewModel.getUser(myUID,
                 (Person user) -> {
@@ -115,7 +122,7 @@ public class MessagingBubbles_Fragment extends Fragment {
                         username = user.getFirstName() + " " + user.getLastName();
                         textViewUsers.setText(
                                 textViewUsers.getText().toString() + uid + ":" + username + ",");
-                        Log.i("reciptUidName",  uid + ":" + username + ",");
+//                        Log.i("reciptUidName",  uid + ":" + username + ",");
                     });
         }
 
@@ -190,16 +197,16 @@ public class MessagingBubbles_Fragment extends Fragment {
                 (UserMessageThread thread) -> {
                     HashMap<String, String> uidNameMap = new HashMap<>();
                     String[] uNPairs = textViewUsers.getText().toString().split(",");
-                    Log.i("textViewUsers", "is " + textViewUsers.getText().toString());
+//                    Log.i("textViewUsers", "is " + textViewUsers.getText().toString());
                     for (String pair : uNPairs){
                         String[] uidName = pair.split(":");
                         for(String i : uidName){
-                            Log.i("uidName", "is " + i);
+//                            Log.i("uidName", "is " + i);
                         }
                         uidNameMap.put(uidName[0], uidName[1]);
                     }
                     for (String i : uidNameMap.keySet()){
-                        Log.i("uidNameMap", i + " : " + uidNameMap.get(i));
+//                        Log.i("uidNameMap", i + " : " + uidNameMap.get(i));
                     }
                     if (thread != null) {
                         if (thread.getMessages() != null) {
@@ -219,7 +226,7 @@ public class MessagingBubbles_Fragment extends Fragment {
                             for (Message message : messages) {
                                 String UID = message.getMessageUID();
                                 String userName = uidNameMap.get(message.getSenderUID());
-                                Log.i("bubbleUsername", "this is " + userName);
+//                                Log.i("bubbleUsername", "this is " + userName);
 
                                 //parse Firebase Severvalue timeStamp use method found in https://exceptionshub.com/firebase-timestamp-to-date-and-time.html
                                 Object ts = message.getTimestamp();
@@ -251,7 +258,7 @@ public class MessagingBubbles_Fragment extends Fragment {
                         } else {
                             RequestNewGroupName();
                         }
-                        Log.i("Messaging Bubble Activity: ", "No messages found in DB");
+//                        Log.i("Messaging Bubble Activity: ", "No messages found in DB");
                     }
                     adapter.notifyDataSetChanged();
                 }
@@ -282,14 +289,14 @@ public class MessagingBubbles_Fragment extends Fragment {
     private static String getMD5(String input) {
         //sort all uids so the same group people will stay in the same group chat
         String[] arr = input.split(",");
-        Log.i("unsorted uids", "this " + input);
+//        Log.i("unsorted uids", "this " + input);
         input = "";
         Arrays.sort(arr);
         for (String id : arr){
-            Log.i("sorted", id);
+//            Log.i("sorted", id);
             input += id;
         }
-        Log.i("sorted String", input);
+//        Log.i("sorted String", input);
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] messageDigest = md.digest(input.getBytes());
@@ -325,7 +332,7 @@ public class MessagingBubbles_Fragment extends Fragment {
                             , Toast.LENGTH_SHORT);
                 } else {
                     textViewGroupName.setText(groupName);
-                    Log.i ("requestNewName", "this is " + textViewGroupName.getText().toString());
+//                    Log.i ("requestNewName", "this is " + textViewGroupName.getText().toString());
                 }
             }
         });
