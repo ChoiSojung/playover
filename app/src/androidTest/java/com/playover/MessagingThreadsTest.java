@@ -54,7 +54,7 @@ public class MessagingThreadsTest {
         if (checkForUser()) {
             activityTestRule.launchActivity(testIntent);
             onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
-                    .check(matches(hasDescendant(withText("Fanny Fartsworth"))));
+                    .check(matches(hasDescendant(withText("Alfred Pennyworth"))));
             /*onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
                     .check(matches(hasDescendant(withResourceName("profile_avatar_placeholder.png"))));*/
         }

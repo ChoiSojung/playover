@@ -58,7 +58,7 @@ public class MessageUnitTest {
     }
 
 
-    @Test
+ /*   @Test
     public void testMessageIsParcelable(){
         Message message = new Message(testContent, testSenderUid, testRecipientUid, testTimestamp);
 
@@ -72,5 +72,5 @@ public class MessageUnitTest {
         assertEquals(createdFromParcel.getRecipientUID(), testRecipientUid);
         assertEquals(createdFromParcel.getTimestamp(), testTimestamp);
 
-    }
+    }*/
 }
