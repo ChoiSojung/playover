@@ -32,9 +32,9 @@ public class MessageAdapter extends ArrayAdapter<MessageBubble> {
         int viewType = getItemViewType(position);
 
         if (messageBubble.myMessage()) {
-            layoutResource = R.layout.left_message_bubble;
-        } else {
             layoutResource = R.layout.right_message_bubble;
+        } else {
+            layoutResource = R.layout.left_message_bubble;
         }
 
         convertView = inflater.inflate(layoutResource, parent, false);
