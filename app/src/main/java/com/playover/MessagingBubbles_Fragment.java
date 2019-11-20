@@ -144,7 +144,7 @@ public class MessagingBubbles_Fragment extends Fragment {
                     Message message = new Message();
                     message.setContent(content);
                     message.setSenderUID(senderUID);
-                    //message.setRecipientUID(recipientUID);
+                    message.setRecipientUID(recipientUID);
                     message.setTimestamp(message.generateTimestamp());
                     editText.setText("");
                     if (userMessageThread == null) {
