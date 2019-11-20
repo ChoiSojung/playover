@@ -143,6 +143,8 @@ public class AddDiscountFragmentTest {
             //onView(withId(R.id.category)).check(matches(withId(R.string.required)));
             onView(withId(R.id.address)).check(matches(hasErrorText("Address is a required field!")));
             Thread.sleep(1000);
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
 
         } catch (Exception ex) {
             Thread.sleep(5000);
@@ -168,6 +170,9 @@ public class AddDiscountFragmentTest {
             //onView(withId(R.id.category)).check(matches(withId(R.string.required)));
             onView(withId(R.id.address)).check(matches(hasErrorText("Address is a required field!")));
             Thread.sleep(1000);
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+
         }
     }
 
