@@ -60,7 +60,7 @@ public class MessagingThreadsTest {
 //        }
 //    }
 //
-
+// test comments
     @Test
     public void testMessagingDrawerMessaging() throws InterruptedException {
         if (checkForUser()) {
