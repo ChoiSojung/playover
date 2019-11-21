@@ -73,7 +73,7 @@ android {
         androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.0.2'
         implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
         implementation 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:0.4.0'
-
+        androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
         androidTestImplementation("com.android.support.test.espresso:espresso-contrib:2.2.2") {
             exclude group: 'com.android.support', module: 'appcompat'
             exclude group: 'com.android.support', module: 'support-v4'
