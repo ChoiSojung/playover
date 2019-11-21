@@ -13,7 +13,7 @@ import org.junit.runners.JUnit4;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-@RunWith(JUnit4.class)
+//@RunWith(JUnit4.class)
 public class MessageUnitTest {
 
     private Message underTest;
@@ -58,7 +58,7 @@ public class MessageUnitTest {
     }
 
 
- /*   @Test
+/*    @Test
     public void testMessageIsParcelable(){
         Message message = new Message(testContent, testSenderUid, testRecipientUid, testTimestamp);
 

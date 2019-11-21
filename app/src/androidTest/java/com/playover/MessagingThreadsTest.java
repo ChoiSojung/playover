@@ -1,15 +1,21 @@
 package com.playover;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.test.espresso.Espresso;
+import android.support.test.espresso.action.GeneralClickAction;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.DrawerActions;
 import android.support.test.espresso.contrib.NavigationViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.view.View;
+
 
 import com.playover.viewmodels.AuthUserViewModel;
 
+import org.hamcrest.Matcher;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +27,7 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -45,6 +52,7 @@ public class MessagingThreadsTest {
                 }
             };
 
+
     private boolean checkForUser() {
         return (authUserViewModel.getUser() != null);
     }
@@ -54,12 +62,19 @@ public class MessagingThreadsTest {
         if (checkForUser()) {
             activityTestRule.launchActivity(testIntent);
             onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
-                    .check(matches(hasDescendant(withText("Alfred Pennyworth"))));
-            /*onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
-                    .check(matches(hasDescendant(withResourceName("profile_avatar_placeholder.png"))));*/
+                    .check(matches(hasDescendant(isDisplayed())));
         }
     }
 
+    @Test
+    public void testClickThreadLaunchMessageBubble(){
+        if (checkForUser()) {
+            activityTestRule.launchActivity(testIntent);
+            onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
+                    .perform(click());
+            onView(withId(R.id.btn_chat_send)).check(matches(isDisplayed()));
+        }
+    }
 
     @Test
     public void testMessagingDrawerMessaging() throws InterruptedException {
