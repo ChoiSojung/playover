@@ -114,67 +114,67 @@ public class AddDiscountFragmentTest {
 
         }
     }
-
-    @Test
-    public void missingFieldsThrowsToastErrorTest() throws Exception {
-        try {
-            Thread.sleep(5000);
-            onView(withId(R.id.main_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
-            onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
-            onView(withId(R.id.email_login)).perform(typeText("lladddiscounttest@fake.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
-            onView(withId(R.id.main_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_discounts));
-            Thread.sleep(3000);
-            onView(withId(R.id.addDiscount)).perform(click());
-            Thread.sleep(3000);
-            onView(withId(R.id.saveDiscount)).perform(click());
-            Thread.sleep(1000);
-            onView(withText("Please fill in the required fields!")).inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
-            Thread.sleep(1000);
-            onView(withId(R.id.business_name)).check(matches(hasErrorText("Business Name Required!")));
-            onView(withId(R.id.city)).check(matches(hasErrorText("City is required!")));
-            //onView(withId(R.id.states)).check(matches(withId(R.string.required)));
-            onView(withId(R.id.discount_details)).check(matches(hasErrorText("Please enter discount details!")));
-            //onView(withId(R.id.category)).check(matches(withId(R.string.required)));
-            onView(withId(R.id.address)).check(matches(hasErrorText("Address is a required field!")));
-            Thread.sleep(1000);
-            onView(withId(R.id.main_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-
-        } catch (Exception ex) {
-            Thread.sleep(5000);
-            onView(withId(R.id.lblogin_main)).perform(click());
-            onView(withId(R.id.email_login)).perform(typeText("lladddiscounttest@fake.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
-            onView(withId(R.id.main_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_discounts));
-            Thread.sleep(3000);
-            onView(withId(R.id.addDiscount)).perform(click());
-            Thread.sleep(1000);
-            onView(withText("Please fill in the required fields!")).inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
-            Thread.sleep(1000);
-            onView(withId(R.id.business_name))
-                    .check(matches(hasErrorText("Business Name Required!")));
-            Thread.sleep(1000);
-            onView(withId(R.id.business_name)).check(matches(hasErrorText("Business Name Required!")));
-            onView(withId(R.id.city)).check(matches(hasErrorText("City is required!")));
-            //onView(withId(R.id.states)).check(matches(withId(R.string.required)));
-            onView(withId(R.id.discount_details)).check(matches(hasErrorText("Please enter discount details!")));
-            //onView(withId(R.id.category)).check(matches(withId(R.string.required)));
-            onView(withId(R.id.address)).check(matches(hasErrorText("Address is a required field!")));
-            Thread.sleep(1000);
-            onView(withId(R.id.main_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-
-        }
-    }
+//
+//    @Test
+//    public void missingFieldsThrowsToastErrorTest() throws Exception {
+//        try {
+//            Thread.sleep(5000);
+//            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+//            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+//            Thread.sleep(5000);
+//            onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
+//            onView(withId(R.id.email_login)).perform(typeText("lladddiscounttest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+//            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
+//            onView(withId(R.id.btn_login)).perform(click());
+//            Thread.sleep(8000);
+//            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+//            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_discounts));
+//            Thread.sleep(3000);
+//            onView(withId(R.id.addDiscount)).perform(click());
+//            Thread.sleep(3000);
+//            onView(withId(R.id.saveDiscount)).perform(click());
+//            Thread.sleep(1000);
+//            onView(withText("Please fill in the required fields!")).inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+//            Thread.sleep(1000);
+//            onView(withId(R.id.business_name)).check(matches(hasErrorText("Business Name Required!")));
+//            onView(withId(R.id.city)).check(matches(hasErrorText("City is required!")));
+//            //onView(withId(R.id.states)).check(matches(withId(R.string.required)));
+//            onView(withId(R.id.discount_details)).check(matches(hasErrorText("Please enter discount details!")));
+//            //onView(withId(R.id.category)).check(matches(withId(R.string.required)));
+//            onView(withId(R.id.address)).check(matches(hasErrorText("Address is a required field!")));
+//            Thread.sleep(1000);
+//            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+//            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+//
+//        } catch (Exception ex) {
+//            Thread.sleep(5000);
+//            onView(withId(R.id.lblogin_main)).perform(click());
+//            onView(withId(R.id.email_login)).perform(typeText("lladddiscounttest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+//            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
+//            onView(withId(R.id.btn_login)).perform(click());
+//            Thread.sleep(8000);
+//            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+//            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_discounts));
+//            Thread.sleep(3000);
+//            onView(withId(R.id.addDiscount)).perform(click());
+//            Thread.sleep(1000);
+//            onView(withText("Please fill in the required fields!")).inRoot(withDecorView(not(is(activityTestRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+//            Thread.sleep(1000);
+//            onView(withId(R.id.business_name))
+//                    .check(matches(hasErrorText("Business Name Required!")));
+//            Thread.sleep(1000);
+//            onView(withId(R.id.business_name)).check(matches(hasErrorText("Business Name Required!")));
+//            onView(withId(R.id.city)).check(matches(hasErrorText("City is required!")));
+//            //onView(withId(R.id.states)).check(matches(withId(R.string.required)));
+//            onView(withId(R.id.discount_details)).check(matches(hasErrorText("Please enter discount details!")));
+//            //onView(withId(R.id.category)).check(matches(withId(R.string.required)));
+//            onView(withId(R.id.address)).check(matches(hasErrorText("Address is a required field!")));
+//            Thread.sleep(1000);
+//            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+//            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+//
+//        }
+//    }
 
 
     //static method for clicking on clickable spans in textviews
