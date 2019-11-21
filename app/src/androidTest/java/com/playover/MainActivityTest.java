@@ -123,8 +123,8 @@ public class MainActivityTest {
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(5000);
             //valid
-            onView(withId(R.id.email_login)).perform(replaceText("mviencek@hotmail.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.email_login)).perform(replaceText("dhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(replaceText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(10000);
             if (withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
@@ -148,8 +148,8 @@ public class MainActivityTest {
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(5000);
             //exists
-            onView(withId(R.id.email_login)).perform(replaceText("mviencek@hotmail.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.email_login)).perform(replaceText("dhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(replaceText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(10000);
             if (withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
