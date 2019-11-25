@@ -79,7 +79,6 @@ public class MessagingBubblesTest {
 
     @Test
     public void testNewThreadWithDefaultName(){
-
         activityTestRuleForDefaultGroupName.launchActivity(testIntent);
         onView(withId(R.id.group_name)).check(matches(withText("Jillian Joyce and null null")));
     }
@@ -104,7 +103,6 @@ public class MessagingBubblesTest {
                     .check(matches(hasDescendant(withText(testMessage))));
         }
     }*/
-/*
 
     @Test
     public void testMessagingDrawerMessaging() throws InterruptedException {
@@ -198,6 +196,5 @@ public class MessagingBubblesTest {
             }
         }
     }
-*/
 
 }

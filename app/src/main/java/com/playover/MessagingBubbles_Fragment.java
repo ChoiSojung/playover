@@ -229,8 +229,8 @@ public class MessagingBubbles_Fragment extends Fragment {
 //                                Log.i("bubbleUsername", "this is " + userName);
 
                                 //parse Firebase Severvalue timeStamp use method found in https://exceptionshub.com/firebase-timestamp-to-date-and-time.html
-                                Object ts = message.getTimestamp();
-                                Long epochValue = (long)ts;
+                                /*Object ts = message.getTimestamp();*/
+                                Long epochValue = message.getTimestampLong();
                                 DateFormat format = new SimpleDateFormat("dd/MM HH:mm");
                                 format.setTimeZone(timeZone);
                                 Date epochDate = new Date(epochValue);
