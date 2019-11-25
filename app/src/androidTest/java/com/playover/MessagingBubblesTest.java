@@ -104,17 +104,20 @@ public class MessagingBubblesTest {
 
     @Test
     public void testCreateNewThread() throws InterruptedException{
-        activityTestRuleForDefaultGroupName.launchActivity(testIntent);
-        String testMessage = "this is a new group";
-        Thread.sleep(2000);
-        onView(withId(R.id.msg_type)).perform(typeText(testMessage));
-        Espresso.closeSoftKeyboard();
-        onView(withId(R.id.btn_chat_send)).perform(click());
-        if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
-            onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
-                    .check(matches(hasDescendant(withText(testMessage))));
+        if (checkForUser()){
+            activityTestRuleForDefaultGroupName.launchActivity(testIntent);
+            String testMessage = "this is a new group";
+            Thread.sleep(2000);
+            onView(withId(R.id.msg_type)).perform(typeText(testMessage));
+            Espresso.closeSoftKeyboard();
+            onView(withId(R.id.btn_chat_send)).perform(click());
+            if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
+                onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
+                        .check(matches(hasDescendant(withText(testMessage))));
+            }
         }
     }
+
 
     @Test
     public void testMessagingDrawerMessaging() throws InterruptedException {

@@ -48,7 +48,8 @@ public class GroupMessagingBubblesTest {
     private DateFormat format = new SimpleDateFormat("dd/MM/yy");
     private String currentDate = format.format(calendar.getTime());
 
-    @Rule public ActivityTestRule<MessagingActivity> activityTestRule =
+    @Rule
+    public ActivityTestRule<MessagingActivity> activityTestRule =
             new ActivityTestRule<MessagingActivity>(MessagingActivity.class, true, false) {
                 @Override
                 protected Intent getActivityIntent() {
@@ -58,7 +59,9 @@ public class GroupMessagingBubblesTest {
                     return testIntent;
                 }
             };
-    @Rule public ActivityTestRule<MessagingActivity> activityTestRule2 =
+
+    @Rule
+    public ActivityTestRule<MessagingActivity> activityTestRule2 =
             new ActivityTestRule<MessagingActivity>(MessagingActivity.class, true, false) {
                 @Override
                 protected Intent getActivityIntent() {
@@ -67,8 +70,10 @@ public class GroupMessagingBubblesTest {
                             "c4C0VrwVkDWpJi8D9d3s2U7cxpr2,Vts6RaoOXmfzipdl3ZG1EzqOMiw2");
                     return testIntent2;
                 }
-            };
-    @Rule public ActivityTestRule<MessagingActivity> activityTestRule3 =
+    };
+
+    @Rule
+    public ActivityTestRule<MessagingActivity> activityTestRule3 =
             new ActivityTestRule<MessagingActivity>(MessagingActivity.class, true, false) {
                 @Override
                 protected Intent getActivityIntent() {
@@ -77,9 +82,10 @@ public class GroupMessagingBubblesTest {
                             "Vts6RaoOXmfzipdl3ZG1EzqOMiw2,dHCtVaM2q9XA7pJ1PGZ3vdhTe1v2");
                     return testIntent;
                 }
-            };
+    };
 
-    @Rule public ActivityTestRule<MessagingActivity> activityTestRuleForGroupName =
+    @Rule
+    public ActivityTestRule<MessagingActivity> activityTestRuleForGroupName =
             new ActivityTestRule<MessagingActivity>(MessagingActivity.class, true, false) {
                 @Override
                 protected Intent getActivityIntent() {
@@ -87,9 +93,10 @@ public class GroupMessagingBubblesTest {
                     testIntent.putExtra("recipientUids", "0ZGitIcZ7gbTrAQWUJleHjON1ML2,2oKJ0oESD0VUqz3tkhs1N9FXdbn1");
                     return testIntent;
                 }
-            };
+    };
 
-    @Rule public ActivityTestRule<MessagingActivity> activityTestRuleWithFencePostUidsString =
+    @Rule
+    public ActivityTestRule<MessagingActivity> activityTestRuleWithFencePostUidsString =
             new ActivityTestRule<MessagingActivity>(MessagingActivity.class, true, false) {
                 @Override
                 protected Intent getActivityIntent() {
@@ -97,7 +104,7 @@ public class GroupMessagingBubblesTest {
                     testIntent.putExtra("recipientUids", ",c4C0VrwVkDWpJi8D9d3s2U7cxpr2,,dHCtVaM2q9XA7pJ1PGZ3vdhTe1v2,");
                     return testIntent;
                 }
-            };
+    };
 
     private boolean checkForUser() {
         return (authUserViewModel.getUser() != null);
@@ -143,10 +150,12 @@ public class GroupMessagingBubblesTest {
 
     @Test
     public void testMessaging()  throws InterruptedException {
-
         String testMessage = "Hello, everyone.";
 
-        testSendMessage(activityTestRule, testIntent, testMessage);
+        if(checkForUser()){
+            testSendMessage(activityTestRule, testIntent, testMessage);
+        }
+
 
 /*
         signOutFromMessaging();
@@ -191,39 +200,47 @@ public class GroupMessagingBubblesTest {
 
     @Test
     public void testNewGroupWithDefaultNameWithEmptyGroupName(){
-        activityTestRuleForGroupName.launchActivity(testIntent);
-        onView(withText("CREATE"))
-                .inRoot(isDialog())
-                .check(matches(isDisplayed()))
-                .perform(click());
-        onView(withId(R.id.group_name)).check(matches(withText("Group created on " + currentDate)));
+        if (checkForUser()){
+            activityTestRuleForGroupName.launchActivity(testIntent);
+            onView(withText("CREATE"))
+                    .inRoot(isDialog())
+                    .check(matches(isDisplayed()))
+                    .perform(click());
+            onView(withId(R.id.group_name)).check(matches(withText("Group created on " + currentDate)));
+        }
+
     }
 
     @Test
     public void testNewGroupWithDefaultNameWithCancel(){
-        activityTestRuleForGroupName.launchActivity(testIntent);
-        onView(withText("CANCEL"))
-                .inRoot(isDialog())
-                .check(matches(isDisplayed()))
-                .perform(click());
-        onView(withId(R.id.group_name)).check(matches(withText("Group created on " + currentDate)));
+        if (checkForUser()){
+            activityTestRuleForGroupName.launchActivity(testIntent);
+            onView(withText("CANCEL"))
+                    .inRoot(isDialog())
+                    .check(matches(isDisplayed()))
+                    .perform(click());
+            onView(withId(R.id.group_name)).check(matches(withText("Group created on " + currentDate)));
+        }
+
     }
 
     @Test
     public void testCreateNewGroup() throws InterruptedException{
-        activityTestRuleForGroupName.launchActivity(testIntent);
-        String testMessage = "this is a new group";
-        onView(withText("CANCEL"))
-                .inRoot(isDialog())
-                .check(matches(isDisplayed()))
-                .perform(click());
-        Thread.sleep(2000);
-        onView(withId(R.id.msg_type)).perform(typeText(testMessage));
-        Espresso.closeSoftKeyboard();
-        onView(withId(R.id.btn_chat_send)).perform(click());
-        if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
-            onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
-                    .check(matches(hasDescendant(withText(testMessage))));
+        if (checkForUser()){
+            activityTestRuleForGroupName.launchActivity(testIntent);
+            String testMessage = "this is a new group";
+            onView(withText("CANCEL"))
+                    .inRoot(isDialog())
+                    .check(matches(isDisplayed()))
+                    .perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.msg_type)).perform(typeText(testMessage));
+            Espresso.closeSoftKeyboard();
+            onView(withId(R.id.btn_chat_send)).perform(click());
+            if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
+                onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
+                        .check(matches(hasDescendant(withText(testMessage))));
+            }
         }
     }
 
@@ -243,8 +260,9 @@ public class GroupMessagingBubblesTest {
     @Test
     public void testMessagingWithContainminatentent(){
         String testMessage = "Is this cleaned?";
-
-        testSendMessage(activityTestRuleWithFencePostUidsString, testIntent, testMessage);
+        if (checkForUser()){
+            testSendMessage(activityTestRuleWithFencePostUidsString, testIntent, testMessage);
+        }
     }
 
  /*   @Test
