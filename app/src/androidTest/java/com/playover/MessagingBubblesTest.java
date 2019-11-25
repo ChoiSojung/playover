@@ -80,7 +80,7 @@ public class MessagingBubblesTest {
     @Test
     public void testNewThreadWithDefaultName(){
         activityTestRuleForDefaultGroupName.launchActivity(testIntent);
-        onView(withId(R.id.group_name)).check(matches(withText("Jillian Joyce and null null")));
+        onView(withId(R.id.group_name)).check(matches(withText("Jillian Joyce and Flight Crew")));
     }
 
  /*   @Test
