@@ -47,7 +47,7 @@ public class MessagingBubblesTest {
                 @Override
                 protected Intent getActivityIntent() {
                     testIntent = new Intent();
-                    testIntent.putExtra("recipientUids", "1234567");
+                    testIntent.putExtra("recipientUids", "0ZGitIcZ7gbTrAQWUJleHjON1ML2");
                     return testIntent;
                 }
             };

@@ -84,7 +84,7 @@ public class GroupMessagingBubblesTest {
                 @Override
                 protected Intent getActivityIntent() {
                     testIntent = new Intent();
-                    testIntent.putExtra("recipientUids", "1234567,7654321");
+                    testIntent.putExtra("recipientUids", "0ZGitIcZ7gbTrAQWUJleHjON1ML2,2oKJ0oESD0VUqz3tkhs1N9FXdbn1");
                     return testIntent;
                 }
             };
