@@ -42,6 +42,16 @@ public class MessagingBubblesTest {
         }
     };
 
+    @Rule public ActivityTestRule<MessagingActivity> activityTestRuleForDefaultGroupName =
+            new ActivityTestRule<MessagingActivity>(MessagingActivity.class, true, false) {
+                @Override
+                protected Intent getActivityIntent() {
+                    testIntent = new Intent();
+                    testIntent.putExtra("recipientUids", "1234567");
+                    return testIntent;
+                }
+            };
+
     private boolean checkForUser() {
         return (authUserViewModel.getUser() != null);
     }
@@ -64,6 +74,27 @@ public class MessagingBubblesTest {
                 onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(1))
                         .check(matches(isDisplayed()));
             }
+        }
+    }
+
+    @Test
+    public void testNewThreadWithDefaultName(){
+
+        activityTestRuleForDefaultGroupName.launchActivity(testIntent);
+        onView(withId(R.id.group_name)).check(matches(withText("Jillian Joyce and null null")));
+    }
+
+    @Test
+    public void testCreateNewThread() throws InterruptedException{
+        activityTestRuleForDefaultGroupName.launchActivity(testIntent);
+        String testMessage = "this is a new group";
+        Thread.sleep(2000);
+        onView(withId(R.id.msg_type)).perform(typeText(testMessage));
+        Espresso.closeSoftKeyboard();
+        onView(withId(R.id.btn_chat_send)).perform(click());
+        if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
+            onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
+                    .check(matches(hasDescendant(withText(testMessage))));
         }
     }
 
