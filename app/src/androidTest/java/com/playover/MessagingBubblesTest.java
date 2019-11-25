@@ -102,7 +102,7 @@ public class MessagingBubblesTest {
     }
 
 
- /*   @Test
+    @Test
     public void testCreateNewThread() throws InterruptedException{
         activityTestRuleForDefaultGroupName.launchActivity(testIntent);
         String testMessage = "this is a new group";
@@ -114,7 +114,7 @@ public class MessagingBubblesTest {
             onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
                     .check(matches(hasDescendant(withText(testMessage))));
         }
-    }*/
+    }
 
     @Test
     public void testMessagingDrawerMessaging() throws InterruptedException {
