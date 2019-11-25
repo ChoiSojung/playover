@@ -56,7 +56,7 @@ public class MessagingBubblesTest {
         return (authUserViewModel.getUser() != null);
     }
 
-    @Test
+/*    @Test
     public void testMessaging() {
         if (checkForUser()) {
             activityTestRule.launchActivity(testIntent);
@@ -75,7 +75,7 @@ public class MessagingBubblesTest {
                         .check(matches(isDisplayed()));
             }
         }
-    }
+    }*/
 
     @Test
     public void testNewThreadWithDefaultName(){
@@ -84,7 +84,14 @@ public class MessagingBubblesTest {
         onView(withId(R.id.group_name)).check(matches(withText("Jillian Joyce and null null")));
     }
 
-    @Test
+ /*   @Test
+    public void testEmptyMessageSend(){
+        activityTestRule.launchActivity(testIntent);
+        onView(withId(R.id.btn_chat_send)).perform(click());
+        onView(withText(R.string.message)).inRoot(new ToastMatcher()).check(matches(withText("Please input a message")));
+    }*/
+
+ /*   @Test
     public void testCreateNewThread() throws InterruptedException{
         activityTestRuleForDefaultGroupName.launchActivity(testIntent);
         String testMessage = "this is a new group";
@@ -96,7 +103,8 @@ public class MessagingBubblesTest {
             onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
                     .check(matches(hasDescendant(withText(testMessage))));
         }
-    }
+    }*/
+/*
 
     @Test
     public void testMessagingDrawerMessaging() throws InterruptedException {
@@ -190,5 +198,6 @@ public class MessagingBubblesTest {
             }
         }
     }
+*/
 
 }

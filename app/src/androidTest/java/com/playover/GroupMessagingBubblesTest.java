@@ -209,7 +209,7 @@ public class GroupMessagingBubblesTest {
         onView(withId(R.id.group_name)).check(matches(withText("Group created on " + currentDate)));
     }
 
-    @Test
+/*    @Test
     public void testCreateNewGroup() throws InterruptedException{
         activityTestRuleForGroupName.launchActivity(testIntent);
         String testMessage = "this is a new group";
@@ -225,7 +225,7 @@ public class GroupMessagingBubblesTest {
             onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
                     .check(matches(hasDescendant(withText(testMessage))));
         }
-    }
+    }*/
 
 /*    @Test
     public void testNewGroupCustomName() throws InterruptedException{
