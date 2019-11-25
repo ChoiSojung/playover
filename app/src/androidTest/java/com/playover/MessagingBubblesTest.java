@@ -60,7 +60,7 @@ public class MessagingBubblesTest {
         return (authUserViewModel.getUser() != null);
     }
 
-/*    @Test
+    @Test
     public void testMessaging() {
         if (checkForUser()) {
             activityTestRule.launchActivity(testIntent);
@@ -79,7 +79,7 @@ public class MessagingBubblesTest {
                         .check(matches(isDisplayed()));
             }
         }
-    }*/
+    }
 
     @Test
     public void testNewThreadWithDefaultName(){
