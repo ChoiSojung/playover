@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DataUse_Fragment">
+    tools:context="appdev.playover.DataUse_Fragment">
 
    <LinearLayout
        android:id="@+id/data_use_main"

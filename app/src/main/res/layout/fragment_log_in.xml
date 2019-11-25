@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LogIn_Fragment">
+    tools:context="appdev.playover.LogIn_Fragment">
 
   <LinearLayout
       android:layout_width="match_parent"

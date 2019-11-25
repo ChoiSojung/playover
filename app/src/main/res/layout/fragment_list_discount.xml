@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ListDiscount_Fragment">
+    tools:context="appdev.playover.ListDiscount_Fragment">
 
     <TextView
         android:id="@+id/device_location"

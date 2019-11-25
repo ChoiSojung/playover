@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.playover">
+    package="appdev.playover">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -19,17 +19,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <receiver
-            android:name=".broadcast_receivers.AlarmReceiver"
+            android:name="appdev.playover.broadcast_receivers.AlarmReceiver"
             android:enabled="true"
             android:exported="false"></receiver>
 
         <receiver
-            android:name=".broadcast_receivers.MyNotificationPublisher"
+            android:name="appdev.playover.broadcast_receivers.MyNotificationPublisher"
             android:enabled="true"
             android:exported="false"></receiver>
 
         <activity
-            android:name=".SplashScreen"
+            android:name="appdev.playover.SplashScreen"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -39,16 +39,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="appdev.playover.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SettingsActivity"
+            android:name="appdev.playover.SettingsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ProfileActivity"
+            android:name="appdev.playover.ProfileActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".CheckIn"
+            android:name="appdev.playover.CheckIn"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.searchable"
@@ -58,12 +58,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NoInternet"
+            android:name="appdev.playover.NoInternet"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Buddies_Activity"
+            android:name="appdev.playover.Buddies_Activity"
             android:screenOrientation="portrait" />
-        <activity android:name=".MessagingActivity"
+        <activity android:name="appdev.playover.MessagingActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.playover_SHOW_MESSAGES"/>
@@ -71,17 +71,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Discounts"
+            android:name="appdev.playover.Discounts"
             android:screenOrientation="portrait" />
 
-        <receiver android:name=".broadcast_receivers.InternetBroadcastReceiver">
+        <receiver android:name="appdev.playover.broadcast_receivers.InternetBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANG" />
             </intent-filter>
         </receiver>
 
         <service
-            android:name=".Notifications"
+            android:name="appdev.playover.Notifications"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

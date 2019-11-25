@@ -5,7 +5,7 @@
     android:id="@+id/profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Profile_Fragment">
+    tools:context="appdev.playover.Profile_Fragment">
 
     <RelativeLayout
         android:layout_width="match_parent"

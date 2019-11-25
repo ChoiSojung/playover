@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
-    tools:context=".NoInternet">
+    tools:context="appdev.playover.NoInternet">
 
     <TextView
         android:id="@+id/noInternetMessage"
