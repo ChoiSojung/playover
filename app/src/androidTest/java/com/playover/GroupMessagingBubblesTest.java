@@ -79,12 +79,22 @@ public class GroupMessagingBubblesTest {
                 }
             };
 
-    @Rule public ActivityTestRule<MessagingActivity> activityTestRule4 =
+    @Rule public ActivityTestRule<MessagingActivity> activityTestRuleForGroupName =
             new ActivityTestRule<MessagingActivity>(MessagingActivity.class, true, false) {
                 @Override
                 protected Intent getActivityIntent() {
                     testIntent = new Intent();
                     testIntent.putExtra("recipientUids", "1234567,7654321");
+                    return testIntent;
+                }
+            };
+
+    @Rule public ActivityTestRule<MessagingActivity> activityTestRuleWithFencePostUidsString =
+            new ActivityTestRule<MessagingActivity>(MessagingActivity.class, true, false) {
+                @Override
+                protected Intent getActivityIntent() {
+                    testIntent = new Intent();
+                    testIntent.putExtra("recipientUids", ",c4C0VrwVkDWpJi8D9d3s2U7cxpr2,,dHCtVaM2q9XA7pJ1PGZ3vdhTe1v2,");
                     return testIntent;
                 }
             };
@@ -115,7 +125,7 @@ public class GroupMessagingBubblesTest {
             onView(withId(R.id.btn_chat_send)).perform(click());
             if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
                 onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
-                        .check(matches(isDisplayed()));
+                        .check(matches(hasDescendant(withText(testMessage))));
             }
         }
     }
@@ -181,7 +191,7 @@ public class GroupMessagingBubblesTest {
 
     @Test
     public void testNewGroupWithDefaultNameWithEmptyGroupName(){
-        activityTestRule4.launchActivity(testIntent);
+        activityTestRuleForGroupName.launchActivity(testIntent);
         onView(withText("CREATE"))
                 .inRoot(isDialog())
                 .check(matches(isDisplayed()))
@@ -191,7 +201,7 @@ public class GroupMessagingBubblesTest {
 
     @Test
     public void testNewGroupWithDefaultNameWithCancel(){
-        activityTestRule4.launchActivity(testIntent);
+        activityTestRuleForGroupName.launchActivity(testIntent);
         onView(withText("CANCEL"))
                 .inRoot(isDialog())
                 .check(matches(isDisplayed()))
@@ -211,6 +221,13 @@ public class GroupMessagingBubblesTest {
                 .perform(click());
         onView(withId(R.id.group_name)).check(matches(withText("Test Group smallTalk")));
     }*/
+
+    @Test
+    public void testMessagingWithContainminatentent(){
+        String testMessage = "Is this cleaned?";
+
+        testSendMessage(activityTestRuleWithFencePostUidsString, testIntent, testMessage);
+    }
 
  /*   @Test
     public void testMessagingDrawerMessaging() throws InterruptedException {
