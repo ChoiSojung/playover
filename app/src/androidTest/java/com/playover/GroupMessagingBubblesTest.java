@@ -15,12 +15,18 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.TimeZone;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
+import static android.support.test.espresso.matcher.RootMatchers.isDialog;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -36,6 +42,11 @@ public class GroupMessagingBubblesTest {
     private String testAccount2 = "zztest@fake.com";
     private String testAccount3 = "syatwork@gmail.com";
     private String password = "Passw0rd!";
+
+    private Calendar calendar = Calendar.getInstance();
+    private TimeZone timeZone = calendar.getTimeZone();
+    private DateFormat format = new SimpleDateFormat("dd/MM/yy");
+    private String currentDate = format.format(calendar.getTime());
 
     @Rule public ActivityTestRule<MessagingActivity> activityTestRule =
             new ActivityTestRule<MessagingActivity>(MessagingActivity.class, true, false) {
@@ -64,6 +75,16 @@ public class GroupMessagingBubblesTest {
                     testIntent = new Intent();
                     testIntent.putExtra("recipientUids",
                             "Vts6RaoOXmfzipdl3ZG1EzqOMiw2,dHCtVaM2q9XA7pJ1PGZ3vdhTe1v2");
+                    return testIntent;
+                }
+            };
+
+    @Rule public ActivityTestRule<MessagingActivity> activityTestRule4 =
+            new ActivityTestRule<MessagingActivity>(MessagingActivity.class, true, false) {
+                @Override
+                protected Intent getActivityIntent() {
+                    testIntent = new Intent();
+                    testIntent.putExtra("recipientUids", "1234567,7654321");
                     return testIntent;
                 }
             };
@@ -158,6 +179,38 @@ public class GroupMessagingBubblesTest {
     }
 
 
+    @Test
+    public void testNewGroupWithDefaultNameWithEmptyGroupName(){
+        activityTestRule4.launchActivity(testIntent);
+        onView(withText("CREATE"))
+                .inRoot(isDialog())
+                .check(matches(isDisplayed()))
+                .perform(click());
+        onView(withId(R.id.group_name)).check(matches(withText("Group created on " + currentDate)));
+    }
+
+    @Test
+    public void testNewGroupWithDefaultNameWithCancel(){
+        activityTestRule4.launchActivity(testIntent);
+        onView(withText("CANCEL"))
+                .inRoot(isDialog())
+                .check(matches(isDisplayed()))
+                .perform(click());
+        onView(withId(R.id.group_name)).check(matches(withText("Group created on " + currentDate)));
+    }
+
+/*    @Test
+    public void testNewGroupCustomName() throws InterruptedException{
+        activityTestRule4.launchActivity(testIntent);
+        Thread.sleep(2000);
+        typeText("Test Group smallTalk");
+        Espresso.closeSoftKeyboard();
+        onView(withText("CREATE"))
+                .inRoot(isDialog())
+                .check(matches(isDisplayed()))
+                .perform(click());
+        onView(withId(R.id.group_name)).check(matches(withText("Test Group smallTalk")));
+    }*/
 
  /*   @Test
     public void testMessagingDrawerMessaging() throws InterruptedException {
