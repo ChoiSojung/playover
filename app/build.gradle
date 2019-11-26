@@ -44,6 +44,12 @@ android {
         }
     }
 
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
     dependencies {
         implementation fileTree(include: ['*.jar'], dir: 'libs')
         implementation 'com.sun.mail:android-mail:1.6.2'
@@ -84,7 +90,7 @@ android {
         }
 
         implementation 'commons-codec:commons-codec:1.10'
-
+        testImplementation 'org.robolectric:robolectric:3.8'
     }
     apply plugin: 'com.google.gms.google-services'
 }

@@ -8,9 +8,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -31,6 +29,7 @@ public class Notifications extends FirebaseMessagingService {
 
     @Override
     public void onDeletedMessages() {
+        super.onDeletedMessages();
         Log.i(TAG, "Excess messages received or app not connected for a month, " +
                 "messages deleted in FCM");
     }
