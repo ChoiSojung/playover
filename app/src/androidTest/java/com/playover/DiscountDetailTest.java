@@ -105,6 +105,24 @@ public class DiscountDetailTest {
             onView(withRecyclerView(R.id.recycler_view_discounts).atPosition(0)).perform(click());
             Thread.sleep(1000);
             Espresso.pressBack();
+            Thread.sleep(1000);
+            onView(withRecyclerView(R.id.recycler_view_discounts).atPosition(0)).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.editDiscount)).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.business_name)).perform(replaceText("Espresso Test Edit Business")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.address)).perform(replaceText("123 Espresso Test Edit Address")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.city)).perform(replaceText("Seattle")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.states)).perform(click());
+            onData(allOf(Is.is(CoreMatchers.instanceOf(String.class)))).atPosition(47).perform(click());
+            onView(withId(R.id.phone)).perform(replaceText("425-420-9999")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.website)).perform(replaceText("www.editurl.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.discount_details)).perform(replaceText("Shop Here And Get Ok Discounts!")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.category)).perform(click());
+            onData(allOf(Is.is(CoreMatchers.instanceOf(String.class)))).atPosition(2).perform(click());
+            onView(withId(R.id.saveDiscount)).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.displayPhone)).check(matches(withText("425-420-9999")));
         } catch (Exception ex) {
             Thread.sleep(5000);
             onView(withId(R.id.lblogin_main)).perform(click());
@@ -150,6 +168,24 @@ public class DiscountDetailTest {
             onView(withRecyclerView(R.id.recycler_view_discounts).atPosition(0)).perform(click());
             Thread.sleep(1000);
             Espresso.pressBack();
+            Thread.sleep(1000);
+            onView(withRecyclerView(R.id.recycler_view_discounts).atPosition(0)).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.editDiscount)).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.business_name)).perform(replaceText("Espresso Test Edit Business")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.address)).perform(replaceText("123 Espresso Test Edit Address")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.city)).perform(replaceText("Seattle")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.states)).perform(click());
+            onData(allOf(Is.is(CoreMatchers.instanceOf(String.class)))).atPosition(47).perform(click());
+            onView(withId(R.id.phone)).perform(replaceText("425-420-9999")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.website)).perform(replaceText("www.editurl.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.discount_details)).perform(replaceText("Shop Here And Get Ok Discounts!")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.category)).perform(click());
+            onData(allOf(Is.is(CoreMatchers.instanceOf(String.class)))).atPosition(2).perform(click());
+            onView(withId(R.id.saveDiscount)).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.displayPhone)).check(matches(withText("425-420-9999")));
         }
     }
 

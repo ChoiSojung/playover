@@ -68,6 +68,7 @@ public class DiscountsTest {
             onView(withRecyclerView(R.id.recycler_view_discounts).atPosition(0)).perform(click());
             Thread.sleep(1000);
             Espresso.pressBack();
+            Thread.sleep(1000);
         }
     }
 
