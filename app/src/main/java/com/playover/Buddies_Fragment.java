@@ -103,11 +103,6 @@ public class Buddies_Fragment extends Fragment {
                     String mListTemp = messagingList.next();
                     buddyToMessageUids += mListTemp + ",";
                 }
-                // clean off the last comma from the message uids list
-                if(buddyToMessageUids.substring(buddyToMessageUids.length()-1).equals(",")) {
-                    buddyToMessageUids = buddyToMessageUids.substring
-                            (0, buddyToMessageUids.length() - 1);
-                }
                 message.putExtra("recipientUids", buddyToMessageUids);
                 startActivity(message);
 

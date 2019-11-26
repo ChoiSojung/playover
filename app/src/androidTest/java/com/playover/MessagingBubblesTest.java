@@ -15,12 +15,16 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
+import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -41,6 +45,16 @@ public class MessagingBubblesTest {
             return testIntent;
         }
     };
+
+    @Rule public ActivityTestRule<MessagingActivity> activityTestRuleForDefaultGroupName =
+            new ActivityTestRule<MessagingActivity>(MessagingActivity.class, true, false) {
+                @Override
+                protected Intent getActivityIntent() {
+                    testIntent = new Intent();
+                    testIntent.putExtra("recipientUids", "0ZGitIcZ7gbTrAQWUJleHjON1ML2");
+                    return testIntent;
+                }
+            };
 
     private boolean checkForUser() {
         return (authUserViewModel.getUser() != null);
@@ -66,6 +80,44 @@ public class MessagingBubblesTest {
             }
         }
     }
+
+    @Test
+    public void testNewThreadWithDefaultName(){
+        if(checkForUser()){
+            activityTestRuleForDefaultGroupName.launchActivity(testIntent);
+            onView(withId(R.id.group_name)).check(matches(withText("Jillian Joyce and Flight Crew")));
+        }
+
+    }
+
+    @Test
+    public void testEmptyMessageSend(){
+        if(checkForUser()){
+            activityTestRule.launchActivity(testIntent);
+            onView(withId(R.id.btn_chat_send)).perform(click());
+            onView(withText("Please input a message"))
+                    .inRoot(withDecorView(not(activityTestRule.getActivity().getWindow().getDecorView())))
+                    .check(matches(isDisplayed()));
+        }
+    }
+
+
+    @Test
+    public void testCreateNewThread() throws InterruptedException{
+        if (checkForUser()){
+            activityTestRuleForDefaultGroupName.launchActivity(testIntent);
+            String testMessage = "this is a new group";
+            Thread.sleep(2000);
+            onView(withId(R.id.msg_type)).perform(typeText(testMessage));
+            Espresso.closeSoftKeyboard();
+            onView(withId(R.id.btn_chat_send)).perform(click());
+            if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
+                onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
+                        .check(matches(hasDescendant(withText(testMessage))));
+            }
+        }
+    }
+
 
     @Test
     public void testMessagingDrawerMessaging() throws InterruptedException {

@@ -60,7 +60,6 @@ public class MessagingThreads_Fragment extends Fragment {
         authVm = new AuthUserViewModel();
         messageViewModel = new MessageViewModel();
         getMessageThreads();
-        //Log.i("messages", "double fuck this");
         return v;
     }
 
@@ -132,9 +131,7 @@ public class MessagingThreads_Fragment extends Fragment {
                 FragmentTransaction transaction = MessagingActivity.messagingFragmentManager.beginTransaction();
                 Bundle bundle = new Bundle();
                 bundle.putString("threadUid", uid.getText().toString());
-//                Log.i("onClickThreadUid", uid.getText().toString());
                 bundle.putString("recipientUid", gUids.getText().toString());
-               /* Log.i("onClickRecipientUid", gUids.getText().toString());*/
                 MessagingBubbles_Fragment newMessagingBubblesFragment = new MessagingBubbles_Fragment();
                 newMessagingBubblesFragment.setArguments(bundle);
                 transaction.replace(R.id.containerMessaging, newMessagingBubblesFragment).addToBackStack(null);

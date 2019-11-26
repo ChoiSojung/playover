@@ -120,13 +120,8 @@ public class SelectedHotel_Fragment extends Fragment{
                         String mListTemp = messagingList.next();
                         personToMessageUids += mListTemp + ",";
                     }
-                    // clean off the last comma from the message uids list
-                    if(personToMessageUids.substring(personToMessageUids.length()-1).equals(",")) {
-                        personToMessageUids = personToMessageUids.substring
-                                (0, personToMessageUids.length() - 1);
-                    }
 
-                    Log.i("iPTMU", personToMessageUids);
+//                    Log.i("iPTMU", personToMessageUids);
 
                     // assuming there is one initially
                     if (personToMessageUids != null) {
