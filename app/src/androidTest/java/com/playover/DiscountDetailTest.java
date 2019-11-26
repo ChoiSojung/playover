@@ -2,6 +2,7 @@ package com.playover;
 
 import android.Manifest;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.Espresso;
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.UiController;
 import android.support.test.espresso.ViewAction;
@@ -18,24 +19,32 @@ import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.TextView;
 
+import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matcher;
+import org.hamcrest.core.Is;
 import org.junit.Rule;
 import org.junit.Test;
 
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.replaceText;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.isDialog;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.playover.MainActivityTest.withRecyclerView;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
+import static org.hamcrest.core.AllOf.allOf;
+import static org.hamcrest.core.StringEndsWith.endsWith;
 
 public class DiscountDetailTest {
 
@@ -64,14 +73,38 @@ public class DiscountDetailTest {
             onView(withRecyclerView(R.id.recycler_view_discounts).atPosition(0)).perform(click());
             Thread.sleep(2000);
             onView(withId(R.id.addComment)).perform(click());
+            onView(allOf(withClassName(endsWith("EditText"))))
+                    .perform(replaceText(""));
+            Thread.sleep(3000);
+            onView(allOf(withClassName(endsWith("EditText"))))
+                    .perform(replaceText("Espresso Comment"));
+            onView(withText("Add")).perform(scrollTo(), click());
             Thread.sleep(2000);
-            UiDevice mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
-            UiObject uiObject = mDevice.findObject(new UiSelector().text("Comment..."));
-            if (uiObject.exists())
-            {
-                mDevice.pressBack();
-            }
-
+            onView(withId(R.id.displayBName)).check(matches(isDisplayed()));
+            Thread.sleep(1000);
+            Espresso.pressBack();
+            Thread.sleep(1000);
+            onView(withId(R.id.addDiscount)).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.saveDiscount)).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.business_name)).perform(replaceText("Espresso Test Business")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.address)).perform(replaceText("123 Espresso Test Address")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.city)).perform(replaceText("Seattle")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.states)).perform(click());
+            onData(allOf(Is.is(CoreMatchers.instanceOf(String.class)))).atPosition(47).perform(click());
+            onView(withId(R.id.phone)).perform(replaceText("206-867-5309")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.website)).perform(replaceText("www.github.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.discount_details)).perform(replaceText("Shop Here And Get Great Discounts!")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.first_comment)).perform(replaceText("Great Customer Service!")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.category)).perform(click());
+            onData(allOf(Is.is(CoreMatchers.instanceOf(String.class)))).atPosition(1).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.saveDiscount)).perform(click());
+            Thread.sleep(10000);
+            onView(withRecyclerView(R.id.recycler_view_discounts).atPosition(0)).perform(click());
+            Thread.sleep(1000);
+            Espresso.pressBack();
         } catch (Exception ex) {
             Thread.sleep(5000);
             onView(withId(R.id.lblogin_main)).perform(click());
@@ -85,13 +118,38 @@ public class DiscountDetailTest {
             onView(withRecyclerView(R.id.recycler_view_discounts).atPosition(0)).perform(click());
             Thread.sleep(2000);
             onView(withId(R.id.addComment)).perform(click());
+            onView(allOf(withClassName(endsWith("EditText"))))
+                    .perform(replaceText(""));
+            Thread.sleep(3000);
+            onView(allOf(withClassName(endsWith("EditText"))))
+                    .perform(replaceText("Espresso Comment"));
+            onView(withText("Add")).perform(scrollTo(), click());
             Thread.sleep(2000);
-            UiDevice mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
-            UiObject uiObject = mDevice.findObject(new UiSelector().text("Comment..."));
-            if (uiObject.exists())
-            {
-                mDevice.pressBack();
-            }
+            onView(withId(R.id.displayBName)).check(matches(isDisplayed()));
+            Thread.sleep(1000);
+            Espresso.pressBack();
+            Thread.sleep(1000);
+            onView(withId(R.id.addDiscount)).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.saveDiscount)).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.business_name)).perform(replaceText("Espresso Test Business")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.address)).perform(replaceText("123 Espresso Test Address")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.city)).perform(replaceText("Seattle")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.states)).perform(click());
+            onData(allOf(Is.is(CoreMatchers.instanceOf(String.class)))).atPosition(47).perform(click());
+            onView(withId(R.id.phone)).perform(replaceText("206-867-5309")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.website)).perform(replaceText("www.github.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.discount_details)).perform(replaceText("Shop Here And Get Great Discounts!")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.first_comment)).perform(replaceText("Great Customer Service!")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.category)).perform(click());
+            onData(allOf(Is.is(CoreMatchers.instanceOf(String.class)))).atPosition(1).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.saveDiscount)).perform(click());
+            Thread.sleep(10000);
+            onView(withRecyclerView(R.id.recycler_view_discounts).atPosition(0)).perform(click());
+            Thread.sleep(1000);
+            Espresso.pressBack();
         }
     }
 
