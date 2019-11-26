@@ -228,8 +228,8 @@ public class DiscountsTest {
             onView(withId(R.id.nav_view_discount)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
             Thread.sleep(2000);
             onView(withId(R.id.lblogin_main)).perform(MainActivityTest.clickClickableSpan("Sign In"));
-            onView(withId(R.id.email_login)).perform(replaceText("mviencek@hotmail.com")).perform(ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.password_login)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.email_login)).perform(replaceText("yydiscounttest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(replaceText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
             Thread.sleep(5000);
             if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
