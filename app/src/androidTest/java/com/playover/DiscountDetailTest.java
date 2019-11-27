@@ -145,6 +145,11 @@ public class DiscountDetailTest {
             onView(withId(R.id.discounts_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view_discount)).perform(NavigationViewActions.navigateTo(R.id.nav_check_in));
             Thread.sleep(3000);
+            onView(withText("CANCEL"))
+                    .inRoot(isDialog())
+                    .check(matches(isDisplayed()))
+                    .perform(click());
+            Thread.sleep(3000);
             onView(withId(R.id.recycler_view_hotels))
                     .check(matches(isDisplayed()));
             onView(withRecyclerView(R.id.recycler_view_hotels).atPosition(0))
@@ -283,6 +288,11 @@ public class DiscountDetailTest {
             Thread.sleep(3000);
             onView(withId(R.id.discounts_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view_discount)).perform(NavigationViewActions.navigateTo(R.id.nav_check_in));
+            Thread.sleep(3000);
+            onView(withText("CANCEL"))
+                    .inRoot(isDialog())
+                    .check(matches(isDisplayed()))
+                    .perform(click());
             Thread.sleep(3000);
             onView(withId(R.id.recycler_view_hotels))
                     .check(matches(isDisplayed()));
