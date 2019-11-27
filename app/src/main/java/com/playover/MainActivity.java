@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     //checking/requesting required permissions on app load
-    private void requestPermissions() {
+    protected void requestPermissions() {
         final List<String> requiredAppPermissions = new ArrayList<>();
         requiredAppPermissions.add(Manifest.permission.INTERNET);
         requiredAppPermissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
