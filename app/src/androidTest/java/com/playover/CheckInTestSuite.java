@@ -5,8 +5,10 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        MikalLogIn.class,
+        CheckInTestUser.class,
         CheckInTest.class
 })
 public class CheckInTestSuite {
 }
+
+//nncheckintest@fake.com
