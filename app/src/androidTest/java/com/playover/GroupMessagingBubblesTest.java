@@ -205,13 +205,15 @@ public class GroupMessagingBubblesTest {
             activityTestRuleForGroupName.launchActivity(testIntent);
             try {
                 onView(withText("CREATE"))
-                        .inRoot(isDialog())
-                        .check(matches(isDisplayed()))
-                        .perform(click());
-                onView(withId(R.id.group_name)).check(matches(withText("Group created on " + currentDate)));
+                            .inRoot(isDialog())
+                            .check(matches(isDisplayed()))
+                            .perform(click());
+                onView(withId(R.id.group_name))
+                            .check(matches(withText("Group created on " + currentDate)));
             }
             catch (Exception e) {
-                Log.i("The group already exist", " for test new group with default name when group name is empty.");
+                Log.i("The group already exist"
+                        , " for test new group with default name when group name is empty.");
             }
         }
 
@@ -226,10 +228,12 @@ public class GroupMessagingBubblesTest {
                         .inRoot(isDialog())
                         .check(matches(isDisplayed()))
                         .perform(click());
-                onView(withId(R.id.group_name)).check(matches(withText("Group created on " + currentDate)));
+                onView(withId(R.id.group_name))
+                        .check(matches(withText("Group created on " + currentDate)));
             }
             catch (Exception e) {
-                Log.i("The group already exist", " for test new group with default name when group name dialog is canceled.");
+                Log.i("The group already exist"
+                        , " for test new group with default name when group name dialog is canceled.");
             }
         }
 
@@ -245,17 +249,19 @@ public class GroupMessagingBubblesTest {
                         .inRoot(isDialog())
                         .check(matches(isDisplayed()))
                         .perform(click());
-                Thread.sleep(2000);
+                Thread.sleep(500);
                 onView(withId(R.id.msg_type)).perform(typeText(testMessage));
                 Espresso.closeSoftKeyboard();
                 onView(withId(R.id.btn_chat_send)).perform(click());
-                if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
+                if (MainActivityTest.withRecyclerView(R.id.recycler_view)
+                        .atPosition(0).matches(isDisplayed())) {
                     onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
                             .check(matches(hasDescendant(withText(testMessage))));
                 }
             }
             catch (Exception e) {
-                    Log.i("The group already exist", " for test new group with default name when group name is empty.");
+                    Log.i("The group already exist"
+                            , " for test new group with default name when group name is empty.");
                 }
         }
     }
