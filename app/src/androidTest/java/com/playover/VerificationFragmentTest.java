@@ -41,15 +41,49 @@ public class VerificationFragmentTest {
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
             Thread.sleep(2000);
-            verificationCodeTest();
+            verificationCodeTestFail();
         }
         catch (Exception ex) {
-            verificationCodeTest();
+            verificationCodeTestFail();
         }
-
+        Espresso.pressBack();
+        Espresso.pressBack();
     }
 
-    private void verificationCodeTest() throws InterruptedException {
+    @Test
+    public void testVerificationCodeResend() throws InterruptedException {
+        Thread.sleep(5000);
+        try {
+            onView(withId(R.id.main_content)).check(matches(isDisplayed()));
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+            Thread.sleep(2000);
+            verificationCodeTestResend();
+        }
+        catch (Exception ex) {
+            verificationCodeTestResend();
+        }
+        Espresso.pressBack();
+        Espresso.pressBack();
+    }
+
+    private void verificationCodeTestFail() throws InterruptedException {
+        goToVerificationCodePage();
+        onView(withId(R.id.verify)).perform(click());
+        onView(withText("Verification Code Does Not Match!"))
+                .inRoot(withDecorView(not(activityTestRule.getActivity().getWindow().getDecorView())))
+                .check(matches(isDisplayed()));
+    }
+
+    private void verificationCodeTestResend() throws InterruptedException {
+        goToVerificationCodePage();
+        onView(withId(R.id.resendVerification)).perform(click());
+        onView(withText("Validation Code Sent!"))
+                .inRoot(withDecorView(not(activityTestRule.getActivity().getWindow().getDecorView())))
+                .check(matches(isDisplayed()));
+    }
+
+    private void goToVerificationCodePage() throws InterruptedException{
         onView(withId(R.id.signup_button_main)).perform(click());
         Thread.sleep(2000);
         onView(withId(R.id.firstNameSignUp)).perform(typeText("testFirst"));
@@ -67,9 +101,5 @@ public class VerificationFragmentTest {
         onView(withId(R.id.buttonSignUp)).perform(click());
         onView(withId(R.id.verificationEdit)).perform(typeText("987654321"));
         Espresso.closeSoftKeyboard();
-        onView(withId(R.id.verify)).perform(click());
-        onView(withText("Verification Code Does Not Match!"))
-                .inRoot(withDecorView(not(activityTestRule.getActivity().getWindow().getDecorView())))
-                .check(matches(isDisplayed()));
     }
 }
