@@ -37,9 +37,7 @@ public class VerificationFragmentTest {
     public void testVerificationCodeFailed() throws InterruptedException {
         Thread.sleep(5000);
         try {
-            onView(withId(R.id.main_content)).check(matches(isDisplayed()));
-            onView(withId(R.id.main_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+            logOut();
             Thread.sleep(2000);
             verificationCodeTestFail();
         }
@@ -48,15 +46,14 @@ public class VerificationFragmentTest {
         }
         Espresso.pressBack();
         Espresso.pressBack();
+        logIn();
     }
 
     @Test
     public void testVerificationCodeResend() throws InterruptedException {
         Thread.sleep(5000);
         try {
-            onView(withId(R.id.main_content)).check(matches(isDisplayed()));
-            onView(withId(R.id.main_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+            logOut();
             Thread.sleep(2000);
             verificationCodeTestResend();
         }
@@ -65,6 +62,7 @@ public class VerificationFragmentTest {
         }
         Espresso.pressBack();
         Espresso.pressBack();
+        logIn();
     }
 
     private void verificationCodeTestFail() throws InterruptedException {
@@ -101,5 +99,18 @@ public class VerificationFragmentTest {
         onView(withId(R.id.buttonSignUp)).perform(click());
         onView(withId(R.id.verificationEdit)).perform(typeText("987654321"));
         Espresso.closeSoftKeyboard();
+    }
+
+    private void logOut(){
+        onView(withId(R.id.main_content)).check(matches(isDisplayed()));
+        onView(withId(R.id.main_content)).perform(DrawerActions.open());
+        onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+    }
+
+    private void logIn(){
+        onView(withId(R.id.lblogin_main)).perform(MainActivityTest.clickClickableSpan("Sign In"));
+        onView(withId(R.id.email_login)).perform(replaceText("jjtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.password_login)).perform(replaceText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.btn_login)).perform(click());
     }
 }
