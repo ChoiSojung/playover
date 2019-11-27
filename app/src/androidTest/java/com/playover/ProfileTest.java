@@ -13,8 +13,6 @@ import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.TextView;
 
-import junit.framework.AssertionFailedError;
-
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.junit.Rule;
@@ -255,6 +253,83 @@ public class ProfileTest {
 
             onView(withId(R.id.editFirstName))
                     .check(matches(hasErrorText("First name is required!")));
+        }
+    }
+
+    @Test
+    public void testingLastandFirstPosition_else() throws Exception {
+            try {
+            Thread.sleep(5000);
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+            Thread.sleep(5000);
+            onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
+            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.btn_login)).perform(click());
+            Thread.sleep(8000);
+            onView(withId(R.id.main_content)).check(matches(isDisplayed()));
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_profile));
+            Thread.sleep(5000);
+            onView(withText("Edit"))
+                    .perform(click());
+            Thread.sleep(10000);
+
+            onView(withId(R.id.editFirstName))
+                    .perform(replaceText(""));
+            onView(withId(R.id.editLastName))
+                    .perform(replaceText(""));
+            onView(withId(R.id.editPosition))
+                    .perform(replaceText(""));
+            closeSoftKeyboard();
+            onView(withText("Save Changes"))
+                    .perform(scrollTo(), click());
+            onView(withId(R.id.editLastName))
+                        .check(matches(hasErrorText("Last name is required!")));
+            onView(withId(R.id.editFirstName))
+                        .check(matches(hasErrorText("First name is required!")));
+                onView(withId(R.id.editPosition))
+                        .check(matches(hasErrorText("Position is required!")));
+        } catch (Exception ex) {
+            Thread.sleep(5000);
+            onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
+            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.btn_login)).perform(click());
+            Thread.sleep(8000);
+            onView(withId(R.id.main_content)).check(matches(isDisplayed()));
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+            Thread.sleep(5000);
+            onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
+            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.btn_login)).perform(click());
+            Thread.sleep(8000);
+            onView(withId(R.id.main_content)).check(matches(isDisplayed()));
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_profile));
+            Thread.sleep(5000);
+            onView(withText("Edit"))
+                    .perform(click());
+            Thread.sleep(10000);
+
+            onView(withId(R.id.editFirstName))
+                    .perform(replaceText("Randall"));
+            onView(withId(R.id.editLastName))
+                    .perform(replaceText(""));
+            onView(withId(R.id.editPosition))
+                    .perform(replaceText("Flight Attendant"));
+            closeSoftKeyboard();
+            onView(withText("Save Changes"))
+                    .perform(scrollTo(), click());
+            onView(withId(R.id.editLastName))
+                    .check(matches(hasErrorText("Last name is required!")));
+            onView(withId(R.id.editFirstName))
+                    .check(matches(hasErrorText("First name is required!")));
+            onView(withId(R.id.editPosition))
+                    .check(matches(hasErrorText("Position is required!")));
         }
     }
 
