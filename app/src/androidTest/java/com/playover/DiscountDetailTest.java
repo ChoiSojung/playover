@@ -70,6 +70,16 @@ public class DiscountDetailTest {
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_discounts));
             Thread.sleep(3000);
+            onView(withId(R.id.all_discounts)).perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.food_discounts)).perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.fun_discounts)).perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.hotel_car_discounts)).perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.all_discounts)).perform(click());
+            Thread.sleep(1000);
             onView(withRecyclerView(R.id.recycler_view_discounts).atPosition(0)).perform(click());
             Thread.sleep(2000);
             onView(withId(R.id.addComment)).perform(click());
@@ -123,6 +133,7 @@ public class DiscountDetailTest {
             onView(withId(R.id.saveDiscount)).perform(click());
             Thread.sleep(2000);
             onView(withId(R.id.displayPhone)).check(matches(withText("425-420-9999")));
+            Thread.sleep(2000);
         } catch (Exception ex) {
             Thread.sleep(5000);
             onView(withId(R.id.lblogin_main)).perform(click());
@@ -133,6 +144,16 @@ public class DiscountDetailTest {
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_discounts));
             Thread.sleep(3000);
+            onView(withId(R.id.all_discounts)).perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.food_discounts)).perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.fun_discounts)).perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.hotel_car_discounts)).perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.all_discounts)).perform(click());
+            Thread.sleep(1000);
             onView(withRecyclerView(R.id.recycler_view_discounts).atPosition(0)).perform(click());
             Thread.sleep(2000);
             onView(withId(R.id.addComment)).perform(click());
