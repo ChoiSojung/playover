@@ -9,6 +9,7 @@ import android.support.test.espresso.ViewAction;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.DrawerActions;
 import android.support.test.espresso.contrib.NavigationViewActions;
+import android.support.test.espresso.contrib.PickerActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.rule.GrantPermissionRule;
 import android.support.test.uiautomator.UiDevice;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 import org.hamcrest.core.Is;
 import org.junit.Rule;
 import org.junit.Test;
@@ -33,6 +35,7 @@ import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.isDialog;
+import static android.support.test.espresso.matcher.RootMatchers.isPlatformPopup;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -134,6 +137,66 @@ public class DiscountDetailTest {
             Thread.sleep(2000);
             onView(withId(R.id.displayPhone)).check(matches(withText("425-420-9999")));
             Thread.sleep(2000);
+            onView(withId(R.id.discounts_content)).perform(DrawerActions.open());
+            onView(withId(R.id.nav_view_discount)).perform(NavigationViewActions.navigateTo(R.id.nav_check_in));
+            Thread.sleep(3000);
+            onView(withId(R.id.txtCheckoutSet)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.recycler_view_hotels))
+                    .check(matches(isDisplayed()));
+            onView(withRecyclerView(R.id.recycler_view_hotels).atPosition(0))
+                    .perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("Today")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("Tomorrow")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("3 Days")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("4 Days")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("5 Days")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("6 Days")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("7 Days")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.tprCheckOut)).perform(PickerActions.setTime(12, 00));
+            Thread.sleep(1000);
+            onView(withId(R.id.btnCheckInConfirm)).perform(click());
+            Thread.sleep(3000);
+            onView(withRecyclerView(R.id.recycler_view_also_checked_in).atPosition(0)).perform(click());
+            Thread.sleep(3000);
+            Espresso.pressBack();
+            Thread.sleep(10000);
+
         } catch (Exception ex) {
             Thread.sleep(5000);
             onView(withId(R.id.lblogin_main)).perform(click());
@@ -207,6 +270,66 @@ public class DiscountDetailTest {
             onView(withId(R.id.saveDiscount)).perform(click());
             Thread.sleep(2000);
             onView(withId(R.id.displayPhone)).check(matches(withText("425-420-9999")));
+            Thread.sleep(3000);
+            onView(withId(R.id.discounts_content)).perform(DrawerActions.open());
+            onView(withId(R.id.nav_view_discount)).perform(NavigationViewActions.navigateTo(R.id.nav_check_in));
+            Thread.sleep(3000);
+            onView(withId(R.id.txtCheckoutSet)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.recycler_view_hotels))
+                    .check(matches(isDisplayed()));
+            onView(withRecyclerView(R.id.recycler_view_hotels).atPosition(0))
+                    .perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("Today")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("Tomorrow")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("3 Days")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("4 Days")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("5 Days")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("6 Days")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("7 Days")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.tprCheckOut)).perform(PickerActions.setTime(12, 00));
+            Thread.sleep(1000);
+            onView(withId(R.id.btnCheckInConfirm)).perform(click());
+            Thread.sleep(3000);
+            onView(withRecyclerView(R.id.recycler_view_also_checked_in).atPosition(0)).perform(click());
+            Thread.sleep(3000);
+            Espresso.pressBack();
+            Thread.sleep(10000);
         }
     }
 
