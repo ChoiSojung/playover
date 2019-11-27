@@ -67,6 +67,7 @@ public class VerificationFragmentTest {
         onView(withId(R.id.buttonSignUp)).perform(click());
         onView(withId(R.id.verificationEdit)).perform(typeText("987654321"));
         Espresso.closeSoftKeyboard();
+        onView(withId(R.id.verify)).perform(click());
         onView(withText("Verification Code Does Not Match!"))
                 .inRoot(withDecorView(not(activityTestRule.getActivity().getWindow().getDecorView())))
                 .check(matches(isDisplayed()));
