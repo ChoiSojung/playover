@@ -61,7 +61,7 @@ public class GroupMessagingBubblesTest {
                 }
             };
 
-    @Rule
+/*    @Rule
     public ActivityTestRule<MessagingActivity> activityTestRule2 =
             new ActivityTestRule<MessagingActivity>(MessagingActivity.class, true, false) {
                 @Override
@@ -83,7 +83,7 @@ public class GroupMessagingBubblesTest {
                             "Vts6RaoOXmfzipdl3ZG1EzqOMiw2,dHCtVaM2q9XA7pJ1PGZ3vdhTe1v2");
                     return testIntent;
                 }
-    };
+    };*/
 
     @Rule
     public ActivityTestRule<MessagingActivity> activityTestRuleForGroupName =
@@ -138,7 +138,7 @@ public class GroupMessagingBubblesTest {
         }
     }
 
-    private void testRecieveMessage(ActivityTestRule activityTestRule, Intent intent, String testMessage){
+/*    private void testRecieveMessage(ActivityTestRule activityTestRule, Intent intent, String testMessage){
 
         if (checkForUser()) {
             activityTestRule.launchActivity(intent);
@@ -147,7 +147,7 @@ public class GroupMessagingBubblesTest {
                         .check(matches(hasDescendant(withText(testMessage))));
             }
         }
-    }
+    }*/
 
     @Test
     public void testMessaging()  throws InterruptedException {
@@ -156,50 +156,10 @@ public class GroupMessagingBubblesTest {
         if(checkForUser()){
             testSendMessage(activityTestRule, testIntent, testMessage);
         }
-
-
-/*
-        signOutFromMessaging();
-        Thread.sleep(20000);
-        signInWithUser(testAccount2, password);
-        Thread.sleep(5000);
-        */
-/*testSendMessage(activityTestRule2, testIntent2, "Hi, Jillian");*//*
-
-        testRecieveMessage(activityTestRule2, testIntent2, testMessage);
-*/
-
-
-/*        Thread.sleep(2000);
-        signOutFromMessaging();
-        Thread.sleep(2000);
-        signInWithUser(testAccount3, password);
-        Thread.sleep(5000);
-        if (checkForUser()) {
-            activityTestRule3.launchActivity(testIntent);
-            onView(withId(R.id.msg_type)).perform(typeText("What's up, guys?"));
-            Espresso.closeSoftKeyboard();
-            onView(withId(R.id.btn_chat_send)).perform(click());
-            if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
-                onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
-                        .check(matches(isDisplayed()));
-            }
-            onView(withId(R.id.msg_type)).perform(typeText("Play is Over, get back to work."));
-            Espresso.closeSoftKeyboard();
-            onView(withId(R.id.btn_chat_send)).perform(click());
-            if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(1).matches(isDisplayed())) {
-                onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(1))
-                        .check(matches(isDisplayed()));
-            }
-        }
-        Thread.sleep(2000);
-        signOutFromMessaging();
-        Thread.sleep(2000);
-        signInWithUser(testAccount1, password);*/
     }
 
 
-    @Test
+ /*   @Test
     public void testNewGroupWithDefaultNameWithEmptyGroupName(){
         if (checkForUser()){
             activityTestRuleForGroupName.launchActivity(testIntent);
@@ -217,7 +177,7 @@ public class GroupMessagingBubblesTest {
             }
         }
 
-    }
+    }*/
 
 /*    @Test
     public void testNewGroupWithDefaultNameWithCancel(){
@@ -238,6 +198,7 @@ public class GroupMessagingBubblesTest {
         }
     }*/
 
+/*
     @Test
     public void testCreateNewGroup() throws InterruptedException{
         if (checkForUser()){
@@ -264,6 +225,7 @@ public class GroupMessagingBubblesTest {
                 }
         }
     }
+*/
 
 /*    @Test
     public void testNewGroupCustomName() throws InterruptedException{
@@ -285,91 +247,4 @@ public class GroupMessagingBubblesTest {
             testSendMessage(activityTestRuleWithFencePostUidsString, testIntent, testMessage);
         }
     }
-
- /*   @Test
-    public void testMessagingDrawerMessaging() throws InterruptedException {
-        if (checkForUser()) {
-            activityTestRule.launchActivity(testIntent);
-            Thread.sleep(2000);
-            onView(withId(R.id.messaging_content)).check(matches(isDisplayed()));
-            onView(withId(R.id.messaging_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view_messaging)).perform(NavigationViewActions.navigateTo(R.id.nav_messaging));
-            Espresso.pressBack();
-        }
-    }
-    @Test
-    public void testMessagingDrawerProfile() throws InterruptedException {
-        if (checkForUser()) {
-            activityTestRule.launchActivity(testIntent);
-            Thread.sleep(2000);
-            onView(withId(R.id.messaging_content)).check(matches(isDisplayed()));
-            onView(withId(R.id.messaging_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view_messaging)).perform(NavigationViewActions.navigateTo(R.id.nav_profile));
-            Espresso.pressBack();
-        }
-    }
-    @Test
-    public void testMessagingDrawerCheckin() throws InterruptedException {
-        if (checkForUser()) {
-            activityTestRule.launchActivity(testIntent);
-            Thread.sleep(2000);
-            onView(withId(R.id.messaging_content)).check(matches(isDisplayed()));
-            onView(withId(R.id.messaging_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view_messaging)).perform(NavigationViewActions.navigateTo(R.id.nav_check_in));
-            Espresso.pressBack();
-        }
-    }
-    @Test
-    public void testMessagingDrawerSettings() throws InterruptedException {
-        if (checkForUser()) {
-            activityTestRule.launchActivity(testIntent);
-            Thread.sleep(2000);
-            onView(withId(R.id.messaging_content)).check(matches(isDisplayed()));
-            onView(withId(R.id.messaging_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view_messaging)).perform(NavigationViewActions.navigateTo(R.id.nav_settings));
-            Espresso.pressBack();
-        }
-    }
-    @Test
-    public void testMessagingDrawerBuddies() throws InterruptedException {
-        if (checkForUser()) {
-            activityTestRule.launchActivity(testIntent);
-            Thread.sleep(2000);
-            onView(withId(R.id.messaging_content)).check(matches(isDisplayed()));
-            onView(withId(R.id.messaging_content)).perform(DrawerActions.open());
-            Espresso.pressBack();
-            onView(withId(R.id.messaging_content)).check(matches(isDisplayed()));
-            onView(withId(R.id.messaging_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view_messaging)).perform(NavigationViewActions.navigateTo(R.id.nav_buddies));
-            Espresso.pressBack();
-        }
-    }
-    @Test
-    public void testMessagingDrawerDiscounts() throws InterruptedException {
-        if (checkForUser()) {
-            activityTestRule.launchActivity(testIntent);
-            Thread.sleep(2000);
-            onView(withId(R.id.messaging_content)).check(matches(isDisplayed()));
-            onView(withId(R.id.messaging_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view_messaging)).perform(NavigationViewActions.navigateTo(R.id.nav_discounts));
-            Espresso.pressBack();
-        }
-    }
-
-    @Test
-    public void testMessagingDrawerSignOut() throws InterruptedException {
-        if (checkForUser()) {
-            activityTestRule.launchActivity(testIntent);
-            Thread.sleep(2000);
-            signOutFromMessaging();
-            Thread.sleep(2000);
-            signInWithUser(testAccount1,password);
-            Thread.sleep(5000);
-            if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
-                onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
-                        .check(matches(isDisplayed()));
-            }
-        }
-    }*/
-
 }
