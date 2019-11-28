@@ -46,7 +46,7 @@ public class VerificationFragmentTest {
         }
         Espresso.pressBack();
         Espresso.pressBack();
-        logIn();
+//        logIn();
     }
 
     @Test
@@ -62,7 +62,7 @@ public class VerificationFragmentTest {
         }
         Espresso.pressBack();
         Espresso.pressBack();
-        logIn();
+//        logIn();
     }
 
     private void verificationCodeTestFail() throws InterruptedException {
@@ -106,11 +106,11 @@ public class VerificationFragmentTest {
         onView(withId(R.id.main_content)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
     }
-
+/*
     private void logIn(){
         onView(withId(R.id.lblogin_main)).perform(MainActivityTest.clickClickableSpan("Sign In"));
         onView(withId(R.id.email_login)).perform(replaceText("jjtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
         onView(withId(R.id.password_login)).perform(replaceText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
         onView(withId(R.id.btn_login)).perform(click());
-    }
+    }*/
 }
