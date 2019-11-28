@@ -219,7 +219,7 @@ public class GroupMessagingBubblesTest {
 
     }
 
-    @Test
+/*    @Test
     public void testNewGroupWithDefaultNameWithCancel(){
         if (checkForUser()){
             activityTestRuleForGroupName.launchActivity(testIntent);
@@ -236,8 +236,7 @@ public class GroupMessagingBubblesTest {
                         , " for test new group with default name when group name dialog is canceled.");
             }
         }
-
-    }
+    }*/
 
     @Test
     public void testCreateNewGroup() throws InterruptedException{
