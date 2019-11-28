@@ -153,6 +153,22 @@ public class BuddyTest2 {
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_buddies));
             Thread.sleep(3000);
+            onView(withRecyclerView(R.id.buddies_recycleView).atPosition(0)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.profileBuddyStar)).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.profileBuddyStar)).perform(click());
+            Thread.sleep(2000);
+            Espresso.pressBack();
+            Thread.sleep(2000);
+            onView(withRecyclerView(R.id.buddies_recycleView).atPositionOnView(0, R.id.checkbox))
+                    .perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.message_sel)).perform(click());
+            Thread.sleep(2000);
+            Espresso.pressBack();
+            Espresso.pressBack();
+            Thread.sleep(3000);
             onView(withId(R.id.buddies_content)).check(matches(isDisplayed()));
             onView(withId(R.id.buddies_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view_buddies)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
@@ -198,6 +214,23 @@ public class BuddyTest2 {
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_buddies));
+            Thread.sleep(3000);
+            Thread.sleep(3000);
+            onView(withRecyclerView(R.id.buddies_recycleView).atPosition(0)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.profileBuddyStar)).perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.profileBuddyStar)).perform(click());
+            Thread.sleep(2000);
+            Espresso.pressBack();
+            Thread.sleep(2000);
+            onView(withRecyclerView(R.id.buddies_recycleView).atPositionOnView(0, R.id.checkbox))
+                    .perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.message_sel)).perform(click());
+            Thread.sleep(2000);
+            Espresso.pressBack();
+            Espresso.pressBack();
             Thread.sleep(3000);
             onView(withId(R.id.buddies_content)).check(matches(isDisplayed()));
             onView(withId(R.id.buddies_content)).perform(DrawerActions.open());
