@@ -202,18 +202,18 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
                                 new FindHotelsAsync().execute(47.608013, -122.335167);
                             }
                         } else {
-                            Toast.makeText(getApplicationContext(),"Device location not found yet, please wait or press the <back> button",Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(),"Device location not found yet, please wait or press the <back> button",Toast.LENGTH_LONG).show();
                         }
 
                     } catch (Exception e) {
-                        Toast.makeText(getApplicationContext(), "Device location not found yet, please wait...", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(), "Device location not found yet, please wait...", Toast.LENGTH_LONG).show();
                     }
                 }
             },null);
         }
         catch (Exception e)
         {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
     }
 
@@ -357,26 +357,26 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
 
                         mProgress.dismiss();
                     } catch (JSONException je) {
-                        Log.e("HERE exception message:", je.getMessage());
+                       // Log.e("HERE exception message:", je.getMessage());
                     }
 
                 } catch (Exception ex) {
-                    Log.e("Here exception message:", ex.getMessage());
-                    System.out.println(ex.getMessage());
+                    //Log.e("Here exception message:", ex.getMessage());
+                    //System.out.println(ex.getMessage());
                     exc = ex;
                 } finally {
                     try {
                         urlConnection.disconnect();
                         reader.close();
                     } catch (Exception ex) {
-                        Log.e("HERE exception message:", ex.getMessage());
+                        //Log.e("HERE exception message:", ex.getMessage());
                     }
                 }
 
             } catch (MalformedURLException mue) {
 
             } catch (IOException ioex) {
-                Log.e("HERE exception message:", ioex.getMessage());
+               // Log.e("HERE exception message:", ioex.getMessage());
             }
             return null;
 
@@ -402,7 +402,7 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
                     trans.commitAllowingStateLoss();
                 }
             } else {
-                Toast.makeText(getApplicationContext(), "503: The service is unavailable", Toast.LENGTH_LONG).show();
+               // Toast.makeText(getApplicationContext(), "503: The service is unavailable", Toast.LENGTH_LONG).show();
             }
         }
 
