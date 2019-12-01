@@ -251,8 +251,8 @@ public class EditProfile_Fragment extends Fragment {
                             transaction.commit();
                         } else {
                             if (task.getException() != null) {
-                                Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                Log.e("update error: ", task.getException().getMessage());
+                                //Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                //Log.e("update error: ", task.getException().getMessage());
                             }
                         }
                     }
@@ -311,9 +311,6 @@ public class EditProfile_Fragment extends Fragment {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
 
-                                        } else {
-                                            if (task.getException() != null)
-                                                Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });

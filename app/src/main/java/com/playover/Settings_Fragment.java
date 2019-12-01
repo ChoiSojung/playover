@@ -83,7 +83,7 @@ public class Settings_Fragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<InstanceIdResult> task) {
                         if (!task.isSuccessful()) {
-                            Log.w(TAG, "getInstanceId failed", task.getException());
+                           // Log.w(TAG, "getInstanceId failed", task.getException());
                             return;
                         }
 
@@ -125,9 +125,6 @@ public class Settings_Fragment extends Fragment {
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
                         Log.i("dndToggle", "switch toggle written to firebase");
-                    } else {
-                        if (task.getException() != null)
-                            Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });

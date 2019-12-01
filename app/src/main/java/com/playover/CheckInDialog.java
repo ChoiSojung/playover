@@ -167,7 +167,7 @@ public class CheckInDialog extends Dialog implements View.OnClickListener
             }
             catch (Exception ex)
             {
-                System.out.println(ex.getMessage());
+                //System.out.println(ex.getMessage());
             }
                 //get checkout time
                 Calendar checkOut = getCal(dateSelection, hourSelection, minuteSelection);
