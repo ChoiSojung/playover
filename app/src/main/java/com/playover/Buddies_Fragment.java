@@ -103,7 +103,10 @@ public class Buddies_Fragment extends Fragment {
                     String mListTemp = messagingList.next();
                     buddyToMessageUids += mListTemp + ",";
                 }
-                message.putExtra("recipientUids", buddyToMessageUids);
+                String recipientUids = "recipientUids";
+                String uid1 = "4xdg93jslchjlweljhjg";
+                String uid2 = "asldjksljsjlvlj4333l";
+                message.putExtra(recipientUids, buddyToMessageUids);
                 startActivity(message);
 
             }
@@ -191,8 +194,10 @@ public class Buddies_Fragment extends Fragment {
             transaction = fragmentManager.beginTransaction();
             Profile_Fragment profile = new Profile_Fragment();
             profile.setArguments(bud);
-            transaction.replace(R.id.containerBuddies, profile, "Buddy Profile");
-            transaction.addToBackStack("Buddy Profile");
+            String buddyProfile = "Buddy Profile";
+            String buddyProfile2 = "Buddy Profile";
+            transaction.replace(R.id.containerBuddies, profile, buddyProfile);
+            transaction.addToBackStack(buddyProfile);
             transaction.commit();
         }
     }

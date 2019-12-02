@@ -55,6 +55,9 @@ public class Profile_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this
+        String onCreate = "onCreate";
+        String onCreateMsg = "In On Create";
+        Log.i(onCreate, onCreateMsg);
         final View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
         editProfileBtn = rootView.findViewById(R.id.editBtn);
         sendMessageBtn = rootView.findViewById(R.id.ProfileMessageBtn);
@@ -82,6 +85,12 @@ public class Profile_Fragment extends Fragment {
                 userVm.getUser(authVm.getUser().getUid(),
                         (Person user) -> {
                             if (user != null) {
+                                String list = "users list";
+                                String list2 = "users List";
+                                String list3 = "users List";
+                                Log.i(list, user.toString());
+                                Log.i(list2, user.toString());
+                                Log.i(list3, user.toString());
                                 Log.i("users list: ", user.toString());
                                 if (!TextUtils.isEmpty(user.getFirstName()) && !TextUtils.isEmpty(user.getLastName())) {
                                     String setName = user.getFirstName() + " " + user.getLastName();
@@ -169,7 +178,7 @@ public class Profile_Fragment extends Fragment {
                         startActivity(messagingIntent);
                     }
                     catch (Exception e) {
-                        Log.v("Exception",e.getMessage());
+                        // Log.v("Exception",e.getMessage());
                     }
                 }
             });
@@ -186,13 +195,13 @@ public class Profile_Fragment extends Fragment {
 
             blockUserBtn.setOnClickListener(v -> {
                 Context context = this.getContext();
-                CharSequence text = "User Blocked";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-
-                toast.setGravity(50, 300, 900);
-                toast.show();
+//                CharSequence text = "User Blocked";
+//                int duration = Toast.LENGTH_SHORT;
+//
+//                Toast toast = Toast.makeText(context, text, duration);
+//
+//                toast.setGravity(50, 300, 900);
+//                toast.show();
                 buddyVm.putBuddy(authVm.getUser().getUid(), getArguments().getString(Constants.KEY_BUDUID), true,
                         new OnCompleteListener<Void>() {
                             @Override
@@ -232,17 +241,17 @@ public class Profile_Fragment extends Fragment {
                     starBtn.setImageResource(R.drawable.ic_star_black_24dp);
                     buddyVm.putBuddy(authVm.getUser().getUid(), getArguments().getString(Constants.KEY_BUDUID), false,
                             new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Log.i("add buddy: ", "worked!");
-                                //display message to user
-                            } else {
-                                Log.i("add buddy", "didn't work!");
-                                //display message to user
-                            }
-                        }
-                    });
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.i("add buddy: ", "worked!");
+                                        //display message to user
+                                    } else {
+                                        // Log.i("add buddy", "didn't work!");
+                                        //display message to user
+                                    }
+                                }
+                            });
                 } else {
                     buddy = false;
                     starBtn.setImageResource(R.drawable.ic_star_border_black_24dp);
@@ -253,7 +262,7 @@ public class Profile_Fragment extends Fragment {
                                 Log.i("delete buddy: ", "worked!");
                                 //display message to user
                             } else {
-                                Log.i("delete buddy", "didn't work!");
+                                //Log.i("delete buddy", "didn't work!");
                                 //display message to user
                             }
                         }
@@ -312,11 +321,17 @@ public class Profile_Fragment extends Fragment {
 
     @Override
     public void onAttach(Context context) {
+        String onAttach = "onAttach";
+        String attachMsg = "In On Attach";
+        Log.i(onAttach, attachMsg);
         super.onAttach(context);
     }
 
     @Override
     public void onDetach() {
+        String onDetach = "onDetach";
+        String detachMsg = "In On Detach";
+        Log.i(onDetach, detachMsg);
         super.onDetach();
     }
 

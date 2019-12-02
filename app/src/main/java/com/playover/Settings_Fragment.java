@@ -47,7 +47,9 @@ public class Settings_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
-
+        String onCreate = "onCreate";
+        String onCreateMsg = "In On Create";
+        Log.i(onCreate, onCreateMsg);
         dndSwitch = rootView.findViewById(R.id.settingsDndSwitch);
         changePassword = rootView.findViewById(R.id.settingsChangePassword);
         fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
@@ -83,7 +85,7 @@ public class Settings_Fragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<InstanceIdResult> task) {
                         if (!task.isSuccessful()) {
-                            Log.w(TAG, "getInstanceId failed", task.getException());
+                           // Log.w(TAG, "getInstanceId failed", task.getException());
                             return;
                         }
 
@@ -125,9 +127,6 @@ public class Settings_Fragment extends Fragment {
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
                         Log.i("dndToggle", "switch toggle written to firebase");
-                    } else {
-                        if (task.getException() != null)
-                            Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });

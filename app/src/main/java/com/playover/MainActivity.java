@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String onCreate = "onCreate";
+        String onCreateMsg = "In On Create";
+        Log.i(onCreate, onCreateMsg);
         //check for permissions on log in
         requestPermissions();
         setContentView(R.layout.activity_main);
@@ -88,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 if (InternetBroadcastReceiver.isNetworkAvailable(context)) {
                     if (shouldToast) {
                         //toast directions if connection restored
-                        Toast.makeText(MainActivity.this, "Network Connection Restored!", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(MainActivity.this, "Network Connection Restored!", Toast.LENGTH_SHORT).show();
                         shouldToast = false;
                     }
 
@@ -125,16 +128,16 @@ public class MainActivity extends AppCompatActivity {
                             //if user declines to enable permission and clicks ignore
                             if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
                                     permissions[i])) {
-                                Toast.makeText(MainActivity.this, permission[2] + " is required. Please go to settings and turn on!", Toast.LENGTH_LONG).show();
+                                //Toast.makeText(MainActivity.this, permission[2] + " is required. Please go to settings and turn on!", Toast.LENGTH_LONG).show();
 
                             } else {
-                                    Toast.makeText(MainActivity.this, permission[2] + " is required.  Please go to settings and turn on!", Toast.LENGTH_LONG).show();
+                                  //  Toast.makeText(MainActivity.this, permission[2] + " is required.  Please go to settings and turn on!", Toast.LENGTH_LONG).show();
 
                             }
                         }
                         //if string split was unsuccessful or they change how its returned on the next api release
                         else {
-                            Toast.makeText(MainActivity.this, "That permission is required for App to work. Please go to settings and turn on!", Toast.LENGTH_LONG).show();
+                           // Toast.makeText(MainActivity.this, "That permission is required for App to work. Please go to settings and turn on!", Toast.LENGTH_LONG).show();
 
                         }
                     }

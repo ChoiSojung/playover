@@ -54,6 +54,9 @@ public class Discounts extends AppCompatActivity implements NavigationView.OnNav
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String onCreate = "onCreate";
+        String onCreateMsg = "In On Create";
+        Log.i(onCreate, onCreateMsg);
         listDiscounts = new ListDiscount_Fragment();
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
@@ -130,15 +133,15 @@ public class Discounts extends AppCompatActivity implements NavigationView.OnNav
                         );
                     }
                 } else {
-                    Log.e("location error: ", "Unable to get location from geocoder!");
+                    //Log.e("location error: ", "Unable to get location from geocoder!");
                     String locatedAt = getString(R.string.get_city_state_error);
-                    Toast.makeText(Discounts.this, locatedAt, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Discounts.this, locatedAt, Toast.LENGTH_SHORT).show();
 
                 }
             } catch (Exception ex) {
-                Log.e("location error: ", ex.getMessage());
+                //Log.e("location error: ", ex.getMessage());
                 String locatedAt = getString(R.string.get_city_state_error);
-                Toast.makeText(Discounts.this, locatedAt, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Discounts.this, locatedAt, Toast.LENGTH_SHORT).show();
             }
         } else {
             Toast.makeText(Discounts.this, "Unable to get location!", Toast.LENGTH_SHORT).show();
@@ -159,7 +162,7 @@ public class Discounts extends AppCompatActivity implements NavigationView.OnNav
 
     private boolean checkLocation() {
         if (!isLocationEnabled()) {
-                Toast.makeText(Discounts.this, "Please enable device location!", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(Discounts.this, "Please enable device location!", Toast.LENGTH_SHORT).show();
 
         }
         return isLocationEnabled();
@@ -208,9 +211,9 @@ public class Discounts extends AppCompatActivity implements NavigationView.OnNav
                 }
             } catch (Exception ex) {
                 //unable to use geocoder or nothing is returned
-                Log.e("location error: ", ex.getMessage());
-                String locatedAt = getString(R.string.get_city_state_error);
-                Toast.makeText(Discounts.this, locatedAt, Toast.LENGTH_SHORT).show();
+               // Log.e("location error: ", ex.getMessage());
+               // String locatedAt = getString(R.string.get_city_state_error);
+                //Toast.makeText(Discounts.this, locatedAt, Toast.LENGTH_SHORT).show();
             }
 
         }
