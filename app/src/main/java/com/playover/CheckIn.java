@@ -75,7 +75,8 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        String CheckInLog = "CheckInLog";
+        Log.d(CheckInLog, "onCreate");
         setHotelCheckedInto(null);
         firstTime = true;
 
@@ -102,6 +103,9 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
 
         try
         {
+             String enterTry = "Enter Try Block";
+             String tryMessage = "Entering try block";
+             Log.d(enterTry, tryMessage);
              authVm = new AuthUserViewModel();
              hotelVm = new HotelViewModel();
              userId = authVm.getUser().getUid();
@@ -111,6 +115,9 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
                  hotelCheckedIncount = result.getChildrenCount();
                  Log.i("findhotelcheckedinto: ", userId + " checked in count: " + hotelCheckedIncount);
                 if (hotelCheckedIncount > 0) {
+                    String enterIf = "Enter If Statement";
+                    String ifMessage = "Entering the If statement";
+                    Log.d(enterIf, ifMessage);
                     DataSnapshot snapshot = result.getChildren().iterator().next();
                     setHotelCheckedInto(snapshot.getValue().toString());
 
@@ -118,10 +125,15 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
 
                     try
                     {
-
+                        String enterTry2 = "Enter 2nd Try Block";
+                        String tryMessage2 = "Entering 2nd try block";
+                        Log.d(enterTry2, tryMessage2);
                         hotelVm.findHotel(hotelCheckedInto, (DataSnapshot hotel) -> {
                             try
                             {
+                                String enterTry3 = "Enter 3rd Try Block";
+                                String tryMessage3 = "Entering 3rd try block";
+                                Log.d(enterTry3, tryMessage);
                                 DataSnapshot snapshotHotel = hotel.getChildren().iterator().next();
                                 obj = snapshotHotel.getValue(Hotel.class);
 
@@ -249,6 +261,9 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
     }
 
     private void showAlert() {
+        String showAlert = "Enter show Alert";
+        String tryMessage = "Entering Show Alert Method";
+        Log.d(showAlert, tryMessage);
         final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle(R.string.enable_location);
         dialog.setMessage(getString(R.string.location_message));
