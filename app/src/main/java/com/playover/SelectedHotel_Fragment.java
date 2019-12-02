@@ -88,7 +88,9 @@ public class SelectedHotel_Fragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-
+        String onCreate = "onCreate";
+        String onCreateMsg = "Entering onCreate";
+        Log.d(onCreate, onCreateMsg);
         isCheckedIn = true;
 
         //enable search in the tool bar
@@ -101,12 +103,15 @@ public class SelectedHotel_Fragment extends Fragment{
         // messageAllButton = v.findViewById(R.id.messageAllBtn);
         try
         {
+            String enterTry = "Enter Try Block";
+            String tryMessage = "Entering try block";
+            Log.d(enterTry, tryMessage);
             Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
             toolbar.setTitle("HOTEL");
         }
         catch (Exception e)
         {
-            Log.v("Couldn't find toolbar",e.getMessage());
+            //Log.v("Couldn't find toolbar",e.getMessage());
         }
 
         messageSelectedButton.setOnClickListener(new View.OnClickListener() {
@@ -128,12 +133,12 @@ public class SelectedHotel_Fragment extends Fragment{
                         Intent messagingIntent = new Intent(getActivity(), MessagingActivity.class);
                         messagingIntent.putExtra("recipientUids", personToMessageUids);
                         ContentAdapter.checkboxPosition = -1;
-                        Log.i("messageThreadBundle: ", "create new group");
+                        //Log.i("messageThreadBundle: ", "create new group");
                         startActivity(messagingIntent);
                     }
                 }
                 catch (Exception e) {
-                    Log.v("Exception",e.getMessage());
+                    //Log.v("Exception",e.getMessage());
                 }
             }
         });
@@ -165,6 +170,9 @@ public class SelectedHotel_Fragment extends Fragment{
         mTxtCheckoutSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String clicked = "Clicked";
+                String clickedMsg = "clicked Checkout";
+                Log.d(clicked, clickedMsg);
                 String userId = authVm.getUser().getUid();
                     hotelVm.findHotelCheckedInto(userId, (DataSnapshot hotel) ->
                     {
@@ -196,7 +204,7 @@ public class SelectedHotel_Fragment extends Fragment{
                         }
                         catch (Exception e)
                         {
-                            System.out.println(e.getMessage());
+                            //System.out.println(e.getMessage());
                         }
                     },null);
             }
@@ -266,7 +274,7 @@ public class SelectedHotel_Fragment extends Fragment{
         closeButton.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View v) {
-                                               Log.i("CloseButton sez: ", "Clicked!");
+                                               //Log.i("CloseButton sez: ", "Clicked!");
                                                searchMenuItem.setQuery("", false);
 
                                                //getFilteredGuests("");
@@ -321,7 +329,7 @@ public class SelectedHotel_Fragment extends Fragment{
 
     public void refreshSearch(String s){
         updateRecyclerView(getFilteredGuests(s));
-        Log.i("refresh", getFilteredGuests(s).toString());
+        //Log.i("refresh", getFilteredGuests(s).toString());
     }
 
     @Override
@@ -358,17 +366,17 @@ public class SelectedHotel_Fragment extends Fragment{
 
             budVm.getBuddies(authVm.getUser().getUid(),
                     (ArrayList<Person> persons) -> {
-                        //Log.i("misuse", persons.toString());
+                        Log.i("misuse", persons.toString());
 
 
 
                         for(Person person : persons) {
-                            //Log.i("buddy", String.valueOf("in for"));
+                            Log.i("buddy", String.valueOf("in for"));
                             if (person.getuId().equals(recipientUid.getText().toString())) {
                                 buddyStar.setImageResource(R.drawable.ic_star_black_24dp);
                                 buddy = true;
                                 hotVm.getUser(authVm.getUser().getUid(), (Person curUser) -> {
-                                    //Log.i("misuse", curUser.toString());
+                                    Log.i("misuse", curUser.toString());
                                     HashMap<String, Buddy> buddies = curUser.getBuddies();
                                     if (buddies != null) {
                                         boolean isBuddy = buddies.containsKey(person.getuId());
@@ -383,7 +391,7 @@ public class SelectedHotel_Fragment extends Fragment{
                                             }
                                         }
                                     }
-                                    //Log.i("misuse", buddies.toString());
+                                    Log.i("misuse", buddies.toString());
                                 });
                             }
                         }
@@ -454,7 +462,7 @@ public class SelectedHotel_Fragment extends Fragment{
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Log.i("Hotels onComplete: remove buddy", "successful");
+                                //Log.i("Hotels onComplete: remove buddy", "successful");
                             } else {
 
                             }
