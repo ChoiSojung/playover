@@ -169,7 +169,7 @@ public class Profile_Fragment extends Fragment {
                         startActivity(messagingIntent);
                     }
                     catch (Exception e) {
-                        Log.v("Exception",e.getMessage());
+                       // Log.v("Exception",e.getMessage());
                     }
                 }
             });
@@ -186,13 +186,13 @@ public class Profile_Fragment extends Fragment {
 
             blockUserBtn.setOnClickListener(v -> {
                 Context context = this.getContext();
-                CharSequence text = "User Blocked";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-
-                toast.setGravity(50, 300, 900);
-                toast.show();
+//                CharSequence text = "User Blocked";
+//                int duration = Toast.LENGTH_SHORT;
+//
+//                Toast toast = Toast.makeText(context, text, duration);
+//
+//                toast.setGravity(50, 300, 900);
+//                toast.show();
                 buddyVm.putBuddy(authVm.getUser().getUid(), getArguments().getString(Constants.KEY_BUDUID), true,
                         new OnCompleteListener<Void>() {
                             @Override
@@ -238,7 +238,7 @@ public class Profile_Fragment extends Fragment {
                                 Log.i("add buddy: ", "worked!");
                                 //display message to user
                             } else {
-                                Log.i("add buddy", "didn't work!");
+                               // Log.i("add buddy", "didn't work!");
                                 //display message to user
                             }
                         }
@@ -253,7 +253,7 @@ public class Profile_Fragment extends Fragment {
                                 Log.i("delete buddy: ", "worked!");
                                 //display message to user
                             } else {
-                                Log.i("delete buddy", "didn't work!");
+                                //Log.i("delete buddy", "didn't work!");
                                 //display message to user
                             }
                         }

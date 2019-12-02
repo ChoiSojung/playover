@@ -134,7 +134,7 @@ public class DiscountDetailFragment extends Fragment {
                                                         } else {
                                                             if (task.getException() != null)
                                                                 if (getActivity() != null) {
-                                                                    Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                                   // Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                                                 }
                                                         }
                                                     }
@@ -286,7 +286,7 @@ public class DiscountDetailFragment extends Fragment {
                                 }
                             } else {
                                 if (getActivity() != null) {
-                                    Toast.makeText(getActivity(), "Unable To Delete", Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(getActivity(), "Unable To Delete", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
@@ -294,7 +294,7 @@ public class DiscountDetailFragment extends Fragment {
                     return super.onOptionsItemSelected(item);
                 } else {
                     if(getActivity()!=null) {
-                        Toast.makeText(getActivity(), "Unable To Delete", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getActivity(), "Unable To Delete", Toast.LENGTH_SHORT).show();
                     }
                     return super.onOptionsItemSelected(item);
                 }
