@@ -56,6 +56,9 @@ public class SignUp_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        String onCreate = "onCreate";
+        String onCreateMsg = "In On Create";
+        Log.i(onCreate, onCreateMsg);
         View rootView = inflater.inflate(R.layout.fragment_sign_up, container, false);
         firstNameSignUp = rootView.findViewById(R.id.firstNameSignUp);
         lastNameSignUp = rootView.findViewById(R.id.lastNameSignUp);

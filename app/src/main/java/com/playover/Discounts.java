@@ -54,6 +54,9 @@ public class Discounts extends AppCompatActivity implements NavigationView.OnNav
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String onCreate = "onCreate";
+        String onCreateMsg = "In On Create";
+        Log.i(onCreate, onCreateMsg);
         listDiscounts = new ListDiscount_Fragment();
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();

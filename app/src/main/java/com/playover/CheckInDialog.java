@@ -85,6 +85,9 @@ public class CheckInDialog extends Dialog implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String onCreate = "onCreate";
+        String onCreateMsg = "In On Create";
+        Log.i(onCreate, onCreateMsg);
         setContentView(R.layout.checkin_dialog);
 
         mPlace = findViewById(R.id.txtCheckInHotel);

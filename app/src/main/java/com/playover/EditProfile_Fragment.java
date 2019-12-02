@@ -82,6 +82,9 @@ public class EditProfile_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        String onCreate = "onCreateView";
+        String onCreateMsg = "In On Create View";
+        Log.i(onCreate, onCreateMsg);
         final View rootView = inflater.inflate(R.layout.fragment_edit_profile, container, false);
         image = rootView.findViewById(R.id.image);
         pickedImage = rootView.findViewById(R.id.pickedImage);

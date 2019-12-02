@@ -75,6 +75,9 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String onCreate = "onCreate";
+        String onCreateMsg = "In On Create";
+        Log.i(onCreate, onCreateMsg);
         String CheckInLog = "CheckInLog";
         Log.d(CheckInLog, "onCreate");
         setHotelCheckedInto(null);

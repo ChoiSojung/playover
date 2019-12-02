@@ -47,7 +47,9 @@ public class Settings_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
-
+        String onCreate = "onCreate";
+        String onCreateMsg = "In On Create";
+        Log.i(onCreate, onCreateMsg);
         dndSwitch = rootView.findViewById(R.id.settingsDndSwitch);
         changePassword = rootView.findViewById(R.id.settingsChangePassword);
         fragmentManager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();

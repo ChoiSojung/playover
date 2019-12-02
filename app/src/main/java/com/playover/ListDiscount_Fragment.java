@@ -47,6 +47,9 @@ public class ListDiscount_Fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String onCreate = "onCreate";
+        String onCreateMsg = "In On Create";
+        Log.i(onCreate, onCreateMsg);
     }
 
     public void updateData(ArrayList<Discount> updatedData, String city, String state) {
