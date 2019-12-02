@@ -393,6 +393,337 @@ public class DiscountDetailTest {
         }
     }
 
+    @Test
+    public void checkAllCheckIns() throws Exception {
+        try {
+            Thread.sleep(5000);
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+            Thread.sleep(5000);
+            onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
+            onView(withId(R.id.email_login)).perform(typeText("lladddiscounttest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.btn_login)).perform(click());
+            Thread.sleep(8000);
+            onView(withText("CANCEL"))
+                    .inRoot(isDialog())
+                    .check(matches(isDisplayed()))
+                    .perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.recycler_view_hotels))
+                    .check(matches(isDisplayed()));
+            onView(withRecyclerView(R.id.recycler_view_hotels).atPosition(0))
+                    .perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("Today")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.tprCheckOut)).perform(PickerActions.setTime(24, 00));
+            Thread.sleep(1000);
+            onView(withId(R.id.sprReminder)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("5 Minutes Before"))).inRoot(isPlatformPopup()).perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.btnCheckInConfirm)).perform(click());
+            Thread.sleep(6000);
+            onView(withId(R.id.txtCheckoutSet)).perform(click());
+            Thread.sleep(3000);
+            onView(withText("CANCEL"))
+                    .inRoot(isDialog())
+                    .check(matches(isDisplayed()))
+                    .perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.recycler_view_hotels))
+                    .check(matches(isDisplayed()));
+            onView(withRecyclerView(R.id.recycler_view_hotels).atPosition(0))
+                    .perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("Tomorrow")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.tprCheckOut)).perform(PickerActions.setTime(12, 00));
+            Thread.sleep(1000);
+            onView(withId(R.id.sprReminder)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("10 Minutes Before"))).inRoot(isPlatformPopup()).perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.btnCheckInConfirm)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.txtCheckoutSet)).perform(click());
+            Thread.sleep(3000);
+            onView(withText("CANCEL"))
+                    .inRoot(isDialog())
+                    .check(matches(isDisplayed()))
+                    .perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.recycler_view_hotels))
+                    .check(matches(isDisplayed()));
+            onView(withRecyclerView(R.id.recycler_view_hotels).atPosition(0))
+                    .perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("3 Days")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.tprCheckOut)).perform(PickerActions.setTime(12, 00));
+            Thread.sleep(1000);
+            onView(withId(R.id.sprReminder)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("15 Minutes Before"))).inRoot(isPlatformPopup()).perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.btnCheckInConfirm)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.txtCheckoutSet)).perform(click());
+            Thread.sleep(3000);
+            onView(withText("CANCEL"))
+                    .inRoot(isDialog())
+                    .check(matches(isDisplayed()))
+                    .perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.recycler_view_hotels))
+                    .check(matches(isDisplayed()));
+            onView(withRecyclerView(R.id.recycler_view_hotels).atPosition(0))
+                    .perform(click());
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("4 Days")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.tprCheckOut)).perform(PickerActions.setTime(12, 00));
+            Thread.sleep(1000);
+            onView(withId(R.id.sprReminder)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("1 Hour Before"))).inRoot(isPlatformPopup()).perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.btnCheckInConfirm)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.txtCheckoutSet)).perform(click());
+            Thread.sleep(3000);
+            onView(withText("CANCEL"))
+                    .inRoot(isDialog())
+                    .check(matches(isDisplayed()))
+                    .perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.recycler_view_hotels))
+                    .check(matches(isDisplayed()));
+            onView(withRecyclerView(R.id.recycler_view_hotels).atPosition(0))
+                    .perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("5 Days")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.tprCheckOut)).perform(PickerActions.setTime(12, 00));
+            Thread.sleep(1000);
+            onView(withId(R.id.sprReminder)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("2 Hours Before"))).inRoot(isPlatformPopup()).perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.btnCheckInConfirm)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.txtCheckoutSet)).perform(click());
+            Thread.sleep(3000);
+            onView(withText("CANCEL"))
+                    .inRoot(isDialog())
+                    .check(matches(isDisplayed()))
+                    .perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.recycler_view_hotels))
+                    .check(matches(isDisplayed()));
+            onView(withRecyclerView(R.id.recycler_view_hotels).atPosition(0))
+                    .perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("6 Days")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.tprCheckOut)).perform(PickerActions.setTime(12, 00));
+            Thread.sleep(1000);
+            onView(withId(R.id.sprReminder)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("1 Day Before"))).inRoot(isPlatformPopup()).perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.btnCheckInConfirm)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.txtCheckoutSet)).perform(click());
+            Thread.sleep(3000);
+        } catch (Exception ex) {
+            Thread.sleep(5000);
+            onView(withId(R.id.lblogin_main)).perform(click());
+            onView(withId(R.id.email_login)).perform(typeText("lladddiscounttest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.btn_login)).perform(click());
+            Thread.sleep(8000);
+            onView(withText("CANCEL"))
+                    .inRoot(isDialog())
+                    .check(matches(isDisplayed()))
+                    .perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.recycler_view_hotels))
+                    .check(matches(isDisplayed()));
+            onView(withRecyclerView(R.id.recycler_view_hotels).atPosition(0))
+                    .perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("Today")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.tprCheckOut)).perform(PickerActions.setTime(24, 00));
+            Thread.sleep(1000);
+            onView(withId(R.id.sprReminder)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("5 Minutes Before"))).inRoot(isPlatformPopup()).perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.btnCheckInConfirm)).perform(click());
+            Thread.sleep(6000);
+            onView(withId(R.id.txtCheckoutSet)).perform(click());
+            Thread.sleep(3000);
+            onView(withText("CANCEL"))
+                    .inRoot(isDialog())
+                    .check(matches(isDisplayed()))
+                    .perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.recycler_view_hotels))
+                    .check(matches(isDisplayed()));
+            onView(withRecyclerView(R.id.recycler_view_hotels).atPosition(0))
+                    .perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("Tomorrow")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.tprCheckOut)).perform(PickerActions.setTime(12, 00));
+            Thread.sleep(1000);
+            onView(withId(R.id.sprReminder)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("10 Minutes Before"))).inRoot(isPlatformPopup()).perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.btnCheckInConfirm)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.txtCheckoutSet)).perform(click());
+            Thread.sleep(3000);
+            onView(withText("CANCEL"))
+                    .inRoot(isDialog())
+                    .check(matches(isDisplayed()))
+                    .perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.recycler_view_hotels))
+                    .check(matches(isDisplayed()));
+            onView(withRecyclerView(R.id.recycler_view_hotels).atPosition(0))
+                    .perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("3 Days")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.tprCheckOut)).perform(PickerActions.setTime(12, 00));
+            Thread.sleep(1000);
+            onView(withId(R.id.sprReminder)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("15 Minutes Before"))).inRoot(isPlatformPopup()).perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.btnCheckInConfirm)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.txtCheckoutSet)).perform(click());
+            Thread.sleep(3000);
+            onView(withText("CANCEL"))
+                    .inRoot(isDialog())
+                    .check(matches(isDisplayed()))
+                    .perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.recycler_view_hotels))
+                    .check(matches(isDisplayed()));
+            onView(withRecyclerView(R.id.recycler_view_hotels).atPosition(0))
+                    .perform(click());
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("4 Days")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.tprCheckOut)).perform(PickerActions.setTime(12, 00));
+            Thread.sleep(1000);
+            onView(withId(R.id.sprReminder)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("1 Hour Before"))).inRoot(isPlatformPopup()).perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.btnCheckInConfirm)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.txtCheckoutSet)).perform(click());
+            Thread.sleep(3000);
+            onView(withText("CANCEL"))
+                    .inRoot(isDialog())
+                    .check(matches(isDisplayed()))
+                    .perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.recycler_view_hotels))
+                    .check(matches(isDisplayed()));
+            onView(withRecyclerView(R.id.recycler_view_hotels).atPosition(0))
+                    .perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("5 Days")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.tprCheckOut)).perform(PickerActions.setTime(12, 00));
+            Thread.sleep(1000);
+            onView(withId(R.id.sprReminder)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("2 Hours Before"))).inRoot(isPlatformPopup()).perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.btnCheckInConfirm)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.txtCheckoutSet)).perform(click());
+            Thread.sleep(3000);
+            onView(withText("CANCEL"))
+                    .inRoot(isDialog())
+                    .check(matches(isDisplayed()))
+                    .perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.recycler_view_hotels))
+                    .check(matches(isDisplayed()));
+            onView(withRecyclerView(R.id.recycler_view_hotels).atPosition(0))
+                    .perform(click());
+            Thread.sleep(2000);
+            onView(withId(R.id.sprCheckout)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("6 Days")))
+                    .inRoot(isPlatformPopup())
+                    .perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.tprCheckOut)).perform(PickerActions.setTime(12, 00));
+            Thread.sleep(1000);
+            onView(withId(R.id.sprReminder)).perform(click());
+            onData(Matchers.allOf(is(instanceOf(String.class)),
+                    is("1 Day Before"))).inRoot(isPlatformPopup()).perform(click());
+            Thread.sleep(1000);
+            onView(withId(R.id.btnCheckInConfirm)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.txtCheckoutSet)).perform(click());
+            Thread.sleep(3000);
+        }
+    }
 
     //static method for clicking on clickable spans in textviews
     public static ViewAction clickClickableSpan(final CharSequence textToClick) {
