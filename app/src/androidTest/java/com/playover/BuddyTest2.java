@@ -166,8 +166,11 @@ public class BuddyTest2 {
             Thread.sleep(2000);
             onView(withId(R.id.message_sel)).perform(click());
             Thread.sleep(2000);
-            Espresso.pressBack();
-            Espresso.pressBack();
+            onView(withId(R.id.messaging_content)).perform(DrawerActions.open());
+            Thread.sleep(2000);
+            onView(withId(R.id.nav_view_messaging)).perform(NavigationViewActions.navigateTo(R.id.nav_buddies));
+            //Espresso.pressBack();
+            //Espresso.pressBack();
             Thread.sleep(3000);
             onView(withId(R.id.buddies_content)).check(matches(isDisplayed()));
             onView(withId(R.id.buddies_content)).perform(DrawerActions.open());
@@ -229,8 +232,10 @@ public class BuddyTest2 {
             Thread.sleep(2000);
             onView(withId(R.id.message_sel)).perform(click());
             Thread.sleep(2000);
-            Espresso.pressBack();
-            Espresso.pressBack();
+            Thread.sleep(2000);
+            onView(withId(R.id.messaging_content)).perform(DrawerActions.open());
+            Thread.sleep(2000);
+            onView(withId(R.id.nav_view_messaging)).perform(NavigationViewActions.navigateTo(R.id.nav_buddies));
             Thread.sleep(3000);
             onView(withId(R.id.buddies_content)).check(matches(isDisplayed()));
             onView(withId(R.id.buddies_content)).perform(DrawerActions.open());
