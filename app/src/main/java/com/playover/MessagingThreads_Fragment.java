@@ -49,11 +49,23 @@ public class MessagingThreads_Fragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getActivity().getApplicationContext();
+        String inClass = "inClass";
+        String inClassMsg = "inClass MessagingThreads Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create";
+        Log.i(onCreate, onCreateMsg);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        String inClass = "inClass";
+        String inClassMsg = "inClass MessagingThreads Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreateView";
+        String onCreateMsg = "On Create View";
+        Log.i(onCreate, onCreateMsg);
         View v = inflater.inflate(R.layout.fragment_messagingthreads, container, false);
         recyclerView = v.findViewById(R.id.recycler_view);
         userViewModel = new UserViewModel();
@@ -138,7 +150,7 @@ public class MessagingThreads_Fragment extends Fragment {
                 transaction.commit();
             }
             catch (Exception e) {
-                Log.v("Exception",e.getMessage());
+                //Log.v("Exception",e.getMessage());
             }
         }
     }

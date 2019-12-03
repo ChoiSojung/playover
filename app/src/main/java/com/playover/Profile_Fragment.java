@@ -55,6 +55,12 @@ public class Profile_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this
+        String inClass = "inClass";
+        String inClassMsg = "inClass Profile Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create";
+        Log.i(onCreate, onCreateMsg);
         final View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
         editProfileBtn = rootView.findViewById(R.id.editBtn);
         sendMessageBtn = rootView.findViewById(R.id.ProfileMessageBtn);
@@ -77,8 +83,14 @@ public class Profile_Fragment extends Fragment {
         buddyVm = new BuddiesViewModel();
 
         if (this.getContext() instanceof ProfileActivity) {
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             editProfileBtn.setVisibility(View.VISIBLE);
             if (authVm != null && userVm != null && authVm.getUser() != null) {
+                String enterIf2 = "EnterIf";
+                String enterIfMsg2 = "Entered 2nd If Statement";
+                Log.i(enterIf, enterIfMsg);
                 userVm.getUser(authVm.getUser().getUid(),
                         (Person user) -> {
                             if (user != null) {

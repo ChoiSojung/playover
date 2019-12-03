@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,12 @@ public class ListHotels_Fragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_list_hotels, container, false);
-
+        String inClass = "inClass";
+        String inClassMsg = "inClass ListHotels Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create View";
+        Log.i(onCreate, onCreateMsg);
         recyclerView = v.findViewById(R.id.recycler_view_hotels);
         ContentAdapter adapter = new ContentAdapter(recyclerView.getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

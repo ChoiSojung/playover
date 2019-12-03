@@ -25,11 +25,23 @@ public class ReportMisuse_Fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String inClass = "inClass";
+        String inClassMsg = "InClass ReportMisuse Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create";
+        Log.i(onCreate, onCreateMsg);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        String inClass = "inClass";
+        String inClassMsg = "InClass ReportMisuse Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreateView";
+        String onCreateMsg = "On Create View";
+        Log.i(onCreate, onCreateMsg);
         String selectedUserUid = getArguments().getString(Constants.KEY_BUDUID);
         String selectedUserName = getArguments().getString(Constants.KEY_BUDNAME);
         String reportersUserName = getArguments().getString(Constants.KEY_UID);

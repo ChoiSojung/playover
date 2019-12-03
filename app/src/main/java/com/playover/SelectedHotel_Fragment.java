@@ -88,7 +88,12 @@ public class SelectedHotel_Fragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-
+        String inClass = "inClass";
+        String inClassMsg = "InClass SelectedHotel Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate View";
+        String onCreateMsg = "On Create View";
+        Log.i(onCreate, onCreateMsg);
         isCheckedIn = true;
 
         //enable search in the tool bar

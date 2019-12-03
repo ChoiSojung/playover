@@ -50,12 +50,24 @@ public class SignUp_Fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String inClass = "inClass";
+        String inClassMsg = "InClass SignUp Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create";
+        Log.i(onCreate, onCreateMsg);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        String inClass = "inClass";
+        String inClassMsg = "InClass SignUp Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreateView ";
+        String onCreateMsg = "On Create View";
+        Log.i(onCreate, onCreateMsg);
         View rootView = inflater.inflate(R.layout.fragment_sign_up, container, false);
         firstNameSignUp = rootView.findViewById(R.id.firstNameSignUp);
         lastNameSignUp = rootView.findViewById(R.id.lastNameSignUp);
@@ -219,7 +231,7 @@ public class SignUp_Fragment extends Fragment {
                                 "playover.mobile@gmail.com", emailSignUp.getText().toString().trim());
                     } catch (Exception e) {
                         validationCode = 0;
-                        Log.e("send mail error", e.getMessage());
+                        //Log.e("send mail error", e.getMessage());
                     }
                 }
 

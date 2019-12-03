@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,11 +32,23 @@ public class PasswordReset_Fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String inClass = "inClass";
+        String inClassMsg = "inClass PasswordReset Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create";
+        Log.i(onCreate, onCreateMsg);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        String inClass = "inClass";
+        String inClassMsg = "inClass PasswordReset Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreateView";
+        String onCreateMsg = "On Create View";
+        Log.i(onCreate, onCreateMsg);
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_password_reset, container, false);
         authVm = new AuthUserViewModel();

@@ -75,7 +75,12 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        String inClass = "inClass";
+        String inClassMsg = "inClass CheckIn";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create View";
+        Log.i(onCreate, onCreateMsg);
         setHotelCheckedInto(null);
         firstTime = true;
 
@@ -111,6 +116,9 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
                  hotelCheckedIncount = result.getChildrenCount();
                  Log.i("findhotelcheckedinto: ", userId + " checked in count: " + hotelCheckedIncount);
                 if (hotelCheckedIncount > 0) {
+                    String enterIf = "EnterIf";
+                    String enterIfMsg = "Entered If Statement";
+                    Log.i(enterIf, enterIfMsg);
                     DataSnapshot snapshot = result.getChildren().iterator().next();
                     setHotelCheckedInto(snapshot.getValue().toString());
 
@@ -357,19 +365,19 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
 
                         mProgress.dismiss();
                     } catch (JSONException je) {
-                        Log.e("HERE exception message:", je.getMessage());
+                       // Log.e("HERE exception message:", je.getMessage());
                     }
 
                 } catch (Exception ex) {
-                    Log.e("Here exception message:", ex.getMessage());
-                    System.out.println(ex.getMessage());
+                    //Log.e("Here exception message:", ex.getMessage());
+                    //System.out.println(ex.getMessage());
                     exc = ex;
                 } finally {
                     try {
                         urlConnection.disconnect();
                         reader.close();
                     } catch (Exception ex) {
-                        Log.e("HERE exception message:", ex.getMessage());
+                       // Log.e("HERE exception message:", ex.getMessage());
                     }
                 }
 
@@ -393,6 +401,9 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
                 //show listhostels fragment only if currently on the check-in activity
                 if (firstTime) {
                     //dismiss progress bar
+                    String enterIf = "EnterIf";
+                    String enterIfMsg = "Entered If Statement";
+                    Log.i(enterIf, enterIfMsg);
                     mProgress.dismiss();
                     firstTime = false;
                     //Add our new fragment to the backstack and view ?
@@ -431,14 +442,23 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
         switch (item.getItemId()) {
             case R.id.nav_profile:
                 Intent newAct = new Intent(getApplicationContext(), ProfileActivity.class);
+                String caseLog = "case";
+                String caseLogMsg = " nav profile";
+                Log.i(caseLog, caseLogMsg);
                 startActivity(newAct);
                 break;
             case R.id.nav_buddies:
                 Intent buddy = new Intent(getApplicationContext(), Buddies_Activity.class);
+                String caseLog2 = "case";
+                String caseLogMsg2 = " nav buddies";
+                Log.i(caseLog2, caseLogMsg2);
                 startActivity(buddy);
                 break;
             case R.id.nav_check_in:
                 drawer.closeDrawer(GravityCompat.START);
+                String caseLog3 = "case";
+                String caseLogMsg3 = " nav check in";
+                Log.i(caseLog3, caseLogMsg3);
                 //handle special profile case
                 Fragment cur = getSupportFragmentManager().findFragmentByTag("Profile");
                 if(null != cur && cur.isVisible())
@@ -448,6 +468,9 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
                 break;
             case R.id.nav_discounts:
                 Intent discounts = new Intent(getApplicationContext(), Discounts.class);
+                String caseLog4 = "case";
+                String caseLogMsg4 = " nav discounts";
+                Log.i(caseLog4, caseLogMsg4);
                 startActivity(discounts);
                 break;
             case R.id.nav_sign_out:
@@ -465,6 +488,9 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
                 break;
             case R.id.nav_settings:
                 Intent newSettings = new Intent(getApplicationContext(), SettingsActivity.class);
+                String caseLog5 = "case";
+                String caseLogMsg5 = " nav settings";
+                Log.i(caseLog5, caseLogMsg5);
                 startActivity(newSettings);
                 break;
             case R.id.nav_messaging:
