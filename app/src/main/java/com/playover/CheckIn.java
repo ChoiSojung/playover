@@ -75,11 +75,7 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String onCreate = "onCreate";
-        String onCreateMsg = "In On Create";
-        Log.i(onCreate, onCreateMsg);
-        String CheckInLog = "CheckInLog";
-        Log.d(CheckInLog, "onCreate");
+
         setHotelCheckedInto(null);
         firstTime = true;
 
@@ -106,9 +102,6 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
 
         try
         {
-             String enterTry = "Enter Try Block";
-             String tryMessage = "Entering try block";
-             Log.d(enterTry, tryMessage);
              authVm = new AuthUserViewModel();
              hotelVm = new HotelViewModel();
              userId = authVm.getUser().getUid();
@@ -118,9 +111,6 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
                  hotelCheckedIncount = result.getChildrenCount();
                  Log.i("findhotelcheckedinto: ", userId + " checked in count: " + hotelCheckedIncount);
                 if (hotelCheckedIncount > 0) {
-                    String enterIf = "Enter If Statement";
-                    String ifMessage = "Entering the If statement";
-                    Log.d(enterIf, ifMessage);
                     DataSnapshot snapshot = result.getChildren().iterator().next();
                     setHotelCheckedInto(snapshot.getValue().toString());
 
@@ -128,15 +118,10 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
 
                     try
                     {
-                        String enterTry2 = "Enter 2nd Try Block";
-                        String tryMessage2 = "Entering 2nd try block";
-                        Log.d(enterTry2, tryMessage2);
+
                         hotelVm.findHotel(hotelCheckedInto, (DataSnapshot hotel) -> {
                             try
                             {
-                                String enterTry3 = "Enter 3rd Try Block";
-                                String tryMessage3 = "Entering 3rd try block";
-                                Log.d(enterTry3, tryMessage);
                                 DataSnapshot snapshotHotel = hotel.getChildren().iterator().next();
                                 obj = snapshotHotel.getValue(Hotel.class);
 
@@ -217,18 +202,18 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
                                 new FindHotelsAsync().execute(47.608013, -122.335167);
                             }
                         } else {
-                            //Toast.makeText(getApplicationContext(),"Device location not found yet, please wait or press the <back> button",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"Device location not found yet, please wait or press the <back> button",Toast.LENGTH_LONG).show();
                         }
 
                     } catch (Exception e) {
-                        //Toast.makeText(getApplicationContext(), "Device location not found yet, please wait...", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Device location not found yet, please wait...", Toast.LENGTH_LONG).show();
                     }
                 }
             },null);
         }
         catch (Exception e)
         {
-            //System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -264,9 +249,6 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
     }
 
     private void showAlert() {
-        String showAlert = "Enter show Alert";
-        String tryMessage = "Entering Show Alert Method";
-        Log.d(showAlert, tryMessage);
         final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle(R.string.enable_location);
         dialog.setMessage(getString(R.string.location_message));
@@ -375,26 +357,26 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
 
                         mProgress.dismiss();
                     } catch (JSONException je) {
-                       // Log.e("HERE exception message:", je.getMessage());
+                        Log.e("HERE exception message:", je.getMessage());
                     }
 
                 } catch (Exception ex) {
-                    //Log.e("Here exception message:", ex.getMessage());
-                    //System.out.println(ex.getMessage());
+                    Log.e("Here exception message:", ex.getMessage());
+                    System.out.println(ex.getMessage());
                     exc = ex;
                 } finally {
                     try {
                         urlConnection.disconnect();
                         reader.close();
                     } catch (Exception ex) {
-                        //Log.e("HERE exception message:", ex.getMessage());
+                        Log.e("HERE exception message:", ex.getMessage());
                     }
                 }
 
             } catch (MalformedURLException mue) {
 
             } catch (IOException ioex) {
-               // Log.e("HERE exception message:", ioex.getMessage());
+                Log.e("HERE exception message:", ioex.getMessage());
             }
             return null;
 
@@ -420,7 +402,7 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
                     trans.commitAllowingStateLoss();
                 }
             } else {
-               // Toast.makeText(getApplicationContext(), "503: The service is unavailable", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "503: The service is unavailable", Toast.LENGTH_LONG).show();
             }
         }
 

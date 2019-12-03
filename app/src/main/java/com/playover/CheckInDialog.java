@@ -85,9 +85,6 @@ public class CheckInDialog extends Dialog implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String onCreate = "onCreate";
-        String onCreateMsg = "In On Create";
-        Log.i(onCreate, onCreateMsg);
         setContentView(R.layout.checkin_dialog);
 
         mPlace = findViewById(R.id.txtCheckInHotel);
@@ -170,7 +167,7 @@ public class CheckInDialog extends Dialog implements View.OnClickListener
             }
             catch (Exception ex)
             {
-                //System.out.println(ex.getMessage());
+                System.out.println(ex.getMessage());
             }
                 //get checkout time
                 Calendar checkOut = getCal(dateSelection, hourSelection, minuteSelection);

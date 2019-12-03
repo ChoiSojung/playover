@@ -30,9 +30,6 @@ public class ReportMisuse_Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        String onCreate = "onCreate";
-        String onCreateMsg = "In On Create";
-        Log.i(onCreate, onCreateMsg);
         String selectedUserUid = getArguments().getString(Constants.KEY_BUDUID);
         String selectedUserName = getArguments().getString(Constants.KEY_BUDNAME);
         String reportersUserName = getArguments().getString(Constants.KEY_UID);

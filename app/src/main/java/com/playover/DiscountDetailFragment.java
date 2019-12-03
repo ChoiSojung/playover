@@ -13,7 +13,6 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -76,9 +75,6 @@ public class DiscountDetailFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        String onCreate = "onCreateView";
-        String onCreateMsg = "In On Create View";
-        Log.i(onCreate, onCreateMsg);
         View rootView = inflater.inflate(R.layout.fragment_discount_detail, container, false);
         setHasOptionsMenu(true);
         DiscountsViewModel discVm = new DiscountsViewModel();
@@ -138,7 +134,7 @@ public class DiscountDetailFragment extends Fragment {
                                                         } else {
                                                             if (task.getException() != null)
                                                                 if (getActivity() != null) {
-                                                                   // Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                                    Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                                                 }
                                                         }
                                                     }
@@ -290,7 +286,7 @@ public class DiscountDetailFragment extends Fragment {
                                 }
                             } else {
                                 if (getActivity() != null) {
-                                    //Toast.makeText(getActivity(), "Unable To Delete", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Unable To Delete", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
@@ -298,7 +294,7 @@ public class DiscountDetailFragment extends Fragment {
                     return super.onOptionsItemSelected(item);
                 } else {
                     if(getActivity()!=null) {
-                       // Toast.makeText(getActivity(), "Unable To Delete", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Unable To Delete", Toast.LENGTH_SHORT).show();
                     }
                     return super.onOptionsItemSelected(item);
                 }

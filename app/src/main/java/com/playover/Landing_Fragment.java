@@ -44,9 +44,6 @@ public class Landing_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_landing, container, false);
-        String onCreate = "onCreateView";
-        String onCreateMsg = "In On Create View";
-        Log.i(onCreate, onCreateMsg);
         if (getActivity() != null) {
             fragmentManager = getActivity().getSupportFragmentManager();
             lblsocialize_main = rootView.findViewById(R.id.lblsocialize_main);

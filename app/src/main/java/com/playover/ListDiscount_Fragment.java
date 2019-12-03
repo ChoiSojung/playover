@@ -47,9 +47,6 @@ public class ListDiscount_Fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String onCreate = "onCreate";
-        String onCreateMsg = "In On Create";
-        Log.i(onCreate, onCreateMsg);
     }
 
     public void updateData(ArrayList<Discount> updatedData, String city, String state) {
@@ -96,7 +93,7 @@ public class ListDiscount_Fragment extends Fragment {
                 item.setChecked(item.getItemData().isChecked());
             }
         } catch (Exception ex) {
-            //Log.e("error: ", ex.getMessage());
+            Log.e("error: ", ex.getMessage());
         }
     }
 
@@ -252,7 +249,7 @@ public class ListDiscount_Fragment extends Fragment {
                 holder.nameList.setText(fDiscounts.get(position).getPosterName());
                 holder.lastUpdatedList.setText(fDiscounts.get(position).getLastUpdate());
             } catch (Exception ex) {
-               // Log.e("onBindViewHolder Error:", ex.getMessage());
+                Log.e("onBindViewHolder Error:", ex.getMessage());
             }
         }
 
