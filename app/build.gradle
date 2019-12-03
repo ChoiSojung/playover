@@ -82,6 +82,7 @@ android {
             exclude module: 'support-annotations'
             exclude module: 'recyclerview-v7'
         }
+        androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.0'
 
         implementation 'commons-codec:commons-codec:1.10'
 

@@ -1,5 +1,7 @@
 package com.playover;
 
+import android.content.Intent;
+import android.support.test.espresso.Espresso;
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.UiController;
 import android.support.test.espresso.ViewAction;
@@ -13,10 +15,13 @@ import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.test.espresso.intent.rule.IntentsTestRule;
+
 import junit.framework.AssertionFailedError;
 
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,11 +45,22 @@ import static org.hamcrest.core.Is.is;
 @RunWith(AndroidJUnit4.class)
 public class ProfileTest {
 
+    Intent testIntent;
+
     @Rule
     public ActivityTestRule<MainActivity> activityTestRule
             = new ActivityTestRule<MainActivity>(MainActivity.class) {
 
     };
+
+    @Rule
+    public IntentsTestRule<ProfileActivity> activityTestLaunchProfile =
+            new IntentsTestRule<>(ProfileActivity.class);
+
+    @Before
+    public void setUp(){
+
+    }
 
     @Test
     public void cantSaveChangesPosition() throws Exception {
@@ -257,6 +273,74 @@ public class ProfileTest {
                     .check(matches(hasErrorText("First name is required!")));
         }
     }
+
+    @Test
+    public void cantSaveChangesProfilePicture() throws Exception {
+        try {
+            Thread.sleep(5000);
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+            Thread.sleep(5000);
+            onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
+            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.btn_login)).perform(click());
+            Thread.sleep(8000);
+            onView(withId(R.id.main_content)).check(matches(isDisplayed()));
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_profile));
+            Thread.sleep(5000);
+            onView(withText("Edit"))
+                    .perform(click());
+            Thread.sleep(10000);
+
+            onView(withId(R.id.editImageText))
+                    .perform(click());
+            Espresso.pressBack();
+            onView(withText("Save Changes"))
+                    .perform(scrollTo(), click());
+
+            onView(withId(R.id.editLastName))
+                    .check(matches(hasErrorText("Last name is required!")));
+        } catch (Exception ex) {
+            Thread.sleep(5000);
+            onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
+            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.btn_login)).perform(click());
+            Thread.sleep(8000);
+            onView(withId(R.id.main_content)).check(matches(isDisplayed()));
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+            Thread.sleep(5000);
+            onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
+            onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.btn_login)).perform(click());
+            Thread.sleep(8000);
+            onView(withId(R.id.main_content)).check(matches(isDisplayed()));
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_profile));
+            Thread.sleep(5000);
+            onView(withText("Edit"))
+                    .perform(click());
+            Thread.sleep(10000);
+
+            onView(withId(R.id.editFirstName))
+                    .perform(replaceText("Randall"));
+            onView(withId(R.id.editLastName))
+                    .perform(replaceText(""));
+            onView(withId(R.id.editPosition))
+                    .perform(replaceText("Flight Attendant"));
+            closeSoftKeyboard();
+            onView(withText("Save Changes"))
+                    .perform(scrollTo(), click());
+
+            onView(withId(R.id.editLastName))
+                    .check(matches(hasErrorText("Last name is required!")));
+        }
+    }
+
 
     @Test
     public void testButtons() throws InterruptedException {

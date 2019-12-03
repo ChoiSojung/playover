@@ -1,6 +1,8 @@
 package com.playover;
 
 import android.Manifest;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.DrawerActions;
@@ -25,8 +27,19 @@ import static org.hamcrest.Matchers.not;
 
 public class VerificationFragmentTest {
 
+    private Intent testIntent;
+    private int validationCode = 999999;
+    private String firstNameSignUp = "testFirst";
+    private String lastNameSignUp = "testLast";
+    private String positionSignUp = "testPosition";
+    private String emailSignUp = "test@testemail.com";
+    private String passwordSignUp = "1234567890";
+
+
+
     @Rule
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
+
     @Rule
     public GrantPermissionRule locationFineRule = GrantPermissionRule.grant(android.Manifest.permission.ACCESS_FINE_LOCATION);
     @Rule
