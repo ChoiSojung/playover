@@ -560,6 +560,7 @@ public class DiscountDetailTest {
             Thread.sleep(3000);
             onView(withId(R.id.txtCheckoutSet)).perform(click());
             Thread.sleep(3000);
+            Thread.sleep(1000);
         } catch (Exception ex) {
             Thread.sleep(5000);
             onView(withId(R.id.lblogin_main)).perform(click());
@@ -722,6 +723,8 @@ public class DiscountDetailTest {
             Thread.sleep(3000);
             onView(withId(R.id.txtCheckoutSet)).perform(click());
             Thread.sleep(3000);
+            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+            Thread.sleep(1000);
         }
     }
 
