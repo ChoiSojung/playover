@@ -230,6 +230,7 @@ public class DiscountDetailTest {
                     .inRoot(isDialog())
                     .check(matches(isDisplayed()))
                     .perform(click());
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
             Thread.sleep(1000);
 
@@ -400,6 +401,7 @@ public class DiscountDetailTest {
                     .inRoot(isDialog())
                     .check(matches(isDisplayed()))
                     .perform(click());
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
             Thread.sleep(1000);
         }
@@ -576,6 +578,7 @@ public class DiscountDetailTest {
                     .inRoot(isDialog())
                     .check(matches(isDisplayed()))
                     .perform(click());
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
             Thread.sleep(1000);
         } catch (Exception ex) {
@@ -744,6 +747,7 @@ public class DiscountDetailTest {
                     .inRoot(isDialog())
                     .check(matches(isDisplayed()))
                     .perform(click());
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
             Thread.sleep(1000);
         }
