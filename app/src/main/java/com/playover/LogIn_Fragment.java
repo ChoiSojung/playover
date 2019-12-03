@@ -58,9 +58,7 @@ public class LogIn_Fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String onCreate = "onCreate";
-        String onCreateMsg = "In On Create";
-        Log.i(onCreate, onCreateMsg);
+
     }
 
     @Override
@@ -129,7 +127,7 @@ public class LogIn_Fragment extends Fragment {
                                                         @Override
                                                         public void onComplete(@NonNull Task<InstanceIdResult> task) {
                                                             if (!task.isSuccessful()) {
-                                                                //Log.w(TAG, "getInstanceId failed", task.getException());
+                                                                Log.w(TAG, "getInstanceId failed", task.getException());
                                                                 return;
                                                             }
 
@@ -141,7 +139,9 @@ public class LogIn_Fragment extends Fragment {
                                                                     if (task.isSuccessful()) {
                                                                         Log.i(TAG, "Successfully set FCMinstanceID " + FCMinstanceID);
                                                                     } else {
-                                                                        }
+                                                                        if (task.getException() != null)
+                                                                            Log.d(TAG, "Failed to set FCMinstanceID: " + task.getException());
+                                                                    }
                                                                 }
                                                             });
 

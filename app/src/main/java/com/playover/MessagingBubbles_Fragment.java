@@ -78,9 +78,6 @@ public class MessagingBubbles_Fragment extends Fragment {
         if (getActivity() != null) {
             fragmentManager = getActivity().getSupportFragmentManager();
         }
-        String onCreate = "onCreateVew";
-        String onCreateMsg = "In On Create View";
-        Log.i(onCreate, onCreateMsg);
         assert getArguments() != null;
         messageBubbles = new ArrayList<>();
         authVm = new AuthUserViewModel();

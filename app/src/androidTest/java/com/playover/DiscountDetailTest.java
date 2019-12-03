@@ -74,7 +74,7 @@ public class DiscountDetailTest {
                     .inRoot(isDialog())
                     .check(matches(isDisplayed()))
                     .perform(click());
-            Thread.sleep(3000);
+            Thread.sleep(6000);
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_discounts));
             Thread.sleep(3000);
@@ -91,11 +91,6 @@ public class DiscountDetailTest {
             onView(withRecyclerView(R.id.recycler_view_discounts).atPosition(0)).perform(click());
             Thread.sleep(2000);
             onView(withId(R.id.addComment)).perform(click());
-            Thread.sleep(3000);
-            onView(withText("Add")).perform(scrollTo(), click());
-            Thread.sleep(4000);
-            onView(withId(R.id.addComment)).perform(click());
-            Thread.sleep(3000);
             onView(allOf(withClassName(endsWith("EditText"))))
                     .perform(replaceText(""));
             Thread.sleep(3000);
@@ -144,24 +139,9 @@ public class DiscountDetailTest {
             onView(withId(R.id.category)).perform(click());
             onData(allOf(Is.is(CoreMatchers.instanceOf(String.class)))).atPosition(2).perform(click());
             onView(withId(R.id.saveDiscount)).perform(click());
-            Thread.sleep(3000);
-            onView(withId(R.id.displayPhone)).check(matches(withText("425-420-9999")));
-            Thread.sleep(3000);
-            Espresso.pressBack();
-            Thread.sleep(5000);
-            onView(withRecyclerView(R.id.recycler_view_discounts).atPosition(0)).perform(click());
             Thread.sleep(2000);
-            onView(withId(R.id.deleteDiscount)).perform(click());
-            Thread.sleep(5000);
-            onView(withId(R.id.discounts_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view_discount)).perform(NavigationViewActions.navigateTo(R.id.nav_discounts));
-            Thread.sleep(3000);
-            onView(withId(R.id.discounts_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view_discount)).perform(NavigationViewActions.navigateTo(R.id.nav_messaging));
-            Thread.sleep(6000);
-            onView(withId(R.id.messaging_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view_messaging)).perform(NavigationViewActions.navigateTo(R.id.nav_discounts));
-            Thread.sleep(6000);
+            onView(withId(R.id.displayPhone)).check(matches(withText("425-420-9999")));
+            Thread.sleep(2000);
             onView(withId(R.id.discounts_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view_discount)).perform(NavigationViewActions.navigateTo(R.id.nav_check_in));
             Thread.sleep(3000);
@@ -169,7 +149,7 @@ public class DiscountDetailTest {
                     .inRoot(isDialog())
                     .check(matches(isDisplayed()))
                     .perform(click());
-            Thread.sleep(3000);
+            Thread.sleep(6000);
             onView(withId(R.id.recycler_view_hotels))
                     .check(matches(isDisplayed()));
             onView(withRecyclerView(R.id.recycler_view_hotels).atPosition(0))
@@ -238,7 +218,7 @@ public class DiscountDetailTest {
                     .inRoot(isDialog())
                     .check(matches(isDisplayed()))
                     .perform(click());
-            Thread.sleep(3000);
+            Thread.sleep(6000);
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_discounts));
             Thread.sleep(3000);
@@ -255,11 +235,6 @@ public class DiscountDetailTest {
             onView(withRecyclerView(R.id.recycler_view_discounts).atPosition(0)).perform(click());
             Thread.sleep(2000);
             onView(withId(R.id.addComment)).perform(click());
-            Thread.sleep(3000);
-            onView(withText("Add")).perform(scrollTo(), click());
-            Thread.sleep(4000);
-            onView(withId(R.id.addComment)).perform(click());
-            Thread.sleep(3000);
             onView(allOf(withClassName(endsWith("EditText"))))
                     .perform(replaceText(""));
             Thread.sleep(3000);
@@ -311,21 +286,6 @@ public class DiscountDetailTest {
             Thread.sleep(2000);
             onView(withId(R.id.displayPhone)).check(matches(withText("425-420-9999")));
             Thread.sleep(3000);
-            Espresso.pressBack();
-            Thread.sleep(5000);
-            onView(withRecyclerView(R.id.recycler_view_discounts).atPosition(0)).perform(click());
-            Thread.sleep(2000);
-            onView(withId(R.id.deleteDiscount)).perform(click());
-            Thread.sleep(5000);
-            onView(withId(R.id.discounts_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view_discount)).perform(NavigationViewActions.navigateTo(R.id.nav_discounts));
-            Thread.sleep(3000);
-            onView(withId(R.id.discounts_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view_discount)).perform(NavigationViewActions.navigateTo(R.id.nav_messaging));
-            Thread.sleep(6000);
-            onView(withId(R.id.messaging_content)).perform(DrawerActions.open());
-            onView(withId(R.id.nav_view_messaging)).perform(NavigationViewActions.navigateTo(R.id.nav_discounts));
-            Thread.sleep(6000);
             onView(withId(R.id.discounts_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view_discount)).perform(NavigationViewActions.navigateTo(R.id.nav_check_in));
             Thread.sleep(3000);
@@ -333,7 +293,7 @@ public class DiscountDetailTest {
                     .inRoot(isDialog())
                     .check(matches(isDisplayed()))
                     .perform(click());
-            Thread.sleep(3000);
+            Thread.sleep(6000);
             onView(withId(R.id.recycler_view_hotels))
                     .check(matches(isDisplayed()));
             onView(withRecyclerView(R.id.recycler_view_hotels).atPosition(0))

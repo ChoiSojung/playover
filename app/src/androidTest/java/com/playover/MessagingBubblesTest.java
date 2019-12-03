@@ -85,7 +85,7 @@ public class MessagingBubblesTest {
     public void testNewThreadWithDefaultName(){
         if(checkForUser()){
             activityTestRuleForDefaultGroupName.launchActivity(testIntent);
-            //onView(withId(R.id.group_name)).check(matches(withText("Jillian Joyce and Flight Crew")));
+            onView(withId(R.id.group_name)).check(matches(withText("Jillian Joyce and Flight Crew")));
         }
 
     }

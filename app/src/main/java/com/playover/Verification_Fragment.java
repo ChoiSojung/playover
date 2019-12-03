@@ -62,9 +62,6 @@ public class Verification_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        String onCreate = "onCreate";
-        String onCreateMsg = "In On Create";
-        Log.i(onCreate, onCreateMsg);
         View rootView = inflater.inflate(R.layout.fragment_verification, container, false);
         verification_message = rootView.findViewById(R.id.verification_message);
         family = rootView.findViewById(R.id.family);
@@ -109,7 +106,7 @@ public class Verification_Fragment extends Fragment {
                                         UserViewModel userVm = new UserViewModel();
                                         Person newUser = new Person(firstName, lastName, null, position, null,
                                                 null, authVm.getUser().getEmail(), authVm.getUser().getUid(), null, null, false, null, null, null);
-                                        //Log.i("new user: ", newUser.toString());
+                                        Log.i("new user: ", newUser.toString());
                                         userVm.createUser(authVm.getUser().getUid(), newUser, new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
@@ -118,7 +115,9 @@ public class Verification_Fragment extends Fragment {
                                                     Intent intent = new Intent(parentActivity, ProfileActivity.class);
                                                     parentActivity.startActivity(intent);
                                                 } else {
-
+                                                    if(getActivity()!=null && task.getException()!=null) {
+                                                        Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                    }
                                                     //delete user if create fails.  display message and pop
                                                     authVm.deleteAuthUser(authVm.getUser(), new OnCompleteListener<Void>() {
                                                         @Override
@@ -217,7 +216,7 @@ public class Verification_Fragment extends Fragment {
                                 "playover.mobile@gmail.com", emailAddress);
                     } catch (Exception e) {
                         validationCode = 0;
-                       // Log.e("send mail error", e.getMessage(), e);
+                        Log.e("send mail error", e.getMessage(), e);
                     }
                 }
 

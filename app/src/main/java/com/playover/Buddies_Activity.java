@@ -50,12 +50,11 @@ public class Buddies_Activity extends AppCompatActivity implements NavigationVie
         toggle.syncState();
 
         Intent intent = this.getIntent();
-        String buddies = "Buddies";
-        String buds = "buds";
-        String buddets = "Buddets";
+
         transaction = fragmentManager.beginTransaction();
         Buddies_Fragment newBuddies = new Buddies_Fragment();
-        transaction.replace(R.id.containerBuddies, newBuddies, buddies);
+        transaction.replace(R.id.containerBuddies, newBuddies, "Buddies");
+       // transaction.addToBackStack("Buddies");
         transaction.commit();
     }
 
@@ -65,21 +64,17 @@ public class Buddies_Activity extends AppCompatActivity implements NavigationVie
             case R.id.nav_profile:
                 Intent profile = new Intent(getApplicationContext(), ProfileActivity.class);
                 startActivity(profile);
-                int case1 = 1;
                 break;
             case R.id.nav_buddies:
                 drawer.closeDrawer(GravityCompat.START);
-                int case2 = 2;
                 break;
             case R.id.nav_check_in:
                 Intent newAct = new Intent(getApplicationContext(), CheckIn.class);
                 startActivity(newAct);
-                int case3 = 3;
                 break;
             case R.id.nav_discounts:
                 Intent discounts = new Intent(getApplicationContext(), Discounts.class);
                 startActivity(discounts);
-                int case4 = 4;
                 break;
             case R.id.nav_sign_out:
                 authVm.signOutUser(new FirebaseAuth.AuthStateListener() {
@@ -97,7 +92,6 @@ public class Buddies_Activity extends AppCompatActivity implements NavigationVie
             case R.id.nav_settings:
                 Intent newSettings = new Intent(getApplicationContext(), SettingsActivity.class);
                 startActivity(newSettings);
-                int case5 = 5;
                 break;
             case R.id.nav_messaging:
                 Intent messaging = new Intent(getApplicationContext(), MessagingActivity.class);
