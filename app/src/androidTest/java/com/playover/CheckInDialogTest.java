@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiCollection;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
@@ -30,10 +32,12 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.uiautomator.UiDevice.getInstance;
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 import static org.hamcrest.JMock1Matchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNull.notNullValue;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
 public class CheckInDialogTest {
@@ -49,7 +53,7 @@ public class CheckInDialogTest {
     @Before
     public void startMainActivityFromHomeScreen(){
         //Initialize UiDevice instance
-        mDevice = UiDevice.getInstance(getInstrumentation());
+        mDevice = getInstance(getInstrumentation());
 
         //Start from home screen
         mDevice.pressHome();
@@ -79,62 +83,47 @@ public class CheckInDialogTest {
 
 
     @Test
-    public void testCheckInDialogLaunch_sameActivity() {
+    public void testCheckInDialogLaunch_sameActivity() throws UiObjectNotFoundException {
         if (checkForUser()) {
             try {
                 UiObject checkOut = new UiObject(new UiSelector().text("CHECK OUT"));
                 checkOut.click();
             } catch (UiObjectNotFoundException e) {
-                Log.i("checkInDialogTest", "No checkout button found");
+
             } finally {
                 UiCollection hotels = new UiCollection(new UiSelector()
                         .className("android.widget.LinearLayout"));
-                int length = hotels.getChildCount(new UiSelector()
-                        .className("android.widget.RecyclerView"));
-                try {
-                    UiObject hotel = hotels.getChild(new UiSelector().index(0));
-                    hotel.click();
-                    UiObject checkInDialog = mDevice.findObject(new UiSelector()
-                            .text("CHECK-IN TO:"));
-                } catch (UiObjectNotFoundException e) {
-                    Log.i("checkinDialogTest", "No recyclerview item found");
-                }
+                UiObject hotel = hotels.getChild(new UiSelector().index(0));
+                hotel.click();
+                UiObject2 confirm = mDevice.findObject(By.text("CONFIRM"));
+                confirm.click();
             }
+
         }
     }
 
     @Test
-    public void testCheckInDialogSetCheckOutTime_sameActivity(){
+    public void testCheckInDialogCheckOutReminderNotification() throws UiObjectNotFoundException{
         if (checkForUser()) {
             try {
                 UiObject checkOut = new UiObject(new UiSelector().text("CHECK OUT"));
                 checkOut.click();
             } catch (UiObjectNotFoundException e) {
-                Log.i("checkInDialogTest", "No checkout button found");
+
             } finally {
+
                 UiCollection hotels = new UiCollection(new UiSelector()
                         .className("android.widget.LinearLayout"));
-                int length = hotels.getChildCount(new UiSelector()
-                        .className("android.widget.RecyclerView"));
-                try {
-                    UiObject hotel = hotels.getChild(new UiSelector().index(0));
-                    hotel.click();
-                    //UiObject checkInDialog = mDevice.findObject(new UiSelector()
-                            //.className("android.widget.Spinner"));
-                    (new UiScrollable((new UiSelector()
-                            .resourceId("com.playover:id/sprCheckout")
-                            .index(1).packageName("com.playover")))).click();
-                    List<UiObject2> children = mDevice.findObjects(By.res("android:id/checkoutDays")
-                            .pkg("com.playover"));
-                    for (UiObject2 uio2 : children){
-                        if ("Tomorrow".equals(uio2.getText())){
-                            uio2.click();
-                            break;
-                        }
-                    }
-                } catch (UiObjectNotFoundException e) {
-                    Log.i("checkinDialogTest", "No recyclerview item found");
-                }
+                UiObject hotel = hotels.getChild(new UiSelector().index(0));
+                hotel.click();
+                UiObject confirm = new UiObject(new UiSelector().text("CONFIRM"));
+                confirm.click();
+
+                UiDevice device = mDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+                device.openNotification();
+                device.wait(Until.hasObject(By.textStartsWith("Playover")), 1000);
+                UiObject notificationTitle = new UiObject(new UiSelector().text("Scheduled Checkout"));
+                assertEquals("Scheduled Checkout", notificationTitle.getText());
             }
         }
     }
@@ -155,6 +144,14 @@ public class CheckInDialogTest {
         PackageManager pm = getApplicationContext().getPackageManager();
         ResolveInfo resolveInfo = pm.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
         return resolveInfo.activityInfo.packageName;
+    }
+
+    //helper
+    private void clearAllNotifications() throws UiObjectNotFoundException{
+        UiDevice device = mDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+        device.openNotification();
+        device.wait(Until.hasObject(By.textStartsWith("Playover")), 1000);
+
     }
 
     //helper
