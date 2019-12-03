@@ -58,16 +58,16 @@ public class BuddiesTest {
 
     @Test
     public void canMakeBuddies() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         try {
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
 
 
             onView(withId(R.id.main_content)).perform(DrawerActions.open());

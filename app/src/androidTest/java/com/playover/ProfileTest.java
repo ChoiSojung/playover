@@ -49,22 +49,22 @@ public class ProfileTest {
     @Test
     public void cantSaveChangesPosition() throws Exception {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_profile));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withText("Edit"))
                     .perform(click());
-            Thread.sleep(10000);
+            Thread.sleep(6000);
             onView(withId(R.id.editFirstName))
                     .perform(replaceText("Randall"));
             onView(withId(R.id.editLastName))
@@ -78,28 +78,28 @@ public class ProfileTest {
             onView(withId(R.id.editPosition))
                     .check(matches(hasErrorText("Position is required!")));
         } catch (Exception ex) {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_profile));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withText("Edit"))
                     .perform(click());
-            Thread.sleep(10000);
+            Thread.sleep(6000);
 
             onView(withId(R.id.editFirstName))
                     .perform(replaceText("Randall"));
@@ -119,22 +119,22 @@ public class ProfileTest {
     @Test
     public void cantSaveChangesLastName() throws Exception {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_profile));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withText("Edit"))
                     .perform(click());
-            Thread.sleep(10000);
+            Thread.sleep(6000);
 
             onView(withId(R.id.editFirstName))
                     .perform(replaceText("Randall"));
@@ -149,28 +149,28 @@ public class ProfileTest {
             onView(withId(R.id.editLastName))
                     .check(matches(hasErrorText("Last name is required!")));
         } catch (Exception ex) {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_profile));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withText("Edit"))
                     .perform(click());
-            Thread.sleep(10000);
+            Thread.sleep(6000);
 
             onView(withId(R.id.editFirstName))
                     .perform(replaceText("Randall"));
@@ -190,22 +190,22 @@ public class ProfileTest {
     @Test
     public void cantSaveChangesFirstName() throws Exception {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_profile));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withText("Edit"))
                     .perform(click());
-            Thread.sleep(10000);
+            Thread.sleep(6000);
 
             onView(withId(R.id.editFirstName))
                     .perform(replaceText(""));
@@ -220,28 +220,28 @@ public class ProfileTest {
             onView(withId(R.id.editFirstName))
                     .check(matches(hasErrorText("First name is required!")));
         } catch (Exception ex) {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_profile));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withText("Edit"))
                     .perform(click());
-            Thread.sleep(10000);
+            Thread.sleep(6000);
 
             onView(withId(R.id.editFirstName))
                     .perform(replaceText(""));
@@ -260,24 +260,24 @@ public class ProfileTest {
 
     @Test
     public void testButtons() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         //if logged in, log out and perform test
         try {
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_profile));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withText("Edit"))
                     .perform(click());
-            Thread.sleep(10000);
+            Thread.sleep(6000);
             onView(withId(R.id.editFirstName))
                     .perform(replaceText("Randall"));
             onView(withId(R.id.editLastName))
@@ -302,7 +302,7 @@ public class ProfileTest {
             closeSoftKeyboard();
             onView(withText("Save Changes"))
                     .perform(scrollTo(), click());
-            Thread.sleep(10000);
+            Thread.sleep(6000);
             onView(withId(R.id.profileName))
                     .check(matches(withText("Randall Hacker")));
             onView(withId(R.id.profileGroup))
@@ -317,19 +317,19 @@ public class ProfileTest {
         }
         //else perform test
         catch (Exception ex) {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_profile));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withText("Edit"))
                     .perform(click());
-            Thread.sleep(10000);
+            Thread.sleep(6000);
             onView(withId(R.id.editFirstName))
                     .perform(replaceText("Randall"));
             onView(withId(R.id.editLastName))
@@ -354,7 +354,7 @@ public class ProfileTest {
             closeSoftKeyboard();
             onView(withText("Save Changes"))
                     .perform(scrollTo(), click());
-            Thread.sleep(10000);
+            Thread.sleep(6000);
             onView(withId(R.id.profileName))
                     .check(matches(withText("Randall Hacker")));
             onView(withId(R.id.profileGroup))
@@ -370,35 +370,35 @@ public class ProfileTest {
 
     @Test
     public void testProfileDrawer() throws Exception {
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         onView(withId(R.id.main_content)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
         onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
         onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
         onView(withId(R.id.btn_login)).perform(click());
-        Thread.sleep(8000);
+        Thread.sleep(5000);
         onView(withId(R.id.main_content)).check(matches(isDisplayed()));
         onView(withId(R.id.main_content)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_profile));
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         onView(withId(R.id.profile_content)).check(matches(isDisplayed()));
         onView(withId(R.id.profile_content)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view_profile)).perform(NavigationViewActions.navigateTo(R.id.nav_discounts));
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         onView(withId(R.id.discounts_content)).check(matches(isDisplayed()));
         onView(withId(R.id.discounts_content)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view_discount)).perform(NavigationViewActions.navigateTo(R.id.nav_profile));
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         onView(withId(R.id.profile_content)).check(matches(isDisplayed()));
         onView(withId(R.id.profile_content)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view_profile)).perform(NavigationViewActions.navigateTo(R.id.nav_buddies));
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         onView(withId(R.id.buddies_content)).check(matches(isDisplayed()));
         onView(withId(R.id.buddies_content)).perform(DrawerActions.open());
         onView(withId(R.id.nav_view_buddies)).perform(NavigationViewActions.navigateTo(R.id.nav_profile));
-        Thread.sleep(5000);
+        Thread.sleep(3000);
 //        onView(withId(R.id.profile_content)).check(matches(isDisplayed()));
 //        onView(withId(R.id.profile_content)).perform(DrawerActions.open());
 //        onView(withId(R.id.nav_view_profile)).perform(NavigationViewActions.navigateTo(R.id.nav_messaging));

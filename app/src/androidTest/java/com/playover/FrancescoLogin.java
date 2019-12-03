@@ -30,7 +30,7 @@ public class FrancescoLogin {
 
     @Test
     public void loginUser() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         try {
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
@@ -39,7 +39,7 @@ public class FrancescoLogin {
             onView(withId(R.id.email_login)).perform(replaceText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(replaceText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
                 onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
                         .check(matches(isDisplayed()));
@@ -49,7 +49,7 @@ public class FrancescoLogin {
             onView(withId(R.id.email_login)).perform(replaceText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(replaceText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
                 onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
                         .check(matches(isDisplayed()));

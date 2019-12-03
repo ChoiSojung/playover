@@ -44,12 +44,12 @@ public class MainActivityTest {
     //can open app and see the landing page
     @Test
     public void canSeeLanding() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(3000);
          try {
              onView(withId(R.id.main_content)).check(matches(isDisplayed()));
              onView(withId(R.id.main_content)).perform(DrawerActions.open());
              onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-             Thread.sleep(5000);
+             Thread.sleep(3000);
              onView(withId(R.id.lblfeature_main))
                      .check(matches(withText("Features")));
          }
@@ -66,36 +66,36 @@ public class MainActivityTest {
     //can open app and see first name on profile
     @Test
     public void canSeeFirstName() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         //if test client is already signed in. sign out and perform test
         try {
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(replaceText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(replaceText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_profile));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withText("Randall Hacker")).check(matches(isDisplayed()));
         }
         //else perform test
         catch (Exception ex) {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(replaceText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(replaceText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_profile));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withText("Randall Hacker")).check(matches(isDisplayed()));
         }
     }
@@ -104,29 +104,29 @@ public class MainActivityTest {
     //can navigate to login fragment, login and go to check in
     @Test
     public void canGoToLogIn() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         //if test client is already signed in. sign out and perform test
         try {
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             //not valid
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(replaceText("mvie")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(replaceText("test")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             //shouldn't exist
             onView(withId(R.id.email_login)).perform(replaceText("mviencek@msn.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             //valid
             onView(withId(R.id.email_login)).perform(replaceText("dhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(replaceText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(10000);
+            Thread.sleep(6000);
             if (withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
                 onView(withRecyclerView(R.id.recycler_view).atPosition(0))
                         .check(matches(isDisplayed()));
@@ -141,17 +141,17 @@ public class MainActivityTest {
             onView(withId(R.id.email_login)).perform(replaceText("mvie")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(replaceText("test")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             //shouldn't exist
             onView(withId(R.id.email_login)).perform(replaceText("mviencek@msn.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             //exists
             onView(withId(R.id.email_login)).perform(replaceText("dhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(replaceText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(10000);
+            Thread.sleep(6000);
             if (withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
                 onView(withRecyclerView(R.id.recycler_view).atPosition(0))
                         .check(matches(isDisplayed()));
@@ -163,13 +163,13 @@ public class MainActivityTest {
 
     @Test
     public void dataUseAndTerms() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         //if test client is already signed in. sign out and perform test
         try {
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.signup_button_main)).perform(click());
             onView(withId(R.id.termsSignUp)).perform(clickClickableSpan("data use policy"));
             Thread.sleep(2000);
@@ -179,7 +179,7 @@ public class MainActivityTest {
             Espresso.pressBack();
 
         } catch (Exception ex) {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.signup_button_main)).perform(click());
             onView(withId(R.id.termsSignUp)).perform(clickClickableSpan("data use policy"));
             Thread.sleep(2000);
@@ -201,36 +201,36 @@ public class MainActivityTest {
     public void canResetPassword() throws InterruptedException {
         //if test client is already signed in. sign out and perform test
         try {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             Thread.sleep(2000);
             onView(withId(R.id.forget_main)).perform(clickClickableSpan("Reset"));
             Thread.sleep(5000);
             onView(withId(R.id.email_reset)).perform(replaceText("test@msn.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_reset)).perform(click());
-            Thread.sleep(10000);
+            Thread.sleep(6000);
             onView(withId(R.id.email_reset)).perform(replaceText("mikeviencek@gmail.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_reset)).perform(click());
-            Thread.sleep(10000);
+            Thread.sleep(6000);
             onView(withId(R.id.email_reset)).check(matches(isDisplayed()));
         }
         //else perform test
         catch (Exception ex) {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             Thread.sleep(2000);
             onView(withId(R.id.forget_main)).perform(clickClickableSpan("Reset"));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.email_reset)).perform(replaceText("test@msn.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_reset)).perform(click());
-            Thread.sleep(10000);
+            Thread.sleep(6000);
             onView(withId(R.id.email_reset)).perform(replaceText("mikeviencek@gmail.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_reset)).perform(click());
-            Thread.sleep(10000);
+            Thread.sleep(6000);
             onView(withId(R.id.email_reset)).check(matches(isDisplayed()));
         }
 
@@ -245,13 +245,13 @@ public class MainActivityTest {
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.signup_button_main)).perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(isRoot()).perform(pressBack());
             onView(withId(R.id.lblfeature_main)).check(matches(isDisplayed()));
             onView(withId(R.id.signup_button_main)).perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.buttonSignUp)).perform(click());
             onView(withId(R.id.firstNameSignUp)).perform(replaceText("Developer")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.lastNameSignUp)).perform(replaceText("Test")).perform(ViewActions.closeSoftKeyboard());
@@ -264,11 +264,11 @@ public class MainActivityTest {
             onView(withId(R.id.passwordSignUp)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.verification_Password)).perform(replaceText("123")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.buttonSignUp)).perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.passwordSignUp)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.verification_Password)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.buttonSignUp)).perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.verify)).perform(click());
             onView(withId(R.id.verificationEdit)).perform(replaceText("1234")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.verify)).perform(click());
@@ -284,19 +284,19 @@ public class MainActivityTest {
             Thread.sleep(3000);
             onView(withId(R.id.resendVerification)).perform(click());
             onView(isRoot()).perform(pressBack());
-            Thread.sleep(8000);
+            Thread.sleep(6000);
             onView(withId(R.id.buttonSignUp))
                     .check(matches(isDisplayed()));
         }
         //else perform test
         catch (Exception ex) {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.signup_button_main)).perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(isRoot()).perform(pressBack());
             onView(withId(R.id.lblfeature_main)).check(matches(isDisplayed()));
             onView(withId(R.id.signup_button_main)).perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.buttonSignUp)).perform(click());
             onView(withId(R.id.firstNameSignUp)).perform(replaceText("Developer")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.lastNameSignUp)).perform(replaceText("Test")).perform(ViewActions.closeSoftKeyboard());
@@ -309,11 +309,11 @@ public class MainActivityTest {
             onView(withId(R.id.passwordSignUp)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.verification_Password)).perform(replaceText("123")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.buttonSignUp)).perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.passwordSignUp)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.verification_Password)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.buttonSignUp)).perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.verify)).perform(click());
             onView(withId(R.id.verificationEdit)).perform(replaceText("1234")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.verify)).perform(click());
@@ -329,7 +329,7 @@ public class MainActivityTest {
             Thread.sleep(3000);
             onView(withId(R.id.resendVerification)).perform(click());
             onView(isRoot()).perform(pressBack());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.buttonSignUp))
                     .check(matches(isDisplayed()));
         }

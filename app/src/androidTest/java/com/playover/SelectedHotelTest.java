@@ -89,15 +89,15 @@ public class SelectedHotelTest {
     @Test
     public void selectedHotelTest() throws Exception {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
 
 
             onView(withId(R.id.recycler_view_also_checked_in))
@@ -119,21 +119,21 @@ public class SelectedHotelTest {
             Thread.sleep(1000);
 
         } catch (Exception ex) {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.recycler_view_also_checked_in))
                     .perform(RecyclerViewActions.actionOnItemAtPosition(0,TestUtils.clickChildViewWithId(R.id.checkbox)));
             Thread.sleep(3000);

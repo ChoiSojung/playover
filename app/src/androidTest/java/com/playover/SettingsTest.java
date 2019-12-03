@@ -55,42 +55,42 @@ public class SettingsTest {
     @Test
     public void toggleDndTest() throws Exception {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_settings));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.settingsDndSwitch))
                     .perform(click());
 
         } catch (Exception ex) {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(click());
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_settings));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.settingsDndSwitch))
                     .perform(click());
         }
@@ -99,22 +99,22 @@ public class SettingsTest {
     @Test
     public void passwordsDontMatchTest() throws Exception {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_settings));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.settingsChangePassword))
                     .perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.currentPassword))
                     .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.newPassword1))
@@ -123,35 +123,35 @@ public class SettingsTest {
                     .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.passwordChangeBtn))
                     .perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.newPassword1))
                     .check(matches(hasErrorText("Try again.")));
             onView(withId(R.id.newPassword2))
                     .check(matches(hasErrorText("Try again.")));
 
         } catch (Exception ex) {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_settings));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.settingsChangePassword))
                     .perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.currentPassword))
                     .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.newPassword1))
@@ -160,7 +160,7 @@ public class SettingsTest {
                     .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.passwordChangeBtn))
                     .perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.newPassword1))
                     .check(matches(hasErrorText("Try again.")));
             onView(withId(R.id.newPassword2))
@@ -171,22 +171,22 @@ public class SettingsTest {
     @Test
     public void wrongCurrentPasswordTest() throws Exception {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_settings));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.settingsChangePassword))
                     .perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.currentPassword))
                     .perform(replaceText("test133"));
             onView(withId(R.id.newPassword1))
@@ -195,33 +195,33 @@ public class SettingsTest {
                     .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.passwordChangeBtn))
                     .perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.currentPassword))
                     .check(matches(hasErrorText("Re-enter correct password.")));
 
         } catch (Exception ex) {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.lblogin_main)).perform(clickClickableSpan("Sign In"));
             onView(withId(R.id.email_login)).perform(typeText("rhtest@fake.com")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.password_login)).perform(typeText("Passw0rd!")).perform(ViewActions.closeSoftKeyboard());
             onView(withId(R.id.btn_login)).perform(click());
-            Thread.sleep(8000);
+            Thread.sleep(5000);
             onView(withId(R.id.main_content)).check(matches(isDisplayed()));
             onView(withId(R.id.main_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_settings));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.settingsChangePassword))
                     .perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.currentPassword))
                     .perform(replaceText("test133"));
             onView(withId(R.id.newPassword1))
@@ -230,7 +230,7 @@ public class SettingsTest {
                     .perform(replaceText("Passw0rd!"));
             onView(withId(R.id.passwordChangeBtn))
                     .perform(click());
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             onView(withId(R.id.currentPassword))
                     .check(matches(hasErrorText("Re-enter correct password.")));
         }
