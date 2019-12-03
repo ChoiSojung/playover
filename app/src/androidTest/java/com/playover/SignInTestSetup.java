@@ -57,4 +57,37 @@ public class SignInTestSetup {
         }
 
     }
+
+    @Test
+    public void testLongerPassword() throws InterruptedException {
+        Thread.sleep(5000);
+        try {
+            onView(withId(R.id.main_content)).check(matches(isDisplayed()));
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+            Thread.sleep(2000);
+            onView(withId(R.id.email_login)).perform(replaceText("melsmail@hotmail.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(replaceText("test123test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.btn_login)).perform(click());
+            Thread.sleep(5000);
+            if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
+                onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
+                        .check(matches(isDisplayed()));
+            }
+        }
+        catch (Exception ex) {
+            onView(withId(R.id.lblogin_main)).perform(MainActivityTest.clickClickableSpan("Sign In"));
+            onView(withId(R.id.email_login)).perform(replaceText("melsmail@hotmail.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(replaceText("test123test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.password_login)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.btn_login)).perform(click());
+            Thread.sleep(5000);
+            if (MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0).matches(isDisplayed())) {
+                onView(MainActivityTest.withRecyclerView(R.id.recycler_view).atPosition(0))
+                        .check(matches(isDisplayed()));
+            }
+        }
+
+    }
 }
