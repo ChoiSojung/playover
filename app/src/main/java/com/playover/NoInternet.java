@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import com.playover.broadcast_receivers.InternetBroadcastReceiver;
 
@@ -14,6 +15,12 @@ public class NoInternet extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String inClass = "inClass";
+        String inClassMsg = "inClass NoInternet";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create";
+        Log.i(onCreate, onCreateMsg);
         setContentView(R.layout.activity_no_internet);
         noInternetMessage = findViewById(R.id.noInternetMessage);
         showAlert();

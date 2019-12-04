@@ -38,7 +38,12 @@ public class ChangePasswordFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_password_change, container, false);
-
+        String inClass = "inClass";
+        String inClassMsg = "inClass ChangePasswordFragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create View";
+        Log.i(onCreate, onCreateMsg);
         currentPasswordEdit = rootView.findViewById(R.id.currentPassword);
         newPasswordEdit1 = rootView.findViewById(R.id.newPassword1);
         newPasswordEdit2 = rootView.findViewById(R.id.newPassword2);
@@ -51,6 +56,9 @@ public class ChangePasswordFragment extends Fragment {
         changePw.setOnClickListener(v -> authVm.reauthenticateUser(authVm.getUserEmail(),
                 currentPasswordEdit.getText().toString(), task -> {
                     if (task.isSuccessful()) {
+                        String enterIf = "EnterIf";
+                        String enterIfMsg = "Entered If Statement";
+                        Log.i(enterIf, enterIfMsg);
                         if ((newPasswordEdit1.getText().toString().length() >= 6
                                 && newPasswordEdit1.getText().toString().length() <= 10)
                                 && (newPasswordEdit2.getText().toString().length() >= 6

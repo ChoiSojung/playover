@@ -36,6 +36,12 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String inClass = "inClass";
+        String inClassMsg = "inClass Messaging Activity";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create";
+        Log.i(onCreate, onCreateMsg);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messaging);
         Intent intent = getIntent();
@@ -49,6 +55,9 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
 //        }
 
         if (b != null){
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             if (b.containsKey("recipientUids")) {
                 recipientUIDs = b.getString("recipientUids");
             }
@@ -60,9 +69,15 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
         if (actionbar != null) {
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             actionbar.setDisplayHomeAsUpEnabled(true);
         }
         if (actionbar != null) {
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
         }
 
@@ -77,6 +92,9 @@ public class MessagingActivity extends AppCompatActivity implements NavigationVi
 
         transaction = fragmentManager.beginTransaction();
         if (recipientUIDs.length() == 0) {
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             //Log.i("messages", "null");
             MessagingThreads_Fragment newMessageThreadsFragment = new MessagingThreads_Fragment();
             transaction.replace(R.id.containerMessaging, newMessageThreadsFragment, "Message Threads");

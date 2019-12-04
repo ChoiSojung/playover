@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -65,6 +66,12 @@ public class AddDiscount_Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        String inClass = "inClass";
+        String inClassMsg = "inClass AddDiscountFrag";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create View";
+        Log.i(onCreate, onCreateMsg);
         View rootView = inflater.inflate(R.layout.fragment_add_discount, container, false);
         setHasOptionsMenu(true);
         category = rootView.findViewById(R.id.category);
@@ -90,40 +97,104 @@ public class AddDiscount_Fragment extends Fragment {
         states.setAdapter(statesAdapter);
         Bundle fromDiscountDetail = this.getArguments();
         if (fromDiscountDetail != null) {
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             if (!TextUtils.isEmpty(fromDiscountDetail.getString(Constants.KEY_EDIT))) {
+                String enterIf2 = "EnterIf";
+                String enterIfMsg2 = "Entered 2nd If Statement";
+                Log.i(enterIf2, enterIfMsg2);
                 edit_discount = true;
                 first_comment.setVisibility(View.GONE);
                 lblcomment.setVisibility(View.GONE);
+                String exitIf2 = "ExitIf";
+                String exitIfMsg2 = "Exiting 2nd If Statement";
+                Log.i(exitIf2, exitIfMsg2);
             }
             if (!TextUtils.isEmpty(fromDiscountDetail.getString(Constants.KEY_BUSINESSNAME))) {
+                String enterIf2 = "EnterIf";
+                String enterIfMsg2 = "Entered 2nd If Statement";
+                Log.i(enterIf2, enterIfMsg2);
                 business_name.setText(fromDiscountDetail.getString(Constants.KEY_BUSINESSNAME));
+                String exitIf2 = "ExitIf";
+                String exitIfMsg2 = "Exiting 2nd If Statement";
+                Log.i(exitIf2, exitIfMsg2);
             }
             if (!TextUtils.isEmpty(fromDiscountDetail.getString(Constants.KEY_ADDRESS))) {
+                String enterIf2 = "EnterIf";
+                String enterIfMsg2 = "Entered 2nd If Statement";
+                Log.i(enterIf2, enterIfMsg2);
                 address.setText(fromDiscountDetail.getString(Constants.KEY_ADDRESS));
+                String exitIf2 = "ExitIf";
+                String exitIfMsg2 = "Exiting 2nd If Statement";
+                Log.i(exitIf2, exitIfMsg2);
             }
             if (!TextUtils.isEmpty((fromDiscountDetail.getString(Constants.KEY_CITY)))) {
+                String enterIf2 = "EnterIf";
+                String enterIfMsg2 = "Entered 2nd If Statement";
+                Log.i(enterIf2, enterIfMsg2);
                 city.setText(fromDiscountDetail.getString(Constants.KEY_CITY));
+                String exitIf2 = "ExitIf";
+                String exitIfMsg2 = "Exiting 2nd If Statement";
+                Log.i(exitIf2, exitIfMsg2);
             }
             if (!TextUtils.isEmpty(fromDiscountDetail.getString(Constants.KEY_STATE))) {
+                String enterIf2 = "EnterIf";
+                String enterIfMsg2 = "Entered 2nd If Statement";
+                Log.i(enterIf2, enterIfMsg2);
                 int spinnerPosition = statesAdapter.getPosition(fromDiscountDetail.getString(Constants.KEY_STATE));
                 states.setSelection(spinnerPosition);
+                String exitIf2 = "ExitIf";
+                String exitIfMsg2 = "Exiting 2nd If Statement";
+                Log.i(exitIf2, exitIfMsg2);
             }
             if (!TextUtils.isEmpty(fromDiscountDetail.getString(Constants.KEY_PHONE))) {
+                String enterIf2 = "EnterIf";
+                String enterIfMsg2 = "Entered 2nd If Statement";
+                Log.i(enterIf2, enterIfMsg2);
                 phone.setText(fromDiscountDetail.getString(Constants.KEY_PHONE));
+                String exitIf2 = "ExitIf";
+                String exitIfMsg2 = "Exiting 2nd If Statement";
+                Log.i(exitIf2, exitIfMsg2);
             }
             if (!TextUtils.isEmpty(fromDiscountDetail.getString(Constants.KEY_WEBSITE))) {
+                String enterIf2 = "EnterIf";
+                String enterIfMsg2 = "Entered 2nd If Statement";
+                Log.i(enterIf2, enterIfMsg2);
                 website.setText(fromDiscountDetail.getString(Constants.KEY_WEBSITE));
+                String exitIf2 = "ExitIf";
+                String exitIfMsg2 = "Exiting 2nd If Statement";
+                Log.i(exitIf2, exitIfMsg2);
             }
             if (!TextUtils.isEmpty(fromDiscountDetail.getString(Constants.KEY_DETAILS))) {
+                String enterIf2 = "EnterIf";
+                String enterIfMsg2 = "Entered 2nd If Statement";
+                Log.i(enterIf2, enterIfMsg2);
                 discount_details.setText(fromDiscountDetail.getString(Constants.KEY_DETAILS));
+                String exitIf2 = "ExitIf";
+                String exitIfMsg2 = "Exiting 2nd If Statement";
+                Log.i(exitIf2, exitIfMsg2);
             }
             if (!TextUtils.isEmpty(fromDiscountDetail.getString(Constants.KEY_UID))) {
+                String enterIf2 = "EnterIf";
+                String enterIfMsg2 = "Entered 2nd If Statement";
+                Log.i(enterIf2, enterIfMsg2);
                 uId = fromDiscountDetail.getString(Constants.KEY_UID);
+                String exitIf2 = "ExitIf";
+                String exitIfMsg2 = "Exiting 2nd If Statement";
+                Log.i(exitIf2, exitIfMsg2);
             }
             if (!TextUtils.isEmpty(fromDiscountDetail.getString(Constants.KEY_CATEGORY))) {
+                String enterIf2 = "EnterIf";
+                String enterIfMsg2 = "Entered 2nd If Statement";
+                Log.i(enterIf2, enterIfMsg2);
                 int spinnerPosition = discountTypeAdapter.getPosition(fromDiscountDetail.getString(Constants.KEY_CATEGORY));
                 category.setSelection(spinnerPosition);
+                String exitIf2 = "ExitIf";
+                String exitIfMsg2 = "Exiting 2nd If Statement";
+                Log.i(exitIf2, exitIfMsg2);
             }
+
         }
 
         return rootView;
@@ -143,29 +214,65 @@ public class AddDiscount_Fragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.saveDiscount:
                 if (TextUtils.isEmpty(business_name.getText())) {
+                    String enterIf = "EnterIf";
+                    String enterIfMsg = "Entered If Statement";
+                    Log.i(enterIf, enterIfMsg);
                     business_name.setError("Business Name Required!");
+                    String exitIf = "ExitIf";
+                    String exitIfMsg = "Exiting If Statement";
+                    Log.i(exitIf, exitIfMsg);
                 }
                 if (TextUtils.isEmpty((city.getText()))) {
+                    String enterIf = "EnterIf";
+                    String enterIfMsg = "Entered If Statement";
+                    Log.i(enterIf, enterIfMsg);
                     city.setError("City is required!");
+                    String exitIf = "ExitIf";
+                    String exitIfMsg = "Exiting If Statement";
+                    Log.i(exitIf, exitIfMsg);
 
                 }
                 if (states.getSelectedItemId() == 0) {
+                    String enterIf = "EnterIf";
+                    String enterIfMsg = "Entered If Statement";
+                    Log.i(enterIf, enterIfMsg);
                     TextView errorText = (TextView) states.getSelectedView();
                     errorText.setError("");
                     errorText.setTextColor(Color.RED);
                     errorText.setText(R.string.required);
+                    String exitIf = "ExitIf";
+                    String exitIfMsg = "Exiting If Statement";
+                    Log.i(exitIf, exitIfMsg);
                 }
                 if (TextUtils.isEmpty(discount_details.getText())) {
+                    String enterIf = "EnterIf";
+                    String enterIfMsg = "Entered If Statement";
+                    Log.i(enterIf, enterIfMsg);
                     discount_details.setError("Please enter discount details!");
+                    String exitIf = "ExitIf";
+                    String exitIfMsg = "Exiting If Statement";
+                    Log.i(exitIf, exitIfMsg);
                 }
                 if (category.getSelectedItemId() == 0) {
+                    String enterIf = "EnterIf";
+                    String enterIfMsg = "Entered If Statement";
+                    Log.i(enterIf, enterIfMsg);
                     TextView errorText = (TextView) category.getSelectedView();
                     errorText.setError("");
                     errorText.setTextColor(Color.RED);
                     errorText.setText(R.string.required);
+                    String exitIf = "ExitIf";
+                    String exitIfMsg = "Exiting If Statement";
+                    Log.i(exitIf, exitIfMsg);
                 }
                 if (TextUtils.isEmpty(address.getText())) {
+                    String enterIf = "EnterIf";
+                    String enterIfMsg = "Entered If Statement";
+                    Log.i(enterIf, enterIfMsg);
                     address.setError("Address is a required field!");
+                    String exitIf = "ExitIf";
+                    String exitIfMsg = "Exiting If Statement";
+                    Log.i(exitIf, exitIfMsg);
                 }
                 if (!TextUtils.isEmpty(business_name.getText()) &&
                         states.getSelectedItemId() != 0 && !TextUtils.isEmpty(discount_details.getText()) &&

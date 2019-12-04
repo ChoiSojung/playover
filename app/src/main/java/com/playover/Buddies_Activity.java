@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import com.google.firebase.auth.FirebaseAuth;
 import com.playover.broadcast_receivers.InternetBroadcastReceiver;
@@ -30,6 +31,12 @@ public class Buddies_Activity extends AppCompatActivity implements NavigationVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String inClass = "inClass";
+        String inClassMsg = "inClass BuddiesActivity";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create View";
+        Log.i(onCreate, onCreateMsg);
         setContentView(R.layout.activity_buddies);
         fragmentManager = getSupportFragmentManager();
         authVm = new AuthUserViewModel();
@@ -63,17 +70,29 @@ public class Buddies_Activity extends AppCompatActivity implements NavigationVie
         switch (item.getItemId()){
             case R.id.nav_profile:
                 Intent profile = new Intent(getApplicationContext(), ProfileActivity.class);
+                String caseLog = "case";
+                String caseLogMsg = " nav profile";
+                Log.i(caseLog, caseLogMsg);
                 startActivity(profile);
                 break;
             case R.id.nav_buddies:
                 drawer.closeDrawer(GravityCompat.START);
+                String caseLog2 = "case";
+                String caseLogMsg2 = " nav buddies";
+                Log.i(caseLog2, caseLogMsg2);
                 break;
             case R.id.nav_check_in:
                 Intent newAct = new Intent(getApplicationContext(), CheckIn.class);
+                String caseLog3 = "case";
+                String caseLogMsg3 = " nav check in";
+                Log.i(caseLog3, caseLogMsg3);
                 startActivity(newAct);
                 break;
             case R.id.nav_discounts:
                 Intent discounts = new Intent(getApplicationContext(), Discounts.class);
+                String caseLog4 = "case";
+                String caseLogMsg4 = " nav discounts";
+                Log.i(caseLog4, caseLogMsg4);
                 startActivity(discounts);
                 break;
             case R.id.nav_sign_out:
@@ -91,6 +110,9 @@ public class Buddies_Activity extends AppCompatActivity implements NavigationVie
                 break;
             case R.id.nav_settings:
                 Intent newSettings = new Intent(getApplicationContext(), SettingsActivity.class);
+                String caseLog5 = "case";
+                String caseLogMsg5 = " nav settings";
+                Log.i(caseLog5, caseLogMsg5);
                 startActivity(newSettings);
                 break;
             case R.id.nav_messaging:

@@ -13,6 +13,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -70,6 +71,12 @@ public class DiscountDetailFragment extends Fragment {
         authVm = new AuthUserViewModel();
         discVm = new DiscountsViewModel();
         userVm = new UserViewModel();
+        String inClass = "inClass";
+        String inClassMsg = "inClass Discount Detail Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create View";
+        Log.i(onCreate, onCreateMsg);
     }
 
     @Override
@@ -92,6 +99,9 @@ public class DiscountDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (getContext() != null) {
+                    String enterIf = "EnterIf";
+                    String enterIfMsg = "Entered If Statement";
+                    Log.i(enterIf, enterIfMsg);
                     AlertDialog.Builder newComment = new AlertDialog.Builder(getContext());
                     //change alert box title color
                     SpannableString title = new SpannableString("Add A Comment");
@@ -166,12 +176,21 @@ public class DiscountDetailFragment extends Fragment {
         StringBuilder sb = new StringBuilder();
         if (fromRecycleViewer != null) {
             if (!TextUtils.isEmpty(fromRecycleViewer.getString(Constants.KEY_BUSINESSNAME))) {
+                String enterIf = "EnterIf";
+                String enterIfMsg = "Entered If Statement";
+                Log.i(enterIf, enterIfMsg);
                 displayBName.setText(fromRecycleViewer.getString(Constants.KEY_BUSINESSNAME));
             }
             if (!TextUtils.isEmpty(fromRecycleViewer.getString(Constants.KEY_ADDRESS))) {
+                String enterIf = "EnterIf";
+                String enterIfMsg = "Entered If Statement";
+                Log.i(enterIf, enterIfMsg);
                 sb.append(fromRecycleViewer.getString(Constants.KEY_ADDRESS));
             }
             if (!TextUtils.isEmpty((fromRecycleViewer.getString(Constants.KEY_CITY))) && !TextUtils.isEmpty(fromRecycleViewer.getString(Constants.KEY_STATE))) {
+                String enterIf = "EnterIf";
+                String enterIfMsg = "Entered If Statement";
+                Log.i(enterIf, enterIfMsg);
                 sb.append("\n");
                 sb.append(fromRecycleViewer.getString(Constants.KEY_CITY));
                 city = fromRecycleViewer.getString(Constants.KEY_CITY);
@@ -180,22 +199,40 @@ public class DiscountDetailFragment extends Fragment {
                 state = fromRecycleViewer.getString(Constants.KEY_STATE);
             }
             if (!TextUtils.isEmpty(fromRecycleViewer.getString(Constants.KEY_PHONE))) {
+                String enterIf = "EnterIf";
+                String enterIfMsg = "Entered If Statement";
+                Log.i(enterIf, enterIfMsg);
                 displayPhone.setText(fromRecycleViewer.getString(Constants.KEY_PHONE));
             }
             if (!TextUtils.isEmpty(fromRecycleViewer.getString(Constants.KEY_WEBSITE))) {
+                String enterIf = "EnterIf";
+                String enterIfMsg = "Entered If Statement";
+                Log.i(enterIf, enterIfMsg);
                 displayWebsite.setText(fromRecycleViewer.getString(Constants.KEY_WEBSITE));
             }
             if (!TextUtils.isEmpty(fromRecycleViewer.getString(Constants.KEY_DETAILS))) {
+                String enterIf = "EnterIf";
+                String enterIfMsg = "Entered If Statement";
+                Log.i(enterIf, enterIfMsg);
                 displayDiscount.setText(fromRecycleViewer.getString(Constants.KEY_DETAILS));
             }
             if (!TextUtils.isEmpty(sb.toString())) {
+                String enterIf = "EnterIf";
+                String enterIfMsg = "Entered If Statement";
+                Log.i(enterIf, enterIfMsg);
                 displayAddress.setText(sb.toString());
             }
             if (!TextUtils.isEmpty(fromRecycleViewer.getString(Constants.KEY_UID))) {
+                String enterIf = "EnterIf";
+                String enterIfMsg = "Entered If Statement";
+                Log.i(enterIf, enterIfMsg);
                 this.uId = fromRecycleViewer.getString(Constants.KEY_UID);
             }
             if (!TextUtils.isEmpty(fromRecycleViewer.getString(Constants.KEY_DISPLAY_NAME)) && !TextUtils.isEmpty(fromRecycleViewer.getString(Constants.KEY_LAST_UPDATE))) {
                 //set lastUpdate with info from last person to post a comment and display
+                String enterIf = "EnterIf";
+                String enterIfMsg = "Entered If Statement";
+                Log.i(enterIf, enterIfMsg);
                 StringBuilder lastComment = new StringBuilder();
                 lastComment.append("Last Updated By: ");
                 lastComment.append(fromRecycleViewer.getString(Constants.KEY_DISPLAY_NAME));
@@ -253,6 +290,9 @@ public class DiscountDetailFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         if (menu != null) {
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             menu.clear();
         }
         inflater.inflate(R.menu.discount_detail_menu, menu);

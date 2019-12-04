@@ -37,10 +37,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //check for permissions on log in
+        String inClass = "inClass";
+        String inClassMsg = "inClass Main Activity";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create";
+        Log.i(onCreate, onCreateMsg);
         requestPermissions();
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
         if (InternetBroadcastReceiver.isNetworkAvailable(this)) {
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             authVm = new AuthUserViewModel();
         }
 
@@ -52,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
         //attach receiver after activity has been built
         attachInternetActivity();
         if (InternetBroadcastReceiver.isNetworkAvailable(this)) {
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             if (authVm.getUser() != null) {
                 //go to check in
                 Intent intent = new Intent(MainActivity.this, CheckIn.class);
@@ -88,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 if (InternetBroadcastReceiver.isNetworkAvailable(context)) {
                     if (shouldToast) {
                         //toast directions if connection restored
-                        Toast.makeText(MainActivity.this, "Network Connection Restored!", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "Network Connection Restored!", Toast.LENGTH_SHORT).show();
                         shouldToast = false;
                     }
 
@@ -125,10 +137,10 @@ public class MainActivity extends AppCompatActivity {
                             //if user declines to enable permission and clicks ignore
                             if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
                                     permissions[i])) {
-                                Toast.makeText(MainActivity.this, permission[2] + " is required. Please go to settings and turn on!", Toast.LENGTH_LONG).show();
+                                //Toast.makeText(MainActivity.this, permission[2] + " is required. Please go to settings and turn on!", Toast.LENGTH_LONG).show();
 
                             } else {
-                                    Toast.makeText(MainActivity.this, permission[2] + " is required.  Please go to settings and turn on!", Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(MainActivity.this, permission[2] + " is required.  Please go to settings and turn on!", Toast.LENGTH_LONG).show();
 
                             }
                         }

@@ -86,7 +86,12 @@ public class CheckInDialog extends Dialog implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.checkin_dialog);
-
+        String inClass = "inClass";
+        String inClassMsg = "inClass CheckIn Dialog";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create View";
+        Log.i(onCreate, onCreateMsg);
         mPlace = findViewById(R.id.txtCheckInHotel);
         mPlace.setText(mPlaceText);
         mDate = findViewById(R.id.sprCheckout);
@@ -99,6 +104,9 @@ public class CheckInDialog extends Dialog implements View.OnClickListener
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
                 try
                 {
+                    String enterTry = "Enter try";
+                    String enterTryMsg = "Enter Try Block";
+                    Log.i(enterTry, enterTryMsg);
                     hourSelection = hourOfDay;
                     minuteSelection = minute;
                 }
@@ -117,7 +125,9 @@ public class CheckInDialog extends Dialog implements View.OnClickListener
             {
                 dateSelection = mDate.getSelectedItem().toString();
                 remindSelection = mReminder.getSelectedItem().toString();
-
+                String enterTry = "Enter try";
+                String enterTryMsg = "Enter Try Block";
+                Log.i(enterTry, enterTryMsg);
                 //@TODO make it UTC time
                 String checkOutTime = getTime(dateSelection, hourSelection, minuteSelection);
 
@@ -167,7 +177,7 @@ public class CheckInDialog extends Dialog implements View.OnClickListener
             }
             catch (Exception ex)
             {
-                System.out.println(ex.getMessage());
+               // System.out.println(ex.getMessage());
             }
                 //get checkout time
                 Calendar checkOut = getCal(dateSelection, hourSelection, minuteSelection);

@@ -55,6 +55,12 @@ public class Verification_Fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String inClass = "inClass";
+        String inClassMsg = "InClass Verification Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create";
+        Log.i(onCreate, onCreateMsg);
     }
 
     @Override
@@ -62,6 +68,12 @@ public class Verification_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        String inClass = "inClass";
+        String inClassMsg = "InClass Verification Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create";
+        Log.i(onCreate, onCreateMsg);
         View rootView = inflater.inflate(R.layout.fragment_verification, container, false);
         verification_message = rootView.findViewById(R.id.verification_message);
         family = rootView.findViewById(R.id.family);

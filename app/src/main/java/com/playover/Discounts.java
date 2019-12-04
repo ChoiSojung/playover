@@ -54,6 +54,12 @@ public class Discounts extends AppCompatActivity implements NavigationView.OnNav
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String inClass = "inClass";
+        String inClassMsg = "inClass Discounts";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create View";
+        Log.i(onCreate, onCreateMsg);
         listDiscounts = new ListDiscount_Fragment();
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
@@ -67,9 +73,15 @@ public class Discounts extends AppCompatActivity implements NavigationView.OnNav
         ActionBar actionbar = getSupportActionBar();
         if (actionbar != null) {
             actionbar.setDisplayHomeAsUpEnabled(true);
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
         }
         if (actionbar != null) {
             actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
         }
 
         drawer = findViewById(R.id.discounts_content);
@@ -94,6 +106,9 @@ public class Discounts extends AppCompatActivity implements NavigationView.OnNav
         //every 60 secconds or 2000 meters
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10 * 60000, 2000, locationListenerNetwork);
         if (location != null) {
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             longitude = location.getLongitude();
             latitude = location.getLatitude();
             Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());

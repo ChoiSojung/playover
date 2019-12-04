@@ -58,6 +58,12 @@ public class Buddies_Fragment extends Fragment {
                              Bundle savedInstanceState) {
 
         initDB();
+        String inClass = "inClass";
+        String inClassMsg = "inClass BuddiesFragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create View";
+        Log.i(onCreate, onCreateMsg);
         View v = inflater.inflate(R.layout.fragment_list_buddies, container, false);
         noBuddies = v.findViewById(R.id.noBuddies);
         noBuddies.setVisibility(View.VISIBLE);
