@@ -56,8 +56,11 @@ public class Discounts extends AppCompatActivity implements NavigationView.OnNav
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String onCreate = "onCreate";
-        String onCreateMsg = "In On Create";
+        String inClass = "inClass";
+        String inClassMsg = "inClass Discounts";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create View";
         Log.i(onCreate, onCreateMsg);
         listDiscounts = new ListDiscount_Fragment();
         fragmentManager = getSupportFragmentManager();
@@ -72,9 +75,15 @@ public class Discounts extends AppCompatActivity implements NavigationView.OnNav
         ActionBar actionbar = getSupportActionBar();
         if (actionbar != null) {
             actionbar.setDisplayHomeAsUpEnabled(true);
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
         }
         if (actionbar != null) {
             actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
         }
 
         drawer = findViewById(R.id.discounts_content);
@@ -99,6 +108,9 @@ public class Discounts extends AppCompatActivity implements NavigationView.OnNav
         //every 60 secconds or 2000 meters
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10 * 60000, 2000, locationListenerNetwork);
         if (location != null) {
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             longitude = location.getLongitude();
             latitude = location.getLatitude();
             Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
@@ -135,15 +147,15 @@ public class Discounts extends AppCompatActivity implements NavigationView.OnNav
                         );
                     }
                 } else {
-                    //Log.e("location error: ", "Unable to get location from geocoder!");
+                    Log.e("location error: ", "Unable to get location from geocoder!");
                     String locatedAt = getString(R.string.get_city_state_error);
-                    //Toast.makeText(Discounts.this, locatedAt, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Discounts.this, locatedAt, Toast.LENGTH_SHORT).show();
 
                 }
             } catch (Exception ex) {
-                //Log.e("location error: ", ex.getMessage());
+                Log.e("location error: ", ex.getMessage());
                 String locatedAt = getString(R.string.get_city_state_error);
-                //Toast.makeText(Discounts.this, locatedAt, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Discounts.this, locatedAt, Toast.LENGTH_SHORT).show();
             }
         } else {
             Toast.makeText(Discounts.this, "Unable to get location!", Toast.LENGTH_SHORT).show();
@@ -164,7 +176,7 @@ public class Discounts extends AppCompatActivity implements NavigationView.OnNav
 
     private boolean checkLocation() {
         if (!isLocationEnabled()) {
-               // Toast.makeText(Discounts.this, "Please enable device location!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Discounts.this, "Please enable device location!", Toast.LENGTH_SHORT).show();
 
         }
         return isLocationEnabled();
@@ -213,9 +225,9 @@ public class Discounts extends AppCompatActivity implements NavigationView.OnNav
                 }
             } catch (Exception ex) {
                 //unable to use geocoder or nothing is returned
-               // Log.e("location error: ", ex.getMessage());
-               // String locatedAt = getString(R.string.get_city_state_error);
-                //Toast.makeText(Discounts.this, locatedAt, Toast.LENGTH_SHORT).show();
+                Log.e("location error: ", ex.getMessage());
+                String locatedAt = getString(R.string.get_city_state_error);
+                Toast.makeText(Discounts.this, locatedAt, Toast.LENGTH_SHORT).show();
             }
 
         }

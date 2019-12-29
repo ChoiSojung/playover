@@ -82,9 +82,11 @@ public class EditProfile_Fragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        String onCreate = "onCreateView";
-        String onCreateMsg = "In On Create View";
+        String inClass = "inClass";
+        String inClassMsg = "inClass EditProfile Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create View";
         Log.i(onCreate, onCreateMsg);
         final View rootView = inflater.inflate(R.layout.fragment_edit_profile, container, false);
         image = rootView.findViewById(R.id.image);
@@ -149,6 +151,9 @@ public class EditProfile_Fragment extends Fragment {
         });
 
         if (getArguments() != null) {
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             String fName = getArguments().getString(Constants.KEY_FNAME);
             String lName = getArguments().getString(Constants.KEY_LNAME);
             String position = getArguments().getString(Constants.KEY_POSITION);
@@ -159,6 +164,9 @@ public class EditProfile_Fragment extends Fragment {
             profileImage = getArguments().getString(Constants.KEY_IMAGEURI);
 
             if (profileImage.isEmpty()) {
+                String enterIf2 = "EnterIf";
+                String enterIfMsg2 = "Entered 2nd If Statement";
+                Log.i(enterIf2, enterIfMsg2);
                 image.setImageResource(R.drawable.profile_avatar_placeholder);
             } else {
                 image.setVisibility(View.INVISIBLE);
@@ -180,12 +188,18 @@ public class EditProfile_Fragment extends Fragment {
             rAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
             mRelationship.setAdapter(rAdapter);
             if (relationship != null) {
+                String enterIf2 = "EnterIf";
+                String enterIfMsg2 = "Entered 2nd If Statement";
+                Log.i(enterIf2, enterIfMsg2);
                 int spinnerPosition = rAdapter.getPosition(relationship);
                 mRelationship.setSelection(spinnerPosition);
             }
 
             if (dob != null && dob.length() == 10) {
                 //sets spinner month
+                String enterIf2 = "EnterIf";
+                String enterIfMsg2 = "Entered 2nd If Statement";
+                Log.i(enterIf2, enterIfMsg2);
                 String mCompare = dob.substring(0, 2);
                 monthsAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
                 int spinnerPositionMonth = monthsAdapter.getPosition(mCompare);
@@ -211,14 +225,23 @@ public class EditProfile_Fragment extends Fragment {
             if (TextUtils.isEmpty(editFirstName.getText().toString().trim())) {
                 editFirstName.setError("First name is required!");
                 flag = false;
+                String enterIf = "EnterIf";
+                String enterIfMsg = "Entered If Statement";
+                Log.i(enterIf, enterIfMsg);
             }
             if (TextUtils.isEmpty(editLastName.getText().toString().trim())) {
                 editLastName.setError("Last name is required!");
                 flag = false;
+                String enterIf = "EnterIf";
+                String enterIfMsg = "Entered If Statement";
+                Log.i(enterIf, enterIfMsg);
             }
             if (TextUtils.isEmpty(editPosition.getText().toString().trim())) {
                 editPosition.setError("Position is required!");
                 flag = false;
+                String enterIf = "EnterIf";
+                String enterIfMsg = "Entered If Statement";
+                Log.i(enterIf, enterIfMsg);
             }
             String selectedDay = day.getSelectedItem().toString();
             String selectedYear = year.getSelectedItem().toString();
@@ -226,10 +249,16 @@ public class EditProfile_Fragment extends Fragment {
             String dob = selectedMonth + "-" + selectedDay + "-" + selectedYear;
 
             if (imageUrl == null) {
+                String enterIf = "EnterIf";
+                String enterIfMsg = "Entered If Statement";
+                Log.i(enterIf, enterIfMsg);
                 imageUrl = "no profile image";
             }
 
             if (authVm != null && userVm != null && authVm.getUser() != null) {
+                String enterIf = "EnterIf";
+                String enterIfMsg = "Entered If Statement";
+                Log.i(enterIf, enterIfMsg);
                 userVm.getUser(authVm.getUser().getUid(),
                         (Person user) -> {
                             if (user != null) {
@@ -241,6 +270,9 @@ public class EditProfile_Fragment extends Fragment {
             }
 
             if (authVm != null && userVm != null && flag) {
+                String enterIf = "EnterIf";
+                String enterIfMsg = "Entered If Statement";
+                Log.i(enterIf, enterIfMsg);
                 Person updatedUser = new Person(editFirstName.getText().toString().trim(), editLastName.getText().toString().trim()
                         , editGroup.getText().toString().trim(), editPosition.getText().toString().trim(), dob, mRelationship.getSelectedItem().toString()
                         , authVm.getUser().getEmail(), authVm.getUser().getUid(), editInterest.getText().toString().trim(), profileImage, dnd, messageThreads, hotelCheckedInto, null);
@@ -255,8 +287,8 @@ public class EditProfile_Fragment extends Fragment {
                             transaction.commit();
                         } else {
                             if (task.getException() != null) {
-                                //Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                //Log.e("update error: ", task.getException().getMessage());
+                                Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                Log.e("update error: ", task.getException().getMessage());
                             }
                         }
                     }
@@ -315,6 +347,9 @@ public class EditProfile_Fragment extends Fragment {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
 
+                                        } else {
+                                            if (task.getException() != null)
+                                                Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
@@ -373,12 +408,12 @@ public class EditProfile_Fragment extends Fragment {
 
         @Override
         protected byte[] doInBackground(Uri... params) {
-            Log.d(TAG, "doInBackground: started.");
+           // Log.d(TAG, "doInBackground: started.");
             try {
                 mBitmap = MediaStore.Images.Media.getBitmap(Objects.requireNonNull(getContext())
                         .getContentResolver(), params[0]);
             } catch (IOException e) {
-                Log.e(TAG, "doInBackground: IOException" + e.getMessage());
+               // Log.e(TAG, "doInBackground: IOException" + e.getMessage());
             }
             byte[] bytes = null;
 

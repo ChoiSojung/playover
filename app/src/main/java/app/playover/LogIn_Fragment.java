@@ -58,18 +58,30 @@ public class LogIn_Fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String onCreate = "onCreate";
-        String onCreateMsg = "In On Create";
+        String inClass = "inClass";
+        String inClassMsg = "inClass LogIn Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create";
         Log.i(onCreate, onCreateMsg);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        String inClass = "inClass";
+        String inClassMsg = "inClass Login Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create View";
+        Log.i(onCreate, onCreateMsg);
         View rootView = inflater.inflate(R.layout.fragment_log_in, container, false);
         authVm = new AuthUserViewModel();
         notifyVM = new NotificationsViewModel();
         if (getActivity() != null) {
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             fragmentManager = getActivity().getSupportFragmentManager();
         }
         sign_in = rootView.findViewById(R.id.sign_in);
@@ -93,6 +105,9 @@ public class LogIn_Fragment extends Fragment {
         resetPwd.setSpan(clickableReset, resetPwd.length() - 5, resetPwd.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         //set link color
         if (getContext() != null) {
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             resetPwd.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getContext(), R.color.link_color)),
                     resetPwd.length() - 5, resetPwd.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
@@ -141,7 +156,9 @@ public class LogIn_Fragment extends Fragment {
                                                                     if (task.isSuccessful()) {
                                                                         Log.i(TAG, "Successfully set FCMinstanceID " + FCMinstanceID);
                                                                     } else {
-                                                                        }
+                                                                        if (task.getException() != null)
+                                                                            Log.d(TAG, "Failed to set FCMinstanceID: " + task.getException());
+                                                                    }
                                                                 }
                                                             });
 

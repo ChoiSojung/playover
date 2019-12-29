@@ -45,8 +45,11 @@ public class Settings_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
-        String onCreate = "onCreate";
-        String onCreateMsg = "In On Create";
+        String inClass = "inClass";
+        String inClassMsg = "InClass Settings Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreateView";
+        String onCreateMsg = "On Create View";
         Log.i(onCreate, onCreateMsg);
         dndSwitch = rootView.findViewById(R.id.settingsDndSwitch);
         changePassword = rootView.findViewById(R.id.settingsChangePassword);
@@ -83,7 +86,7 @@ public class Settings_Fragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<InstanceIdResult> task) {
                         if (!task.isSuccessful()) {
-                           // Log.w(TAG, "getInstanceId failed", task.getException());
+                            Log.w(TAG, "getInstanceId failed", task.getException());
                             return;
                         }
 

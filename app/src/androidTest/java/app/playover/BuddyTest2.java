@@ -240,6 +240,7 @@ public class BuddyTest2 {
             Thread.sleep(2000);
             onView(withId(R.id.nav_view_messaging)).perform(NavigationViewActions.navigateTo(R.id.nav_buddies));
             Thread.sleep(3000);
+
             onView(withId(R.id.buddies_content)).check(matches(isDisplayed()));
             onView(withId(R.id.buddies_content)).perform(DrawerActions.open());
             onView(withId(R.id.nav_view_buddies)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));

@@ -73,13 +73,19 @@ public class MessagingBubbles_Fragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        String inClass = "inClass";
+        String inClassMsg = "inClass MessagingBubbles Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create";
+        Log.i(onCreate, onCreateMsg);
         final View rootView = inflater.inflate(R.layout.fragment_messagingbubbles, container, false);
         if (getActivity() != null) {
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             fragmentManager = getActivity().getSupportFragmentManager();
         }
-        String onCreate = "onCreateVew";
-        String onCreateMsg = "In On Create View";
-        Log.i(onCreate, onCreateMsg);
         assert getArguments() != null;
         messageBubbles = new ArrayList<>();
         authVm = new AuthUserViewModel();
@@ -91,15 +97,24 @@ public class MessagingBubbles_Fragment extends Fragment {
         textViewUsers = rootView.findViewById(R.id.users);
         recipientUID = getArguments().getString("recipientUid");
         if (recipientUID.endsWith(",")){
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             recipientUID = recipientUID.substring(0, recipientUID.length()-1);
         }
         if (recipientUID.startsWith(",")){
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             recipientUID = recipientUID.substring(1, recipientUID.length());
         }
 //        Log.i("recipientUID", "is " + recipientUID);
         senderUID = authVm.getUser().getUid();
         myUID = senderUID;
         if (getArguments().containsKey("threadUid")){
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             threadUid = getArguments().getString("threadUid");
 //            Log.i ("aLREADYthreadUid",threadUid);
         } else {
@@ -169,7 +184,7 @@ public class MessagingBubbles_Fragment extends Fragment {
                                     try {
                                         userViewModel.addMessageThreadToUser(user);
                                     }catch(Exception e) {
-                                        Log.e("Exception occurred adding message thread to sender: ", e.getMessage());
+                                        //Log.e("Exception occurred adding message thread to sender: ", e.getMessage());
                                     }
                                 });
 
@@ -180,7 +195,7 @@ public class MessagingBubbles_Fragment extends Fragment {
                                         try {
                                             userViewModel.addMessageThreadToUser(user);
                                         } catch (Exception e) {
-                                            Log.e("Exception occurred adding message thread to recipient: ", e.getMessage());
+                                            //Log.e("Exception occurred adding message thread to recipient: ", e.getMessage());
                                         }
                                     });
                         }
@@ -211,6 +226,9 @@ public class MessagingBubbles_Fragment extends Fragment {
 //                        Log.i("uidNameMap", i + " : " + uidNameMap.get(i));
                     }
                     if (thread != null) {
+                        String enterIf = "EnterIf";
+                        String enterIfMsg = "Entered If Statement";
+                        Log.i(enterIf, enterIfMsg);
                         if (thread.getMessages() != null) {
                             messageBubbles.clear();
                             adapter.clear();
@@ -271,6 +289,9 @@ public class MessagingBubbles_Fragment extends Fragment {
         String MTUID;
         reciptUids = recipientUID.split(",");
         if (reciptUids.length > 1){
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             // all group chat begin with G-, and is saved under key groupMessageThread
             MTUID = "G-" + getMD5(senderUID + "," + recipientUID);
         } else {

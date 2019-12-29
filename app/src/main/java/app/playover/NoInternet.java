@@ -18,8 +18,11 @@ public class NoInternet extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String onCreate = "onCreate";
-        String onCreateMsg = "In On Create";
+        String inClass = "inClass";
+        String inClassMsg = "inClass NoInternet";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create";
         Log.i(onCreate, onCreateMsg);
         setContentView(R.layout.activity_no_internet);
         noInternetMessage = findViewById(R.id.noInternetMessage);

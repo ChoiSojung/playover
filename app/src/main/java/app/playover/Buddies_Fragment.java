@@ -58,6 +58,12 @@ public class Buddies_Fragment extends Fragment {
                              Bundle savedInstanceState) {
 
         initDB();
+        String inClass = "inClass";
+        String inClassMsg = "inClass BuddiesFragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create View";
+        Log.i(onCreate, onCreateMsg);
         View v = inflater.inflate(R.layout.fragment_list_buddies, container, false);
         noBuddies = v.findViewById(R.id.noBuddies);
         noBuddies.setVisibility(View.VISIBLE);
@@ -103,10 +109,7 @@ public class Buddies_Fragment extends Fragment {
                     String mListTemp = messagingList.next();
                     buddyToMessageUids += mListTemp + ",";
                 }
-                String recipientUids = "recipientUids";
-                String uid1 = "4xdg93jslchjlweljhjg";
-                String uid2 = "asldjksljsjlvlj4333l";
-                message.putExtra(recipientUids, buddyToMessageUids);
+                message.putExtra("recipientUids", buddyToMessageUids);
                 startActivity(message);
 
             }
@@ -194,10 +197,8 @@ public class Buddies_Fragment extends Fragment {
             transaction = fragmentManager.beginTransaction();
             Profile_Fragment profile = new Profile_Fragment();
             profile.setArguments(bud);
-            String buddyProfile = "Buddy Profile";
-            String buddyProfile2 = "Buddy Profile";
-            transaction.replace(R.id.containerBuddies, profile, buddyProfile);
-            transaction.addToBackStack(buddyProfile);
+            transaction.replace(R.id.containerBuddies, profile, "Buddy Profile");
+            transaction.addToBackStack("Buddy Profile");
             transaction.commit();
         }
     }

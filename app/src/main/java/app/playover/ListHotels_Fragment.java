@@ -31,8 +31,11 @@ public class ListHotels_Fragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_list_hotels, container, false);
-        String onCreate = "onCreateView";
-        String onCreateMsg = "In On Create View";
+        String inClass = "inClass";
+        String inClassMsg = "inClass ListHotels Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create View";
         Log.i(onCreate, onCreateMsg);
         recyclerView = v.findViewById(R.id.recycler_view_hotels);
         ContentAdapter adapter = new ContentAdapter(recyclerView.getContext());

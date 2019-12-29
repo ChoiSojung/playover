@@ -45,11 +45,17 @@ public class Landing_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View rootView = inflater.inflate(R.layout.fragment_landing, container, false);
-        String onCreate = "onCreateView";
-        String onCreateMsg = "In On Create View";
+        String inClass = "inClass";
+        String inClassMsg = "inClass Landing Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create View";
         Log.i(onCreate, onCreateMsg);
+        final View rootView = inflater.inflate(R.layout.fragment_landing, container, false);
         if (getActivity() != null) {
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             fragmentManager = getActivity().getSupportFragmentManager();
             lblsocialize_main = rootView.findViewById(R.id.lblsocialize_main);
             lblogin_main = rootView.findViewById(R.id.lblogin_main);
@@ -75,6 +81,9 @@ public class Landing_Fragment extends Fragment {
             logIn.setSpan(clickableSignUp, logIn.length() - 7, logIn.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             //set link color
             if(getContext() != null) {
+                String enterIf2 = "EnterIf";
+                String enterIfMsg2 = "Entered 2nd If Statement";
+                Log.i(enterIf2, enterIfMsg2);
                 logIn.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getContext(), R.color.link_color)),
                         logIn.length() - 7, logIn.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }

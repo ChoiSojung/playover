@@ -48,8 +48,11 @@ public class ListDiscount_Fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String onCreate = "onCreate";
-        String onCreateMsg = "In On Create";
+        String inClass = "inClass";
+        String inClassMsg = "inClass ListDiscount Fragment";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create View";
         Log.i(onCreate, onCreateMsg);
     }
 
@@ -57,6 +60,9 @@ public class ListDiscount_Fragment extends Fragment {
         cityName = city;
         stateName = state;
         if (cityName != null && stateName != null) {
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             String cityAndState = "Discounts for " + cityName + ", " + stateName.toUpperCase();
             if (deviceLocation != null)
                 deviceLocation.setText(cityAndState);
@@ -66,6 +72,9 @@ public class ListDiscount_Fragment extends Fragment {
                 deviceLocation.setText(noLocation);
         }
         if (adapter != null) {
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             adapter.updateAdapter(updatedData);
             setNoDiscounts();
         }
@@ -74,6 +83,9 @@ public class ListDiscount_Fragment extends Fragment {
 
     public void setNoDiscounts() {
             if (adapter.getItemCount() == 0) {
+                String enterIf = "EnterIf";
+                String enterIfMsg = "Entered If Statement";
+                Log.i(enterIf, enterIfMsg);
                 noDiscounts.setVisibility(View.VISIBLE);
             } else {
                 noDiscounts.setVisibility(View.GONE);
@@ -97,7 +109,7 @@ public class ListDiscount_Fragment extends Fragment {
                 item.setChecked(item.getItemData().isChecked());
             }
         } catch (Exception ex) {
-            //Log.e("error: ", ex.getMessage());
+           // Log.e("error: ", ex.getMessage());
         }
     }
 
@@ -157,6 +169,9 @@ public class ListDiscount_Fragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         if (menu != null) {
+            String enterIf = "EnterIf";
+            String enterIfMsg = "Entered If Statement";
+            Log.i(enterIf, enterIfMsg);
             menu.clear();
         }
         inflater.inflate(R.menu.list_discount_menu, menu);
@@ -199,6 +214,9 @@ public class ListDiscount_Fragment extends Fragment {
         //update adapter with new information
         private void updateAdapter(ArrayList<Discount> updatedDiscounts) {
             if (updatedDiscounts != null && updatedDiscounts.size() > 0) {
+                String enterIf = "EnterIf";
+                String enterIfMsg = "Entered If Statement";
+                Log.i(enterIf, enterIfMsg);
                 uDiscounts = updatedDiscounts;
                 fDiscounts.clear();
                 for (Discount d : updatedDiscounts) {
@@ -253,7 +271,7 @@ public class ListDiscount_Fragment extends Fragment {
                 holder.nameList.setText(fDiscounts.get(position).getPosterName());
                 holder.lastUpdatedList.setText(fDiscounts.get(position).getLastUpdate());
             } catch (Exception ex) {
-               // Log.e("onBindViewHolder Error:", ex.getMessage());
+                //Log.e("onBindViewHolder Error:", ex.getMessage());
             }
         }
 

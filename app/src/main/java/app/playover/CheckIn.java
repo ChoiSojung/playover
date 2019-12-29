@@ -77,11 +77,12 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String onCreate = "onCreate";
-        String onCreateMsg = "In On Create";
+        String inClass = "inClass";
+        String inClassMsg = "inClass CheckIn";
+        Log.i(inClass, inClassMsg);
+        String onCreate = "OnCreate";
+        String onCreateMsg = "On Create View";
         Log.i(onCreate, onCreateMsg);
-        String CheckInLog = "CheckInLog";
-        Log.d(CheckInLog, "onCreate");
         setHotelCheckedInto(null);
         firstTime = true;
 
@@ -108,9 +109,6 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
 
         try
         {
-             String enterTry = "Enter Try Block";
-             String tryMessage = "Entering try block";
-             Log.d(enterTry, tryMessage);
              authVm = new AuthUserViewModel();
              hotelVm = new HotelViewModel();
              userId = authVm.getUser().getUid();
@@ -120,9 +118,9 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
                  hotelCheckedIncount = result.getChildrenCount();
                  Log.i("findhotelcheckedinto: ", userId + " checked in count: " + hotelCheckedIncount);
                 if (hotelCheckedIncount > 0) {
-                    String enterIf = "Enter If Statement";
-                    String ifMessage = "Entering the If statement";
-                    Log.d(enterIf, ifMessage);
+                    String enterIf = "EnterIf";
+                    String enterIfMsg = "Entered If Statement";
+                    Log.i(enterIf, enterIfMsg);
                     DataSnapshot snapshot = result.getChildren().iterator().next();
                     setHotelCheckedInto(snapshot.getValue().toString());
 
@@ -130,15 +128,10 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
 
                     try
                     {
-                        String enterTry2 = "Enter 2nd Try Block";
-                        String tryMessage2 = "Entering 2nd try block";
-                        Log.d(enterTry2, tryMessage2);
+
                         hotelVm.findHotel(hotelCheckedInto, (DataSnapshot hotel) -> {
                             try
                             {
-                                String enterTry3 = "Enter 3rd Try Block";
-                                String tryMessage3 = "Entering 3rd try block";
-                                Log.d(enterTry3, tryMessage);
                                 DataSnapshot snapshotHotel = hotel.getChildren().iterator().next();
                                 obj = snapshotHotel.getValue(Hotel.class);
 
@@ -219,18 +212,18 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
                                 new FindHotelsAsync().execute(47.608013, -122.335167);
                             }
                         } else {
-                            //Toast.makeText(getApplicationContext(),"Device location not found yet, please wait or press the <back> button",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"Device location not found yet, please wait or press the <back> button",Toast.LENGTH_LONG).show();
                         }
 
                     } catch (Exception e) {
-                        //Toast.makeText(getApplicationContext(), "Device location not found yet, please wait...", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Device location not found yet, please wait...", Toast.LENGTH_LONG).show();
                     }
                 }
             },null);
         }
         catch (Exception e)
         {
-            //System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -266,9 +259,6 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
     }
 
     private void showAlert() {
-        String showAlert = "Enter show Alert";
-        String tryMessage = "Entering Show Alert Method";
-        Log.d(showAlert, tryMessage);
         final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle(R.string.enable_location);
         dialog.setMessage(getString(R.string.location_message));
@@ -389,14 +379,14 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
                         urlConnection.disconnect();
                         reader.close();
                     } catch (Exception ex) {
-                        //Log.e("HERE exception message:", ex.getMessage());
+                       // Log.e("HERE exception message:", ex.getMessage());
                     }
                 }
 
             } catch (MalformedURLException mue) {
 
             } catch (IOException ioex) {
-               // Log.e("HERE exception message:", ioex.getMessage());
+                Log.e("HERE exception message:", ioex.getMessage());
             }
             return null;
 
@@ -413,6 +403,9 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
                 //show listhostels fragment only if currently on the check-in activity
                 if (firstTime) {
                     //dismiss progress bar
+                    String enterIf = "EnterIf";
+                    String enterIfMsg = "Entered If Statement";
+                    Log.i(enterIf, enterIfMsg);
                     mProgress.dismiss();
                     firstTime = false;
                     //Add our new fragment to the backstack and view ?
@@ -422,7 +415,7 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
                     trans.commitAllowingStateLoss();
                 }
             } else {
-               // Toast.makeText(getApplicationContext(), "503: The service is unavailable", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "503: The service is unavailable", Toast.LENGTH_LONG).show();
             }
         }
 
@@ -451,14 +444,23 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
         switch (item.getItemId()) {
             case R.id.nav_profile:
                 Intent newAct = new Intent(getApplicationContext(), ProfileActivity.class);
+                String caseLog = "case";
+                String caseLogMsg = " nav profile";
+                Log.i(caseLog, caseLogMsg);
                 startActivity(newAct);
                 break;
             case R.id.nav_buddies:
                 Intent buddy = new Intent(getApplicationContext(), Buddies_Activity.class);
+                String caseLog2 = "case";
+                String caseLogMsg2 = " nav buddies";
+                Log.i(caseLog2, caseLogMsg2);
                 startActivity(buddy);
                 break;
             case R.id.nav_check_in:
                 drawer.closeDrawer(GravityCompat.START);
+                String caseLog3 = "case";
+                String caseLogMsg3 = " nav check in";
+                Log.i(caseLog3, caseLogMsg3);
                 //handle special profile case
                 Fragment cur = getSupportFragmentManager().findFragmentByTag("Profile");
                 if(null != cur && cur.isVisible())
@@ -468,6 +470,9 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
                 break;
             case R.id.nav_discounts:
                 Intent discounts = new Intent(getApplicationContext(), Discounts.class);
+                String caseLog4 = "case";
+                String caseLogMsg4 = " nav discounts";
+                Log.i(caseLog4, caseLogMsg4);
                 startActivity(discounts);
                 break;
             case R.id.nav_sign_out:
@@ -485,6 +490,9 @@ public class CheckIn extends AppCompatActivity implements NavigationView.OnNavig
                 break;
             case R.id.nav_settings:
                 Intent newSettings = new Intent(getApplicationContext(), SettingsActivity.class);
+                String caseLog5 = "case";
+                String caseLogMsg5 = " nav settings";
+                Log.i(caseLog5, caseLogMsg5);
                 startActivity(newSettings);
                 break;
             case R.id.nav_messaging:
