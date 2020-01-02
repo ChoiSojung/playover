@@ -6,8 +6,14 @@ import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.UiController;
 import android.support.test.espresso.ViewAction;
 import android.support.test.espresso.action.ViewActions;
+import android.support.test.espresso.contrib.DrawerActions;
+import android.support.test.espresso.contrib.NavigationViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.rule.GrantPermissionRule;
+import android.text.SpannableString;
+import android.text.style.ClickableSpan;
+import android.view.View;
+import android.widget.TextView;
 
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
@@ -23,13 +29,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isRoot;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-
-import android.support.test.espresso.contrib.DrawerActions;
-import android.support.test.espresso.contrib.NavigationViewActions;
-import android.text.SpannableString;
-import android.text.style.ClickableSpan;
-import android.view.View;
-import android.widget.TextView;
 
 
 public class MainActivityTest {
@@ -334,6 +333,105 @@ public class MainActivityTest {
                     .check(matches(isDisplayed()));
         }
     }
+
+    @Test
+    public void singUp_ValidationCode() throws InterruptedException {
+        //if test client is already signed in. sign out and perform test
+        try {
+            onView(withId(R.id.main_content)).check(matches(isDisplayed()));
+            onView(withId(R.id.main_content)).perform(DrawerActions.open());
+            onView(withId(R.id.nav_view)).perform(NavigationViewActions.navigateTo(R.id.nav_sign_out));
+            Thread.sleep(5000);
+            onView(withId(R.id.signup_button_main)).perform(click());
+            Thread.sleep(5000);
+            onView(isRoot()).perform(pressBack());
+            onView(withId(R.id.lblfeature_main)).check(matches(isDisplayed()));
+            onView(withId(R.id.signup_button_main)).perform(click());
+            Thread.sleep(5000);
+            onView(withId(R.id.buttonSignUp)).perform(click());
+            onView(withId(R.id.firstNameSignUp)).perform(replaceText("Developer")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.lastNameSignUp)).perform(replaceText("Test")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.positionSignUp)).perform(replaceText("Application Developer")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.emailSignUp)).perform(replaceText("mviencekhotmail.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.passwordSignUp)).perform(replaceText("123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.verification_Password)).perform(replaceText("123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.buttonSignUp)).perform(click());
+            onView(withId(R.id.emailSignUp)).perform(replaceText("mviencek@alaskaair.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.passwordSignUp)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.verification_Password)).perform(replaceText("123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.buttonSignUp)).perform(click());
+            Thread.sleep(5000);
+            onView(withId(R.id.passwordSignUp)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.verification_Password)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.buttonSignUp)).perform(click());
+            Thread.sleep(5000);
+            onView(withId(R.id.verify)).perform(click());
+            onView(withId(R.id.verificationEdit)).perform(replaceText("1234")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.verify)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.verificationEdit)).perform(replaceText("12345")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.verify)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.verificationEdit)).perform(replaceText("12")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.verify)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.verificationEdit)).perform(replaceText("123456")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.verify)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.resendVerification)).perform(click());
+            onView(isRoot()).perform(pressBack());
+            Thread.sleep(8000);
+            onView(withId(R.id.buttonSignUp))
+                    .check(matches(isDisplayed()));
+        }
+        //else perform test
+        catch (Exception ex) {
+            Thread.sleep(5000);
+            onView(withId(R.id.signup_button_main)).perform(click());
+            Thread.sleep(5000);
+            onView(isRoot()).perform(pressBack());
+            onView(withId(R.id.lblfeature_main)).check(matches(isDisplayed()));
+            onView(withId(R.id.signup_button_main)).perform(click());
+            Thread.sleep(5000);
+            onView(withId(R.id.buttonSignUp)).perform(click());
+            onView(withId(R.id.firstNameSignUp)).perform(replaceText("Developer")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.lastNameSignUp)).perform(replaceText("Test")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.positionSignUp)).perform(replaceText("Application Developer")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.emailSignUp)).perform(replaceText("mviencekhotmail.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.passwordSignUp)).perform(replaceText("123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.verification_Password)).perform(replaceText("123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.buttonSignUp)).perform(click());
+            onView(withId(R.id.emailSignUp)).perform(replaceText("mviencek@alaskaair.com")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.passwordSignUp)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.verification_Password)).perform(replaceText("123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.buttonSignUp)).perform(click());
+            Thread.sleep(5000);
+            onView(withId(R.id.passwordSignUp)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.verification_Password)).perform(replaceText("test123")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.buttonSignUp)).perform(click());
+            Thread.sleep(5000);
+            onView(withId(R.id.verify)).perform(click());
+            onView(withId(R.id.verificationEdit)).perform(replaceText("1234")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.verify)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.verificationEdit)).perform(replaceText("12345")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.verify)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.verificationEdit)).perform(replaceText("12")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.verify)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.verificationEdit)).perform(replaceText("123456")).perform(ViewActions.closeSoftKeyboard());
+            onView(withId(R.id.verify)).perform(click());
+            Thread.sleep(3000);
+            onView(withId(R.id.resendVerification)).perform(click());
+            onView(isRoot()).perform(pressBack());
+            Thread.sleep(8000);
+            onView(withId(R.id.buttonSignUp))
+                    .check(matches(isDisplayed()));
+        }
+    }
+
+
 
     //static method for clicking on clickable spans in textviews
     public static ViewAction clickClickableSpan(final CharSequence textToClick) {
